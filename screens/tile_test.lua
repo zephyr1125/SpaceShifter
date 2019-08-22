@@ -6,14 +6,14 @@ local TileTestScreen = class {}
 function TileTestScreen:init(ScreenManager)
     self.screen = ScreenManager
     
-    map = sti("assets/maps/desert.lua")
+    self.map = sti("assets/maps/desert.lua")
 
     -- Create new dynamic data layer called "Sprites" as the 8th layer
-    local layer = map:addCustomLayer("Sprites")
+    local layer = self.map:addCustomLayer("Sprites")
 
     -- Get player spawn object
     local player
-    for k, object in pairs(map.objects) do
+    for k, object in pairs(self.map.objects) do
         if object.name == "Player" then
             player = object
             break
@@ -80,7 +80,7 @@ function TileTestScreen:init(ScreenManager)
     end
 
     -- Remove unneeded object layer
-    map:removeLayer("Spawn Point")
+    self.map:removeLayer("Spawn Point")
 end
 
 function TileTestScreen:activate()
@@ -88,12 +88,17 @@ function TileTestScreen:activate()
 end
 
 function TileTestScreen:update(dt)
-    map:update(dt)
+    self.map:update(dt)
 end
 
 function TileTestScreen:draw()
-    love.graphics.print("Tile Test", 10, 10)
-    map:draw()
+    local player = self.map.layers["Sprites"].player
+    local tx = math.floor(player.x - love.graphics.getWidth() / 2)
+    local ty = math.floor(player.y - love.graphics.getHeight() / 2)
+    
+    self.map:draw(-tx, -ty)
+    
+    love.graphics.print(tostring(love.timer.getFPS( )), 10, 10)
 end
 
 function TileTestScreen:keyreleased(key)

@@ -4,10 +4,10 @@
 keys = {}
 
 -- A, B, X, Y
-keys.Y = 'i'
-keys.X = 'u'
-keys.A = 'j'
-keys.B = 'k'
+keys.Y = 'u'
+keys.X = 'i'
+keys.A = 'k'
+keys.B = 'j'
 
 -- D-Pad
 keys.DPad_up =		'up'
