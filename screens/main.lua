@@ -14,9 +14,13 @@ function MainScreen:draw()
 	love.graphics.print("Main", 10, 10)
 end
 
-function MainScreen:keypressed(key)
+function MainScreen:keyreleased(key)
 	if key == keys.A then
 		self.screen:view('test/index', 'Hello World!')
+	end
+	
+	if key == keys.X then
+		self.screen:view('tile')
 	end
 end
 
