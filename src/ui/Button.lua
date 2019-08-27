@@ -1,6 +1,3 @@
-require('src.utils')
-local class = require('lib.hump.class')
-
 local Button = class {}
 
 function Button:init(text, width, height, idleBGColor, selectBGColor, confirmCallback)

@@ -1,6 +1,3 @@
-local class = require('lib.hump.class')
-local keys = require('lib.keys')
-
 local GameScreen = class {}
 
 function GameScreen:init(ScreenManager)

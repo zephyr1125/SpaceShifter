@@ -1,5 +1,3 @@
-local class = require('lib.hump.class')
-
 local SelectionGroup = class {
     elements = {},
     selected = 1

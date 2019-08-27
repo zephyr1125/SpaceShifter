@@ -16,9 +16,9 @@ love.graphics.present()
 --log to IDE
 io.stdout:setvbuf("no")
 
--- this fixes compatibility for LÖVE v11.x colors (0-255 instead of 0-1)
-require('lib.compatibility')
---
+class = require('lib.hump.class')
+keys = require('lib.keys')
+utils = require('src.utils')
 
 -- Load Libraries
 local ScreenManager = require('lib.ScreenManager')
