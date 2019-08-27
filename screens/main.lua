@@ -20,14 +20,6 @@ function MainScreen:keyreleased(key)
 	if key == keys.A then
 		self.screen:view('test/index', 'Hello World!')
 	end
-	
-	if key == keys.X then
-		self.screen:view('tile')
-	end
-
-    if key == keys.Y then
-        self.screen:view('suit')
-    end
 end
 
 return MainScreen
