@@ -5,12 +5,14 @@ local MainScreen = class {}
 
 function MainScreen:init(ScreenManager)
 	self.screen = ScreenManager
+	self.uiTestImage = love.graphics.newImage("assets/images/ui_test.png")
 end
 
 function MainScreen:activate()
 end
 
 function MainScreen:draw()
+	love.graphics.draw(self.uiTestImage)
 	love.graphics.print("Main", 10, 10)
 end
 

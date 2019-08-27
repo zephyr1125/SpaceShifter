@@ -13,7 +13,7 @@ local w, h = love.window.getMode()
 love.graphics.present()
 ]]--
 
---实时输出log
+--log to IDE
 io.stdout:setvbuf("no")
 
 -- this fixes compatibility for LÖVE v11.x colors (0-255 instead of 0-1)

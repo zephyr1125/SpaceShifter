@@ -1,5 +1,5 @@
 function love.conf(t)
-	t.window.title = "Lab42的游戏" -- The window title
+	t.window.title = "Card Shift" -- The window title
 	t.window.width = 320                -- Gameshell Screen Width
 	t.window.height = 240               -- Gameshell Screen Height
 	t.console = false                   -- Enable this while developing the game
