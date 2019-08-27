@@ -1,5 +1,5 @@
-local class = require('lib.hump.class')
-
-local Card = class {}
+local Card = class {
+    actions = {}
+}
 
 return Card

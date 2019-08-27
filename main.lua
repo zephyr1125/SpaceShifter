@@ -20,6 +20,9 @@ class = require('lib.hump.class')
 keys = require('lib.keys')
 utils = require('src.utils')
 
+-- ECS
+tiny = require "lib.tiny"
+
 -- Load Libraries
 local ScreenManager = require('lib.ScreenManager')
 --
@@ -28,7 +31,6 @@ local ScreenManager = require('lib.ScreenManager')
 local TitleScreen = require('src.screens.TitleScreen')
 local GameScreen = require('src.screens.GameScreen')
 --
-
 
 -- Load Game
 function love.load()

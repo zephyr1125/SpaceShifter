@@ -6,5 +6,10 @@ function drawText(text, x, y, color)
 end
 
 function setColor(color)
-    love.graphics.setColor({color[1]/256, color[2]/256, color[3]/256})
+    love.graphics.setColor({color[1]/255, color[2]/255, color[3]/255})
+end
+
+function drawFPS()
+    setColor({255, 255, 255})
+    love.graphics.print(tostring(love.timer.getFPS( )), 8, 8)
 end

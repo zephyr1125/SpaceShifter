@@ -1,4 +1,4 @@
-local Button = require('src.ui.button')
+local Button = require('src.ui.Button')
 local SelectionGroup = require('src.ui.SelectionGroup')
 
 local TitleScreen = class {}
