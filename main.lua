@@ -28,6 +28,7 @@ local ScreenManager = require('lib.ScreenManager')
 local MainScreen = require('screens.main')
 local TestScreen = require('screens.test')
 local TileTestScreen = require('screens.tile_test')
+local SuitTestScreen = require('screens.suit_test')
 --
 
 
@@ -39,6 +40,7 @@ function love.load()
 	screenManager:register('/', MainScreen)
 	screenManager:register('test/index', TestScreen)
 	screenManager:register('tile', TileTestScreen)
+	screenManager:register('suit', SuitTestScreen)
 	
 	-- Load the main screen. Only needed if you didn't register a screen with path "/"
 	--screenManager:view('test/index', 'Wow!')
