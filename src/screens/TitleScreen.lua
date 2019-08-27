@@ -1,8 +1,8 @@
 local class = require('lib.hump.class')
 local keys = require('lib.keys')
 
-local Button = require('ui.button')
-local SelectionGroup = require('ui.SelectionGroup')
+local Button = require('src.ui.button')
+local SelectionGroup = require('src.ui.SelectionGroup')
 
 local TitleScreen = class {}
 

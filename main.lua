@@ -25,8 +25,8 @@ local ScreenManager = require('lib.ScreenManager')
 --
 
 -- Load Screens
-local TitleScreen = require('screens.title')
-local GameScreen = require('screens.game')
+local TitleScreen = require('src.screens.TitleScreen')
+local GameScreen = require('src.screens.GameScreen')
 --
 
 
