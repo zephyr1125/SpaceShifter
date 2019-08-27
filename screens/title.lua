@@ -7,11 +7,12 @@ local TitleScreen = class {}
 
 local buttonWidth, buttonHeight = 128, 18
 local buttonStartY = 180
+local buttonIdleColor = {0.2, 0.2, 0.2}
 
 function TitleScreen:init(ScreenManager)
 	self.screen = ScreenManager
-	self.startButton = Button('开始游戏', buttonWidth, buttonHeight)
-	self.exitButton = Button('退出游戏', buttonWidth, buttonHeight)
+	self.startButton = Button('开始游戏', buttonWidth, buttonHeight, buttonIdleColor)
+	self.exitButton = Button('退出游戏', buttonWidth, buttonHeight, buttonIdleColor)
 end
 
 function TitleScreen:activate()
