@@ -2,17 +2,29 @@ local class = require('lib.hump.class')
 local keys = require('lib.keys')
 
 local Button = require('ui.button')
+local SelectionGroup = require('ui.SelectionGroup')
 
 local TitleScreen = class {}
 
 local buttonWidth, buttonHeight = 128, 18
 local buttonStartY = 180
-local buttonIdleColor = {0.2, 0.2, 0.2}
+local buttonIdleColor = {32, 32, 32}
+local buttonSelectColor = {136, 151, 166}
 
 function TitleScreen:init(ScreenManager)
 	self.screen = ScreenManager
-	self.startButton = Button('开始游戏', buttonWidth, buttonHeight, buttonIdleColor)
-	self.exitButton = Button('退出游戏', buttonWidth, buttonHeight, buttonIdleColor)
+	
+	self.buttons = SelectionGroup()
+	self.startButton = Button('开始游戏', buttonWidth, buttonHeight,
+			buttonIdleColor, buttonSelectColor, function()
+				self.screen:view('game')
+			end)
+	self.exitButton = Button('退出游戏', buttonWidth, buttonHeight,
+			buttonIdleColor, buttonSelectColor, function ()
+				love.event.quit()
+			end)
+	self.buttons:add(self.startButton)
+	self.buttons:add(self.exitButton)
 end
 
 function TitleScreen:activate()
@@ -24,9 +36,13 @@ function TitleScreen:draw()
 	self.exitButton:draw((320-buttonWidth)/2, buttonStartY+buttonHeight)
 end
 
-function TitleScreen:keyreleased(key)
-	if key == keys.A then
-		self.screen:view('game')
+function TitleScreen:keypressed(key)
+	self.buttons:keypressed(key)
+
+	if key == keys.DPad_up then
+		self.buttons:Prev()
+	elseif key == keys.DPad_down then
+		self.buttons:Next()
 	end
 end
 

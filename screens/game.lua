@@ -15,7 +15,7 @@ function GameScreen:draw()
     love.graphics.draw(self.uiTestImage)
 end
 
-function GameScreen:keyreleased(key)
+function GameScreen:keypressed(key)
     if key == keys.B then
         self.screen:view('/')
     end

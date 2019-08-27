@@ -24,7 +24,7 @@ function TestScreen:draw()
 	self.testBox:draw(70, 70)
 end
 
-function TestScreen:keyreleased(key)
+function TestScreen:keypressed(key)
 	if key == keys.A then
 		self.screen:view('/')
 	end
