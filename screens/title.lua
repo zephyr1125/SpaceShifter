@@ -10,8 +10,8 @@ local buttonStartY = 180
 
 function TitleScreen:init(ScreenManager)
 	self.screen = ScreenManager
-	self.startButton = Button('Start Game', buttonWidth, buttonHeight)
-	self.exitButton = Button('Exit', buttonWidth, buttonHeight)
+	self.startButton = Button('开始游戏', buttonWidth, buttonHeight)
+	self.exitButton = Button('退出游戏', buttonWidth, buttonHeight)
 end
 
 function TitleScreen:activate()

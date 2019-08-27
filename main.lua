@@ -32,6 +32,11 @@ local GameScreen = require('screens.game')
 
 -- Load Game
 function love.load()
+	love.graphics.setDefaultFilter( "nearest", "nearest", 1 )
+	font = love.graphics.newFont("assets/fonts/zpix.ttf", 12)
+	font:setFilter( "nearest", "nearest", 0 )
+	love.graphics.setFont(font)
+	
 	local screenManager = ScreenManager()
 	
 	-- Register your screens here (A screen with the path '/' is mandatory!)
