@@ -4,6 +4,7 @@ luaunit = require('luaunit')
 package.path = package.path .. ";..\\?.lua;"
 
 tiny = require("lib.tiny")
+world = tiny.world()
 
 require('src.utils')
 

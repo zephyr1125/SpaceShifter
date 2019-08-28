@@ -1,26 +1,20 @@
 local GameScreen = class {}
 
-local drawNameSystem = require('src.systems.DrawNameSystem')
 local fillDeckSystem = require('src.systems.FillDeckSystem')
 
 function GameScreen:init(ScreenManager)
     self.screen = ScreenManager
     self.uiTestImage = love.graphics.newImage("assets/images/ui_test.png")
     
-    local joe = {
-        name = 'joe'
-    }
     world = tiny.world(
             drawNameSystem,
             fillDeckSystem,
             
-            player,
-            enemies
+            player
     )
     for _,deck in pairs(decks) do
         world:add(deck)
     end
-    world:add(joe)
 end
 
 function GameScreen:activate()

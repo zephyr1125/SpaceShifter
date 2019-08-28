@@ -1,26 +1,33 @@
 local fillDeckSystem = require('src.systems.FillDeckSystem')
 
-world = tiny.world()
+testsFillDeckSystem = {}
 
-tests = {}
-    function tests:setUp()
-        world:add(fillDeckSystem)
-        for _,deck in pairs(decks) do
-            world:add(deck)
-        end
+function testsFillDeckSystem:setUp()
+    world:add(fillDeckSystem)
+    for _,deck in pairs(decks) do
+        world:add(deck)
     end
+    world:update(1)
+end
 
-    function tests:tearDown()
-        world:clearEntities()
-        world:clearSystems()
-        fillDeckSystem.world = nil
+function testsFillDeckSystem:tearDown()
+    world:clearEntities()
+    world:clearSystems()
+    world:update(1)
+end
+
+function testsFillDeckSystem:testAllDecksExecuted()
+    world:update(1)
+    for _, deck in pairs(decks) do
+        luaunit.assertNotIsNil(deck.cards)
     end
+end
 
-    function tests:testAllDecksExecuted()
-        world:update(1)
-        for _, deck in pairs(decks) do
-            luaunit.assertNotIsNil(deck.cards)
-        end
+function testsFillDeckSystem:testCreateAllCards()
+    world:update(1)
+    for _, deck in pairs(decks) do
+        luaunit.assertEquals(#deck.cards, deck.size)
     end
+end
 
-return tests
+return testsFillDeckSystem
