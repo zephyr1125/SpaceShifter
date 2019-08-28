@@ -16,12 +16,12 @@ love.graphics.present()
 --log to IDE
 io.stdout:setvbuf("no")
 
-local oldprint = print
 logs = {}
-print = function(...)
-	setColor({255, 255, 255})
-	logs[#logs] = ...
-end
+--local oldprint = print
+--print = function(...)
+--	setColor({255, 255, 255})
+--	logs[#logs] = ...
+--end
 
 class = require('lib.hump.class')
 keys = require('lib.keys')
