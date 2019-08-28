@@ -14,6 +14,7 @@ function GameScreen:init(ScreenManager)
 end
 
 function GameScreen:activate()
+    
 end
 
 function GameScreen:update(dt)
