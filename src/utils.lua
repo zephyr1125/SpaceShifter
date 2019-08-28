@@ -21,3 +21,8 @@ function drawLogs()
     end
     
 end
+
+--Create card and add to world
+function createCard(score, world)
+    
+end

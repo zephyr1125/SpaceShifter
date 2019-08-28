@@ -3,7 +3,7 @@ local GameScreen = class {}
 local drawNameSystem = require('src.systems.DrawNameSystem')
 local fillDeckSystem = require('src.systems.FillDeckSystem')
 
-local publicDeck = require('src.entities.PublicDeck')
+local decks = require('src.entities.Decks')
 local player = require('src.entities.Player')
 local enemies = require('src.entities.Enemies')
 
@@ -17,11 +17,13 @@ function GameScreen:init(ScreenManager)
     world = tiny.world(
             drawNameSystem,
             fillDeckSystem,
-    
-            publicDeck,
+            
             player,
             enemies
     )
+    for _,deck in pairs(decks) do
+        world:add(deck)
+    end
     world:add(joe)
 end
 
