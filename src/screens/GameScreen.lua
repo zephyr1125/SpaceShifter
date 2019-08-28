@@ -23,6 +23,7 @@ end
 function GameScreen:draw()
     love.graphics.draw(self.uiTestImage)
     drawFPS()
+    drawLogs()
 end
 
 function GameScreen:keypressed(key)

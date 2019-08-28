@@ -13,3 +13,11 @@ function drawFPS()
     setColor({255, 255, 255})
     love.graphics.print(tostring(love.timer.getFPS( )), 8, 8)
 end
+
+function drawLogs()
+    setColor({255, 255, 255})
+    for _,log in pairs(logs) do
+        love.graphics.print(log, 8, 16)
+    end
+    
+end

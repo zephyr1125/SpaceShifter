@@ -3,7 +3,8 @@ function love.conf(t)
 	t.window.width = 320                -- Gameshell Screen Width
 	t.window.height = 240               -- Gameshell Screen Height
 	t.console = false                   -- Enable this while developing the game
-	
+	t.window.vsync = 1
+
 	t.modules.audio = true              -- Enable the audio module (boolean)
 	t.modules.data = true               -- Enable the data module (boolean)
 	t.modules.event = true              -- Enable the event module (boolean)
