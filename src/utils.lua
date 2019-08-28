@@ -23,6 +23,16 @@ function drawLogs()
 end
 
 --Create card and add to world
-function createCard(score, world)
+function createRandomCard(scoreRange, world)
+    --random action and space
+    local action, space, totalScore
+    repeat
+        action = actions[math.random(#actions)]
+        space = spaces[math.random(#spaces)]
+        totalScore = action.score + space.score
+    until totalScore >= scoreRange[1] and totalScore <= scoreRange[2]
     
+    local card = {action = action, space = space}
+    world:add(card)
+    return card
 end

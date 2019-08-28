@@ -1,5 +1,5 @@
 return {
-    Mountain = {
+    {
         name = 'Mountain',
         icon = 'mountain',
         effectIcon = 'defence1',
@@ -9,7 +9,7 @@ return {
             return 1
         end
     },
-    Plain = {
+    {
         name = 'Plain',
         icon = 'plain',
         effectIcon = 'attack1',

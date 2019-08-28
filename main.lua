@@ -30,6 +30,13 @@ utils = require('src.utils')
 -- ECS
 tiny = require "lib.tiny"
 
+-- Game Data
+decks = require('src.entities.Decks')
+actions = require('src.entities.Actions')
+spaces =  require('src.entities.Spaces')
+player = require('src.entities.Player')
+enemies = require('src.entities.Enemies')
+
 -- Load Libraries
 local ScreenManager = require('lib.ScreenManager')
 --

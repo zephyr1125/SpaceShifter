@@ -1,7 +1,6 @@
 local fillDeckSystem = require('src.systems.FillDeckSystem')
 
 world = tiny.world()
-decks = require('src.entities.Decks')
 
 tests = {}
     function tests:setUp()

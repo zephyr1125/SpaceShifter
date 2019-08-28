@@ -3,10 +3,6 @@ local GameScreen = class {}
 local drawNameSystem = require('src.systems.DrawNameSystem')
 local fillDeckSystem = require('src.systems.FillDeckSystem')
 
-local decks = require('src.entities.Decks')
-local player = require('src.entities.Player')
-local enemies = require('src.entities.Enemies')
-
 function GameScreen:init(ScreenManager)
     self.screen = ScreenManager
     self.uiTestImage = love.graphics.newImage("assets/images/ui_test.png")
