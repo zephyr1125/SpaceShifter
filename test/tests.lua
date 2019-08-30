@@ -11,7 +11,7 @@ spaces =  require('src.entities.Spaces')
 player = require('src.entities.Player')
 enemies = require('src.entities.Enemies')
 
-require('testsFillDeckSystem')
 require('testsOfUtils')
+require('testsFillAllDecks')
 
 os.exit( luaunit.LuaUnit.run() )

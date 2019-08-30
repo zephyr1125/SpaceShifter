@@ -36,3 +36,12 @@ function createRandomCard(scoreRange)
     local card = {action = action, space = space}
     return card
 end
+
+function fillAllDecks()
+    for _, deck in pairs(decks) do
+        deck.cards = {}
+        for i = 1, deck.size do
+            deck.cards[i] = createRandomCard(deck.scoreRange)
+        end
+    end
+end 

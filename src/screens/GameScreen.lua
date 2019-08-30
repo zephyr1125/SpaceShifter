@@ -23,15 +23,6 @@ function GameScreen:keypressed(key)
     end
 end
 
-function GameScreen:fillAllDecks()
-    for _, deck in pairs(decks) do
-        deck.cards = {}
-        for i = 1, deck.size do
-            deck.cards[i] = createRandomCard(deck.scoreRange)
-        end
-    end
-end
-
 function GameScreen:drawDecks()
     decks.PublicDeck:draw(30, 60)
 end
