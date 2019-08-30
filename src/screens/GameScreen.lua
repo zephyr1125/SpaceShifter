@@ -5,7 +5,7 @@ function GameScreen:init(ScreenManager)
 end
 
 function GameScreen:activate()
-    self:fillAllDecks()
+    fillAllDecks()
 end
 
 function GameScreen:update(dt)
@@ -25,6 +25,7 @@ end
 
 function GameScreen:drawDecks()
     decks.PublicDeck:draw(30, 60)
+    decks.PlayerDeck:draw(56, 174)
 end
 
 return GameScreen
