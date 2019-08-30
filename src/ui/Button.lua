@@ -29,7 +29,7 @@ function Button:draw(x, y)
     end
     
     --text
-    drawText(self.text, x + math.floor((self.width-self.textWidth)/2), y, {1,1,1})
+    drawText(self.text, x + math.floor((self.width-self.textWidth)/2), y)
 end
 
 function Button:keypressed(key)

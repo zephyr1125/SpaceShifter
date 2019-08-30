@@ -1,7 +1,6 @@
 function drawText(text, x, y, color)
-    if color ~= nil then
-        love.graphics.setColor(color)
-    end
+    color = color or {255,255,255}
+    setColor(color)
     love.graphics.print(text, x, y+3)
 end
 
@@ -22,8 +21,8 @@ function drawLogs()
     
 end
 
---Create card and add to world
-function createRandomCard(scoreRange, world)
+--Create card
+function createRandomCard(scoreRange)
     --random action and space
     local action, space, totalScore
     repeat
@@ -33,6 +32,5 @@ function createRandomCard(scoreRange, world)
     until totalScore >= scoreRange[1] and totalScore <= scoreRange[2]
     
     local card = {action = action, space = space}
-    world:add(card)
     return card
 end

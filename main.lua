@@ -27,9 +27,6 @@ class = require('lib.hump.class')
 keys = require('lib.keys')
 utils = require('src.utils')
 
--- ECS
-tiny = require "lib.tiny"
-
 -- Game Data
 decks = require('src.entities.Decks')
 actions = require('src.entities.Actions')

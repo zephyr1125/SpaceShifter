@@ -3,9 +3,6 @@ luaunit = require('luaunit')
 -- Add parent path to search list
 package.path = package.path .. ";..\\?.lua;"
 
-tiny = require("lib.tiny")
-world = tiny.world()
-
 require('src.utils')
 
 decks = require('src.entities.Decks')
