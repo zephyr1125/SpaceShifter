@@ -9,8 +9,11 @@ return {
             setColor({136, 151, 166})
             love.graphics.rectangle('fill', x, y, width, height)
             
+            --top deck
+            
             --card count
-            drawText(tostring(#self.cards), x+10, y+48)
+            setColor(white)
+            love.graphics.printf(tostring(#self.cards), x, y+48, width, 'center')
         end
     },
     PlayerDeck = {

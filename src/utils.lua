@@ -1,5 +1,7 @@
+white = {255,255,255}
+
 function drawText(text, x, y, color)
-    color = color or {255,255,255}
+    color = color or white
     setColor(color)
     love.graphics.print(text, x, y+3)
 end
@@ -9,12 +11,12 @@ function setColor(color)
 end
 
 function drawFPS()
-    setColor({255, 255, 255})
+    setColor(white)
     love.graphics.print(tostring(love.timer.getFPS( )), 8, 8)
 end
 
 function drawLogs()
-    setColor({255, 255, 255})
+    setColor(white)
     for _,log in pairs(logs) do
         love.graphics.print(log, 8, 16)
     end
