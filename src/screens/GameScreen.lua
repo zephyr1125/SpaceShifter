@@ -15,6 +15,7 @@ end
 
 function GameScreen:draw()
     self:drawDecks()
+    player:drawHand(120, 160, 200-4)
     drawFPS()
     drawLogs()
 end
