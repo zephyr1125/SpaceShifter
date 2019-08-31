@@ -9,19 +9,34 @@ return {
     deck = 'PlayerDeck',
     handSize = 3,
     hand = {},
-    drawHand  = function(self, x, y, width, selection)
+    init = function(self)
+        decks.PlayerDeck:pickCards(self.hand, self.handSize)
+        self.currentCardId = #self.hand
+    end,
+    drawHand  = function(self, x, y, width)
         if #self.hand == 0 then return end
-        
-        selection = selection or self.hand[#self.hand]
+
         local xInterval = (width - cardWidth)/(#self.hand <= 1 and 1 or #self.hand-1)
-        local selectionId
         for id, card in pairs(self.hand) do
-            if card ~= selection then
+            if id ~= self.currentCardId then
                 drawHandCard(id, card, x, xInterval, y, width)
-            else
-                selectionId = id
             end
         end
-        drawHandCard(selectionId, selection, x, xInterval, y-4, width)
-    end
+        drawHandCard(self.currentCardId, self.hand[self.currentCardId],
+                x, xInterval, y-4, width)
+    end,
+    selectNext = function(self)
+        local id = self.currentCardId + 1
+        if id > #self.hand then
+            id = 1
+        end
+        self.currentCardId = id
+    end,
+    selectPrev = function(self)
+        local id = self.currentCardId - 1
+        if id < 1 then
+            id = #self.hand
+        end
+        self.currentCardId = id
+    end,
 }

@@ -57,3 +57,8 @@ function drawCardAsSpace(card, x, y)
     setColor(white)
     love.graphics.printf(card.space.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
 end
+
+function reload(packageName)
+    package.loaded[packageName] = nil
+    return require(packageName)
+end

@@ -29,11 +29,8 @@ require('src.const')
 require('src.utils')
 
 -- Game Data
-decks = require('src.entities.Decks')
-actions = require('src.entities.Actions')
-spaces =  require('src.entities.Spaces')
-player = require('src.entities.Player')
-enemies = require('src.entities.Enemies')
+actions = reload('src.entities.Actions')
+spaces =  reload('src.entities.Spaces')
 
 -- Load Libraries
 local ScreenManager = require('lib.ScreenManager')

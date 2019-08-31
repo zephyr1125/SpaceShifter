@@ -5,9 +5,13 @@ function GameScreen:init(ScreenManager)
 end
 
 function GameScreen:activate()
+    decks = reload('src.entities.Decks')
+    player = reload('src.entities.Player')
+    enemies = reload('src.entities.Enemies')
+    
     math.randomseed(os.time())
     fillAllDecks()
-    self.pickCardToPlayerHand(player.handSize)
+    player:init()
 end
 
 function GameScreen:update(dt)
@@ -24,15 +28,19 @@ function GameScreen:keypressed(key)
     if key == keys.B then
         self.screen:view('/')
     end
+
+    if key == keys.DPad_right then
+        player:selectPrev()
+    end
+
+    if key == keys.DPad_left then
+        player:selectNext()
+    end
 end
 
 function GameScreen:drawDecks()
-    decks.PublicDeck:draw(30, 60)
-    decks.PlayerDeck:draw(56, 174)
-end
-
-function GameScreen.pickCardToPlayerHand(amount)
-    decks.PlayerDeck:pickCards(player.hand, amount)
+    decks.PublicDeck:draw(4, 4)
+    decks.PlayerDeck:draw(4+48+4, 174)
 end
 
 return GameScreen
