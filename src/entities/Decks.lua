@@ -1,15 +1,13 @@
 local function drawDeck(cards, x, y, drawTopDeck)
-    local width = 48
-    local height = 64
 
     setColor({136, 151, 166})
-    love.graphics.rectangle('fill', x, y, width, height)
+    love.graphics.rectangle('line', x, y, cardWidth, cardHeight)
 
-    if drawTopDeck ~= nil then drawTopDeck(x, y) end
+    if drawTopDeck ~= nil then drawTopDeck() end
 
     --card count
     setColor(white)
-    love.graphics.printf(tostring(#cards), x, y+48, width, 'center')
+    love.graphics.printf(tostring(#cards), x, y+48, cardWidth, 'center')
 end
 
 local function pickCards(cards, target, amount)
@@ -25,7 +23,7 @@ return {
         size = 40,
         scoreRange = {4,10},
         draw = function(self, x, y)
-            drawDeck(self.cards, x, y)
+            drawDeck(self.cards, x, y, drawCardAsSpace(self.cards[#self.cards], x, y))
         end,
         pickCards = function(self, target, amount)
             pickCards(self.cards, target, amount)
@@ -35,7 +33,7 @@ return {
         size = 9,
         scoreRange = {2,2},
         draw = function(self, x, y)
-            drawDeck(self.cards, x, y)
+            drawDeck(self.cards, x, y, drawCardAsAction(self.cards[#self.cards], x, y))
         end,
         pickCards = function(self, target, amount)
             pickCards(self.cards, target, amount)

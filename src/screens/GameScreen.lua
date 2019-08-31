@@ -5,8 +5,9 @@ function GameScreen:init(ScreenManager)
 end
 
 function GameScreen:activate()
+    math.randomseed(os.time())
     fillAllDecks()
-    
+    self.pickCardToPlayerHand(player.handSize)
 end
 
 function GameScreen:update(dt)
@@ -27,6 +28,10 @@ end
 function GameScreen:drawDecks()
     decks.PublicDeck:draw(30, 60)
     decks.PlayerDeck:draw(56, 174)
+end
+
+function GameScreen.pickCardToPlayerHand(amount)
+    decks.PlayerDeck:pickCards(player.hand, amount)
 end
 
 return GameScreen

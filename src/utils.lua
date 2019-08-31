@@ -1,5 +1,3 @@
-white = {255,255,255}
-
 function drawText(text, x, y, color)
     color = color or white
     setColor(color)
@@ -44,4 +42,18 @@ function fillAllDecks()
             deck.cards[i] = createRandomCard(deck.scoreRange)
         end
     end
-end 
+end
+
+function drawCardAsAction(card, x, y)
+    setColor(cardActionColor)
+    love.graphics.rectangle('fill', x, y, cardWidth, cardHeight)
+    setColor(white)
+    love.graphics.printf(card.action.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
+end
+
+function drawCardAsSpace(card, x, y)
+    setColor(cardSpaceColor)
+    love.graphics.rectangle('fill', x, y, cardWidth, cardHeight)
+    setColor(white)
+    love.graphics.printf(card.space.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
+end

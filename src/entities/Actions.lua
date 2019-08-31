@@ -1,6 +1,6 @@
 return {
     {
-        name = 'Attack 1',
+        name = '攻击1',
         icon = 'attack1',
         score = 1,
         effect = function(self, enemy)
@@ -8,7 +8,7 @@ return {
         end,
     },
     {
-        name = 'Heal 3',
+        name = '治疗3',
         icon = 'heal3',
         score = 1,
         effect = function(self, enemy)
@@ -17,7 +17,7 @@ return {
     },
     {
         -- heal3 and pick up 2 cards
-        name = 'Phoenix',
+        name = '神智清醒',
         icon = 'phoenix',
         score = 3,
         effect = function(self, enemy)

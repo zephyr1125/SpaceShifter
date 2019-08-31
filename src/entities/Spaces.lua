@@ -1,6 +1,6 @@
 return {
     {
-        name = 'Mountain',
+        name = '山脉',
         icon = 'mountain',
         effectIcon = 'defence1',
         spaceAnim = 'mountain',
@@ -10,7 +10,7 @@ return {
         end
     },
     {
-        name = 'Plain',
+        name = '平原',
         icon = 'plain',
         effectIcon = 'attack1',
         spaceAnim = 'plain',
@@ -20,7 +20,7 @@ return {
         end
     },
     {
-        name = 'Graveyard',
+        name = '墓地',
         icon = 'graveyard',
         effectIcon = 'harm1',
         spaceAnim = 'graveyard',

@@ -25,7 +25,8 @@ logs = {}
 
 class = require('lib.hump.class')
 keys = require('lib.keys')
-utils = require('src.utils')
+require('src.const')
+require('src.utils')
 
 -- Game Data
 decks = require('src.entities.Decks')
@@ -46,7 +47,7 @@ local GameScreen = require('src.screens.GameScreen')
 -- Load Game
 function love.load()
 	love.graphics.setDefaultFilter( "nearest", "nearest", 1 )
-	font = love.graphics.newFont("assets/fonts/zpix.ttf", 12)
+	font = love.graphics.newFont("assets/fonts/zpix.ttf", fontSize)
 	font:setFilter( "nearest", "nearest", 0 )
 	love.graphics.setFont(font)
 	
