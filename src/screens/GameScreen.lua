@@ -2,6 +2,7 @@ local GameScreen = class {}
 
 function GameScreen:init(ScreenManager)
     self.screen = ScreenManager
+    self.imgMapSlot = love.graphics.newImage("assets/images/map_slot.png")
 end
 
 function GameScreen:activate()
@@ -25,6 +26,7 @@ function GameScreen:update(dt)
 end
 
 function GameScreen:draw()
+    self:drawMap()
     self:drawDecks()
     player:drawHand(120, 160, 200-4)
     player:drawInfo(4, screenHeight-4-cardHeight)
@@ -56,6 +58,12 @@ end
 function GameScreen:drawDecks()
     decks.PublicDeck:draw(4, 4)
     decks.PlayerDeck:draw(4+48+4, screenHeight-4-cardHeight)
+end
+
+function GameScreen:drawMap()
+    for _, slot in pairs(map) do
+        love.graphics.draw(self.imgMapSlot, 46 + slot.x, 56 + slot.y)
+    end
 end
 
 return GameScreen
