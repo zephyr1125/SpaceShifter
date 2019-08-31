@@ -6,6 +6,7 @@ end
 
 function GameScreen:activate()
     fillAllDecks()
+    
 end
 
 function GameScreen:update(dt)

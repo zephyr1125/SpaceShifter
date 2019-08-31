@@ -12,12 +12,23 @@ local function drawDeck(cards, x, y, drawTopDeck)
     love.graphics.printf(tostring(#cards), x, y+48, width, 'center')
 end
 
+local function pickCards(cards, target, amount)
+    target = target or {}
+    for _ = 1, amount do
+        local card = table.remove(cards, #cards)
+        target[#target+1] = card
+    end
+end
+
 return {
     PublicDeck = {
         size = 40,
         scoreRange = {4,10},
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)
+        end,
+        pickCards = function(self, target, amount)
+            pickCards(self.cards, target, amount)
         end
     },
     PlayerDeck = {
@@ -25,6 +36,9 @@ return {
         scoreRange = {2,2},
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)
+        end,
+        pickCards = function(self, target, amount)
+            pickCards(self.cards, target, amount)
         end
     },
     BansheeDeck = {
@@ -32,6 +46,9 @@ return {
         scoreRange = {2,3},
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)
+        end,
+        pickCards = function(self, target, amount)
+            pickCards(self.cards, target, amount)
         end
     }
 }
