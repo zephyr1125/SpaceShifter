@@ -4,6 +4,9 @@ screenHeight = 240
 cardWidth = 48
 cardHeight = 64
 
+mapX = 46
+mapY = 56
+
 white = {255,255,255}
 black = {0,0,0}
 cardActionColor = {227,168,102}

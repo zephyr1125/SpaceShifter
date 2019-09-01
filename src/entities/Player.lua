@@ -60,7 +60,7 @@ return {
     playCard = function(self)
         self.playingCard = table.remove(self.hand, self.currentCardId)
         self.playingCardAsAction = self.cardAsAction
-        self:selectNext()
+        self:selectPrev()
         if not self.playingCardAsAction then
             -- play space card always need choose slot
             return true

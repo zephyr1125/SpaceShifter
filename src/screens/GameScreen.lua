@@ -27,7 +27,7 @@ function GameScreen:update(dt)
 end
 
 function GameScreen:draw()
-    map:draw(self.imgMapSlot, 46, 56)
+    map:draw(self.imgMapSlot, mapX, mapY)
     self:drawDecks()
     player:drawHand(120, 160, 200-2)
     player:drawInfo(2, screenHeight-2-cardHeight)
@@ -42,18 +42,6 @@ end
 function GameScreen:keypressed(key)
     if key == keys.B then
         self.screen:view('/')
-    end
-
-    if key == keys.DPad_right then
-        player:selectPrev()
-    end
-
-    if key == keys.DPad_left then
-        player:selectNext()
-    end
-
-    if key == keys.Y then
-        player.cardAsAction = not player.cardAsAction
     end
 end
 
