@@ -1,10 +1,23 @@
-local baseDrawInfo = function(enemy, x, y)
+local baseDrawInfo = function(self, x, y)
     setColor(enemyInfoBgColor)
     love.graphics.rectangle('fill', x,y, cardWidth, cardHeight)
 
     --life--
     setColor(white)
-    love.graphics.printf(tostring(enemy.life), x, y+cardHeight-fontSize-4, cardWidth, 'center')
+    love.graphics.printf(tostring(self.life), x, y+cardHeight-fontSize-4, cardWidth, 'center')
+end
+
+local basePlayCard = function(self)
+    if self.hands == nil or #self.hands == 0 then return end
+    -- just random hand card
+    local cardId = random(#self.hands)
+    self.playingCard = table.remove(self.hands, cardId)
+end
+
+local baseDrawPlayingCard = function(self, x, y)
+    if(self.playingCard ~= nil) then
+        drawCardAsAction(self.playingCard, x, y)
+    end
 end
 
 return {
@@ -19,5 +32,11 @@ return {
         drawInfo = function(self, x, y)
             baseDrawInfo(self, x, y)
         end,
+        drawPlayingCard = function(self, x, y)
+            baseDrawPlayingCard(self, x, y)
+        end,
+        playCard = function(self)
+            basePlayCard(self)
+        end
     }
 }

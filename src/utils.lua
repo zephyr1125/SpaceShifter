@@ -62,3 +62,13 @@ function reload(packageName)
     package.loaded[packageName] = nil
     return require(packageName)
 end
+
+function random(m, n)
+    math.randomseed(os.time())
+    return math.random(m,n)
+end
+
+function random(n)
+    math.randomseed(os.time())
+    return math.random(1,n)
+end

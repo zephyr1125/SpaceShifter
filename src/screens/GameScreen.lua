@@ -23,10 +23,11 @@ end
 function GameScreen:draw()
     map:draw(self.imgMapSlot, 46, 56)
     self:drawDecks()
-    player:drawHand(120, 160, 200-4)
-    player:drawInfo(4, screenHeight-4-cardHeight)
+    player:drawHand(120, 160, 200-2)
+    player:drawInfo(2, screenHeight-2-cardHeight)
     if currentEnemy ~= nil then
-        currentEnemy:drawInfo(screenWidth-4-cardWidth, 4)
+        currentEnemy:drawInfo(screenWidth-2-cardWidth, 2)
+        currentEnemy:drawPlayingCard(216, 2)
     end
     drawFPS()
     drawLogs()
