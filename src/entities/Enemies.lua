@@ -28,6 +28,7 @@ return {
         deck = 'BansheeDeck',
         handSize = 3,
         init = function(self)
+            self.slot = 7
             self.hands = decks.BansheeDeck:pickCards(self.handSize)
         end,
         drawInfo = function(self, x, y)

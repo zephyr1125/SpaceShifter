@@ -1,58 +1,38 @@
 return {
     slots = {
         {
-            up = 2,
-            down = 6,
-            left = nil,
-            right = 7,
+            neighbours = {nil, 2, 7, 6, nil, nil},
             x = 0,
             y = 16
         },
         {
-            up = nil,
-            down = 7,
-            left = 1,
-            right = 3,
+            neighbours = {nil, nil, 3, 7, 1, nil},
             x = 66,
             y = 0
         },
         {
-            up = 2,
-            down = 4,
-            left = 7,
-            right = nil,
+            neighbours = {nil, nil, nil, 4, 7, 2},
             x = 132,
             y = 16
         },
         {
-            up = 3,
-            down = 5,
-            left = 7,
-            right = nil,
+            neighbours = {3, nil, nil, nil, 5, 7},
             x = 132,
             y = 48
         },
         {
-            up = 7,
-            down = nil,
-            left = 6,
-            right = 4,
+            neighbours = {7, 4, nil, nil, nil, 6},
             x = 66,
             y = 64
         },
         {
-            up = 1,
-            down = 5,
-            left = nil,
+            neighbours = {1, 7, 5, nil, nil, nil},
             right = 7,
             x = 0,
             y = 48
         },
         {
-            up = 2,
-            down = 5,
-            left = 1,
-            right = 3,
+            neighbours = {2, 3, 4, 5, 6, 1},
             x = 66,
             y = 32
         }
@@ -74,5 +54,13 @@ return {
             love.graphics.printf(slot.card.space.name,
                     x + slot.x, y + slot.y + 31-2-fontSize, 96, 'center')
         end
-    end
+    end,
+    -- returns neighbour id starts with 1 at up, and counter clockwise
+    -- returns 0 if is not neighbour
+    isNeighbour = function (self, a, b)
+        for i, neighbour in pairs(self.slots[a].neighbours) do
+            if neighbour == b then return i end
+        end
+        return 0
+    end,
 }

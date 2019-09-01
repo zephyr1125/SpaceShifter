@@ -14,6 +14,7 @@ return {
     handSize = 3,
     cardAsAction = true,
     init = function(self)
+        self.slot = 1
         self.hand = decks.PlayerDeck:pickCards(self.handSize)
         self.currentCardId = #self.hand
     end,
@@ -55,9 +56,17 @@ return {
         end
         self.currentCardId = id
     end,
+    -- returns if the card need choose slot
     playCard = function(self)
         self.playingCard = table.remove(self.hand, self.currentCardId)
         self.playingCardAsAction = self.cardAsAction
         self:selectNext()
+        if not self.playingCardAsAction then
+            -- play space card always need choose slot
+            return true
+        elseif self.playingCardAsAction and self.playingCard.action.needChooseSlot then
+            return true
+        end
+        return false
     end
 }

@@ -6,8 +6,10 @@ InitState = {}
 require('src.states.InitState')
 EnemyActionState = {}
 require('src.states.EnemyActionState')
-PlayerActionState = {}
-require('src.states.PlayerActionState')
+PlayerPlayCardState = {}
+require('src.states.PlayerPlayCardState')
+PlayerChooseSlotState = {}
+require('src.states.PlayerChooseSlotState')
 ResolutionState = {}
 require('src.states.ResolutionState')
 
