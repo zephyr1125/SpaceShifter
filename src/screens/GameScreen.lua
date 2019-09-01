@@ -6,6 +6,10 @@ InitState = {}
 require('src.states.InitState')
 EnemyActionState = {}
 require('src.states.EnemyActionState')
+PlayerActionState = {}
+require('src.states.PlayerActionState')
+ResolutionState = {}
+require('src.states.ResolutionState')
 
 function GameScreen:init(ScreenManager)
     self.screen = ScreenManager

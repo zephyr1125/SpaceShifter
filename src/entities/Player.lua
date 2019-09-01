@@ -26,7 +26,7 @@ return {
         love.graphics.printf(tostring(self.life), x, y+cardHeight-fontSize-4, cardWidth, 'center')
     end,
     drawHand  = function(self, x, y, width)
-        if #self.hand == 0 then return end
+        if self.hand == nil or #self.hand == 0 then return end
 
         local xInterval = (width - cardWidth)/(#self.hand <= 1 and 1 or #self.hand-1)
         for id, card in pairs(self.hand) do
@@ -38,6 +38,8 @@ return {
                 x, xInterval, y-4, width, self.cardAsAction)
     end,
     selectNext = function(self)
+        if self.hand == nil or #self.hand == 0 then return end
+        
         local id = self.currentCardId + 1
         if id > #self.hand then
             id = 1
@@ -45,10 +47,16 @@ return {
         self.currentCardId = id
     end,
     selectPrev = function(self)
+        if self.hand == nil or #self.hand == 0 then return end
+        
         local id = self.currentCardId - 1
         if id < 1 then
             id = #self.hand
         end
         self.currentCardId = id
     end,
+    playCard = function(self)
+        self.playingCard = table.remove(self.hand, self.currentCardId)
+        self:selectNext()
+    end
 }
