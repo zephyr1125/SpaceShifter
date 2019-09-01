@@ -1,4 +1,11 @@
+GameState = require "lib.hump.gamestate"
+
 local GameScreen = class {}
+
+InitState = {}
+require('src.states.InitState')
+EnemyActionState = {}
+require('src.states.EnemyActionState')
 
 function GameScreen:init(ScreenManager)
     self.screen = ScreenManager
@@ -6,32 +13,20 @@ function GameScreen:init(ScreenManager)
 end
 
 function GameScreen:activate()
-    decks = reload('src.entities.Decks')
-    player = reload('src.entities.Player')
-    enemies = reload('src.entities.Enemies')
-    
-    math.randomseed(os.time())
-    fillAllDecks()
-    player:init()
-    self:initEnemy()
-end
-
-function GameScreen:initEnemy()
-    self.currentEnemyId = 1
-    self.currentEnemy = enemies[self.currentEnemyId]
-    self.currentEnemy:init()
+    GameState.registerEvents()
+    GameState.switch(InitState)
 end
 
 function GameScreen:update(dt)
 end
 
 function GameScreen:draw()
-    self:drawMap()
+    map:draw(self.imgMapSlot, 46, 56)
     self:drawDecks()
     player:drawHand(120, 160, 200-4)
     player:drawInfo(4, screenHeight-4-cardHeight)
-    if self.currentEnemy ~= nil then
-        self.currentEnemy:drawInfo(screenWidth-4-cardWidth, 4)
+    if currentEnemy ~= nil then
+        currentEnemy:drawInfo(screenWidth-4-cardWidth, 4)
     end
     drawFPS()
     drawLogs()
@@ -58,12 +53,6 @@ end
 function GameScreen:drawDecks()
     decks.PublicDeck:draw(4, 4)
     decks.PlayerDeck:draw(4+48+4, screenHeight-4-cardHeight)
-end
-
-function GameScreen:drawMap()
-    for _, slot in pairs(map) do
-        love.graphics.draw(self.imgMapSlot, 46 + slot.x, 56 + slot.y)
-    end
 end
 
 return GameScreen

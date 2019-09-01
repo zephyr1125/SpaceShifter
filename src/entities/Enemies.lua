@@ -13,9 +13,8 @@ return {
         life = 5,
         deck = 'BansheeDeck',
         handSize = 3,
-        hand = {},
         init = function(self)
-            decks.BansheeDeck:pickCards(self.hand, self.handSize)
+            self.hands = decks.BansheeDeck:pickCards(self.handSize)
         end,
         drawInfo = function(self, x, y)
             baseDrawInfo(self, x, y)

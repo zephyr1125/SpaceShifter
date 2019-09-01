@@ -1,6 +1,6 @@
 local function drawHandCard(id, card, handX, xInterval, handY, width, cardAsAction)
     local cardX = handX + width - cardWidth -
-            (id-1)*(xInterval > cardWidth+4 and cardWidth+4 or xInterval)
+            (id-1)*(xInterval > cardWidth+1 and cardWidth+1 or xInterval)
     if cardAsAction then
         drawCardAsAction(card, cardX, handY)
     else
@@ -13,9 +13,8 @@ return {
     deck = 'PlayerDeck',
     handSize = 3,
     cardAsAction = true,
-    hand = {},
     init = function(self)
-        decks.PlayerDeck:pickCards(self.hand, self.handSize)
+        self.hand = decks.PlayerDeck:pickCards(self.handSize)
         self.currentCardId = #self.hand
     end,
     drawInfo = function(self, x, y)
