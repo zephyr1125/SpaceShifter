@@ -57,6 +57,7 @@ return {
     end,
     playCard = function(self)
         self.playingCard = table.remove(self.hand, self.currentCardId)
+        self.playingCardAsAction = self.cardAsAction
         self:selectNext()
     end
 }

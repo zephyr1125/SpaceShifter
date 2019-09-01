@@ -4,7 +4,14 @@ return {
         icon = 'attack1',
         score = 1,
         effect = function(self, enemy)
-            enemy.life = enemy.life - 1
+            enemy.damagePending = enemy.damagePending + 1
+        end,
+    },{
+        name = '防御1',
+        icon = 'defence1',
+        score = 1,
+        effect = function(self, enemy)
+            self.damagePending = self.damagePending - 1
         end,
     },
     {

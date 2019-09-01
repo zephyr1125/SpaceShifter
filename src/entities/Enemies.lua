@@ -12,6 +12,7 @@ local basePlayCard = function(self)
     -- just random hand card
     local cardId = random(#self.hands)
     self.playingCard = table.remove(self.hands, cardId)
+    self.playingCardAsAction = true
 end
 
 local baseDrawPlayingCard = function(self, x, y)
