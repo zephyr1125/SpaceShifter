@@ -35,8 +35,10 @@ return {
                 drawHandCard(id, card, x, xInterval, y, width, self.cardAsAction)
             end
         end
-        drawHandCard(self.currentCardId, self.hand[self.currentCardId],
-                x, xInterval, y-4, width, self.cardAsAction)
+        if self.currentCardId ~= 0 then
+            drawHandCard(self.currentCardId, self.hand[self.currentCardId],
+                    x, xInterval, y-4, width, self.cardAsAction)
+        end
     end,
     selectNext = function(self)
         if self.hand == nil or #self.hand == 0 then return end
@@ -58,9 +60,8 @@ return {
     end,
     -- returns if the card need choose slot
     playCard = function(self)
-        self.playingCard = table.remove(self.hand, self.currentCardId)
+        self.playingCard = self.hand[self.currentCardId]
         self.playingCardAsAction = self.cardAsAction
-        self:selectPrev()
         if not self.playingCardAsAction then
             -- play space card always need choose slot
             return true

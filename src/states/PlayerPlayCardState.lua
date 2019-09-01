@@ -1,5 +1,6 @@
 function PlayerPlayCardState:enter()
     print("player state")
+    player.currentCardId = #player.hand
 end
 
 function PlayerPlayCardState:keypressed(key)

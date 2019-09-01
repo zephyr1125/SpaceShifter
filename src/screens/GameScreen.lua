@@ -1,25 +1,14 @@
-GameState = require "lib.hump.gamestate"
-
 local GameScreen = class {}
-
-InitState = {}
-require('src.states.InitState')
-EnemyActionState = {}
-require('src.states.EnemyActionState')
-PlayerPlayCardState = {}
-require('src.states.PlayerPlayCardState')
-PlayerChooseSlotState = {}
-require('src.states.PlayerChooseSlotState')
-ResolutionState = {}
-require('src.states.ResolutionState')
 
 function GameScreen:init(ScreenManager)
     self.screen = ScreenManager
     self.imgMapSlot = love.graphics.newImage("assets/images/map_slot.png")
+
+    GameState.registerEvents()
+    GameState.switch(InitState)
 end
 
 function GameScreen:activate()
-    GameState.registerEvents()
     GameState.switch(InitState)
 end
 

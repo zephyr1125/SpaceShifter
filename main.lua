@@ -42,6 +42,19 @@ local TitleScreen = require('src.screens.TitleScreen')
 local GameScreen = require('src.screens.GameScreen')
 --
 
+-- Game States
+GameState = require "lib.hump.gamestate"
+InitState = {}
+require('src.states.InitState')
+EnemyActionState = {}
+require('src.states.EnemyActionState')
+PlayerPlayCardState = {}
+require('src.states.PlayerPlayCardState')
+PlayerChooseSlotState = {}
+require('src.states.PlayerChooseSlotState')
+ResolutionState = {}
+require('src.states.ResolutionState')
+
 -- Load Game
 function love.load()
 	love.graphics.setDefaultFilter( "nearest", "nearest", 1 )

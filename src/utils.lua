@@ -72,3 +72,13 @@ function random(n)
     math.randomseed(os.time())
     return math.random(1,n)
 end
+
+function hasValue (tab, val)
+    for _, value in pairs(tab) do
+        if value == val then
+            return true
+        end
+    end
+
+    return false
+end

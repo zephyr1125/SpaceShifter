@@ -63,4 +63,8 @@ return {
         end
         return 0
     end,
+    getNeighbour = function(self, slot)
+        if slot > #self.slots then return {} end
+        return self.slots[slot].neighbours
+    end,
 }

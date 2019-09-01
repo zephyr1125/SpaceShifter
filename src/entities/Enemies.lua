@@ -26,6 +26,7 @@ return {
         name = 'Banshee',
         life = 5,
         deck = 'BansheeDeck',
+        img = 'banshee',
         handSize = 3,
         init = function(self)
             self.slot = 7
