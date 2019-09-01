@@ -21,12 +21,20 @@ local baseDrawPlayingCard = function(self, x, y)
     end
 end
 
+local baseDrawSprite = function(self, imageSprite, mapX, mapY)
+    setColor(white)
+    love.graphics.draw(imageSprite,
+            mapX + map.slots[self.slot].x
+                    + math.floor(mapSlotWidth/2) - imageSprite:getWidth()/2,
+            mapY + map.slots[self.slot].y
+                    + math.floor(mapSlotHeight/2) - imageSprite:getHeight())
+end
+
 return {
     {
         name = 'Banshee',
         life = 5,
         deck = 'BansheeDeck',
-        img = 'banshee',
         handSize = 3,
         init = function(self)
             self.slot = 7
@@ -37,6 +45,9 @@ return {
         end,
         drawPlayingCard = function(self, x, y)
             baseDrawPlayingCard(self, x, y)
+        end,
+        drawSprite = function(self, mapX, mapY)
+            baseDrawSprite(self, imgBansheeSprite, mapX, mapY)
         end,
         playCard = function(self)
             basePlayCard(self)

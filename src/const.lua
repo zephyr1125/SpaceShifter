@@ -7,6 +7,9 @@ cardHeight = 64
 mapX = 46
 mapY = 56
 
+mapSlotWidth = 97
+mapSlotHeight = 31
+
 white = {255,255,255}
 black = {0,0,0}
 cardActionColor = {227,168,102}

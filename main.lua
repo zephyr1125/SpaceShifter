@@ -28,6 +28,9 @@ keys = require('lib.keys')
 require('src.const')
 require('src.utils')
 
+-- assets
+require('src.assets')
+
 -- Game Data
 actions = require('src.entities.Actions')
 spaces =  require('src.entities.Spaces')
@@ -57,6 +60,8 @@ require('src.states.ResolutionState')
 
 -- Load Game
 function love.load()
+	InitAssets()
+	
 	love.graphics.setDefaultFilter( "nearest", "nearest", 1 )
 	font = love.graphics.newFont("assets/fonts/zpix.ttf", fontSize)
 	font:setFilter( "nearest", "nearest", 0 )

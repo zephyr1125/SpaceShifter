@@ -2,7 +2,6 @@ local GameScreen = class {}
 
 function GameScreen:init(ScreenManager)
     self.screen = ScreenManager
-    self.imgMapSlot = love.graphics.newImage("assets/images/map_slot.png")
 
     GameState.registerEvents()
     GameState.switch(InitState)
@@ -16,7 +15,10 @@ function GameScreen:update(dt)
 end
 
 function GameScreen:draw()
-    map:draw(self.imgMapSlot, mapX, mapY)
+    self:drawBackground()
+    map:draw(imgMapSlot, mapX, mapY)
+    currentEnemy:drawSprite(mapX, mapY)
+    player:drawSprite(mapX, mapY)
     self:drawDecks()
     player:drawHand(120, 160, 200-2)
     player:drawInfo(2, screenHeight-2-cardHeight)
@@ -26,6 +28,11 @@ function GameScreen:draw()
     end
     drawFPS()
     drawLogs()
+end
+
+function GameScreen:drawBackground()
+    setColor({53,53,53})
+    love.graphics.rectangle('fill', 0, 0, screenWidth, screenHeight)
 end
 
 function GameScreen:keypressed(key)

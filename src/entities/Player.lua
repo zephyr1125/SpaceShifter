@@ -40,6 +40,14 @@ return {
                     x, xInterval, y-4, width, self.cardAsAction)
         end
     end,
+    drawSprite = function(self, mapX, mapY)
+        setColor(white)
+        love.graphics.draw(imgPlayerSprite,
+                mapX + map.slots[self.slot].x
+                        + math.floor(mapSlotWidth/2) - playerSpriteWidth/2,
+                mapY + map.slots[self.slot].y
+                        + math.floor(mapSlotHeight/2) - playerSpriteHeight)
+    end,
     selectNext = function(self)
         if self.hand == nil or #self.hand == 0 then return end
         

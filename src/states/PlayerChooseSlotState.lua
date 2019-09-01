@@ -5,7 +5,7 @@ local function setTargetSlot(next, playerNeighbours)
 end
 
 function PlayerChooseSlotState:init()
-    self.imgSelect = love.graphics.newImage('assets/images/slot_select.png')
+    
 end
 
 function PlayerChooseSlotState:enter()
@@ -22,7 +22,7 @@ function PlayerChooseSlotState:draw()
     local slot = map.slots[player.targetSlot]
     
     setColor(white)
-    love.graphics.draw(self.imgSelect, mapX + slot.x, mapY + slot.y)
+    love.graphics.draw(imgSlotSelect, mapX + slot.x, mapY + slot.y)
 end
 
 function PlayerChooseSlotState:keypressed(key)
