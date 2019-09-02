@@ -77,5 +77,8 @@ return {
             return true
         end
         return false
+    end,
+    pickCard = function(self)
+        self.hand[#self.hand+1] = decks.PlayerDeck:pickCards(1)
     end
 }

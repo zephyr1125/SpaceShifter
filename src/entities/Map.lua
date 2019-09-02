@@ -1,32 +1,32 @@
 return {
     slots = {
         {
-            neighbours = {nil, 2, 7, 6, nil, nil},
+            neighbours = {0, 2, 7, 6, 0, 0},
             x = 0,
             y = 16
         },
         {
-            neighbours = {nil, nil, 3, 7, 1, nil},
+            neighbours = {0, 0, 3, 7, 1, 0},
             x = 66,
             y = 0
         },
         {
-            neighbours = {nil, nil, nil, 4, 7, 2},
+            neighbours = {0, 0, 0, 4, 7, 2},
             x = 132,
             y = 16
         },
         {
-            neighbours = {3, nil, nil, nil, 5, 7},
+            neighbours = {3, 0, 0, 0, 5, 7},
             x = 132,
             y = 48
         },
         {
-            neighbours = {7, 4, nil, nil, nil, 6},
+            neighbours = {7, 4, 0, 0, 0, 6},
             x = 66,
             y = 64
         },
         {
-            neighbours = {1, 7, 5, nil, nil, nil},
+            neighbours = {1, 7, 5, 0, 0, 0},
             right = 7,
             x = 0,
             y = 48
@@ -64,7 +64,23 @@ return {
         return 0
     end,
     getNeighbours = function(self, slot)
-        if slot > #self.slots then return {} end
-        return self.slots[slot].neighbours
+        if slot < 1 or slot > #self.slots then return {} end
+        return {unpack(self.slots[slot].neighbours)}
     end,
+    getNoHoleNeighbours = function(self, slot)
+        --warning remove the 0s of neighbours table but be aware will loss direction information
+        local neighbours = self:getNeighbours(slot)
+        for i, neighbour in pairs(neighbours) do
+            if neighbour == 0 then table.remove(neighbours, i) end
+        end
+        return neighbours
+    end,
+    randomNeighbour = function(self, slot, except)
+        local neighbours = self:getNoHoleNeighbours(slot)
+        -- remove the except slot
+        for i, neighbour in pairs(neighbours) do
+            if neighbour == except then table.remove(neighbours, i) end
+        end
+        return neighbours[random(#neighbours)]
+    end
 }

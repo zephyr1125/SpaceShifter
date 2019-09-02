@@ -8,10 +8,10 @@ local baseDrawInfo = function(self, x, y)
 end
 
 local basePlayCard = function(self)
-    if self.hands == nil or #self.hands == 0 then return end
+    if self.hand == nil or #self.hand == 0 then return end
     -- just random hand card
-    local cardId = random(#self.hands)
-    self.playingCard = table.remove(self.hands, cardId)
+    local cardId = random(#self.hand)
+    self.playingCard = table.remove(self.hand, cardId)
     self.playingCardAsAction = true
     if self.playingCard.action.needChooseSlot then
         return true
@@ -35,9 +35,9 @@ local baseDrawSprite = function(self, imageSprite, mapX, mapY)
 end
 
 local baseChooseActionSlot = function(self)
-    -- todo choose slot base on action type, may write on action
-    local neighbours = map:getNeighbours(self.slot)
-    self.targetSlot = neighbours[random(#neighbours)]
+    -- todo now is random, need to choose slot base on action type, may write on action
+    self.targetSlot = map:randomNeighbour(self.slot,
+            self.playingCard.action.getExceptSlot(self, player))
 end
 
 return {
@@ -48,7 +48,7 @@ return {
         handSize = 3,
         init = function(self)
             self.slot = 7
-            self.hands = decks.BansheeDeck:pickCards(self.handSize)
+            self.hand = decks.BansheeDeck:pickCards(self.handSize)
         end,
         drawInfo = function(self, x, y)
             baseDrawInfo(self, x, y)
@@ -64,6 +64,9 @@ return {
         end,
         chooseActionSlot = function(self)
             baseChooseActionSlot(self)
+        end,
+        pickCard = function(self)
+            self.hand[#self.hand+1] = decks.BansheeDeck:pickCards(1)
         end
     }
 }
