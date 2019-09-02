@@ -1,23 +1,34 @@
 function ResolutionState:enter()
     ResolutionState:reset()
 
-    -- both actions take effect
-    if currentEnemy.playingCardAsAction then
-        currentEnemy.playingCard.action.effect(currentEnemy, player)
+    local enemyAction = currentEnemy.playingCard.action
+    local enemySpace = currentEnemy.playingCard.space
+    local playerAction = player.playingCard.action
+    local playerSpace = player.playingCard.space
+    
+    -- both move actions first
+    if currentEnemy.playingCardAsAction and enemyAction.move ~= nil then
+        enemyAction.move(currentEnemy)
     end
-    if player.playingCardAsAction then
-        player.playingCard.action.effect(player, currentEnemy)
+    if player.playingCardAsAction and playerAction.move ~= nil then
+        playerAction.move(player)
+    end
+    
+    -- both actions take effect
+    if currentEnemy.playingCardAsAction and enemyAction.effect ~= nil then
+        enemyAction.effect(currentEnemy, player)
+    end
+    if player.playingCardAsAction and playerAction.effect ~= nil then
+        playerAction.effect(player, currentEnemy)
     end
 
-    -- calc damage
+    -- trim damage
     if currentEnemy.damagePending<0 then currentEnemy.damagePending = 0 end
     if player.damagePending<0 then player.damagePending = 0 end
 
     -- resolve damage
     currentEnemy.life = currentEnemy.life - currentEnemy.damagePending
     player.life = player.life - player.damagePending
-
-    -- both spaces take effect
 end
 
 function ResolutionState:reset()

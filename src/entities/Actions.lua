@@ -5,6 +5,7 @@ return {
         score = 1,
         needChooseSlot = true,
         effect = function(self, enemy)
+            if self.targetSlot ~= enemy.slot then return end
             enemy.damagePending = enemy.damagePending + 1
         end,
     },{
@@ -35,5 +36,13 @@ return {
             self.life = self.life + 3
             self.drawCards(2)
         end,
-    }
+    },{
+        name = '移动',
+        icon = 'move',
+        score = 1,
+        needChooseSlot = true,
+        move = function(self)
+            self.slot = self.targetSlot
+        end,
+    },
 }
