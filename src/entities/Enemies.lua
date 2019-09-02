@@ -13,6 +13,10 @@ local basePlayCard = function(self)
     local cardId = random(#self.hands)
     self.playingCard = table.remove(self.hands, cardId)
     self.playingCardAsAction = true
+    if self.playingCard.action.needChooseSlot then
+        return true
+    end
+    return false
 end
 
 local baseDrawPlayingCard = function(self, x, y)
@@ -30,12 +34,19 @@ local baseDrawSprite = function(self, imageSprite, mapX, mapY)
                     + math.floor(mapSlotHeight/2) - imageSprite:getHeight())
 end
 
+local baseChooseActionSlot = function(self)
+    -- todo choose slot base on action type, may write on action
+    local neighbours = map:getNeighbours(self.slot)
+    self.targetSlot = neighbours[random(#neighbours)]
+end
+
 return {
     {
         name = 'Banshee',
         life = 5,
         deck = 'BansheeDeck',
         handSize = 3,
+        discardPile = {},
         init = function(self)
             self.slot = 7
             self.hands = decks.BansheeDeck:pickCards(self.handSize)
@@ -50,7 +61,10 @@ return {
             baseDrawSprite(self, imgBansheeSprite, mapX, mapY)
         end,
         playCard = function(self)
-            basePlayCard(self)
+            return basePlayCard(self)
+        end,
+        chooseActionSlot = function(self)
+            baseChooseActionSlot(self)
         end
     }
 }

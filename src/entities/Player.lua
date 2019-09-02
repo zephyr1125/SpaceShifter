@@ -13,6 +13,7 @@ return {
     deck = 'PlayerDeck',
     handSize = 3,
     cardAsAction = true,
+    discardPile = {},
     init = function(self)
         self.slot = 1
         self.hand = decks.PlayerDeck:pickCards(self.handSize)

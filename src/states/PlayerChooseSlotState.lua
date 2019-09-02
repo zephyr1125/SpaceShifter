@@ -4,6 +4,8 @@ local function setTargetSlot(next, playerNeighbours)
     end
 end
 
+PlayerChooseSlotState = {}
+
 function PlayerChooseSlotState:init()
     
 end
@@ -26,46 +28,44 @@ function PlayerChooseSlotState:draw()
 end
 
 function PlayerChooseSlotState:keypressed(key)
-    local playerNeighbours = map:getNeighbour(player.slot)
+    local playerNeighbours = map:getNeighbours(player.slot)
     -- add self slot
     playerNeighbours[#playerNeighbours+1] = player.slot
     
     local next
     if key == keys.DPad_up then
-        next = map:getNeighbour(player.targetSlot)[1]
+        next = map:getNeighbours(player.targetSlot)[1]
         if next == nil or not hasValue(playerNeighbours, next) then
-            next = map:getNeighbour(player.targetSlot)[6]
+            next = map:getNeighbours(player.targetSlot)[6]
         end
         if next == nil or not hasValue(playerNeighbours, next) then
-            next = map:getNeighbour(player.targetSlot)[2]
+            next = map:getNeighbours(player.targetSlot)[2]
         end
         setTargetSlot(next, playerNeighbours)
     elseif key == keys.DPad_down then
-        next = map:getNeighbour(player.targetSlot)[4]
+        next = map:getNeighbours(player.targetSlot)[4]
         if next == nil or not hasValue(playerNeighbours, next) then
-            next = map:getNeighbour(player.targetSlot)[5]
+            next = map:getNeighbours(player.targetSlot)[5]
         end
         if next == nil or not hasValue(playerNeighbours, next) then
-            next = map:getNeighbour(player.targetSlot)[3]
+            next = map:getNeighbours(player.targetSlot)[3]
         end
         setTargetSlot(next, playerNeighbours)
     elseif key == keys.DPad_left then
-        next = map:getNeighbour(player.targetSlot)[6]
+        next = map:getNeighbours(player.targetSlot)[6]
         if next == nil or not hasValue(playerNeighbours, next) then
-            next = map:getNeighbour(player.targetSlot)[5]
+            next = map:getNeighbours(player.targetSlot)[5]
         end
         setTargetSlot(next, playerNeighbours)
     elseif key == keys.DPad_right then
-        next = map:getNeighbour(player.targetSlot)[2]
+        next = map:getNeighbours(player.targetSlot)[2]
         if next == nil or not hasValue(playerNeighbours, next) then
-            next = map:getNeighbour(player.targetSlot)[3]
+            next = map:getNeighbours(player.targetSlot)[3]
         end
         setTargetSlot(next, playerNeighbours)
     end
 
     if key == keys.A then
-        table.remove(player.hand, player.currentCardId)
-        player.currentCardId = 0
         GameState.switch(ResolutionState)
     end
 end

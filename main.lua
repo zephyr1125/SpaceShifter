@@ -47,16 +47,15 @@ local GameScreen = require('src.screens.GameScreen')
 
 -- Game States
 GameState = require "lib.hump.gamestate"
-InitState = {}
 require('src.states.InitState')
-EnemyActionState = {}
 require('src.states.EnemyActionState')
-PlayerPlayCardState = {}
 require('src.states.PlayerPlayCardState')
-PlayerChooseSlotState = {}
 require('src.states.PlayerChooseSlotState')
-ResolutionState = {}
 require('src.states.ResolutionState')
+require('src.states.LifeCheckState')
+require('src.states.WinState')
+require('src.states.LoseState')
+require('src.states.BothDeathState')
 
 -- Load Game
 function love.load()

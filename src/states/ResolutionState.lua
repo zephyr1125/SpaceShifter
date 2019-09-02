@@ -1,3 +1,5 @@
+ResolutionState = {}
+
 function ResolutionState:enter()
     ResolutionState:reset()
 
@@ -29,6 +31,19 @@ function ResolutionState:enter()
     -- resolve damage
     currentEnemy.life = currentEnemy.life - currentEnemy.damagePending
     player.life = player.life - player.damagePending
+    
+    --clean cards
+    GameState.cleanCards()
+    -- next state
+    GameState.switch(LifeCheckState)
+end
+
+function ResolutionState.cleanCards()
+    table.remove(player.hand, player.currentCardId)
+    player.currentCardId = 0
+    player.playingCard = nil
+    
+    currentEnemy.playingCard = nil
 end
 
 function ResolutionState:reset()

@@ -1,3 +1,5 @@
+InitState = {}
+
 function InitState:enter()
     decks = reload('src.entities.Decks')
     player = reload('src.entities.Player')

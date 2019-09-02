@@ -1,3 +1,4 @@
+PlayerPlayCardState = {}
 function PlayerPlayCardState:enter()
     print("player state")
     player.currentCardId = #player.hand

@@ -1,4 +1,8 @@
+EnemyActionState = {}
+
 function EnemyActionState:enter()
-    currentEnemy:playCard()
+    if currentEnemy:playCard() then
+        currentEnemy:chooseActionSlot()
+    end
     GameState.switch(PlayerPlayCardState)
 end
