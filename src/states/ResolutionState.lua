@@ -33,7 +33,7 @@ function ResolutionState:enter()
     player.life = player.life - player.damagePending
     
     --clean cards
-    GameState.cleanCards()
+    ResolutionState.cleanCards()
     -- next state
     GameState.switch(LifeCheckState)
 end
@@ -41,8 +41,11 @@ end
 function ResolutionState.cleanCards()
     table.remove(player.hand, player.currentCardId)
     player.currentCardId = 0
+    decks.PlayerDeck.discardCards[#decks.PlayerDeck.discardCards+1] = player.playingCard
     player.playingCard = nil
     
+    local enemyDeck = decks[currentEnemy.deck]
+    enemyDeck.discardCards[#enemyDeck.discardCards+1] = currentEnemy.playingCard
     currentEnemy.playingCard = nil
 end
 

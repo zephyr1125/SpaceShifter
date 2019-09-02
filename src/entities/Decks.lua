@@ -28,6 +28,7 @@ return {
     PublicDeck = {
         size = 40,
         scoreRange = {4,10},
+        discardCards = {},
         draw = function(self, x, y)
             drawDeck(self.cards, x, y, drawCardAsSpace(self.cards[#self.cards], x, y))
         end,
@@ -38,6 +39,7 @@ return {
     PlayerDeck = {
         size = 9,
         scoreRange = {2,2},
+        discardCards = {},
         draw = function(self, x, y)
             drawDeck(self.cards, x, y, drawCardAsAction(self.cards[#self.cards], x, y))
         end,
@@ -48,6 +50,7 @@ return {
     BansheeDeck = {
         size = 9,
         scoreRange = {2,3},
+        discardCards = {},
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)
         end,

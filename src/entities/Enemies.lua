@@ -46,7 +46,6 @@ return {
         life = 5,
         deck = 'BansheeDeck',
         handSize = 3,
-        discardPile = {},
         init = function(self)
             self.slot = 7
             self.hands = decks.BansheeDeck:pickCards(self.handSize)
