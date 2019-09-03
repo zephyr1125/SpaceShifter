@@ -23,5 +23,3 @@ function testsFillAllDecks:testCreateAllCards()
         luaunit.assertEquals(#deck.cards, deck.size)
     end
 end
-
-return testsFillAllDecks

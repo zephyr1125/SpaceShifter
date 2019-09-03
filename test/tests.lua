@@ -14,5 +14,7 @@ enemies = require('src.entities.Enemies')
 require('testsOfUtils')
 require('testsFillAllDecks')
 require('testsPickCards')
+require('testsActionMove')
+require('testsMap')
 
 os.exit( luaunit.LuaUnit.run() )

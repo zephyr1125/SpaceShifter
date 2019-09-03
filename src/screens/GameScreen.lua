@@ -4,7 +4,7 @@ function GameScreen:init(ScreenManager)
     self.screen = ScreenManager
 
     GameState.registerEvents()
-    GameState.switch(InitState)
+    GameState.switch(IdleState)
 end
 
 function GameScreen:activate()

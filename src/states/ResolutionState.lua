@@ -7,14 +7,9 @@ function ResolutionState:enter()
     local enemySpace = currentEnemy.playingCard.space
     local playerAction = player.playingCard.action
     local playerSpace = player.playingCard.space
-    
-    -- both move actions first
-    if currentEnemy.playingCardAsAction and enemyAction.move ~= nil then
-        enemyAction.move(currentEnemy)
-    end
-    if player.playingCardAsAction and playerAction.move ~= nil then
-        playerAction.move(player)
-    end
+
+    -- both move first
+    self.move(playerAction, enemyAction)
     
     -- both actions take effect
     if currentEnemy.playingCardAsAction and enemyAction.effect ~= nil then
@@ -36,6 +31,22 @@ function ResolutionState:enter()
     ResolutionState.cleanCards()
     -- next state
     GameState.switch(LifeCheckState)
+end
+
+function ResolutionState.move(playerAction, enemyAction)
+    -- if they are moving to same slot, stop both
+    if currentEnemy.playingCardAsAction and enemyAction.move ~= nil and
+            player.playingCardAsAction and playerAction.move ~= nil and
+            currentEnemy.targetSlot == player.targetSlot then
+        -- todo play some collide animation
+    else
+        if currentEnemy.playingCardAsAction and enemyAction.move ~= nil then
+            enemyAction.move(currentEnemy)
+        end
+        if player.playingCardAsAction and playerAction.move ~= nil then
+            playerAction.move(player)
+        end
+    end
 end
 
 function ResolutionState.cleanCards()

@@ -17,5 +17,3 @@ function testsPickCards:testPickPublicDeckCards()
     luaunit.assertNotIsNil(hand[1].action)
     luaunit.assertNotIs(hand[1].space)
 end
-
-return testsPickCards

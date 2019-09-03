@@ -47,6 +47,7 @@ local GameScreen = require('src.screens.GameScreen')
 
 -- Game States
 GameState = require "lib.hump.gamestate"
+require('src.states.IdleState')
 require('src.states.InitState')
 require('src.states.EnemyActionState')
 require('src.states.PlayerPlayCardState')

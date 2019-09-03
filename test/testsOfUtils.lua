@@ -15,5 +15,3 @@ function testsOfUtils:testCreateRandomCard()
     local score = card.action.score + card.space.score
     luaunit.assertIsTrue(score >= 2 and score <= 4)
 end
-
-return testsOfUtils
