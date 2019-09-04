@@ -1,4 +1,3 @@
-require('src.states/ResolutionState')
 testsActionMove = {}
 
 function testsActionMove:setUp()

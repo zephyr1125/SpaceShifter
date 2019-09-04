@@ -5,7 +5,7 @@ return {
         score = 1,
         needChooseSlot = true,
         effect = function(me, opponent)
-            me.attack = 1
+            me.attack = me.attack + 1
             -- space affect attack
             local space = map.slots[me.slot].card.space
             if space.onCalcAttack ~= nil then
@@ -33,12 +33,7 @@ return {
         score = 1,
         needChooseSlot = false,
         effect = function(me, opponent)
-            me.defence = 1
-            -- space affect defence
-            local space = map.slots[me.slot].card.space
-            if space.onCalcDefence ~= nil then
-                space.onCalcDefence(me, opponent)
-            end
+            me.defence = me.defence + 1
         end,
     },
     ['hear1'] = {

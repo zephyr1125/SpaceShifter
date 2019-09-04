@@ -4,6 +4,7 @@ luaunit = require('luaunit')
 package.path = package.path .. ";..\\?.lua;"
 
 require('src.utils')
+require('src.states/ResolutionState')
 
 decks = require('src.entities.Decks')
 actions = require('src.entities.Actions')
@@ -18,5 +19,7 @@ require('testsPickCards')
 require('testsActionMove')
 require('testsMap')
 require('testsAttackAndDefence')
+require('testsSpacePlain')
+require('testsSpaceMountain')
 
 os.exit( luaunit.LuaUnit.run() )

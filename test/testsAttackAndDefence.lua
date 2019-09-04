@@ -1,12 +1,11 @@
 testsAttackAndDefence = {}
 
+function testsAttackAndDefence:setUp()
+    ResolutionState.reset()
+end
+
 function testsAttackAndDefence:tearDown()
-    player.attack = 0
-    player.defence = 0
-    currentEnemy.attack = 0
-    currentEnemy.defence = 0
-    player.damagePending = 0
-    currentEnemy.damagePending = 0
+    ResolutionState.reset()
 end
 
 function testsAttackAndDefence:testPlainAffectAttack()
@@ -20,19 +19,46 @@ function testsAttackAndDefence:testPlainAffectAttack()
 end
 
 function testsAttackAndDefence:testMountainAffectDefence()
-    player.playingCard = {action = actions['defence1']}
+    player.playingCard = {action = actions['move']}
     player.playingCardAsAction = true
     player.slot = 1
+    player.targetSlot = 1
     map.slots[1].card = {space = spaces['mountain']}
-    player.playingCard.action.effect(player, currentEnemy)
+    currentEnemy.slot = 2
+    map.slots[2].card = {space = spaces['mountain']}
+    ResolutionState.extraDefence()
 
-    luaunit.assertEquals(player.defence, 2)
+    luaunit.assertEquals(player.defence, 1)
+    luaunit.assertEquals(currentEnemy.defence, 1)
 end
 
 function testsAttackAndDefence:testCorrectDamageCalc()
+    player.playingCard = {action = actions['attack1']}
+    player.playingCardAsAction = true
+    player.slot = 1
+    player.targetSlot = 2
+    currentEnemy.life = 5
+    currentEnemy.defence = 1
+    currentEnemy.slot = 2
+    map.slots[1].card = {space = spaces['plain']}
+
+    player.playingCard.action.effect(player, currentEnemy)
+    ResolutionState.calcDamage()
     
+    luaunit.assertEquals(currentEnemy.life, 4)
 end
 
 function testsAttackAndDefence:testNotRightSlot_NoDamage()
-    
+    player.playingCard = {action = actions['attack1']}
+    player.playingCardAsAction = true
+    player.slot = 1
+    player.targetSlot = 2
+    currentEnemy.life = 5
+    currentEnemy.slot = 3
+    map.slots[1].card = {space = spaces['plain']}
+
+    player.playingCard.action.effect(player, currentEnemy)
+    ResolutionState.calcDamage()
+
+    luaunit.assertEquals(currentEnemy.life, 5)
 end
