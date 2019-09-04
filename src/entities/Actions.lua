@@ -1,5 +1,5 @@
 return {
-    {
+    ['attack1'] = {
         name = '攻击1',
         icon = 'attack1',
         score = 1,
@@ -26,7 +26,8 @@ return {
                 return opponent.slot
             end
         end
-    },{
+    },
+    ['defence1'] = {
         name = '防御1',
         icon = 'defence1',
         score = 1,
@@ -40,7 +41,7 @@ return {
             end
         end,
     },
-    {
+    ['hear1'] = {
         name = '治疗1',
         icon = 'heal1',
         score = 1,
@@ -49,17 +50,18 @@ return {
             me.life = me.life + 1
         end,
     },
-    {
+    ['concentrate'] = {
         -- heal1 and pick up 2 cards
-        name = '神智清醒',
-        icon = 'phoenix',
+        name = '集中精神',
+        icon = 'concentrate',
         score = 3,
         needChooseSlot = false,
         effect = function(me, opponent)
             me.life = me.life + 1
             me.drawCards(2)
         end,
-    },{
+    },
+    ['move'] = {
         name = '移动',
         icon = 'move',
         score = 1,

@@ -8,10 +8,10 @@ function testsActionMove:setUp()
 end
 
 function testsActionMove:testMove()
-    player.playingCard = {action = actions[5]}
+    player.playingCard = {action = actions['move']}
     player.playingCardAsAction = true
     player.targetSlot = 2
-    currentEnemy.playingCard = {action = actions[5]}
+    currentEnemy.playingCard = {action = actions['move']}
     currentEnemy.playingCardAsAction = true
     currentEnemy.targetSlot = 5
 
@@ -22,10 +22,10 @@ function testsActionMove:testMove()
 end
 
 function testsActionMove:testIfBothSameTarget_NeitherMove()
-    player.playingCard = {action = actions[5]}
+    player.playingCard = {action = actions['move']}
     player.playingCardAsAction = true
     player.targetSlot = 2
-    currentEnemy.playingCard = {action = actions[5]}
+    currentEnemy.playingCard = {action = actions['move']}
     currentEnemy.playingCardAsAction = true
     currentEnemy.targetSlot = 2
     

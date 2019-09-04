@@ -26,7 +26,7 @@ function createRandomCard(scoreRange)
     --random action and space
     local action, space, totalScore
     repeat
-        action = actions[math.random(#actions)]
+        action = randomElement(actions)
         space = randomElement(spaces)
         totalScore = action.score + space.score
     until totalScore >= scoreRange[1] and totalScore <= scoreRange[2]

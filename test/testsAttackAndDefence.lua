@@ -10,7 +10,7 @@ function testsAttackAndDefence:tearDown()
 end
 
 function testsAttackAndDefence:testPlainAffectAttack()
-    player.playingCard = {action = actions[1]}
+    player.playingCard = {action = actions['attack1']}
     player.playingCardAsAction = true
     player.slot = 1
     map.slots[1].card = {space = spaces['plain']}
@@ -20,7 +20,7 @@ function testsAttackAndDefence:testPlainAffectAttack()
 end
 
 function testsAttackAndDefence:testMountainAffectDefence()
-    player.playingCard = {action = actions[2]}
+    player.playingCard = {action = actions['defence1']}
     player.playingCardAsAction = true
     player.slot = 1
     map.slots[1].card = {space = spaces['mountain']}
