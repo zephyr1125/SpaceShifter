@@ -19,6 +19,8 @@ function ResolutionState:enter()
         playerAction.effect(player, currentEnemy)
     end
 
+    -- calc damage
+    
     -- trim damage
     if currentEnemy.damagePending<0 then currentEnemy.damagePending = 0 end
     if player.damagePending<0 then player.damagePending = 0 end
@@ -61,6 +63,10 @@ function ResolutionState.cleanCards()
 end
 
 function ResolutionState:reset()
-    currentEnemy.damagePending = 0
+    player.attack = 0
+    player.defence = 0
+    currentEnemy.attack = 0
+    currentEnemy.defence = 0
     player.damagePending = 0
+    currentEnemy.damagePending = 0
 end

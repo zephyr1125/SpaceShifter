@@ -5,8 +5,12 @@ return {
         score = 1,
         needChooseSlot = true,
         effect = function(me, opponent)
-            if me.targetSlot ~= opponent.slot then return end
-            opponent.damagePending = opponent.damagePending + 1
+            me.attack = 1
+            -- space affect attack
+            local space = map.slots[me.slot].card.space
+            if space.onCalcAttack ~= nil then
+                space.onCalcAttack(me, opponent)
+            end
         end,
         getExceptSlot = function(me, opponent)
             -- can attack anywhere
@@ -28,26 +32,31 @@ return {
         score = 1,
         needChooseSlot = false,
         effect = function(me, opponent)
-            me.damagePending = me.damagePending - 1
+            me.defence = 1
+            -- space affect defence
+            local space = map.slots[me.slot].card.space
+            if space.onCalcDefence ~= nil then
+                space.onCalcDefence(me, opponent)
+            end
         end,
     },
     {
-        name = '治疗3',
-        icon = 'heal3',
+        name = '治疗1',
+        icon = 'heal1',
         score = 1,
         needChooseSlot = false,
         effect = function(me, opponent)
-            me.life = me.life + 3
+            me.life = me.life + 1
         end,
     },
     {
-        -- heal3 and pick up 2 cards
+        -- heal1 and pick up 2 cards
         name = '神智清醒',
         icon = 'phoenix',
         score = 3,
         needChooseSlot = false,
         effect = function(me, opponent)
-            me.life = me.life + 3
+            me.life = me.life + 1
             me.drawCards(2)
         end,
     },{

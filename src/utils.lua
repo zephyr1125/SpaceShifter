@@ -27,7 +27,7 @@ function createRandomCard(scoreRange)
     local action, space, totalScore
     repeat
         action = actions[math.random(#actions)]
-        space = spaces[math.random(#spaces)]
+        space = randomElement(spaces)
         totalScore = action.score + space.score
     until totalScore >= scoreRange[1] and totalScore <= scoreRange[2]
     
@@ -71,6 +71,17 @@ end
 function random(n)
     math.randomseed(os.time())
     return math.random(1,n)
+end
+
+-- random element in table, no mater if the table is integer sequence
+function randomElement(myTable)
+    -- iterate over whole table to get all keys
+    local keySet = {}
+    for k in pairs(myTable) do
+        table.insert(keySet, k)
+    end
+    -- now you can reliably return a random key
+    return myTable[keySet[math.random(#keySet)]]
 end
 
 function hasValue (tab, val)

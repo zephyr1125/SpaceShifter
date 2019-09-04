@@ -70,8 +70,10 @@ return {
     getNoHoleNeighbours = function(self, slot)
         --warning remove the 0s of neighbours table but be aware will loss direction information
         local neighbours = self:getNeighbours(slot)
-        for i, neighbour in pairs(neighbours) do
-            if neighbour == 0 then table.remove(neighbours, i) end
+        for i=#neighbours,1,-1 do
+            if neighbours[i] == 0 then
+                table.remove(neighbours, i)
+            end
         end
         return neighbours
     end,

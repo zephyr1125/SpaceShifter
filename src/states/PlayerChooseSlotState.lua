@@ -1,7 +1,10 @@
 local function checkTargetSlot(playerNeighbours, slot)
+    local isNeighbour = slot ~= 0 and hasValue(playerNeighbours, slot)
+    -- playing space only consider if is neighbour
+    if not player.playingCardAsAction then return isNeighbour end
+    -- playing action need to consider exception
     local action = player.playingCard.action
-    return slot ~= 0 and hasValue(playerNeighbours, slot)
-            and slot ~= action.getExceptSlot(player, currentEnemy)
+    return isNeighbour and slot ~= action.getExceptSlot(player, currentEnemy)
 end
 
 local function setTargetSlot(playerNeighbours, slot)
@@ -18,7 +21,11 @@ end
 
 function PlayerChooseSlotState:enter()
     -- to defaultSlot
-    player.targetSlot = player.playingCard.action.defaultTargetSlot(player, currentEnemy)
+    if player.playingCardAsAction then
+        player.targetSlot = player.playingCard.action.defaultTargetSlot(player, currentEnemy)
+    else
+        player.targetSlot = player.playingCard.space.defaultTargetSlot(player, currentEnemy)
+    end
 end
 
 function PlayerChooseSlotState:draw()
