@@ -36,6 +36,10 @@ function PlayerChooseSlotState:draw()
 end
 
 function PlayerChooseSlotState:keypressed(key)
+    if key == keys.B then
+        GameState.switch(PlayerPlayCardState)
+    end
+    
     local playerNeighbours = map:getNeighbours(player.slot)
     playerNeighbours[#playerNeighbours+1] = player.slot
     local next

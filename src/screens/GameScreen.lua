@@ -36,9 +36,7 @@ function GameScreen:drawBackground()
 end
 
 function GameScreen:keypressed(key)
-    if key == keys.B then
-        self.screen:view('/')
-    end
+    
 end
 
 function GameScreen:drawDecks()

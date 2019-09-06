@@ -41,6 +41,7 @@ return {
         -- pick space cards to slots
         for i, slot in pairs(self.slots) do
             local card = decks.PublicDeck:pickCards(1)
+            self.slots[i].baseCard = card
             self.slots[i].card = card
         end
     end,
@@ -50,8 +51,14 @@ return {
             love.graphics.draw(imgMapSlot, x + slot.x, y + slot.y)
             
             --space name
+            local card
+            if slot.card ~= nil then
+                card = slot.card
+            else
+                card = slot.baseCard
+            end
             setColor(black)
-            love.graphics.printf(slot.card.space.name,
+            love.graphics.printf(card.space.name,
                     x + slot.x, y + slot.y + 31-2-fontSize, 96, 'center')
         end
     end,

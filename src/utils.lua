@@ -40,6 +40,7 @@ function fillAllDecks()
         deck.cards = {}
         for i = 1, deck.size do
             deck.cards[i] = createRandomCard(deck.scoreRange)
+            deck.cards[i].deck = deck
         end
     end
 end
@@ -92,4 +93,15 @@ function hasValue (tab, val)
     end
 
     return false
+end
+
+function table.clean(t)
+    for k in pairs (t) do
+        t [k] = nil
+    end
+end
+
+function discardCard(card)
+    local originDeck = card.deck
+    originDeck.discardCards[#originDeck.discardCards+1] = card
 end

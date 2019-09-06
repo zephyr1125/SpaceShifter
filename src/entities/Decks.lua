@@ -49,7 +49,7 @@ return {
         end
     },
     PlayerDeck = {
-        size = 9,
+        size = 12,
         scoreRange = {2,2},
         discardCards = {},
         draw = function(self, x, y)

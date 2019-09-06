@@ -5,6 +5,11 @@ function PlayerPlayCardState:enter()
 end
 
 function PlayerPlayCardState:keypressed(key)
+    if key == keys.B then
+        -- todo open system window
+        screenManager:view('/')
+    end
+    
     if key == keys.DPad_right then
         player:selectPrev()
     end

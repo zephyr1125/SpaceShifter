@@ -36,15 +36,15 @@ return {
             me.defence = me.defence + 1
         end,
     },
-    ['hear1'] = {
-        name = '治疗1',
-        icon = 'heal1',
-        score = 1,
-        needChooseSlot = false,
-        effect = function(me, opponent)
-            me.life = me.life + 1
-        end,
-    },
+    --['hear1'] = {
+    --    name = '治疗1',
+    --    icon = 'heal1',
+    --    score = 1,
+    --    needChooseSlot = false,
+    --    effect = function(me, opponent)
+    --        me.life = me.life + 1
+    --    end,
+    --},
     ['concentrate'] = {
         -- heal1 and pick up 2 cards
         name = '集中精神',

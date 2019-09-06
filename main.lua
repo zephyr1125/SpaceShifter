@@ -68,7 +68,7 @@ function love.load()
 	font:setFilter( "nearest", "nearest", 0 )
 	love.graphics.setFont(font)
 	
-	local screenManager = ScreenManager()
+	screenManager = ScreenManager()
 	
 	-- Register your screens here (A screen with the path '/' is mandatory!)
 	screenManager:register('/', TitleScreen)

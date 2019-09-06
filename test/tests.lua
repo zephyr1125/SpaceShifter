@@ -21,5 +21,6 @@ require('testsMap')
 require('testsAttackAndDefence')
 require('testsSpacePlain')
 require('testsSpaceMountain')
+require('testsPlaySpace')
 
 os.exit( luaunit.LuaUnit.run() )

@@ -10,25 +10,39 @@ function ResolutionState:enter()
 
     -- both move first
     self.move(playerAction, enemyAction)
+    self.cardsEffect(playerAction, enemyAction)
+    self.extraDefence()
+    self.calcDamage()
+    self.changeSpace()
     
-    -- both actions take effect
+    self.cleanCards()
+    -- next state
+    GameState.switch(LifeCheckState)
+end
+
+function ResolutionState.move(playerAction, enemyAction)
+    -- if they are moving to same slot, stop both
+    if currentEnemy.playingCardAsAction and enemyAction.move ~= nil and
+            player.playingCardAsAction and playerAction.move ~= nil and
+            currentEnemy.targetSlot == player.targetSlot then
+        -- todo play some collide animation
+    else
+        if currentEnemy.playingCardAsAction and enemyAction.move ~= nil then
+            enemyAction.move(currentEnemy)
+        end
+        if player.playingCardAsAction and playerAction.move ~= nil then
+            playerAction.move(player)
+        end
+    end
+end
+
+function ResolutionState.cardsEffect(playerAction, enemyAction)
     if player.playingCardAsAction and playerAction.effect ~= nil then
         playerAction.effect(player, currentEnemy)
     end
     if currentEnemy.playingCardAsAction and enemyAction.effect ~= nil then
         enemyAction.effect(currentEnemy, player)
     end
-
-    -- extraDefence
-    self.extraDefence()
-    
-    -- calc damage
-    self.calcDamage()
-    
-    --clean cards
-    self.cleanCards()
-    -- next state
-    GameState.switch(LifeCheckState)
 end
 
 function ResolutionState.extraDefence()
@@ -69,26 +83,23 @@ function ResolutionState.calcDamage()
     player.life = player.life - player.damagePending
 end
 
-function ResolutionState.move(playerAction, enemyAction)
-    -- if they are moving to same slot, stop both
-    if currentEnemy.playingCardAsAction and enemyAction.move ~= nil and
-            player.playingCardAsAction and playerAction.move ~= nil and
-            currentEnemy.targetSlot == player.targetSlot then
-        -- todo play some collide animation
-    else
-        if currentEnemy.playingCardAsAction and enemyAction.move ~= nil then
-            enemyAction.move(currentEnemy)
-        end
-        if player.playingCardAsAction and playerAction.move ~= nil then
-            playerAction.move(player)
-        end
+function ResolutionState.changeSpace()
+    if player.playingCardAsAction then return end
+    
+    local oldCard = map.slots[player.targetSlot].card
+    if oldCard ~= nil then
+        discardCard(oldCard)
     end
+    map.slots[player.targetSlot].card = player.playingCard
 end
 
 function ResolutionState.cleanCards()
     table.remove(player.hand, player.currentCardId)
     player.currentCardId = 0
-    decks.PlayerDeck.discardCards[#decks.PlayerDeck.discardCards+1] = player.playingCard
+    if player.playingCardAsAction then
+        decks.PlayerDeck.discardCards[#decks.PlayerDeck.discardCards+1] = 
+            player.playingCard
+    end 
     player.playingCard = nil
     
     local enemyDeck = decks[currentEnemy.deck]
