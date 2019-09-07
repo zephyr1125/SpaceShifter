@@ -1,12 +1,8 @@
-local Button = require('src.ui.Button')
-local SelectionGroup = require('src.ui.SelectionGroup')
-
 local TitleScreen = class {}
 
 local buttonWidth, buttonHeight = 128, 18
 local buttonStartY = 180
-local buttonIdleColor = {32, 32, 32}
-local buttonSelectColor = {136, 151, 166}
+
 
 function TitleScreen:init(ScreenManager)
 	self.screen = ScreenManager
@@ -29,8 +25,8 @@ end
 
 function TitleScreen:draw()
 	--love.graphics.print('Space Shifter', 10, 10)
-	self.startButton:draw((320-buttonWidth)/2, buttonStartY)
-	self.exitButton:draw((320-buttonWidth)/2, buttonStartY+buttonHeight)
+	self.startButton:draw((screenWidth-buttonWidth)/2, buttonStartY)
+	self.exitButton:draw((screenWidth-buttonWidth)/2, buttonStartY+buttonHeight)
 	drawFPS()
 	drawLogs()
 end

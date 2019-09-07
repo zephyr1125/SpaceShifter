@@ -3,6 +3,8 @@ luaunit = require('luaunit')
 -- Add parent path to search list
 package.path = package.path .. ";..\\?.lua;"
 
+class = require 'lib.hump.class'
+
 require('src.utils')
 require('src.states/ResolutionState')
 
@@ -13,6 +15,7 @@ map = require('src.entities.Map')
 player = require('src.entities.Player')
 enemies = require('src.entities.Enemies')
 
+require('testsHumpClass')
 require('testsOfUtils')
 require('testsFillAllDecks')
 require('testsPickCards')
@@ -22,5 +25,7 @@ require('testsAttackAndDefence')
 require('testsSpacePlain')
 require('testsSpaceMountain')
 require('testsPlaySpace')
+
+require('src.ui.SelectionGroup')
 
 os.exit( luaunit.LuaUnit.run() )

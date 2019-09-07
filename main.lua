@@ -28,6 +28,11 @@ keys = require('lib.keys')
 require('src.const')
 require('src.utils')
 
+-- UI
+Button = require('src.ui.Button')
+require('src.ui.SelectionGroup')
+Window = require('src.ui.Window')
+
 -- assets
 require('src.assets')
 

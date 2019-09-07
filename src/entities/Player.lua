@@ -9,7 +9,7 @@ local function drawHandCard(id, card, handX, xInterval, handY, width, cardAsActi
 end
 
 return {
-    life = 5,
+    life = 0,
     deck = 'PlayerDeck',
     handSize = 3,
     cardAsAction = true,

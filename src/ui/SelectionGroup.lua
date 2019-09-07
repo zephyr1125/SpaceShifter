@@ -1,6 +1,8 @@
-local SelectionGroup = class {
-    elements = {},
-    selected = 1
+SelectionGroup = class{
+    init = function(self)
+        self.selected = 1
+        self.elements = {}
+    end;
 }
 
 function SelectionGroup:add(element)
@@ -44,5 +46,3 @@ function SelectionGroup:keypressed(key)
         element:keypressed(key)
     end
 end
-
-return SelectionGroup
