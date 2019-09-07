@@ -39,7 +39,7 @@ end
 return {
     PublicDeck = {
         size = 40,
-        scoreRange = {4,10},
+        scoreRange = {3,10},
         discardCards = {},
         draw = function(self, x, y)
             drawDeck(self.cards, x, y, drawCardAsSpace)

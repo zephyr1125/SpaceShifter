@@ -4,6 +4,9 @@ screenHeight = 240
 cardWidth = 48
 cardHeight = 64
 
+buttonWidth = 128
+buttonHeight = 18
+
 mapX = 46
 mapY = 56
 
@@ -12,6 +15,7 @@ mapSlotHeight = 31
 
 white = {255,255,255}
 black = {0,0,0}
+coverColor = {0,0,0,0.5}
 buttonIdleColor = {32, 32, 32}
 buttonSelectColor = {136, 151, 166}
 cardActionColor = {227,168,102}

@@ -9,9 +9,10 @@ local function drawHandCard(id, card, handX, xInterval, handY, width, cardAsActi
 end
 
 return {
-    life = 0,
+    life = 5,
     deck = 'PlayerDeck',
     handSize = 3,
+    rewardSize = 3,
     cardAsAction = true,
     init = function(self)
         self.slot = 1

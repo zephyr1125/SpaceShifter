@@ -61,8 +61,9 @@ require('src.states.ResolutionState')
 require('src.states.LifeCheckState')
 require('src.states.WinState')
 require('src.states.LoseState')
-require('src.states.BothDeadState')
 require('src.states.PickCardState')
+require('src.states.RewardState')
+require('src.states.DiscardCardState')
 
 -- Load Game
 function love.load()

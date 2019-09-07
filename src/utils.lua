@@ -5,7 +5,8 @@ function drawText(text, x, y, color)
 end
 
 function setColor(color)
-    love.graphics.setColor({color[1]/255, color[2]/255, color[3]/255})
+    color[4] = color[4] or 1
+    love.graphics.setColor({color[1]/255, color[2]/255, color[3]/255, color[4]})
 end
 
 function drawFPS()
