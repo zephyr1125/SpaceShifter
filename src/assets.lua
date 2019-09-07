@@ -6,4 +6,5 @@ function InitAssets()
     playerSpriteHeight = imgPlayerSprite:getHeight()
     imgBansheeSprite = love.graphics.newImage('assets/images/banshee.png')
     imgRewardSelect = love.graphics.newImage('assets/images/reward_select.png')
+    imgDiscardSelect = love.graphics.newImage('assets/images/discard_select.png')
 end

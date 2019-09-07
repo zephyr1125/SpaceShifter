@@ -1,8 +1,8 @@
 screenWidth = 320
 screenHeight = 240
 
-cardWidth = 48
-cardHeight = 64
+cardWidth = 40
+cardHeight = 56
 
 buttonWidth = 128
 buttonHeight = 18

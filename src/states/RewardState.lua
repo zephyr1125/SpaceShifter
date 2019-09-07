@@ -78,6 +78,7 @@ function RewardState:confirmSelection()
             decks.PublicDeck.discardCards[#decks.PublicDeck.discardCards +1 ] =
                 slot.baseCard
         end
+        slot.baseCard.isRewardSelected = nil
         slot.baseCard = nil
     end
 end
