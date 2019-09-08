@@ -10,6 +10,7 @@ return {
         effectIcon = 'defence1',
         spaceAnim = 'mountain',
         score = 1,
+        benefit = 1,
         onCountDefence = function()
             return 1
         end,
@@ -27,6 +28,7 @@ return {
         effectIcon = 'attack1',
         spaceAnim = 'plain',
         score = 1,
+        benefit = 1,
         onCalcAttack = function()
             return 1
         end,
@@ -44,6 +46,7 @@ return {
         effectIcon = 'harm1',
         spaceAnim = 'graveyard',
         score = 2,
+        benefit = -2,
         onRoundStart = function(resident)
             resident.life = resident.life -1
         end,

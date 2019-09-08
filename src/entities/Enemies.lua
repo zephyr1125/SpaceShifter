@@ -34,10 +34,8 @@ local baseDrawSprite = function(self, imageSprite, mapX, mapY)
                     + math.floor(mapSlotHeight/2) - imageSprite:getHeight())
 end
 
-local baseChooseActionSlot = function(self)
-    -- todo now is random, need to choose slot base on action type, may write on action
-    self.targetSlot = map:randomNeighbour(self.slot,
-            self.playingCard.action.getExceptSlot(self, player))
+local baseChooseActionSlot = function(self, action)
+    self.targetSlot = action.aiTargetSlot(self, player)
 end
 
 return {
