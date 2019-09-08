@@ -26,6 +26,7 @@ end
 function DiscardCardState:init()
     self.confirmButton = Button('Confirm', buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
+                if not isDiscardFull() then return end
                 self:confirmSelection()
                 GameState.switch(NextEnemyState)
             end)
@@ -59,32 +60,106 @@ function DiscardCardState:drawPlayerDeck(x, y, xInterval, yInterval)
     local width = 5*cardWidth + 4*xInterval
     x = x - width/2
     for id, card in pairs(decks.PlayerDeck.cards) do
-        if id ~= self.currentCardId then
+        if id ~= self.currentCardId or not self.isSelectingCard then
             drawCard(id, card,
                 x + math.fmod(id-1, 5) * (cardWidth + xInterval),
                 y + math.floor((id-1)/5) * (cardHeight + yInterval),
                 self.showAction)
         end
     end
-    if self.currentCardId ~= 0 then
+    if self.currentCardId ~= 0 and self.isSelectingCard then
         drawCard(self.currentCardId, decks.PlayerDeck.cards[self.currentCardId],
             x + math.fmod(self.currentCardId-1, 5) * (cardWidth + xInterval),
-            y + math.floor((self.currentCardId-1)/5) * (cardHeight + yInterval),
+            y + math.floor((self.currentCardId-1)/5) * (cardHeight + yInterval) - 3,
             self.showAction)
     end
 end
 
 function DiscardCardState:confirmSelection()
-    --for _, slot in pairs(map.slots) do
-    --    if slot.baseCard.isRewardSelected then
-    --        -- selected card into player deck
-    --        decks.PlayerDeck.cards[#decks.PlayerDeck.cards+1] = slot.baseCard
-    --    else
-    --        -- others into public discard pile
-    --        decks.PublicDeck.discardCards[#decks.PublicDeck.discardCards +1 ] =
-    --        slot.baseCard
-    --    end
-    --    slot.baseCard.isRewardSelected = nil
-    --    slot.baseCard = nil
-    --end
+    for i = #decks.PlayerDeck.cards, 1, -1 do
+        local card = decks.PlayerDeck.cards[i]
+        if card.isDiscardSelected then
+            -- selected card removed
+            table.remove(decks.PlayerDeck.cards, i)
+        end
+        card.isDiscardSelected = nil
+    end
+end
+
+function DiscardCardState:selectLeft()
+    self:setSelectingCard(true)
+    local id = self.currentCardId - 1
+    if id < 1 then
+        id = #decks.PlayerDeck.cards
+    end
+    self.currentCardId = id
+end
+
+function DiscardCardState:selectRight()
+    self:setSelectingCard(true)
+    local id = self.currentCardId + 1
+    if id > #decks.PlayerDeck.cards then
+        id = 1
+    end
+    self.currentCardId = id
+end
+
+function DiscardCardState:selectUp()
+    if not self.isSelectingCard then
+        self:setSelectingCard(true)
+    else
+        local id = self.currentCardId - 5
+        if id >= 1 then
+            self.currentCardId = id
+        end
+    end
+end
+
+function DiscardCardState:selectDown()
+    local id = self.currentCardId + 5
+    if id <= #decks.PlayerDeck.cards then
+        self:setSelectingCard(true)
+        self.currentCardId = id
+    else
+        self:setSelectingCard(false)
+    end
+end
+
+function DiscardCardState:keypressed(key)
+    if key == keys.Y then
+        self.showAction = not self.showAction
+    end
+
+    if key == keys.DPad_left then
+        self:selectLeft()
+    end
+
+    if key == keys.DPad_right then
+        self:selectRight()
+    end
+
+    if key == keys.DPad_up then
+        self:selectUp()
+    end
+
+    if key == keys.DPad_down then
+        self:selectDown()
+    end
+
+    if key == keys.A and self.isSelectingCard then
+        local currentCard = decks.PlayerDeck.cards[self.currentCardId]
+        local selected = currentCard.isDiscardSelected
+        if isDiscardFull() then
+            currentCard.isDiscardSelected = false
+        else
+            currentCard.isDiscardSelected = not selected
+        end
+    end
+
+    self.confirmButton:keypressed(key)
+end
+
+function DiscardCardState:setSelectingCard(isSelectingCard)
+    self.isSelectingCard = isSelectingCard
+    self.confirmButton:setSelect(not isSelectingCard)
 end

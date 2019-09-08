@@ -43,10 +43,11 @@ end
 return {
     {
         name = 'Banshee',
-        life = 0,
+        maxLife = 5,
         deck = 'BansheeDeck',
         handSize = 3,
         init = function(self)
+            self.life = self.maxLife
             self.slot = 7
             self.hand = decks.BansheeDeck:pickCards(self.handSize)
         end,
@@ -67,6 +68,35 @@ return {
         end,
         pickCard = function(self)
             self.hand[#self.hand+1] = decks.BansheeDeck:pickCards(1)
+        end
+    },
+    {
+        name = 'Greed',
+        maxLife = 5,
+        deck = 'GreedDeck',
+        handSize = 3,
+        init = function(self)
+            self.life = self.maxLife
+            self.slot = 7
+            self.hand = decks.GreedDeck:pickCards(self.handSize)
+        end,
+        drawInfo = function(self, x, y)
+            baseDrawInfo(self, x, y)
+        end,
+        drawPlayingCard = function(self, x, y)
+            baseDrawPlayingCard(self, x, y)
+        end,
+        drawSprite = function(self, mapX, mapY)
+            baseDrawSprite(self, imgGreedSprite, mapX, mapY)
+        end,
+        playCard = function(self)
+            return basePlayCard(self)
+        end,
+        chooseActionSlot = function(self)
+            baseChooseActionSlot(self)
+        end,
+        pickCard = function(self)
+            self.hand[#self.hand+1] = decks.GreedDeck:pickCards(1)
         end
     }
 }

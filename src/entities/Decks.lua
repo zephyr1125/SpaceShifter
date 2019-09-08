@@ -13,9 +13,10 @@ local function drawDeck(cards, x, y, drawTopDeck)
 end
 
 local function refillDeck(self)
-    for i, _ in pairs(self.discardCards) do
-        self.cards[#self.cards+1] = table.remove(self.discardCards, i)
+    for _, card in pairs(self.discardCards) do
+        self.cards[#self.cards+1] = card
     end
+    table.clean(self.discardCards)
     print('refilled deck')
 end
 
@@ -62,6 +63,17 @@ return {
     BansheeDeck = {
         size = 9,
         scoreRange = {2,3},
+        discardCards = {},
+        draw = function(self, x, y)
+            drawDeck(self.cards, x, y)
+        end,
+        pickCards = function(self, amount)
+            return pickCards(self, amount)
+        end
+    },
+    GreedDeck = {
+        size = 9,
+        scoreRange = {3,4},
         discardCards = {},
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)
