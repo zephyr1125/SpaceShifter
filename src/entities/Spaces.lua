@@ -46,9 +46,11 @@ return {
         effectIcon = 'harm1',
         spaceAnim = 'graveyard',
         score = 2,
-        benefit = -2,
-        onRoundStart = function(resident)
-            resident.life = resident.life -1
+        benefit = -1,
+        onUpkeep = function(resident)
+            if resident ~= nil then
+                resident.life = resident.life -1
+            end
         end,
         defaultTargetSlot = function(me, opponent)
             return defaultTargetSlot(me, opponent)

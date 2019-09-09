@@ -21,13 +21,13 @@ function testsMap:testRandomNeighbour_NoExceptValues()
     end
 end
 
-function testsMap:testIsSlotOccupied()
+function testsMap:testGetSlotOccupied()
     player.slot = 1
     currentEnemy.slot = 2
     
-    luaunit.assertIsTrue(map:isSlotOccupied(1))
-    luaunit.assertIsTrue(map:isSlotOccupied(2))
-    luaunit.assertIsFalse(map:isSlotOccupied(3))
+    luaunit.assertEquals(map:getSlotOccupied(1), player)
+    luaunit.assertEquals(map:getSlotOccupied(2), currentEnemy)
+    luaunit.assertIsNil(map:getSlotOccupied(3))
     
 end
 

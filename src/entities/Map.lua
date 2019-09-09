@@ -92,17 +92,18 @@ return {
         end
         return neighbours[random(#neighbours)]
     end,
-    isSlotOccupied = function(self, slot)
-        local isPlayerOccupied = player.slot == slot
-        local isEnemyOccupied = currentEnemy~=nil and currentEnemy.slot == slot
-        return isPlayerOccupied or isEnemyOccupied
+    getSlotOccupied = function(self, slot)
+        local resident
+        if player.slot == slot then resident = player end
+        if currentEnemy~=nil and currentEnemy.slot == slot then resident = currentEnemy end
+        return resident
     end,
     getBestBenefitNeighbour = function (self, slot, isExceptOccupied)
         isExceptOccupied = isExceptOccupied or true
         local mostBenefit = self.slots[slot].card.space.benefit
         local mostSlot = slot
         for _, neighbour in pairs(self:getNoHoleNeighbours(slot)) do
-            local skip = isExceptOccupied and self:isSlotOccupied(neighbour)
+            local skip = isExceptOccupied and self:getSlotOccupied(neighbour)~=nil
             local benefit = self.slots[neighbour].card.space.benefit
             if benefit > mostBenefit and not skip then
                 mostBenefit = benefit

@@ -27,6 +27,6 @@ function LifeCheckState:enter()
         returnAllPlayerCards()
         GameState.switch(WinState)
     else
-        GameState.switch(PickCardState)
+        GameState.switch(UpkeepState)
     end
 end

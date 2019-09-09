@@ -6,7 +6,8 @@ package.path = package.path .. ";..\\?.lua;"
 class = require 'lib.hump.class'
 
 require('src.utils')
-require('src.states/ResolutionState')
+require('src.states.ResolutionState')
+require('src.states.UpkeepState')
 
 decks = require('src.entities.Decks')
 actions = require('src.entities.Actions')
@@ -27,6 +28,7 @@ require('testsSpaceMountain')
 require('testsPlaySpace')
 require('testsDiscardCardState')
 require('testsAIChooseCards')
+require('testsUpkeepState')
 
 require('src.ui.SelectionGroup')
 
