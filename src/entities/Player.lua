@@ -16,9 +16,13 @@ return {
     rewardSize = 3,
     cardAsAction = true,
     init = function(self)
+        self.life = self.initLife
         self.slot = 1
         self.hand = decks.PlayerDeck:pickCards(self.handSize)
         self.currentCardId = #self.hand
+    end,
+    upgrade = function(self)
+        self.initLife = self.initLife + 1
     end,
     drawInfo = function(self, x, y)
         setColor(playerInfoBgColor)

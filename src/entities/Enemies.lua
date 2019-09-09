@@ -112,7 +112,7 @@ return {
     },
     {
         name = 'Greed',
-        initLife = 5,
+        initLife = 7,
         deck = 'GreedDeck',
         handSize = 3,
         init = function(self)

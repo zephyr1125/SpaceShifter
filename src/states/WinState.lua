@@ -5,6 +5,8 @@ local windowHeight = 48
 
 
 function WinState:init()
+    player:upgrade()
+    
     self.window = Window()
     self.buttons = SelectionGroup()
     self.nextButton = Button('Next', buttonWidth, buttonHeight,

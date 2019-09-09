@@ -57,7 +57,8 @@ return {
         type = {'heal','pick'},
         effect = function(me, opponent)
             me.life = me.life + 1
-            me.drawCards(2)
+            me:pickCard()
+            me:pickCard()
         end,
     },
     ['move'] = {
