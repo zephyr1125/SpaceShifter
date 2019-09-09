@@ -26,16 +26,6 @@ return {
             else
                 return opponent.slot
             end
-        end,
-        aiTargetSlot = function(me, opponent)
-            -- default to opponent slot
-            local neighbourId = map:isNeighbour(me.slot, opponent.slot)
-            if neighbourId == 0 then
-                -- opponent is not neighbour, target self
-                return me.slot
-            else
-                return opponent.slot
-            end
         end
     },
     ['defence1'] = {

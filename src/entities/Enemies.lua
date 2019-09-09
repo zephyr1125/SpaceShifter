@@ -9,6 +9,7 @@ end
 
 function baseAIChooseCard(me, opponent)
     local cardId = 0
+    local targetSlot = 0
 
     -- life low, heal
     if cardId == 0 and getLifePercent(me) < 0.3 then
@@ -18,29 +19,29 @@ function baseAIChooseCard(me, opponent)
     -- player nearby, attack
     if cardId == 0 and map:isNeighbour(me.slot, opponent.slot) then
         cardId = chooseHandCardAttack(me)
+        targetSlot = opponent.slot
     end
     
     -- player too far, move
     
     -- space too bad, move to best neighbour
-    if cardId == 0 and map:getBestBenefitNeighbour(me.slot) ~= me.slot then
-        cardId = chooseHandCardMove(me)
+    if cardId == 0 then
+        local bestBenefitSlot = map:getBestBenefitNeighbour(me.slot)
+        if bestBenefitSlot ~= me.slot then
+            cardId = chooseHandCardMove(me)
+            targetSlot = bestBenefitSlot
+        end
     end
     
-    
-    
-    return cardId
+    return cardId, targetSlot
 end
 
 local basePlayCard = function(self)
     if self.hand == nil or #self.hand == 0 then return end
-    local cardId = baseAIChooseCard(self, player)
+    local cardId, targetSlot = baseAIChooseCard(self, player)
     self.playingCard = table.remove(self.hand, cardId)
     self.playingCardAsAction = true
-    if self.playingCard.action.needChooseSlot then
-        return true
-    end
-    return false
+    self.targetSlot = targetSlot
 end
 
 local baseDrawPlayingCard = function(self, x, y)
@@ -83,7 +84,7 @@ return {
             baseDrawSprite(self, imgBansheeSprite, mapX, mapY)
         end,
         playCard = function(self)
-            return basePlayCard(self)
+            basePlayCard(self)
         end,
         chooseActionSlot = function(self)
             baseChooseActionSlot(self)
@@ -112,7 +113,7 @@ return {
             baseDrawSprite(self, imgGreedSprite, mapX, mapY)
         end,
         playCard = function(self)
-            return basePlayCard(self)
+            basePlayCard(self)
         end,
         chooseActionSlot = function(self)
             baseChooseActionSlot(self)

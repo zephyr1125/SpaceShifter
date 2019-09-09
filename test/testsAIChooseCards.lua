@@ -25,11 +25,11 @@ function testsAIChooseCards:testPlayerNearby_Attack()
 end
 
 function testsAIChooseCards:testSpaceTooBad_Move()
-    --self.me.life = 10
-    --table.remove(self.me.hand, 1)
-    --map.slots[1].card = {space = spaces.graveyard}
-    --map.slots[2].card = {space = spaces.mountain}
-    --map.slots[6].card = {space = spaces.plain}
-    --map.slots[7].card = {space = spaces.graveyard}
-    --luaunit.assertEquals(baseAIChooseCard(self.me, self.opponent), 4)
+    self.me.life = 10
+    table.remove(self.me.hand, 1)
+    map.slots[1].card = {space = spaces.graveyard}
+    map.slots[2].card = {space = spaces.mountain}
+    map.slots[6].card = {space = spaces.plain}
+    map.slots[7].card = {space = spaces.graveyard}
+    luaunit.assertEquals(baseAIChooseCard(self.me, self.opponent), 3)
 end
