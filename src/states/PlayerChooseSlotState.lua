@@ -1,5 +1,5 @@
 local function checkTargetSlot(playerNeighbours, slot)
-    local isNeighbour = slot ~= 0 and hasValue(playerNeighbours, slot)
+    local isNeighbour = slot ~= 0 and table.contains(playerNeighbours, slot)
     -- playing space only consider if is neighbour
     if not player.playingCardAsAction then return isNeighbour end
     -- playing action need to consider exception

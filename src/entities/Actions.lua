@@ -4,6 +4,7 @@ return {
         icon = 'attack1',
         score = 1,
         needChooseSlot = true,
+        type = {'attack'},
         effect = function(me, opponent)
             me.attack = me.attack + 1
             -- space affect attack
@@ -42,25 +43,28 @@ return {
         icon = 'defence1',
         score = 1,
         needChooseSlot = false,
+        type = {'defence'},
         effect = function(me, opponent)
             me.defence = me.defence + 1
         end,
     },
-    --['hear1'] = {
-    --    name = '治疗1',
-    --    icon = 'heal1',
-    --    score = 1,
-    --    needChooseSlot = false,
-    --    effect = function(me, opponent)
-    --        me.life = me.life + 1
-    --    end,
-    --},
+    ['heal1'] = {
+        name = '治疗1',
+        icon = 'heal1',
+        score = 1,
+        needChooseSlot = false,
+        type = {'heal'},
+        effect = function(me, opponent)
+            me.life = me.life + 1
+        end,
+    },
     ['concentrate'] = {
         -- heal1 and pick up 2 cards
         name = '集中精神',
         icon = 'concentrate',
         score = 3,
         needChooseSlot = false,
+        type = {'heal','pick'},
         effect = function(me, opponent)
             me.life = me.life + 1
             me.drawCards(2)
@@ -71,6 +75,7 @@ return {
         icon = 'move',
         score = 1,
         needChooseSlot = true,
+        type = {'move'},
         move = function(me)
             me.slot = me.targetSlot
         end,
@@ -94,17 +99,9 @@ return {
                 end
             else
                 -- or find best slot, cant be opponent slot
-                local mostBenefit = map.slots[me.slot].card.space.benefit
-                local mostSlot = me.slot
-                for _, slot in pairs(myNeighbours) do
-                    local benefit = map.slots[slot].card.space.benefit
-                    if benefit > mostBenefit and slot ~= opponent.slot then
-                        mostBenefit = benefit
-                        mostSlot = slot
-                    end
-                end
-                if mostBenefit > me.slot then
-                    return mostSlot
+                local mostBenefitNeighbour = map:getBestBenefitNeighbour(me.slot)
+                if mostBenefitNeighbour ~= me.slot then
+                    return mostBenefitNeighbour
                 end
             end
             return me.slot

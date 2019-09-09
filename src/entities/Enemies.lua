@@ -7,10 +7,34 @@ local baseDrawInfo = function(self, x, y)
     love.graphics.printf(tostring(self.life), x, y+cardHeight-fontSize-4, cardWidth, 'center')
 end
 
+function baseAIChooseCard(me, opponent)
+    local cardId = 0
+
+    -- life low, heal
+    if cardId == 0 and getLifePercent(me) < 0.3 then
+        cardId = chooseHandCardHeal(me)
+    end
+    
+    -- player nearby, attack
+    if cardId == 0 and map:isNeighbour(me.slot, opponent.slot) then
+        cardId = chooseHandCardAttack(me)
+    end
+    
+    -- player too far, move
+    
+    -- space too bad, move to best neighbour
+    if cardId == 0 and map:getBestBenefitNeighbour(me.slot) ~= me.slot then
+        cardId = chooseHandCardMove(me)
+    end
+    
+    
+    
+    return cardId
+end
+
 local basePlayCard = function(self)
     if self.hand == nil or #self.hand == 0 then return end
-    -- just random hand card
-    local cardId = random(#self.hand)
+    local cardId = baseAIChooseCard(self, player)
     self.playingCard = table.remove(self.hand, cardId)
     self.playingCardAsAction = true
     if self.playingCard.action.needChooseSlot then
@@ -41,11 +65,11 @@ end
 return {
     {
         name = 'Banshee',
-        maxLife = 5,
+        initLife = 5,
         deck = 'BansheeDeck',
         handSize = 3,
         init = function(self)
-            self.life = self.maxLife
+            self.life = self.initLife
             self.slot = 7
             self.hand = decks.BansheeDeck:pickCards(self.handSize)
         end,
@@ -70,11 +94,11 @@ return {
     },
     {
         name = 'Greed',
-        maxLife = 5,
+        initLife = 5,
         deck = 'GreedDeck',
         handSize = 3,
         init = function(self)
-            self.life = self.maxLife
+            self.life = self.initLife
             self.slot = 7
             self.hand = decks.GreedDeck:pickCards(self.handSize)
         end,

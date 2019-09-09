@@ -15,3 +15,16 @@ function testsOfUtils:testCreateRandomCard()
     local score = card.action.score + card.space.score
     luaunit.assertIsTrue(score >= 2 and score <= 4)
 end
+
+function testsOfUtils:testGetLifePercent()
+    local char = {life = 2, initLife = 10}
+    luaunit.assertEquals(getLifePercent(char), 0.2)
+end
+
+function testsOfUtils:testChooseHandCardHeal()
+    local char = {hand = {
+        {action = actions.attack1},
+        {action = actions.heal1},
+        {action = actions.defence1}}}
+    luaunit.assertEquals(chooseHandCardHeal(char), 2)
+end

@@ -91,5 +91,24 @@ return {
             if neighbour == except then table.remove(neighbours, i) end
         end
         return neighbours[random(#neighbours)]
-    end
+    end,
+    isSlotOccupied = function(self, slot)
+        local isPlayerOccupied = player.slot == slot
+        local isEnemyOccupied = currentEnemy~=nil and currentEnemy.slot == slot
+        return isPlayerOccupied or isEnemyOccupied
+    end,
+    getBestBenefitNeighbour = function (self, slot, isExceptOccupied)
+        isExceptOccupied = isExceptOccupied or true
+        local mostBenefit = self.slots[slot].card.space.benefit
+        local mostSlot = slot
+        for _, neighbour in pairs(self:getNoHoleNeighbours(slot)) do
+            local skip = isExceptOccupied and self:isSlotOccupied(neighbour)
+            local benefit = self.slots[neighbour].card.space.benefit
+            if benefit > mostBenefit and not skip then
+                mostBenefit = benefit
+                mostSlot = neighbour
+            end
+        end
+        return mostSlot
+    end,
 }

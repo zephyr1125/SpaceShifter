@@ -86,7 +86,7 @@ function randomElement(myTable)
     return myTable[keySet[math.random(#keySet)]]
 end
 
-function hasValue (tab, val)
+function table.contains(tab, val)
     for _, value in pairs(tab) do
         if value == val then
             return true
@@ -105,4 +105,36 @@ end
 function discardCard(card)
     local originDeck = card.deck
     originDeck.discardCards[#originDeck.discardCards+1] = card
+end
+
+function getLifePercent(char)
+    return char.life/char.initLife
+end
+
+-- choose the first heal card from hand
+function chooseHandCardHeal(char)
+    for id, card in pairs(char.hand) do
+        if table.contains(card.action.type, 'heal') then
+            return id
+        end
+    end
+    return 0
+end
+
+function chooseHandCardAttack(char)
+    for id, card in pairs(char.hand) do
+        if table.contains(card.action.type, 'attack') then
+            return id
+        end
+    end
+    return 0
+end
+
+function chooseHandCardMove(char)
+    for id, card in pairs(char.hand) do
+        if table.contains(card.action.type, 'move') then
+            return id
+        end
+    end
+    return 0
 end
