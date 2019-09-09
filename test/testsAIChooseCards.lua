@@ -13,6 +13,11 @@ function testsAIChooseCards:setUp()
     
     self.opponent = {}
     self.opponent.slot = 2
+    currentEnemy = self.opponent
+end
+
+function testsAIChooseCards:teatDown()
+    currentEnemy = nil
 end
 
 function testsAIChooseCards:testLifeDanger_Heal()
@@ -21,15 +26,19 @@ end
 
 function testsAIChooseCards:testPlayerNearby_Attack()
     self.me.life = 10
-    luaunit.assertEquals(baseAIChooseCard(self.me, self.opponent), 1)
+    local cardId, targetSlot = baseAIChooseCard(self.me, self.opponent)
+    luaunit.assertEquals(cardId, 1)
+    luaunit.assertEquals(targetSlot, 2)
 end
 
 function testsAIChooseCards:testSpaceTooBad_Move()
     self.me.life = 10
     table.remove(self.me.hand, 1)
-    map.slots[1].card = {space = spaces.graveyard}
-    map.slots[2].card = {space = spaces.mountain}
-    map.slots[6].card = {space = spaces.plain}
-    map.slots[7].card = {space = spaces.graveyard}
-    luaunit.assertEquals(baseAIChooseCard(self.me, self.opponent), 3)
+    map.slots[1].card = {space = {benefit = 1}}
+    map.slots[2].card = {space = {benefit = 4}}
+    map.slots[6].card = {space = {benefit = 2}}
+    map.slots[7].card = {space = {benefit = 1}}
+    local cardId, targetSlot = baseAIChooseCard(self.me, self.opponent)
+    luaunit.assertEquals(cardId, 3)
+    luaunit.assertEquals(targetSlot, 6)
 end
