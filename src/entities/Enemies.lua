@@ -17,12 +17,23 @@ function baseAIChooseCard(me, opponent)
     end
     
     -- player nearby, attack
-    if cardId == 0 and map:isNeighbour(me.slot, opponent.slot) then
+    if cardId == 0 and map:isNeighbour(me.slot, opponent.slot)~=0 then
         cardId = chooseHandCardAttack(me)
         targetSlot = opponent.slot
     end
     
     -- player too far, move
+    if cardId == 0 and map:isNeighbour(me.slot, opponent.slot) == 0 then
+        local myNeighbours = map:getNoHoleNeighbours(me.slot)
+        -- go to near opponent
+        cardId = chooseHandCardMove(me)
+        for _, slot in pairs(myNeighbours) do
+            if map:isNeighbour(slot, opponent.slot) ~= 0 then
+                targetSlot = slot
+                break
+            end
+        end
+    end
     
     -- space too bad, move to best neighbour
     if cardId == 0 then
@@ -31,6 +42,12 @@ function baseAIChooseCard(me, opponent)
             cardId = chooseHandCardMove(me)
             targetSlot = bestBenefitSlot
         end
+    end
+    
+    -- others, just random a card 
+    if cardId == 0 then
+        cardId = random(#me.hand)
+        targetSlot = me.slot
     end
     
     return cardId, targetSlot

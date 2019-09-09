@@ -26,7 +26,6 @@ require('testsSpacePlain')
 require('testsSpaceMountain')
 require('testsPlaySpace')
 require('testsDiscardCardState')
-require('testsAIMoveTargetSlot')
 require('testsAIChooseCards')
 
 require('src.ui.SelectionGroup')

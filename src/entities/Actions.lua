@@ -76,25 +76,6 @@ return {
         defaultTargetSlot = function(me, opponent)
             -- due to performance, default to self
             return me.slot
-        end,
-        aiTargetSlot = function(me, opponent)
-            local neighbourId = map:isNeighbour(me.slot, opponent.slot)
-            local myNeighbours = map:getNoHoleNeighbours(me.slot)
-            if neighbourId == 0 then
-                -- if opponent not neighbour, go to near opponent
-                for _, slot in pairs(myNeighbours) do
-                    if map:isNeighbour(slot, opponent.slot) ~= 0 then
-                        return slot
-                    end
-                end
-            else
-                -- or find best slot, cant be opponent slot
-                local mostBenefitNeighbour = map:getBestBenefitNeighbour(me.slot)
-                if mostBenefitNeighbour ~= me.slot then
-                    return mostBenefitNeighbour
-                end
-            end
-            return me.slot
         end
     },
 }

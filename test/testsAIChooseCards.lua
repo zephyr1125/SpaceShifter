@@ -31,6 +31,14 @@ function testsAIChooseCards:testPlayerNearby_Attack()
     luaunit.assertEquals(targetSlot, 2)
 end
 
+function testsAIChooseCards:testPlayerToFar_Move()
+    self.me.life = 10
+    self.opponent.slot = 3
+    local cardId, targetSlot = baseAIChooseCard(self.me, self.opponent)
+    luaunit.assertEquals(cardId, 4)
+    luaunit.assertEquals(targetSlot, 2)
+end
+
 function testsAIChooseCards:testSpaceTooBad_Move()
     self.me.life = 10
     table.remove(self.me.hand, 1)
