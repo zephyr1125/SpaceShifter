@@ -61,3 +61,43 @@ function testsSpaces:testCovePickCardOnDamaged()
     luaunit.assertEquals(#player.hand, 1)
     luaunit.assertEquals(#currentEnemy.hand, 2)
 end
+
+function testsSpaces:testDesertDropCardOnAttack()
+    map.slots[1].card = {space = spaces.desert}
+    map.slots[2].card = {space = spaces.plain}
+
+    player.playingCard = {action = actions.attack1}
+    player.life = 3
+    player.targetSlot = 2
+    player.currentCardId = 1
+    player.hand = {player.playingCard, {action = actions.attack1}}
+
+    currentEnemy.playingCard = {action = actions.attack1}
+    currentEnemy.targetSlot = 1
+    currentEnemy.hand = {currentEnemy.playingCard, {action = actions.attack1}}
+
+    ResolutionState:enter()
+
+    luaunit.assertEquals(#player.hand, 1)
+    luaunit.assertEquals(#currentEnemy.hand, 1)
+end
+
+function testsSpaces:testDesert_NotCorrectSlot_NoDropCard()
+    map.slots[1].card = {space = spaces.desert}
+    map.slots[2].card = {space = spaces.plain}
+
+    player.playingCard = {action = actions.attack1}
+    player.life = 3
+    player.targetSlot = 3
+    player.currentCardId = 1
+    player.hand = {player.playingCard, {action = actions.attack1}}
+
+    currentEnemy.playingCard = {action = actions.attack1}
+    currentEnemy.targetSlot = 1
+    currentEnemy.hand = {currentEnemy.playingCard, {action = actions.attack1}}
+
+    ResolutionState:enter()
+
+    luaunit.assertEquals(#player.hand, 1)
+    luaunit.assertEquals(#currentEnemy.hand, 2)
+end

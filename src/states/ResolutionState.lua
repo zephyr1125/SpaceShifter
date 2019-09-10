@@ -11,6 +11,7 @@ function ResolutionState:enter()
     -- both move first
     self.move(playerAction, enemyAction)
     self.cardsEffect(playerAction, enemyAction)
+    self.onAttack()
     self.extraDefence()
     self.calcDamage()
     self.changeSpace()
@@ -42,6 +43,20 @@ function ResolutionState.cardsEffect(playerAction, enemyAction)
     end
     if currentEnemy.playingCardAsAction and enemyAction.effect ~= nil then
         enemyAction.effect(currentEnemy, player)
+    end
+end
+
+function ResolutionState.onAttack()
+    if table.contains(player.playingCard.action.type, 'attack') then
+        local isHit = player.targetSlot == currentEnemy.slot
+        local space = map.slots[player.slot].card.space
+        if isHit and space.onAttack~= nil then space.onAttack(player, currentEnemy) end
+    end
+
+    if table.contains(currentEnemy.playingCard.action.type, 'attack') then
+        local isHit = currentEnemy.targetSlot == player.slot
+        local space = map.slots[currentEnemy.slot].card.space
+        if isHit and space.onAttack~= nil then space.onAttack(currentEnemy, player) end
     end
 end
 

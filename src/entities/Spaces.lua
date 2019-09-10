@@ -132,8 +132,8 @@ return {
         spaceAnim = 'desert',
         score = 2,
         benefit = -1,
-        onAttack = function(me)
-            me:dropCard()
+        onAttack = function(me, opponent)
+            opponent:dropCard()
         end,
     },
 }
