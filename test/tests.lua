@@ -4,6 +4,7 @@ luaunit = require('luaunit')
 package.path = package.path .. ";..\\?.lua;"
 
 class = require 'lib.hump.class'
+love = require 'mock.mocklove'
 
 require('src.utils')
 require('src.states.ResolutionState')
@@ -20,7 +21,7 @@ require('testsHumpClass')
 require('testsOfUtils')
 require('testsFillAllDecks')
 require('testsPickCards')
-require('testsActionMove')
+require('testsActions')
 require('testsMap')
 require('testsAttackAndDefence')
 require('testsSpacePlain')

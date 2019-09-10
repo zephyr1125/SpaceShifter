@@ -108,6 +108,9 @@ return {
         end,
         pickCard = function(self)
             self.hand[#self.hand+1] = decks.BansheeDeck:pickCards(1)
+        end,
+        dropCard = function(self)
+            dropFirstHandCard(self)
         end
     },
     {
@@ -137,6 +140,9 @@ return {
         end,
         pickCard = function(self)
             self.hand[#self.hand+1] = decks.GreedDeck:pickCards(1)
+        end,
+        dropCard = function(self)
+            dropFirstHandCard(self)
         end
     }
 }

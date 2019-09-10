@@ -66,13 +66,13 @@ function reload(packageName)
 end
 
 function random(m, n)
-    math.randomseed(os.time())
-    return math.random(m,n)
+    love.math.randomseed(os.time())
+    return love.math.random(m,n)
 end
 
 function random(n)
-    math.randomseed(os.time())
-    return math.random(1,n)
+    love.math.randomseed(os.clock())
+    return love.math.random(n)
 end
 
 -- random element in table, no mater if the table is integer sequence
@@ -137,4 +137,15 @@ function chooseHandCardMove(char)
         end
     end
     return 0
+end
+
+function dropFirstHandCard(char)
+    if #char.hand == 0 then return end
+    ---- if currently playing card, that card should not be droped
+    if char.currentCardId ~= 0 and #char.hand == 1 then return end
+    
+    local dropId = 1
+    if char.currentCardId == 1 then dropId = 2 end
+    
+    table.remove(char.hand,dropId)
 end

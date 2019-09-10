@@ -86,5 +86,8 @@ return {
     end,
     pickCard = function(self)
         self.hand[#self.hand+1] = decks.PlayerDeck:pickCards(1)
+    end,
+    dropCard = function(self)
+        dropFirstHandCard(self)
     end
 }
