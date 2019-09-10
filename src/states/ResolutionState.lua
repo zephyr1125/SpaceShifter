@@ -62,10 +62,10 @@ function ResolutionState.calcDamage()
 
     -- not correct slot, no damage
     local isPlayerAttackSuccess =
-        player.targetSlot ~= nil and player.targetSlot == currentEnemy.slot
+    player.targetSlot ~= nil and player.targetSlot == currentEnemy.slot
     local isEnemyAttackSuccess =
-        currentEnemy.targetSlot ~= nil and currentEnemy.targetSlot == player.slot
-    
+    currentEnemy.targetSlot ~= nil and currentEnemy.targetSlot == player.slot
+
     -- calc damage
     if isPlayerAttackSuccess then
         currentEnemy.damagePending = player.attack - currentEnemy.defence
@@ -77,6 +77,16 @@ function ResolutionState.calcDamage()
     -- trim damage
     if currentEnemy.damagePending<0 then currentEnemy.damagePending = 0 end
     if player.damagePending<0 then player.damagePending = 0 end
+
+    -- space onDamaged
+    local enemySpace = map.slots[currentEnemy.slot].card.space
+    if currentEnemy.damagePending > 0 and enemySpace.onDamaged ~= nil then
+        enemySpace.onDamaged(currentEnemy)
+    end
+    local playerSpace = map.slots[player.slot].card.space
+    if player.damagePending > 0 and playerSpace.onDamaged ~= nil then
+        playerSpace.onDamaged(player)
+    end
 
     -- resolve damage
     currentEnemy.life = currentEnemy.life - currentEnemy.damagePending
