@@ -66,12 +66,12 @@ function reload(packageName)
 end
 
 function random(m, n)
-    love.math.randomseed(os.time())
+    --love.math.setRandomSeed(os.time())
     return love.math.random(m,n)
 end
 
 function random(n)
-    love.math.randomseed(os.clock())
+    --love.math.setRandomSeed(os.clock())
     return love.math.random(n)
 end
 
@@ -83,7 +83,7 @@ function randomElement(myTable)
         table.insert(keySet, k)
     end
     -- now you can reliably return a random key
-    return myTable[keySet[math.random(#keySet)]]
+    return myTable[keySet[random(#keySet)]]
 end
 
 function table.contains(tab, val)

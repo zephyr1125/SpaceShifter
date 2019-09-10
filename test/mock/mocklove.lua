@@ -112,7 +112,7 @@ end
 local mm = {}
 M['math'] = mm
 function mm.randomseed(...)
-    math.randomseed(...)
+    --math.randomseed(...)
 end
 
 function mm.random(n,m)

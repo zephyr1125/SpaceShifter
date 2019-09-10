@@ -4,8 +4,7 @@ function InitState:enter()
     decks = reload('src.entities.Decks')
     player = reload('src.entities.Player')
     enemies = reload('src.entities.Enemies')
-
-    math.randomseed(os.time())
+    
     fillAllDecks()
     map:init()
     player:init()
