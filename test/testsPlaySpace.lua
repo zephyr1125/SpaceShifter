@@ -6,6 +6,8 @@ function testsPlaySpace:setUp()
     player.playingCard = {space = spaces['mountain']}
     player.playingCardAsAction = false
     player.targetSlot = 1
+    
+    currentEnemy.playingCard = {action = actions.move}
 end
 
 function testsPlaySpace:tearDown()
