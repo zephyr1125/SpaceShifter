@@ -91,3 +91,21 @@ function testsActions:testDropCard_NotDropPlayingCardWhenOnly()
     ResolutionState:enter()
     luaunit.assertEquals(#currentEnemy.hand, 1)
 end
+
+function testsActions:testDropCard_MissSlot_NotDrop()
+    local playerPlayingCard = {action = actions.drop1}
+    player.playingCard = playerPlayingCard
+    player.currentCardId = 1
+    player.playingCardAsAction = true
+    player.targetSlot = 2
+    player.hand = {playerPlayingCard, {action=actions.attack1}}
+    
+    local enemyPlayingCard = {action = actions.move}
+    currentEnemy.playingCard = enemyPlayingCard
+    currentEnemy.currentCardId = 1
+    currentEnemy.targetSlot = 7
+    currentEnemy.hand = {enemyPlayingCard, {action=actions.attack1}}
+    
+    ResolutionState:enter()
+    luaunit.assertEquals(#currentEnemy.hand, 2)
+end
