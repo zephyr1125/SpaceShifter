@@ -84,13 +84,14 @@ function ResolutionState.calcDamage()
 end
 
 function ResolutionState.changeSpace()
+    local enemyChangeSpace = currentEnemy.playingCard.action.onChangeSpace
+    if enemyChangeSpace ~= nil then
+        enemyChangeSpace(currentEnemy.targetSlot)
+    end
+    
     if player.playingCardAsAction then return end
     
-    local oldCard = map.slots[player.targetSlot].card
-    if oldCard ~= nil then
-        discardCard(oldCard)
-    end
-    map.slots[player.targetSlot].card = player.playingCard
+    map:changeSpace(player.targetSlot, player.playingCard)
 end
 
 function ResolutionState.cleanCards()

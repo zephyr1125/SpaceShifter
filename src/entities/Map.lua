@@ -112,4 +112,11 @@ return {
         end
         return mostSlot
     end,
+    changeSpace = function(self, slot, newCard)
+        local oldCard = self.slots[slot].card
+        if oldCard ~= nil then
+            discardCard(oldCard)
+        end
+        self.slots[slot].card = newCard
+    end
 }
