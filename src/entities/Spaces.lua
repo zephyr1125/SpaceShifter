@@ -99,21 +99,21 @@ return {
             return defaultTargetSlot(me, opponent)
         end,
     },
-    ['bog'] = {
-        name = '沼泽',
-        icon = 'bog',
-        effectIcon = 'grounded',
-        spaceAnim = 'bog',
-        score = 2,
-        benefit = -1,
-        onActionCheck = function(action)
-            if table.contains(action.type, 'move') then
-                return false
-            else
-                return true
-            end
-        end,
-    },
+    --['bog'] = {
+    --    name = '沼泽',
+    --    icon = 'bog',
+    --    effectIcon = 'grounded',
+    --    spaceAnim = 'bog',
+    --    score = 2,
+    --    benefit = -1,
+    --    onActionCheck = function(action)
+    --        if table.contains(action.type, 'move') then
+    --            return false
+    --        else
+    --            return true
+    --        end
+    --    end,
+    --},
     ['cove'] = {
         name = '海湾',
         icon = 'cove',
