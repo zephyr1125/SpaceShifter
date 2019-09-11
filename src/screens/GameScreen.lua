@@ -20,12 +20,13 @@ function GameScreen:draw()
     currentEnemy:drawSprite(mapX, mapY)
     player:drawSprite(mapX, mapY)
     self:drawDecks()
-    player:drawHand(120, 160, 200-2)
-    player:drawInfo(2, screenHeight-2-cardHeight)
+    player:drawHand(72, 160, 200)
+    player:drawInfo(4, 160)
     if currentEnemy ~= nil then
         currentEnemy:drawInfo(screenWidth-2-cardWidth, 2)
         currentEnemy:drawPlayingCard(216, 2)
     end
+    infoBar:draw(4, 216)
     drawFPS()
     drawLogs()
 end
@@ -41,7 +42,7 @@ end
 
 function GameScreen:drawDecks()
     decks.PublicDeck:draw(4, 4)
-    decks.PlayerDeck:draw(4+48+4, screenHeight-4-cardHeight)
+    decks.PlayerDeck:draw(280, 162)
 end
 
 return GameScreen

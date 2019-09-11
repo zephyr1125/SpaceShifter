@@ -2,6 +2,7 @@ PlayerPlayCardState = {}
 function PlayerPlayCardState:enter()
     print("player state")
     player.currentCardId = #player.hand
+    infoBar:setCardInfo(player.hand[player.currentCardId], player.cardAsAction)
 end
 
 function PlayerPlayCardState:keypressed(key)
@@ -30,4 +31,6 @@ function PlayerPlayCardState:keypressed(key)
             GameState.switch(ResolutionState)
         end
     end
+
+    infoBar:setCardInfo(player.hand[player.currentCardId], player.cardAsAction)
 end

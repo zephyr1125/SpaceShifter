@@ -13,6 +13,7 @@ return {
     ['attack1'] = {
         name = '戳刺',
         icon = 'attack1',
+        info = '对指定格上的单位攻击1',
         score = 1,
         needChooseSlot = true,
         type = {'attack'},
@@ -35,6 +36,7 @@ return {
     ['attack2'] = {
         name = '挥击',
         icon = 'attack2',
+        info = '对指定格上的单位攻击2',
         score = 2,
         needChooseSlot = true,
         type = {'attack'},
@@ -57,6 +59,7 @@ return {
     ['attack3'] = {
         name = '重劈',
         icon = 'attack3',
+        info = '对指定格上的单位攻击3',
         score = 3,
         needChooseSlot = true,
         type = {'attack'},
@@ -79,6 +82,7 @@ return {
     ['a1d1'] = {
         name = '格挡反击',
         icon = 'a1d1',
+        info = '防御1并攻击1',
         score = 1.5,
         needChooseSlot = true,
         type = {'attack','defence'},
@@ -102,6 +106,7 @@ return {
     ['a2d1'] = {
         name = '格挡重击',
         icon = 'a2d1',
+        info = '防御1并攻击2',
         score = 2.5,
         needChooseSlot = true,
         type = {'attack','defence'},
@@ -125,6 +130,7 @@ return {
     ['defence1'] = {
         name = '防御',
         icon = 'defence1',
+        info = '防御1点伤害',
         score = 1,
         needChooseSlot = false,
         type = {'defence'},
@@ -135,6 +141,7 @@ return {
     ['heal1'] = {
         name = '喘息',
         icon = 'heal1',
+        info = '提升1点血量',
         score = 1,
         needChooseSlot = false,
         type = {'heal'},
@@ -145,6 +152,7 @@ return {
     ['heal2'] = {
         name = '包扎',
         icon = 'heal2',
+        info = '提升2点血量',
         score = 2.5,
         needChooseSlot = false,
         type = {'heal'},
@@ -156,6 +164,7 @@ return {
         -- pick up 2 cards
         name = '休整',
         icon = 'pick2',
+        info = '抓牌2',
         score = 3,
         needChooseSlot = false,
         type = {'pick'},
@@ -167,6 +176,7 @@ return {
     ['a1p1'] = {
         name = '戏法',
         icon = 'a1p1',
+        info = '攻击1抓牌1',
         score = 2,
         needChooseSlot = true,
         type = {'attack','pick'},
@@ -190,6 +200,7 @@ return {
     ['a2p1'] = {
         name = '诈术',
         icon = 'a2p1',
+        info = '攻击2抓牌1',
         score = 3,
         needChooseSlot = true,
         type = {'attack','pick'},
@@ -214,6 +225,7 @@ return {
         -- heal1 and pick up 2 cards
         name = '整理思绪',
         icon = 'h1p2',
+        info = '加血1抓牌2',
         score = 3,
         needChooseSlot = false,
         type = {'heal','pick'},
@@ -226,6 +238,7 @@ return {
     ['drop1'] = {
         name = '扰乱',
         icon = 'drop1',
+        info = '使指定格上的单位弃牌1张',
         score = 1.5,
         needChooseSlot = true,
         type = {'drop'},
@@ -245,6 +258,7 @@ return {
     ['drop2'] = {
         name = '混乱',
         icon = 'drop2',
+        info = '使指定格上的单位弃牌2张',
         score = 2.5,
         needChooseSlot = true,
         type = {'drop'},
@@ -265,6 +279,7 @@ return {
     ['a1drop1'] = {
         name = '摄魂一击',
         icon = 'a1drop1',
+        info = '对指定格上的单位攻击1弃牌1',
         score = 2,
         needChooseSlot = true,
         type = {'attack','drop'},
@@ -290,6 +305,7 @@ return {
     ['move'] = {
         name = '时空转移',
         icon = 'move',
+        info = '移动到另一个时空',
         score = 1,
         needChooseSlot = true,
         type = {'move'},
@@ -308,6 +324,7 @@ return {
     ['spaceRecover'] = {
         name = '时空复原',
         icon = 'spaceRecover',
+        info = '目标时空恢复初始',
         score = 99,
         needChooseSlot = true,
         type = {'spaceRecover'},
@@ -325,6 +342,7 @@ return {
     ['universeRecover'] = {
         name = '宇宙复原',
         icon = 'universeRecover',
+        info = '全部时空恢复初始',
         score = 99,
         needChooseSlot = false,
         type = {'spaceRecover'},

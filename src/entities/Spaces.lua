@@ -7,6 +7,7 @@ return {
     ['mountain'] = {
         name = '山脉',
         icon = 'mountain',
+        info = '提升1点防御',
         effectIcon = 'defence1',
         spaceAnim = 'mountain',
         score = 1,
@@ -22,6 +23,7 @@ return {
     ['canyon'] = {
         name = '峡谷',
         icon = 'canyon',
+        info = '提升2点防御',
         effectIcon = 'defence2',
         spaceAnim = 'canyon',
         score = 2,
@@ -37,6 +39,7 @@ return {
     ['plain'] = {
         name = '平原',
         icon = 'plain',
+        info = '提升1点攻击',
         effectIcon = 'attack1',
         spaceAnim = 'plain',
         score = 1,
@@ -52,6 +55,7 @@ return {
     ['ruin'] = {
         name = '遗迹',
         icon = 'ruin',
+        info = '提升2点攻击',
         effectIcon = 'attack2',
         spaceAnim = 'ruin',
         score = 2,
@@ -67,6 +71,7 @@ return {
     ['castle'] = {
         name = '堡垒',
         icon = 'castle',
+        info = '提升1防御1攻击',
         effectIcon = 'a1d1',
         spaceAnim = 'castle',
         score = 2,
@@ -86,6 +91,7 @@ return {
     ['graveyard'] = {
         name = '墓地',
         icon = 'graveyard',
+        info = '每回合受伤1',
         effectIcon = 'harm1',
         spaceAnim = 'graveyard',
         score = 2,
@@ -102,6 +108,7 @@ return {
     --['bog'] = {
     --    name = '沼泽',
     --    icon = 'bog',
+    --    info = '无法转移时空',
     --    effectIcon = 'grounded',
     --    spaceAnim = 'bog',
     --    score = 2,
@@ -117,6 +124,7 @@ return {
     ['cove'] = {
         name = '海湾',
         icon = 'cove',
+        info = '受伤时抽牌1',
         effectIcon = 'pick',
         spaceAnim = 'cove',
         score = 2,
@@ -128,6 +136,7 @@ return {
     ['desert'] = {
         name = '沙漠',
         icon = 'desert',
+        info = '攻击时附加弃牌1',
         effectIcon = 'drop',
         spaceAnim = 'desert',
         score = 2,

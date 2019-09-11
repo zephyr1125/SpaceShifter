@@ -33,6 +33,7 @@ require('src.utils')
 Button = require('src.ui.Button')
 require('src.ui.SelectionGroup')
 Window = require('src.ui.Window')
+InfoBar = require('src.ui.InfoBar')
 
 -- assets
 require('src.assets')
@@ -77,16 +78,14 @@ function love.load()
 	font:setFilter( "nearest", "nearest", 0 )
 	love.graphics.setFont(font)
 	
+	infoBar = InfoBar(infoBarWidth)
+	
 	screenManager = ScreenManager()
 	
-	-- Register your screens here (A screen with the path '/' is mandatory!)
 	screenManager:register('/', TitleScreen)
 	screenManager:register('game', GameScreen)
 	
-	-- Load the main screen. Only needed if you didn't register a screen with path "/"
-	--screenManager:view('test/index', 'Wow!')
 end
---
 
 local cachetable = {}
 for i = 0, math.pi * 2, math.pi / 1000 do
