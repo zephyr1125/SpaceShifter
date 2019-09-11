@@ -2,13 +2,13 @@ testsSpaces = {}
 
 function testsSpaces:setUp()
     GameState = {switch = function()end}
-    ResolutionState.reset()
+    ResolutionState:reset()
     player.slot = 1
     player.playingCardAsAction = true
 end
 
 function testsSpaces:tearDown()
-    ResolutionState.reset()
+    ResolutionState:reset()
 end
 
 function testsSpaces:testMountainAffectDefence()

@@ -1,7 +1,7 @@
 ResolutionState = {}
 
 function ResolutionState:enter()
-    self.reset()
+    self:reset()
 
     local playerAction = player.playingCard.action
     local playerSpace = player.playingCard.space
@@ -25,15 +25,17 @@ end
 
 function ResolutionState:playSprites(playerAction, enemyAction)
     self.playerSprite = playerAction.sprite
-    self.playerSprite:play()
-    self.playerSprite:onLoop(function()
-        self.playerSprite:stop()
-        GameState.switch(LifeCheckState)
-    end)
+    if self.playerSprite ~= nil then
+        self.playerSprite:play()
+        self.playerSprite:onLoop(function()
+            self.playerSprite:stop()
+            self.isPlayerActionSpriteDone = true
+        end)
+    end
 end
 
 function ResolutionState:draw()
-    if self.playerSprite ~= nil then
+    if self.playerSprite ~= nil and not self.isPlayerActionSpriteDone then
         local spriteX, spriteY, drawSlot
         if player.targetSlot == 0 then
             drawSlot = player.slot
@@ -167,11 +169,14 @@ function ResolutionState.cleanCards()
     currentEnemy.playingCard = nil
 end
 
-function ResolutionState.reset()
+function ResolutionState:reset()
     player.attack = 0
     player.defence = 0
     currentEnemy.attack = 0
     currentEnemy.defence = 0
     player.damagePending = 0
     currentEnemy.damagePending = 0
+    
+    self.isPlayerActionSpriteDone = false
+    self.isEnemyActionSpriteDone = false
 end

@@ -34,33 +34,6 @@
     "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
     "sourceSize": { "w": 48, "h": 24 },
     "duration": 100
-   },
-   {
-    "filename": "attack1 4.aseprite",
-    "frame": { "x": 192, "y": 0, "w": 48, "h": 24 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
-    "sourceSize": { "w": 48, "h": 24 },
-    "duration": 100
-   },
-   {
-    "filename": "attack1 5.aseprite",
-    "frame": { "x": 240, "y": 0, "w": 48, "h": 24 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
-    "sourceSize": { "w": 48, "h": 24 },
-    "duration": 100
-   },
-   {
-    "filename": "attack1 6.aseprite",
-    "frame": { "x": 288, "y": 0, "w": 48, "h": 24 },
-    "rotated": false,
-    "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 24 },
-    "sourceSize": { "w": 48, "h": 24 },
-    "duration": 100
    }
  ],
  "meta": {
@@ -68,10 +41,10 @@
   "version": "1.2.14-x64",
   "image": "attack1.png",
   "format": "RGBA8888",
-  "size": { "w": 336, "h": 24 },
+  "size": { "w": 192, "h": 24 },
   "scale": "1",
   "frameTags": [
-   { "name": "effect", "from": 0, "to": 6, "direction": "forward" }
+   { "name": "effect", "from": 0, "to": 3, "direction": "forward" }
   ],
   "layers": [
    { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }

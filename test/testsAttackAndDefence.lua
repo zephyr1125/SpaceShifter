@@ -1,11 +1,11 @@
 testsAttackAndDefence = {}
 
 function testsAttackAndDefence:setUp()
-    ResolutionState.reset()
+    ResolutionState:reset()
 end
 
 function testsAttackAndDefence:tearDown()
-    ResolutionState.reset()
+    ResolutionState:reset()
 end
 
 function testsAttackAndDefence:testPlainAffectAttack()
