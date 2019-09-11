@@ -39,6 +39,7 @@ function DiscardCardState:enter()
 
     for _, card in pairs(decks.PlayerDeck.cards) do
         card.isDiscardSelected = false
+        card.isShowAction = true
     end
     
     infoBar:setShowFlipInfo(true)
