@@ -36,6 +36,7 @@ function DiscardCardState:enter()
     self.showAction = true
     self.currentCardId = 1
     self.isSelectingCard = true
+    self.confirmButton:setSelect(false)
 
     for _, card in pairs(decks.PlayerDeck.cards) do
         card.isDiscardSelected = false

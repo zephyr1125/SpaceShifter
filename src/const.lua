@@ -16,11 +16,13 @@ mapSlotHeight = 31
 enemyCardX = 136
 enemyCardY = 4
 
+infoBarX = 4
+infoBarY = 216
 infoBarWidth = 312
 
 white = {255,255,255}
 black = {0,0,0}
-coverColor = {0,0,0,0.5}
+coverColor = {0,0,0,0.1}
 buttonIdleColor = {32, 32, 32}
 buttonSelectColor = {136, 151, 166}
 cardActionColor = {227,168,102}

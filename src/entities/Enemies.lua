@@ -95,7 +95,7 @@ end
 return {
     {
         name = 'Banshee',
-        initLife = 5,
+        initLife = 0,
         deck = 'BansheeDeck',
         handSize = 3,
         init = function(self)

@@ -15,6 +15,11 @@ function GameScreen:update(dt)
 end
 
 function GameScreen:draw()
+    local state = GameState.current()
+    if state == RewardState or state == DiscardCardState then
+        return
+    end
+    
     self:drawBackground()
     map:draw(imgMapSlot, mapX, mapY)
     currentEnemy:drawSprite(mapX, mapY)
@@ -26,7 +31,7 @@ function GameScreen:draw()
         currentEnemy:drawInfo(screenWidth-2-cardWidth, 4)
         currentEnemy:drawPlayingCard(enemyCardX, enemyCardY)
     end
-    infoBar:draw(4, 216)
+    infoBar:draw(infoBarX, infoBarY)
     drawFPS()
     drawLogs()
 end

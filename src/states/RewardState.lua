@@ -40,6 +40,7 @@ function RewardState:enter()
     self.showAction = true
     self.currentCardId = 1
     self.isSelectingCard = true
+    self.confirmButton:setSelect(false)
 
     for _, slot in pairs(map.slots) do
         slot.baseCard.isRewardSelected = false
