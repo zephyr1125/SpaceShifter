@@ -3,7 +3,7 @@ testsBanshee = {}
 function testsBanshee:setUp()
     fillAllDecks()
     player.slot = 1
-    player.playingCard = Card{action=actions.container.move}
+    player.playingCard = Card(actions.container.move)
     player.targetSlot = 1
     
     currentEnemy = enemies[1]
