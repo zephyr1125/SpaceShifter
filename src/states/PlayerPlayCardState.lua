@@ -1,9 +1,13 @@
 local noTips, mapTips, enemyTips = 1,2,3
 
+local function refreshInfoBarAtNoTips(self)
+    infoBar:setCardInfo(player.hand[player.currentCardId], player.cardAsAction)
+end
+
 local function enterNoTips(self)
     self.tipsStatus = noTips
     infoBar:setShowFlipInfo(true)
-    infoBar:setCardInfo(player.hand[player.currentCardId], player.cardAsAction)
+    refreshInfoBarAtNoTips(self)
 end
 
 local function enterMapTips(self, isFromBottom)
@@ -39,7 +43,7 @@ local function noTipsKeyPressed(self, key)
     end
 
     if key == keys.Y then
-        self:flipHandCard()
+        self:flipHandCard(self)
     end
     
     if key == keys.A then
@@ -53,7 +57,7 @@ local function noTipsKeyPressed(self, key)
         end
     end
 
-    infoBar:setCardInfo(player.hand[player.currentCardId], player.cardAsAction)
+    refreshInfoBarAtNoTips(self)
 end
 
 local function mapTipsKeyPressed(self, key)
@@ -145,7 +149,11 @@ function PlayerPlayCardState:keypressed(key)
 end
 
 function PlayerPlayCardState:flipHandCard()
-    for _, card in pairs(player.hand) do
-        card:flip()
+    for id, card in pairs(player.hand) do
+        if id == player.currentCardId then
+            card:flip(self, refreshInfoBarAtNoTips)
+        else
+            card:flip()
+        end
     end
 end

@@ -20,6 +20,10 @@ local function isRewardFull()
     return rewardCount >= player.rewardSize
 end
 
+local function refreshInfoBar(self)
+    infoBar:setCardInfo(map.slots[self.currentCardId].card)
+end
+
 function RewardState:init()
     self.confirmButton = Button('Confirm', buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
@@ -105,8 +109,12 @@ end
 
 function RewardState:keypressed(key)
     if key == keys.Y then
-        for _, slot in pairs(map.slots) do
-            slot.card:flip()
+        for id, slot in pairs(map.slots) do
+            if id == self.currentCardId then
+                slot.card:flip(self, refreshInfoBar)
+            else
+                slot.card:flip()
+            end
         end
     end
 
@@ -142,7 +150,7 @@ function RewardState:keypressed(key)
         end
     end
 
-    infoBar:setCardInfo(map.slots[self.currentCardId].card)
+    refreshInfoBar(self)
     
     self.confirmButton:keypressed(key)
 end

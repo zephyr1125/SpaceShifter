@@ -32,9 +32,10 @@ function Card:draw(x, y)
     end
 end
 
-function Card:flip()
+function Card:flip(caller, onFliped)
     flux.to(self, 0.1, {tweenWidth = cardWidth}):oncomplete(function()
         self.isShowAction = not self.isShowAction
         flux.to(self, 0.1, {tweenWidth = 0})
+        if onFliped~= nil then onFliped(caller) end
     end)
 end
