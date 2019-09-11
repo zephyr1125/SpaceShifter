@@ -28,3 +28,14 @@ function testsOfUtils:testChooseHandCardHeal()
         {action = actions.defence1}}}
     luaunit.assertEquals(chooseHandCardHeal(char), 2)
 end
+
+function testsOfUtils:testSortDeck()
+    fillAllDecks()
+    sortDeck(decks.PublicDeck)
+    for i = 1, #decks.PublicDeck.cards-1 do
+        card = decks.PublicDeck.cards[i]
+        cardNext = decks.PublicDeck.cards[i+1]
+        luaunit.assertIsTrue(card.action.score+card.space.score <=
+            cardNext.action.score+cardNext.space.score)
+    end
+end

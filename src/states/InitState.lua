@@ -6,6 +6,7 @@ function InitState:enter()
     enemies = reload('src.entities.Enemies')
     
     fillAllDecks()
+    sortDeck(decks.PublicDeck)
     map:init()
     player:init()
     self:initEnemy()

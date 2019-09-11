@@ -158,3 +158,9 @@ function dropFirstHandCard(char)
     
     table.remove(char.hand,dropId)
 end
+
+function sortDeck(deck)
+    table.sort(deck.cards, function(e1, e2)
+        return e1.action.score+e1.space.score < e2.action.score+e2.space.score
+    end)
+end
