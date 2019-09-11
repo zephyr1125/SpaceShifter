@@ -26,6 +26,7 @@ logs = {}
 class = require('lib.hump.class')
 keys = require('lib.keys')
 flux = require('lib.flux')
+peachy = require('lib.peachy')
 require('src.const')
 require('src.utils')
 
@@ -38,11 +39,7 @@ InfoBar = require('src.ui.InfoBar')
 -- assets
 require('src.assets')
 
--- Game Data
-actions = require('src.entities.Actions')
-spaces =  require('src.entities.Spaces')
-map = require('src.entities.Map')
-require('src.entities.Card')
+
 
 -- Load Libraries
 local ScreenManager = require('lib.ScreenManager')
@@ -73,6 +70,12 @@ require('src.states.NextEnemyState')
 -- Load Game
 function love.load()
 	InitAssets()
+
+	-- Game Data
+	actions = require('src.entities.Actions')
+	spaces =  require('src.entities.Spaces')
+	map = require('src.entities.Map')
+	require('src.entities.Card')
 	
 	love.graphics.setDefaultFilter( "nearest", "nearest", 1 )
 	font = love.graphics.newFont("assets/fonts/zpix.ttf", fontSize)
