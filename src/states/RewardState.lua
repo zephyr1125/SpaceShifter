@@ -46,7 +46,7 @@ function RewardState:enter()
     end
 
     infoBar:setShowFlipInfo(true)
-    infoBar:setCardInfo(map.slots[self.currentCardId].card)
+    refreshInfoBar(self)
 end
 
 function RewardState:draw()

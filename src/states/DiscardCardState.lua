@@ -1,11 +1,7 @@
 DiscardCardState = {}
 
-local function drawCard(id, card, x, y, cardAsAction)
-    if cardAsAction then
-        drawCardAsAction(card, x, y)
-    else
-        drawCardAsSpace(card, x, y)
-    end
+local function drawCard(id, card, x, y)
+    card:draw(x, y)
     -- draw selection
     if card.isDiscardSelected then
         setColor(white)
@@ -23,6 +19,10 @@ local function isDiscardFull()
     return discardSum <= 0
 end
 
+local function refreshInfoBar(self)
+    infoBar:setCardInfo(decks.PlayerDeck.cards[self.currentCardId])
+end
+
 function DiscardCardState:init()
     self.confirmButton = Button('Confirm', buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
@@ -33,7 +33,6 @@ function DiscardCardState:init()
 end
 
 function DiscardCardState:enter()
-    self.showAction = true
     self.currentCardId = 1
     self.isSelectingCard = true
     self.confirmButton:setSelect(false)
@@ -43,7 +42,7 @@ function DiscardCardState:enter()
     end
     
     infoBar:setShowFlipInfo(true)
-    infoBar:setCardInfo(decks.PlayerDeck.cards[self.currentCardId])
+    refreshInfoBar(self)
 end
 
 function DiscardCardState:draw()
@@ -69,15 +68,13 @@ function DiscardCardState:drawPlayerDeck(x, y, xInterval, yInterval)
         if id ~= self.currentCardId or not self.isSelectingCard then
             drawCard(id, card,
                 x + math.fmod(id-1, 5) * (cardWidth + xInterval),
-                y + math.floor((id-1)/5) * (cardHeight + yInterval),
-                self.showAction)
+                y + math.floor((id-1)/5) * (cardHeight + yInterval))
         end
     end
     if self.currentCardId ~= 0 and self.isSelectingCard then
         drawCard(self.currentCardId, decks.PlayerDeck.cards[self.currentCardId],
             x + math.fmod(self.currentCardId-1, 5) * (cardWidth + xInterval),
-            y + math.floor((self.currentCardId-1)/5) * (cardHeight + yInterval) - 3,
-            self.showAction)
+            y + math.floor((self.currentCardId-1)/5) * (cardHeight + yInterval) - 3)
     end
 end
 
@@ -133,7 +130,13 @@ end
 
 function DiscardCardState:keypressed(key)
     if key == keys.Y then
-        self.showAction = not self.showAction
+        for id, card in pairs(decks.PlayerDeck.cards) do
+            if id == self.currentCardId then
+                card:flip(self, refreshInfoBar)
+            else
+                card:flip()
+            end
+        end
     end
 
     if key == keys.DPad_left then
@@ -162,7 +165,7 @@ function DiscardCardState:keypressed(key)
         end
     end
 
-    infoBar:setCardInfo(decks.PlayerDeck.cards[self.currentCardId])
+    refreshInfoBar(self)
 
     self.confirmButton:keypressed(key)
 end
