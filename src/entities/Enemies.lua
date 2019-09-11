@@ -13,11 +13,20 @@ function baseAIChooseCard(me, opponent)
 
     -- life low, heal
     if cardId == 0 and getLifePercent(me) < 0.3 then
+        print('ai choose heal')
         cardId = chooseHandCardHeal(me)
+    end
+
+    -- player hand too much, drop
+    if cardId == 0 and map:isNeighbour(me.slot, opponent.slot)~=0 and #opponent.hand >3 then
+        print('ai choose drop')
+        cardId = chooseHandCardDrop(me)
+        targetSlot = opponent.slot
     end
     
     -- player nearby, attack
     if cardId == 0 and map:isNeighbour(me.slot, opponent.slot)~=0 then
+        print('ai choose attack')
         cardId = chooseHandCardAttack(me)
         targetSlot = opponent.slot
     end
@@ -26,6 +35,7 @@ function baseAIChooseCard(me, opponent)
     if cardId == 0 and map:isNeighbour(me.slot, opponent.slot) == 0 then
         local myNeighbours = map:getNoHoleNeighbours(me.slot)
         -- go to near opponent
+        print('ai choose approach player')
         cardId = chooseHandCardMove(me)
         for _, slot in pairs(myNeighbours) do
             if map:isNeighbour(slot, opponent.slot) ~= 0 then
@@ -39,6 +49,7 @@ function baseAIChooseCard(me, opponent)
     if cardId == 0 then
         local bestBenefitSlot = map:getBestBenefitNeighbour(me.slot)
         if bestBenefitSlot ~= me.slot then
+            print('ai choose move to better slot')
             cardId = chooseHandCardMove(me)
             targetSlot = bestBenefitSlot
         end
@@ -46,6 +57,7 @@ function baseAIChooseCard(me, opponent)
     
     -- others, just random a card 
     if cardId == 0 then
+        print('ai choose random')
         cardId = random(#me.hand)
         targetSlot = me.slot
     end

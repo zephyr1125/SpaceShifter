@@ -8,11 +8,14 @@ function testsAIChooseCards:setUp()
         {action=actions.attack1},
         {action=actions.heal1},
         {action=actions.defence1},
-        {action=actions.move}}
+        {action=actions.move},
+        {action=actions.drop1}}
     self.me.slot = 1
     
     self.opponent = {}
     self.opponent.slot = 2
+    self.opponent.hand = {{action = actions.attack1},{action = actions.attack1},
+                            {action = actions.attack1}}
     currentEnemy = self.opponent
 end
 
@@ -21,7 +24,13 @@ function testsAIChooseCards:teatDown()
 end
 
 function testsAIChooseCards:testLifeDanger_Heal()
-    luaunit.assertEquals(baseAIChooseCard(self.me), 2)
+    luaunit.assertEquals(baseAIChooseCard(self.me, self.opponent), 2)
+end
+
+function testsAIChooseCards:testPlayerHandTooMuch_Drop()
+    self.me.life = 10
+    self.opponent.hand[#self.opponent.hand+1] = {action = actions.attack1}
+    luaunit.assertEquals(baseAIChooseCard(self.me, self.opponent), 5)
 end
 
 function testsAIChooseCards:testPlayerNearby_Attack()

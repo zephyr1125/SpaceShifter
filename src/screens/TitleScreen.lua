@@ -27,6 +27,8 @@ function TitleScreen:draw()
 	--love.graphics.print('Space Shifter', 10, 10)
 	self.startButton:draw((screenWidth-buttonWidth)/2, buttonStartY)
 	self.exitButton:draw((screenWidth-buttonWidth)/2, buttonStartY+buttonHeight)
+	setColor(white)
+	love.graphics.draw(imgPreview, 0, 0)
 	drawFPS()
 	drawLogs()
 end

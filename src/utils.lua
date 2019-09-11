@@ -139,6 +139,15 @@ function chooseHandCardMove(char)
     return 0
 end
 
+function chooseHandCardDrop(char)
+    for id, card in pairs(char.hand) do
+        if table.contains(card.action.type, 'drop') then
+            return id
+        end
+    end
+    return 0
+end
+
 function dropFirstHandCard(char)
     if #char.hand == 0 then return end
     ---- if currently playing card, that card should not be droped

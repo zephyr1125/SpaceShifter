@@ -117,3 +117,20 @@ function testsActions:testUniverseRecover()
         luaunit.assertEquals(slot.card, slot.baseCard)
     end
 end
+
+function testsActions:testA1Drop1_DropCard()
+    local playerPlayingCard = {action = actions.drop1}
+    player.playingCard = playerPlayingCard
+    player.targetSlot = 1
+    player.life = 3
+    player.hand = {playerPlayingCard, {action=actions.attack1}}
+
+    currentEnemy.playingCard = {action = actions.a1drop1}
+    currentEnemy.targetSlot = 1
+    currentEnemy.life = 4
+
+    ResolutionState:enter()
+
+    luaunit.assertEquals(player.life, 2)
+    luaunit.assertEquals(#player.hand, 0)
+end
