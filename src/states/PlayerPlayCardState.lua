@@ -10,13 +10,13 @@ local function enterMapTips(self, isFromBottom)
     self.tipsStatus = mapTips
     self.mapTipSlot = isFromBottom and 5 or 2
     infoBar:setShowFlipInfo(false)
-    infoBar:setCardInfo(map.slots[self.mapTipSlot].card, false)
+    infoBar:setCardInfo(map.slots[self.mapTipSlot].card)
 end
 
 local function enterEnemyTips(self)
     self.tipsStatus = enemyTips
     infoBar:setShowFlipInfo(false)
-    infoBar:setCardInfo(currentEnemy.playingCard, true)
+    infoBar:setCardInfo(currentEnemy.playingCard)
 end
 
 local function noTipsKeyPressed(self, key)
@@ -39,7 +39,7 @@ local function noTipsKeyPressed(self, key)
     end
 
     if key == keys.Y then
-        player.cardAsAction = not player.cardAsAction
+        self:flipHandCard()
     end
     
     if key == keys.A then
@@ -98,7 +98,7 @@ local function mapTipsKeyPressed(self, key)
         end
     end
 
-    infoBar:setCardInfo(map.slots[self.mapTipSlot].card, false)
+    infoBar:setCardInfo(map.slots[self.mapTipSlot].card)
 end
 
 local function enemyTipsKeyPressed(self, key)
@@ -112,7 +112,7 @@ local function enemyTipsKeyPressed(self, key)
         return
     end
 
-    infoBar:setCardInfo(currentEnemy.playingCard, true)
+    infoBar:setCardInfo(currentEnemy.playingCard)
 end
 
 PlayerPlayCardState = {}
@@ -141,5 +141,11 @@ function PlayerPlayCardState:keypressed(key)
         mapTipsKeyPressed(self, key)
     else
         enemyTipsKeyPressed(self, key)
+    end
+end
+
+function PlayerPlayCardState:flipHandCard()
+    for _, card in pairs(player.hand) do
+        card:flip()
     end
 end

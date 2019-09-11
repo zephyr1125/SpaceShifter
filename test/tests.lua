@@ -16,6 +16,7 @@ spaces =  require('src.entities.Spaces')
 map = require('src.entities.Map')
 player = require('src.entities.Player')
 enemies = require('src.entities.Enemies')
+require('src.entities.Card')
 
 require('testsHumpClass')
 require('testsOfUtils')

@@ -1,11 +1,7 @@
-local function drawHandCard(id, card, handX, xInterval, handY, width, cardAsAction)
+local function drawHandCard(id, card, handX, xInterval, handY, width)
     local cardX = handX + width - cardWidth -
             (id-1)*(xInterval > cardWidth+1 and cardWidth+1 or xInterval)
-    if cardAsAction then
-        drawCardAsAction(card, cardX, handY)
-    else
-        drawCardAsSpace(card, cardX, handY)
-    end
+    card:draw(cardX, handY)
 end
 
 return {
@@ -38,12 +34,12 @@ return {
         local xInterval = (width - cardWidth)/(#self.hand <= 1 and 1 or #self.hand-1)
         for id, card in pairs(self.hand) do
             if id ~= self.currentCardId then
-                drawHandCard(id, card, x, xInterval, y, width, self.cardAsAction)
+                drawHandCard(id, card, x, xInterval, y, width)
             end
         end
         if self.currentCardId ~= 0 then
             drawHandCard(self.currentCardId, self.hand[self.currentCardId],
-                    x, xInterval, y-4, width, self.cardAsAction)
+                    x, xInterval, y-4, width)
         end
     end,
     drawSprite = function(self, mapX, mapY)
@@ -85,7 +81,7 @@ return {
         return false
     end,
     pickCard = function(self)
-        self.hand[#self.hand+1] = decks.PlayerDeck:pickCards(1)
+        table.add(self.hand, decks.PlayerDeck:pickCards(1))
     end,
     dropCard = function(self)
         dropFirstHandCard(self)

@@ -123,13 +123,12 @@ function ResolutionState.cleanCards()
     table.remove(player.hand, player.currentCardId)
     player.currentCardId = 0
     if player.playingCardAsAction then
-        decks.PlayerDeck.discardCards[#decks.PlayerDeck.discardCards+1] = 
-            player.playingCard
+        table.add(decks.PlayerDeck.discardCards, player.playingCard)
     end 
     player.playingCard = nil
     
     local enemyDeck = decks[currentEnemy.deck]
-    enemyDeck.discardCards[#enemyDeck.discardCards+1] = currentEnemy.playingCard
+    table.add(enemyDeck.discardCards, currentEnemy.playingCar)
     currentEnemy.playingCard = nil
 end
 

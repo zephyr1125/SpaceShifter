@@ -43,7 +43,7 @@ function DiscardCardState:enter()
     end
     
     infoBar:setShowFlipInfo(true)
-    infoBar:setCardInfo(decks.PlayerDeck.cards[self.currentCardId], self.showAction)
+    infoBar:setCardInfo(decks.PlayerDeck.cards[self.currentCardId])
 end
 
 function DiscardCardState:draw()
@@ -162,7 +162,7 @@ function DiscardCardState:keypressed(key)
         end
     end
 
-    infoBar:setCardInfo(decks.PlayerDeck.cards[self.currentCardId], self.showAction)
+    infoBar:setCardInfo(decks.PlayerDeck.cards[self.currentCardId])
 
     self.confirmButton:keypressed(key)
 end

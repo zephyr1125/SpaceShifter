@@ -32,7 +32,7 @@ function createRandomCard(scoreRange)
         totalScore = action.score + space.score
     until totalScore >= scoreRange[1] and totalScore <= scoreRange[2]
     
-    local card = {action = action, space = space}
+    local card = Card(action, space)
     return card
 end
 
@@ -46,19 +46,6 @@ function fillAllDecks()
     end
 end
 
-function drawCardAsAction(card, x, y)
-    setColor(cardActionColor)
-    love.graphics.rectangle('fill', x, y, cardWidth, cardHeight)
-    setColor(white)
-    love.graphics.printf(card.action.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
-end
-
-function drawCardAsSpace(card, x, y)
-    setColor(cardSpaceColor)
-    love.graphics.rectangle('fill', x, y, cardWidth, cardHeight)
-    setColor(white)
-    love.graphics.printf(card.space.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
-end
 
 function reload(packageName)
     package.loaded[packageName] = nil
@@ -102,9 +89,13 @@ function table.clean(t)
     end
 end
 
+function table.add(t, element)
+    t[#t+1] = element
+end
+
 function discardCard(card)
     local originDeck = card.deck
-    originDeck.discardCards[#originDeck.discardCards+1] = card
+    table.add(originDeck.discardCards, card)
 end
 
 function getLifePercent(char)

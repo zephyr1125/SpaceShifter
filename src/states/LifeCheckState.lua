@@ -2,18 +2,18 @@ LifeCheckState = {}
 
 local function returnAllPlayerCards()
     for _, card in pairs(player.hand) do
-        decks.PlayerDeck.cards[#decks.PlayerDeck.cards+1] = card
+        table.add(decks.PlayerDeck.cards, card)
     end
     table.clean(player.hand)
     
     for _, card in pairs(decks.PlayerDeck.discardCards) do
-        decks.PlayerDeck.cards[#decks.PlayerDeck.cards+1] = card
+        table.add(decks.PlayerDeck.cards, card)
     end
     table.clean(decks.PlayerDeck.discardCards)
 
     for _, slot in pairs(map.slots) do
         if slot.card.deck == decks.PlayerDeck then
-            decks.PlayerDeck.cards[#decks.PlayerDeck.cards+1] = slot.card
+            table.add(decks.PlayerDeck.cards, slot.card)
             slot.card = slot.baseCard
         end
     end

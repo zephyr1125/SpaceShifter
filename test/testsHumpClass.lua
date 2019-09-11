@@ -14,8 +14,8 @@ function testsHumpClass:test2Instances()
     luaunit.assertEquals(garfield.size, .7)
     luaunit.assertEquals(felix.size, .8)
 
-    garfield.elements[#garfield.elements+1] = 'a'
-    felix.elements[#felix.elements+1] = 'b'
+    table.add(garfield.elements, 'a')
+    table.add(felix.elements, 'b')
 
     luaunit.assertEquals(#garfield.elements, 1)
     luaunit.assertEquals(#felix.elements, 1)

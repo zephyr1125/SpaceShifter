@@ -75,7 +75,7 @@ end
 
 local baseDrawPlayingCard = function(self, x, y)
     if(self.playingCard ~= nil) then
-        drawCardAsAction(self.playingCard, x, y)
+        self.playingCard:draw(x,y)
     end
 end
 
@@ -119,7 +119,7 @@ return {
             baseChooseActionSlot(self)
         end,
         pickCard = function(self)
-            self.hand[#self.hand+1] = decks.BansheeDeck:pickCards(1)
+            table.add(self.hand, decks.BansheeDeck:pickCards(1))
         end,
         dropCard = function(self)
             dropFirstHandCard(self)
@@ -151,7 +151,7 @@ return {
             baseChooseActionSlot(self)
         end,
         pickCard = function(self)
-            self.hand[#self.hand+1] = decks.GreedDeck:pickCards(1)
+            table.add(self.hand, decks.GreedDeck:pickCards(1))
         end,
         dropCard = function(self)
             dropFirstHandCard(self)

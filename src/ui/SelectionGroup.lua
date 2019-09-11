@@ -6,7 +6,7 @@ SelectionGroup = class{
 }
 
 function SelectionGroup:add(element)
-    self.elements[#self.elements+1] = element
+    table.add(self.elements, element)
     if #self.elements == 1 then
         element:setSelect(true)
     end

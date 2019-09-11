@@ -12,6 +12,7 @@ function GameScreen:activate()
 end
 
 function GameScreen:update(dt)
+    flux.update(dt)
 end
 
 function GameScreen:draw()

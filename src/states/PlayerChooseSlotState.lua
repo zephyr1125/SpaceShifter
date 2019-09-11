@@ -26,7 +26,7 @@ function PlayerChooseSlotState:enter()
     else
         player.targetSlot = player.playingCard.space.defaultTargetSlot(player, currentEnemy)
     end
-    infoBar:setCardInfo(map.slots[player.targetSlot].card, false)
+    infoBar:setCardInfo(map.slots[player.targetSlot].card)
 end
 
 function PlayerChooseSlotState:draw()
@@ -43,7 +43,7 @@ function PlayerChooseSlotState:keypressed(key)
     end
     
     local playerNeighbours = map:getNeighbours(player.slot)
-    playerNeighbours[#playerNeighbours+1] = player.slot
+    table.add(playerNeighbours, player.slot)
     local next
     if key == keys.DPad_up then
         next = map:getNeighbours(player.targetSlot)[1]
@@ -82,5 +82,5 @@ function PlayerChooseSlotState:keypressed(key)
         return
     end
 
-    infoBar:setCardInfo(map.slots[player.targetSlot].card, false)
+    infoBar:setCardInfo(map.slots[player.targetSlot].card)
 end

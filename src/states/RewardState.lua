@@ -2,11 +2,7 @@ RewardState = {}
 
 local function drawCard(id, card, x, xInterval, y, cardAsAction)
     local cardX = x + (id-1)*xInterval
-    if cardAsAction then
-        drawCardAsAction(card, cardX, y)
-    else
-        drawCardAsSpace(card, cardX, y)
-    end
+    card:draw(cardX, y)
     -- draw selection
     if card.isRewardSelected then
         setColor(white)
@@ -37,7 +33,6 @@ function RewardState:init()
 end
 
 function RewardState:enter()
-    self.showAction = true
     self.currentCardId = 1
     self.isSelectingCard = true
     self.confirmButton:setSelect(false)
@@ -47,7 +42,7 @@ function RewardState:enter()
     end
 
     infoBar:setShowFlipInfo(true)
-    infoBar:setCardInfo(map.slots[self.currentCardId].card, self.showAction)
+    infoBar:setCardInfo(map.slots[self.currentCardId].card)
 end
 
 function RewardState:draw()
@@ -69,12 +64,12 @@ function RewardState:drawRewards(x, y, width)
     local xInterval = (width - cardWidth)/6
     for id, slot in pairs(map.slots) do
         if id ~= self.currentCardId then
-            drawCard(id, slot.baseCard, x, xInterval, y, self.showAction)
+            drawCard(id, slot.baseCard, x, xInterval, y)
         end
     end
     if self.currentCardId ~= 0 then
         drawCard(self.currentCardId, map.slots[self.currentCardId].baseCard,
-                x, xInterval, y+4, self.showAction)
+                x, xInterval, y+4)
     end
 end
 
@@ -82,11 +77,10 @@ function RewardState:confirmSelection()
     for _, slot in pairs(map.slots) do
         if slot.baseCard.isRewardSelected then
             -- selected card into player deck
-            decks.PlayerDeck.cards[#decks.PlayerDeck.cards+1] = slot.baseCard
+            table.add(decks.PlayerDeck.cards, slot.baseCard)
         else 
             -- others into public discard pile
-            decks.PublicDeck.discardCards[#decks.PublicDeck.discardCards +1 ] =
-                slot.baseCard
+            table.add(decks.PublicDeck.discardCards, slot.baseCard)
         end
         slot.baseCard.isRewardSelected = nil
         slot.baseCard = nil
@@ -111,7 +105,9 @@ end
 
 function RewardState:keypressed(key)
     if key == keys.Y then
-        self.showAction = not self.showAction
+        for _, slot in pairs(map.slots) do
+            slot.card:flip()
+        end
     end
 
     if key == keys.DPad_left then
@@ -146,7 +142,7 @@ function RewardState:keypressed(key)
         end
     end
 
-    infoBar:setCardInfo(map.slots[self.currentCardId].card, self.showAction)
+    infoBar:setCardInfo(map.slots[self.currentCardId].card)
     
     self.confirmButton:keypressed(key)
 end

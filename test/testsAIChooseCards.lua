@@ -29,7 +29,7 @@ end
 
 function testsAIChooseCards:testPlayerHandTooMuch_Drop()
     self.me.life = 10
-    self.opponent.hand[#self.opponent.hand+1] = {action = actions.attack1}
+    table.add(self.opponent.hand, {action = actions.attack1})
     luaunit.assertEquals(baseAIChooseCard(self.me, self.opponent), 5)
 end
 

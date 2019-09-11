@@ -10,7 +10,7 @@ end
 
 local function refillDeck(self)
     for _, card in pairs(self.discardCards) do
-        self.cards[#self.cards+1] = card
+        table.add(self.cards, card)
     end
     table.clean(self.discardCards)
     print('refilled deck')
@@ -27,7 +27,7 @@ local function pickCards(self, amount)
         if amount == 1 then
             return card
         else
-            picked[#picked+1] = card
+            table.add(picked, card)
         end
     end
     return picked

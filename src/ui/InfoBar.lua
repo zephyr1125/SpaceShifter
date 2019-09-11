@@ -9,8 +9,8 @@ function InfoBar:setText(text)
     self.text = text
 end
 
-function InfoBar:setCardInfo(card, isAction)
-    if isAction then
+function InfoBar:setCardInfo(card)
+    if card.isShowAction then
         self.text = card.action.info
     else
         self.text = card.space.info

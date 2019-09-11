@@ -25,7 +25,8 @@ logs = {}
 
 class = require('lib.hump.class')
 keys = require('lib.keys')
-tween = require('lib.tween')
+--tween = require('lib.tween')
+flux = require('lib.flux')
 require('src.const')
 require('src.utils')
 
@@ -42,6 +43,7 @@ require('src.assets')
 actions = require('src.entities.Actions')
 spaces =  require('src.entities.Spaces')
 map = require('src.entities.Map')
+require('src.entities.Card')
 
 -- Load Libraries
 local ScreenManager = require('lib.ScreenManager')
