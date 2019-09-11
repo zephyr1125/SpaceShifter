@@ -83,10 +83,12 @@ function ResolutionState.calcDamage()
 
     -- calc damage
     if isPlayerAttackSuccess then
-        currentEnemy.damagePending = player.attack - currentEnemy.defence
+        currentEnemy.damagePending = currentEnemy.damagePending + player.attack
+        currentEnemy.damagePending = currentEnemy.damagePending - currentEnemy.defence
     end
     if isEnemyAttackSuccess then
-        player.damagePending = currentEnemy.attack - player.defence
+        player.damagePending = player.damagePending + currentEnemy.attack
+        player.damagePending = player.damagePending - player.defence
     end
 
     -- trim damage
@@ -126,9 +128,11 @@ function ResolutionState.cleanCards()
         table.add(decks.PlayerDeck.discardCards, player.playingCard)
     end 
     player.playingCard = nil
-    
-    local enemyDeck = decks[currentEnemy.deck]
-    table.add(enemyDeck.discardCards, currentEnemy.playingCar)
+
+    if not currentEnemy.isPlayingSpecialCard then
+        local enemyDeck = decks[currentEnemy.deck]
+        table.add(enemyDeck.discardCards, currentEnemy.playingCard)
+    end
     currentEnemy.playingCard = nil
 end
 

@@ -23,9 +23,9 @@ end
 
 function testsOfUtils:testChooseHandCardHeal()
     local char = {hand = {
-        {action = actions.attack1},
-        {action = actions.heal1},
-        {action = actions.defence1}}}
+        {action = actions.container.attack1},
+        {action = actions.container.heal1},
+        {action = actions.container.defence1}}}
     luaunit.assertEquals(chooseHandCardHeal(char), 2)
 end
 

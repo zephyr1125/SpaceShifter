@@ -5,17 +5,17 @@ function testsAIChooseCards:setUp()
     self.me.life = 2
     self.me.initLife = 10
     self.me.hand = {
-        {action=actions.attack1},
-        {action=actions.heal1},
-        {action=actions.defence1},
-        {action=actions.move},
-        {action=actions.drop1}}
+        {action=actions.container.attack1},
+        {action=actions.container.heal1},
+        {action=actions.container.defence1},
+        {action=actions.container.move},
+        {action=actions.container.drop1}}
     self.me.slot = 1
     
     self.opponent = {}
     self.opponent.slot = 2
-    self.opponent.hand = {{action = actions.attack1},{action = actions.attack1},
-                            {action = actions.attack1}}
+    self.opponent.hand = {{action = actions.container.attack1},{action = actions.container.attack1},
+                            {action = actions.container.attack1}}
     currentEnemy = self.opponent
 end
 
@@ -29,7 +29,7 @@ end
 
 function testsAIChooseCards:testPlayerHandTooMuch_Drop()
     self.me.life = 10
-    table.add(self.opponent.hand, {action = actions.attack1})
+    table.add(self.opponent.hand, {action = actions.container.attack1})
     luaunit.assertEquals(baseAIChooseCard(self.me, self.opponent), 5)
 end
 

@@ -92,16 +92,18 @@ local baseChooseActionSlot = function(self, action)
     self.targetSlot = action.aiTargetSlot(self, player)
 end
 
-return {
+Enemies = class {
     {
         name = 'Banshee',
-        initLife = 0,
+        initLife = 5,
         deck = 'BansheeDeck',
         handSize = 3,
+        specialCard = Card(actions.container.roundAttack),
         init = function(self)
             self.life = self.initLife
             self.slot = 7
             self.hand = decks.BansheeDeck:pickCards(self.handSize)
+            self.specialCounter = 0
         end,
         drawInfo = function(self, x, y)
             baseDrawInfo(self, x, y)
@@ -113,7 +115,16 @@ return {
             baseDrawSprite(self, imgBansheeSprite, mapX, mapY)
         end,
         playCard = function(self)
-            basePlayCard(self)
+            self.isPlayingSpecialCard = false
+            self.specialCounter = self.specialCounter+1
+            if self.specialCounter >= 3 then
+                self.specialCounter = 0
+                self.isPlayingSpecialCard = true
+                self.playingCard = self.specialCard
+                self.playingCardAsAction = true
+            else
+                basePlayCard(self)
+            end
         end,
         chooseActionSlot = function(self)
             baseChooseActionSlot(self)
@@ -158,3 +169,4 @@ return {
         end
     }
 }
+return Enemies

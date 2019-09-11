@@ -1,19 +1,3 @@
-local function drawCardAsAction(self, x, y)
-    setColor(cardActionColor)
-    love.graphics.rectangle('fill', x+self.tweenWidth/2, y,
-            cardWidth-self.tweenWidth, cardHeight)
-    setColor(white)
-    love.graphics.printf(self.action.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
-end
-
-local function drawCardAsSpace(self, x, y)
-    setColor(cardSpaceColor)
-    love.graphics.rectangle('fill', x+self.tweenWidth/2, y,
-            cardWidth-self.tweenWidth, cardHeight)
-    setColor(white)
-    love.graphics.printf(self.space.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
-end
-
 Card = class{}
 
 function Card:init(action, space)
@@ -26,10 +10,26 @@ end
 
 function Card:draw(x, y)
     if self.isShowAction then
-        drawCardAsAction(self, x, y)
+        self:drawCardAsAction(x, y)
     else
-        drawCardAsSpace(self, x, y)
+        self:drawCardAsSpace(x, y)
     end
+end
+
+function Card:drawCardAsAction(x, y)
+    setColor(cardActionColor)
+    love.graphics.rectangle('fill', x+self.tweenWidth/2, y,
+            cardWidth-self.tweenWidth, cardHeight)
+    setColor(white)
+    love.graphics.printf(self.action.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
+end
+
+function Card:drawCardAsSpace(x, y)
+    setColor(cardSpaceColor)
+    love.graphics.rectangle('fill', x+self.tweenWidth/2, y,
+            cardWidth-self.tweenWidth, cardHeight)
+    setColor(white)
+    love.graphics.printf(self.space.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
 end
 
 function Card:flip(caller, onFliped)

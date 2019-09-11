@@ -9,7 +9,9 @@ love = require 'mock.mocklove'
 require('src.utils')
 require('src.states.ResolutionState')
 require('src.states.UpkeepState')
+require('src.ui.SelectionGroup')
 
+require('src.entities.Card')
 decks = require('src.entities.Decks')
 actions = require('src.entities.Actions')
 spaces =  require('src.entities.Spaces')
@@ -30,7 +32,7 @@ require('testsPlaySpace')
 require('testsDiscardCardState')
 require('testsAIChooseCards')
 require('testsUpkeepState')
+require('testsBanshee')
 
-require('src.ui.SelectionGroup')
 
 os.exit( luaunit.LuaUnit.run() )

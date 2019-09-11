@@ -5,21 +5,15 @@ function testsFillAllDecks:setUp()
 end
 
 function testsFillAllDecks:tearDown()
-    for _, deck in pairs(decks) do
-        deck.cards = nil
-    end
+    decks.PublicDeck.cards = nil
 end
 
 function testsFillAllDecks:testAllDecksExecuted()
     fillAllDecks()
-    for _, deck in pairs(decks) do
-        luaunit.assertNotIsNil(deck.cards)
-    end
+    luaunit.assertNotIsNil(decks.PublicDeck)
 end
 
 function testsFillAllDecks:testCreateAllCards()
     fillAllDecks()
-    for _, deck in pairs(decks) do
-        luaunit.assertEquals(#deck.cards, deck.size)
-    end
+    luaunit.assertEquals(#decks.PublicDeck.cards, decks.PublicDeck.size)
 end

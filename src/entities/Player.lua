@@ -4,7 +4,7 @@ local function drawHandCard(id, card, handX, xInterval, handY, width)
     card:draw(cardX, handY)
 end
 
-return {
+local Player = {
     initLife = 5,
     life = 5,
     deck = 'PlayerDeck',
@@ -87,3 +87,4 @@ return {
         dropFirstHandCard(self)
     end
 }
+return Player

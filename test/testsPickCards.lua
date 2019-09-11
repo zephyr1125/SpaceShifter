@@ -5,9 +5,7 @@ function testsPickCards:setUp()
 end
 
 function testsPickCards:tearDown()
-    for _, deck in pairs(decks) do
-        deck.cards = nil
-    end
+    decks.PublicDeck.cards = nil
 end
 
 function testsPickCards:testPickPublicDeckCards()

@@ -27,8 +27,8 @@ function createRandomCard(scoreRange)
     --random action and space
     local action, space, totalScore
     repeat
-        action = randomElement(actions)
-        space = randomElement(spaces)
+        action = randomElement(actions.container)
+        space = randomElement(spaces.container)
         totalScore = action.score + space.score
     until totalScore >= scoreRange[1] and totalScore <= scoreRange[2]
     
@@ -37,12 +37,17 @@ function createRandomCard(scoreRange)
 end
 
 function fillAllDecks()
-    for _, deck in pairs(decks) do
-        deck.cards = {}
-        for i = 1, deck.size do
-            deck.cards[i] = createRandomCard(deck.scoreRange)
-            deck.cards[i].deck = deck
-        end
+    fillDeck(decks.PublicDeck)
+    fillDeck(decks.PlayerDeck)
+    fillDeck(decks.BansheeDeck)
+    fillDeck(decks.GreedDeck)
+end
+
+function fillDeck(deck)
+    deck.cards = {}
+    for i = 1, deck.size do
+        deck.cards[i] = createRandomCard(deck.scoreRange)
+        deck.cards[i].deck = deck
     end
 end
 

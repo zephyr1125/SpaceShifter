@@ -34,7 +34,7 @@ local function pickCards(self, amount)
     return picked
 end
 
-return {
+local Decks = class {
     PublicDeck = {
         size = 40,
         scoreRange = {3,10},
@@ -80,3 +80,5 @@ return {
         end
     }
 }
+
+return Decks

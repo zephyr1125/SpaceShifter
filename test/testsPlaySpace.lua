@@ -1,13 +1,13 @@
 testsPlaySpace = {}
 
 function testsPlaySpace:setUp()
-    map.slots[1].card = {space = spaces['plain']}
+    map.slots[1].card = {space = spaces.container['plain']}
     map.slots[1].card.deck = decks.PlayerDeck
-    player.playingCard = {space = spaces['mountain']}
+    player.playingCard = {space = spaces.container['mountain']}
     player.playingCardAsAction = false
     player.targetSlot = 1
     
-    currentEnemy.playingCard = {action = actions.move}
+    currentEnemy.playingCard = {action = actions.container.move}
 end
 
 function testsPlaySpace:tearDown()

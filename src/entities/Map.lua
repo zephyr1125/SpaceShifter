@@ -1,4 +1,4 @@
-return {
+local Map = class {
     slots = {
         {
             neighbours = {0, 2, 7, 6, 0, 0},
@@ -121,3 +121,4 @@ return {
         self.slots[slot].card = newCard
     end
 }
+return Map
