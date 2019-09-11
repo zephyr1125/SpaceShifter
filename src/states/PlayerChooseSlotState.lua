@@ -26,6 +26,7 @@ function PlayerChooseSlotState:enter()
     else
         player.targetSlot = player.playingCard.space.defaultTargetSlot(player, currentEnemy)
     end
+    infoBar:setCardInfo(map.slots[player.targetSlot].card, false)
 end
 
 function PlayerChooseSlotState:draw()
@@ -38,6 +39,7 @@ end
 function PlayerChooseSlotState:keypressed(key)
     if key == keys.B then
         GameState.switch(PlayerPlayCardState)
+        return
     end
     
     local playerNeighbours = map:getNeighbours(player.slot)
@@ -77,5 +79,8 @@ function PlayerChooseSlotState:keypressed(key)
 
     if key == keys.A then
         GameState.switch(ResolutionState)
+        return
     end
+
+    infoBar:setCardInfo(map.slots[player.targetSlot].card, false)
 end

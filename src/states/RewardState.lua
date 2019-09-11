@@ -28,7 +28,11 @@ function RewardState:init()
     self.confirmButton = Button('Confirm', buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
                 self:confirmSelection()
-                GameState.switch(DiscardCardState)
+                if #decks.PlayerDeck.cards > decks.PlayerDeck.size then
+                    GameState.switch(DiscardCardState)
+                else
+                    GameState.switch(NextEnemyState)
+                end
             end)
 end
 
@@ -40,6 +44,8 @@ function RewardState:enter()
     for _, slot in pairs(map.slots) do
         slot.baseCard.isRewardSelected = false
     end
+    
+    infoBar:setCardInfo(map.slots[self.currentCardId].card, self.showAction)
 end
 
 function RewardState:draw()
@@ -53,6 +59,8 @@ function RewardState:draw()
     self:drawRewards(32, 96, screenWidth-64)
 
     self.confirmButton:draw((screenWidth-buttonWidth)/2, 96 + 64 + 16)
+    
+    infoBar:draw(infoBarX, infoBarY)
 end
 
 function RewardState:drawRewards(x, y, width)
@@ -135,6 +143,8 @@ function RewardState:keypressed(key)
             currentCard.isRewardSelected = not selected
         end
     end
+
+    infoBar:setCardInfo(map.slots[self.currentCardId].card, self.showAction)
     
     self.confirmButton:keypressed(key)
 end

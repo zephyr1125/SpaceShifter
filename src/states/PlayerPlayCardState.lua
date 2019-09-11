@@ -38,13 +38,15 @@ local function noTipsKeyPressed(self, key)
     if key == keys.Y then
         player.cardAsAction = not player.cardAsAction
     end
-
+    
     if key == keys.A then
         local needChooseSlot = player:playCard()
         if needChooseSlot then
             GameState.switch(PlayerChooseSlotState)
+            return
         else
             GameState.switch(ResolutionState)
+            return
         end
     end
 
