@@ -31,6 +31,7 @@ function ResolutionState:playSprites(playerAction, enemyAction)
             self.playerSprite:stop()
             self.isPlayerActionSpriteDone = true
         end)
+        playerAction.sound:play()
     end
 end
 

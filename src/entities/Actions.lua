@@ -19,6 +19,7 @@ local Actions = class {
             needChooseSlot = true,
             type = {'attack'},
             sprite = spriteAttack1,
+            sound = soundHit1,
             effect = function(me, opponent)
                 me.attack = me.attack + 1
                 -- space affect attack

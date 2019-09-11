@@ -15,4 +15,5 @@ function InitAssets()
     spriteAttack1 = peachy.new("assets/sprites/attack1.json",
             love.graphics.newImage("assets/sprites/attack1.png"), 'effect')
     spriteAttack1:stop()
+    soundHit1 = love.audio.newSource("assets/sounds/hit01.wav", "static")
 end
