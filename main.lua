@@ -25,7 +25,6 @@ logs = {}
 
 class = require('lib.hump.class')
 keys = require('lib.keys')
---tween = require('lib.tween')
 flux = require('lib.flux')
 require('src.const')
 require('src.utils')
