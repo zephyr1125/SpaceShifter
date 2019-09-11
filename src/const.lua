@@ -8,10 +8,13 @@ buttonWidth = 128
 buttonHeight = 18
 
 mapX = 46
-mapY = 56
+mapY = 60
 
 mapSlotWidth = 97
 mapSlotHeight = 31
+
+enemyCardX = 136
+enemyCardY = 4
 
 infoBarWidth = 312
 

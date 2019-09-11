@@ -23,8 +23,8 @@ function GameScreen:draw()
     player:drawHand(72, 160, 200)
     player:drawInfo(4, 160)
     if currentEnemy ~= nil then
-        currentEnemy:drawInfo(screenWidth-2-cardWidth, 2)
-        currentEnemy:drawPlayingCard(216, 2)
+        currentEnemy:drawInfo(screenWidth-2-cardWidth, 4)
+        currentEnemy:drawPlayingCard(enemyCardX, enemyCardY)
     end
     infoBar:draw(4, 216)
     drawFPS()

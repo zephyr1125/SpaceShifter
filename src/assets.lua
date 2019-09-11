@@ -9,4 +9,5 @@ function InitAssets()
     imgDiscardSelect = love.graphics.newImage('assets/images/discard_select.png')
     imgBansheeSprite = love.graphics.newImage('assets/images/banshee.png')
     imgGreedSprite = love.graphics.newImage('assets/images/greed.png')
+    imgTipCursor = love.graphics.newImage('assets/images/tip_cursor.png')
 end
