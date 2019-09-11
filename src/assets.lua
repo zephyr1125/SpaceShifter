@@ -10,4 +10,5 @@ function InitAssets()
     imgBansheeSprite = love.graphics.newImage('assets/images/banshee.png')
     imgGreedSprite = love.graphics.newImage('assets/images/greed.png')
     imgTipCursor = love.graphics.newImage('assets/images/tip_cursor.png')
+    imgButtonY = love.graphics.newImage('assets/images/button_y.png')
 end

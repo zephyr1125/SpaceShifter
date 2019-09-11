@@ -1,8 +1,4 @@
 local function drawDeck(cards, x, y, drawTopDeck)
-
-    setColor({136, 151, 166})
-    love.graphics.rectangle('line', x, y, cardWidth, cardHeight)
-
     if #cards > 0 and drawTopDeck ~= nil then
         drawTopDeck(cards[#cards], x, y)
     end

@@ -2,6 +2,7 @@ local InfoBar = class {}
 
 function InfoBar:init(width)
     self.width = width
+    self.isShowFlipInfo = false
 end
 
 function InfoBar:setText(text)
@@ -16,9 +17,22 @@ function InfoBar:setCardInfo(card, isAction)
     end
 end
 
+function InfoBar:setShowFlipInfo(isShowFlipInfo)
+    self.isShowFlipInfo = isShowFlipInfo
+end
+
 function InfoBar:draw(x, y)
     setColor(infoBarBgColor)
     love.graphics.rectangle('fill', x, y, self.width, 20)
+    
+    -- button y flip card
+    if self.isShowFlipInfo then
+        setColor(white)
+        love.graphics.draw(imgButtonY, x+246, y+4)
+        setColor(infoBarFlipInfoColor)
+        love.graphics.print('卡牌翻面', x+258, y+4)
+    end
+    
     
     if self.text == nil then return end
     setColor(infoBarTextColor)

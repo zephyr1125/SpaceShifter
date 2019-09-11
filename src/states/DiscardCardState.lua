@@ -41,6 +41,9 @@ function DiscardCardState:enter()
     for _, card in pairs(decks.PlayerDeck.cards) do
         card.isDiscardSelected = false
     end
+    
+    infoBar:setShowFlipInfo(true)
+    infoBar:setCardInfo(decks.PlayerDeck.cards[self.currentCardId], self.showAction)
 end
 
 function DiscardCardState:draw()
@@ -51,9 +54,11 @@ function DiscardCardState:draw()
     love.graphics.printf('弃牌直至你的牌库为12张', 0, 4, screenWidth, 'center')
 
     setColor(white)
-    self:drawPlayerDeck(screenWidth/2, 24, 4, 4)
+    self:drawPlayerDeck(screenWidth/2, 22, 4, 4)
 
-    self.confirmButton:draw((screenWidth-buttonWidth)/2, screenHeight - 8 - buttonHeight)
+    self.confirmButton:draw((screenWidth-buttonWidth)/2, screenHeight - 28 - buttonHeight)
+
+    infoBar:draw(infoBarX, infoBarY)
 end
 
 function DiscardCardState:drawPlayerDeck(x, y, xInterval, yInterval)
@@ -156,6 +161,8 @@ function DiscardCardState:keypressed(key)
             currentCard.isDiscardSelected = not selected
         end
     end
+
+    infoBar:setCardInfo(decks.PlayerDeck.cards[self.currentCardId], self.showAction)
 
     self.confirmButton:keypressed(key)
 end

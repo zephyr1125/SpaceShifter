@@ -2,17 +2,20 @@ local noTips, mapTips, enemyTips = 1,2,3
 
 local function enterNoTips(self)
     self.tipsStatus = noTips
+    infoBar:setShowFlipInfo(true)
     infoBar:setCardInfo(player.hand[player.currentCardId], player.cardAsAction)
 end
 
 local function enterMapTips(self, isFromBottom)
     self.tipsStatus = mapTips
     self.mapTipSlot = isFromBottom and 5 or 2
+    infoBar:setShowFlipInfo(false)
     infoBar:setCardInfo(map.slots[self.mapTipSlot].card, false)
 end
 
 local function enterEnemyTips(self)
     self.tipsStatus = enemyTips
+    infoBar:setShowFlipInfo(false)
     infoBar:setCardInfo(currentEnemy.playingCard, true)
 end
 

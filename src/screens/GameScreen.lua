@@ -47,7 +47,7 @@ end
 
 function GameScreen:drawDecks()
     decks.PublicDeck:draw(4, 4)
-    decks.PlayerDeck:draw(280, 162)
+    decks.PlayerDeck:draw(276, 160)
 end
 
 return GameScreen

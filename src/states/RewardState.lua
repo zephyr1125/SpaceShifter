@@ -45,7 +45,8 @@ function RewardState:enter()
     for _, slot in pairs(map.slots) do
         slot.baseCard.isRewardSelected = false
     end
-    
+
+    infoBar:setShowFlipInfo(true)
     infoBar:setCardInfo(map.slots[self.currentCardId].card, self.showAction)
 end
 

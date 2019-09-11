@@ -32,5 +32,6 @@ enemyInfoBgColor = {150,85,86}
 windowColor = {163,154,137}
 infoBarBgColor = {240,234,216}
 infoBarTextColor = {119,119,119}
+infoBarFlipInfoColor = {87,152,250}
 
 fontSize = 12
