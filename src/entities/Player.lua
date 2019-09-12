@@ -12,6 +12,7 @@ local Player = {
     rewardSize = 3,
     spriteWidth = 16,
     spriteHeight = 18,
+    isShaking = false,
     init = function(self)
         self.life = self.initLife
         self.slot = 1
@@ -45,8 +46,12 @@ local Player = {
         end
     end,
     drawSprite = function(self, mapX, mapY)
+        local shakeX = 0
+        if self.isShaking then
+            shakeX = love.math.random(-2, 2)
+        end
         setColor(white)
-        spritePlayer:draw(mapX + self.x, mapY + self.y)
+        spritePlayer:draw(mapX + self.x + shakeX, mapY + self.y)
     end,
     update = function(self, dt)
         spritePlayer:update(dt)

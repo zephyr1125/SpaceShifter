@@ -13,6 +13,7 @@ end
 
 function GameScreen:update(dt)
     player:update(dt)
+    timer.update(dt)
     flux.update(dt)
 end
 

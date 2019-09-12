@@ -24,6 +24,7 @@ logs = {}
 --end
 
 class = require('lib.hump.class')
+timer = require('lib.hump.timer')
 keys = require('lib.keys')
 flux = require('lib.flux')
 peachy = require('lib.peachy')

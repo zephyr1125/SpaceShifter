@@ -80,9 +80,12 @@ local baseDrawPlayingCard = function(self, x, y)
 end
 
 local baseDrawSprite = function(self, imageSprite, mapX, mapY)
+    local shakeX = 0
+    if self.isShaking then
+        shakeX = love.math.random(-2, 2)
+    end
     setColor(black)
-    love.graphics.draw(imageSprite,
-            mapX + self.x, mapY + self.y)
+    love.graphics.draw(imageSprite, mapX + self.x + shakeX, mapY + self.y)
 end
 
 local baseChooseActionSlot = function(self, action)
@@ -97,6 +100,7 @@ Enemies = class {
         handSize = 3,
         spriteWidth = 42,
         spriteHeight = 44,
+        isShaking = false,
         specialCard = Card(actions.container.roundAttack),
         init = function(self)
             self.life = self.initLife
@@ -143,6 +147,7 @@ Enemies = class {
         handSize = 3,
         spriteWidth = 56,
         spriteHeight = 32,
+        isShaking = false,
         init = function(self)
             self.life = self.initLife
             self.slot = 7

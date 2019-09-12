@@ -10,5 +10,6 @@ function InitAssets()
     imgButtonY = love.graphics.newImage('assets/images/button_y.png')
     spritePlayer = peachy.new("assets/sprites/oldHero.json",
             love.graphics.newImage("assets/sprites/oldHero.png"), 'run')
+    spriteDefence = {'assets/sprites/shield.json','assets/sprites/shield.png', 'effect'}
     soundHit1 = love.audio.newSource("assets/sounds/hit01.wav", "static")
 end

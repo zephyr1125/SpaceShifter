@@ -16,6 +16,8 @@ function ResolutionState:enter()
     self.onAttack()
     self.extraDefence()
     self.calcDamage()
+    self:playDefence()
+    self:playDamage()
     self.changeSpace()
     
     self.cleanCards()
@@ -60,6 +62,12 @@ function ResolutionState:draw()
     if self.enemyFX ~= nil and not self.isEnemyFXDone then
         self:drawFX(currentEnemy, self.enemyFX)
     end
+    if self.playerDefenceFX ~= nil and not self.isPlayerDefenceFXDone then
+        self:drawDefenceFX(player, self.playerDefenceFX)
+    end
+    if self.enemyDefenceFX ~= nil and not self.isEnemyDefenceFXDone then
+        self:drawDefenceFX(currentEnemy, self.enemyDefenceFX)
+    end
 end
 
 function ResolutionState:drawFX(char, spriteFX)
@@ -74,6 +82,13 @@ function ResolutionState:drawFX(char, spriteFX)
     spriteFX:draw(spriteX, spriteY)
 end
 
+function ResolutionState:drawDefenceFX(char, spriteDefenceFX)
+    local spriteX, spriteY
+    spriteX = mapX + map.slots[char.slot].x + mapSlotWidth/2 - spriteDefenceFX:getWidth()/2
+    spriteY = mapY + map.slots[char.slot].y + 4 - spriteDefenceFX:getHeight()/2
+    spriteDefenceFX:draw(spriteX, spriteY)
+end
+
 function ResolutionState:update(dt)
     if self.playerFX ~= nil then
         self.playerFX:update(dt)
@@ -81,12 +96,19 @@ function ResolutionState:update(dt)
     if self.enemyFX ~= nil then
         self.enemyFX:update(dt)
     end
+    if self.playerDefenceFX ~= nil then
+        self.playerDefenceFX:update(dt)
+    end
+    if self.enemyDefenceFX ~= nil then
+        self.enemyDefenceFX:update(dt)
+    end
     self:done()
 end
 
 function ResolutionState:done()
     if self.isPlayerFXDone and self.isEnemyFXDone and
-            self.isPlayerMoveDone and self.isEnemyMoveDone
+            self.isPlayerMoveDone and self.isEnemyMoveDone and
+            self.isPlayerDefenceFXDone and self.isEnemyDefenceFXDone
     then
         -- next state
         GameState.switch(LifeCheckState)
@@ -190,6 +212,47 @@ function ResolutionState.calcDamage()
     player.life = player.life - player.damagePending
 end
 
+function ResolutionState:playDamage()
+    if player.damagePending > 0 then
+        player.isShaking = true
+        timer.after(0.25, function() player.isShaking = false end)
+    end
+    if currentEnemy.damagePending > 0 then
+        currentEnemy.isShaking = true
+        timer.after(0.25, function() currentEnemy.isShaking = false end)
+    end
+end
+
+function ResolutionState:playDefence()
+    if player.defence>0 then
+        if self.playerDefenceFX == nil then
+            self.playerDefenceFX = peachy.new(spriteDefence[1],
+                    love.graphics.newImage(spriteDefence[2]), spriteDefence[3])
+        end
+        self.playerDefenceFX:play()
+        self.playerDefenceFX:onLoop(function()
+            self.playerDefenceFX:stop()
+            self.isPlayerDefenceFXDone = true
+        end)
+    else
+        self.isPlayerDefenceFXDone = true
+    end
+
+    if currentEnemy.defence>0 then
+        if self.enemyDefenceFX == nil then
+            self.enemyDefenceFX = peachy.new(spriteDefence[1],
+                    love.graphics.newImage(spriteDefence[2]), spriteDefence[3])
+        end
+        self.enemyDefenceFX:play()
+        self.enemyDefenceFX:onLoop(function()
+            self.enemyDefenceFX:stop()
+            self.isEnemyDefenceFXDone = true
+        end)
+    else
+        self.isEnemyDefenceFXDone = true
+    end
+end
+
 function ResolutionState.changeSpace()
     local enemyChangeSpace = currentEnemy.playingCard.action.onChangeSpace
     if enemyChangeSpace ~= nil then
@@ -229,4 +292,7 @@ function ResolutionState:reset()
     
     self.isPlayerMoveDone = false
     self.isEnemyMoveDone = false
+    
+    self.isPlayerDefenceFXDone = false
+    self.isEnemyDefenceFXDone = false
 end
