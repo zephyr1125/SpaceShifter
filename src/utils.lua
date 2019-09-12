@@ -160,3 +160,20 @@ function sortDeck(deck)
         return e1.action.score+e1.space.score < e2.action.score+e2.space.score
     end)
 end
+
+-- moveMode: 'instant', 'fly', 'hit'
+function charMove(char, newSlot, moveMode, onComplete)
+    local newX = map.slots[newSlot].x
+            + math.floor(mapSlotWidth/2) - char.spriteWidth/2
+    local newY = map.slots[newSlot].y
+            + math.floor(mapSlotHeight/2) - char.spriteHeight
+    if moveMode == 'instant' then
+        char.x = newX
+        char.y = newY
+        if onComplete ~= nil then onComplete() end
+    elseif moveMode == 'fly' then
+        flux.to(char, 0.5, {x=newX, y=newY}):ease('quintout'):oncomplete(onComplete)
+    elseif moveMode == 'hit' then
+        flux.to(char, 0.25, {x=newX, y=newY}):ease('quintout'):oncomplete(onComplete)
+    end
+end

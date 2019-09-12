@@ -98,10 +98,13 @@ Enemies = class {
         initLife = 5,
         deck = 'BansheeDeck',
         handSize = 3,
+        spriteWidth = 42,
+        spriteHeight = 44,
         specialCard = Card(actions.container.roundAttack),
         init = function(self)
             self.life = self.initLife
             self.slot = 7
+            charMove(self, self.slot, 'instant')
             self.hand = decks.BansheeDeck:pickCards(self.handSize)
             self.specialCounter = 0
         end,
@@ -141,9 +144,12 @@ Enemies = class {
         initLife = 7,
         deck = 'GreedDeck',
         handSize = 3,
+        spriteWidth = 56,
+        spriteHeight = 32,
         init = function(self)
             self.life = self.initLife
             self.slot = 7
+            charMove(self, self.slot, 'instant')
             self.hand = decks.GreedDeck:pickCards(self.handSize)
         end,
         drawInfo = function(self, x, y)

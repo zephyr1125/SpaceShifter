@@ -11,9 +11,12 @@ local Player = {
     handSize = 3,
     rewardSize = 3,
     cardAsAction = true,
+    spriteWidth = 16,
+    spriteHeight = 18,
     init = function(self)
         self.life = self.initLife
         self.slot = 1
+        charMove(self, 1, 'instant')
         self.hand = decks.PlayerDeck:pickCards(self.handSize)
         self.currentCardId = #self.hand
     end,
@@ -43,10 +46,7 @@ local Player = {
         end
     end,
     drawSprite = function(self, mapX, mapY)
-        spritePlayer:draw(mapX + map.slots[self.slot].x
-                + math.floor(mapSlotWidth/2) - playerSpriteWidth/2,
-                mapY + map.slots[self.slot].y
-                        + math.floor(mapSlotHeight/2) - playerSpriteHeight)
+        spritePlayer:draw(mapX + self.x, mapY + self.y)
     end,
     update = function(self, dt)
         spritePlayer:update(dt)

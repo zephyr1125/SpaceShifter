@@ -38,7 +38,7 @@
  ],
  "meta": {
   "app": "http://www.aseprite.org/",
-  "version": "1.2.14-x64",
+  "version": "1.2.15-x64",
   "image": "attack1.png",
   "format": "RGBA8888",
   "size": { "w": 192, "h": 24 },

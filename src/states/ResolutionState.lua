@@ -8,10 +8,10 @@ function ResolutionState:enter()
     local enemyAction = currentEnemy.playingCard.action
     local enemySpace = currentEnemy.playingCard.space
     
-    self:playSprites(playerAction, enemyAction)
+    self:playFX(playerAction, enemyAction)
 
     -- both move first
-    self.move(playerAction, enemyAction)
+    self:move(playerAction, enemyAction)
     self.cardsEffect(playerAction, enemyAction)
     self.onAttack()
     self.extraDefence()
@@ -19,54 +19,84 @@ function ResolutionState:enter()
     self.changeSpace()
     
     self.cleanCards()
-    -- next state
-    --GameState.switch(LifeCheckState)
 end
 
-function ResolutionState:playSprites(playerAction, enemyAction)
-    self.playerSprite = playerAction.sprite
-    if self.playerSprite ~= nil then
-        self.playerSprite:play()
-        self.playerSprite:onLoop(function()
-            self.playerSprite:stop()
-            self.isPlayerActionSpriteDone = true
+function ResolutionState:playFX(playerAction, enemyAction)
+    self.playerFX = playerAction.sprite
+    if self.playerFX ~= nil then
+        self.playerFX:play()
+        self.playerFX:onLoop(function()
+            self.playerFX:stop()
+            self.isPlayerFXDone = true
         end)
+    end
+    if playerAction.sound ~= nil then
         playerAction.sound:play()
+    end
+
+    self.enemyFX = enemyAction.sprite
+    if self.enemyFX ~= nil then
+        self.enemyFX:play()
+        self.enemyFX:onLoop(function()
+            self.enemyFX:stop()
+            self.isEnemyFXDone = true
+        end)
+    end
+    if enemyAction.sound ~= nil then
+        enemyAction.sound:play()
     end
 end
 
 function ResolutionState:draw()
-    if self.playerSprite ~= nil and not self.isPlayerActionSpriteDone then
+    if self.playerFX ~= nil and not self.isPlayerFXDone then
         local spriteX, spriteY, drawSlot
         if player.targetSlot == 0 then
             drawSlot = player.slot
         else
             drawSlot = player.targetSlot
         end
-        spriteX = mapX + map.slots[drawSlot].x + mapSlotWidth/2 - self.playerSprite:getWidth()/2
-        spriteY = mapY + map.slots[drawSlot].y + 4 - self.playerSprite:getHeight()/2
-        self.playerSprite:draw(spriteX, spriteY)
+        spriteX = mapX + map.slots[drawSlot].x + mapSlotWidth/2 - self.playerFX:getWidth()/2
+        spriteY = mapY + map.slots[drawSlot].y + 4 - self.playerFX:getHeight()/2
+        self.playerFX:draw(spriteX, spriteY)
     end
 end
 
 function ResolutionState:update(dt)
-    if self.playerSprite ~= nil then
-        self.playerSprite:update(dt)
+    if self.playerFX ~= nil then
+        self.playerFX:update(dt)
+    end
+    self:done()
+end
+
+function ResolutionState:done()
+    if self.isPlayerFXDone and self.isEnemyFXDone and
+            self.isPlayerMoveDone and self.isEnemyMoveDone
+    then
+        -- next state
+        GameState.switch(LifeCheckState)
     end
 end
 
-function ResolutionState.move(playerAction, enemyAction)
+function ResolutionState:move(playerAction, enemyAction)
     -- if they are moving to same slot, stop both
     if currentEnemy.playingCardAsAction and enemyAction.move ~= nil and
             player.playingCardAsAction and playerAction.move ~= nil and
             currentEnemy.targetSlot == player.targetSlot then
-        -- todo play some collide animation
+        -- todo play some collide animation then set move done
     else
         if currentEnemy.playingCardAsAction and enemyAction.move ~= nil then
-            enemyAction.move(currentEnemy)
+            enemyAction.move(currentEnemy, function()
+                    self.isEnemyMoveDone = true
+            end)
+        else
+            self.isEnemyMoveDone = true
         end
         if player.playingCardAsAction and playerAction.move ~= nil then
-            playerAction.move(player)
+            playerAction.move(player, function()
+                    self.isPlayerMoveDone = true
+            end)
+        else
+            self.isPlayerMoveDone = true
         end
     end
 end
@@ -178,6 +208,9 @@ function ResolutionState:reset()
     player.damagePending = 0
     currentEnemy.damagePending = 0
     
-    self.isPlayerActionSpriteDone = false
-    self.isEnemyActionSpriteDone = false
+    self.isPlayerFXDone = false
+    self.isEnemyFXDone = false
+    
+    self.isPlayerMoveDone = false
+    self.isEnemyMoveDone = false
 end

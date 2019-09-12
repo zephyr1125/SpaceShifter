@@ -10,8 +10,6 @@ function InitAssets()
     imgButtonY = love.graphics.newImage('assets/images/button_y.png')
     spritePlayer = peachy.new("assets/sprites/oldHero.json",
             love.graphics.newImage("assets/sprites/oldHero.png"), 'run')
-    playerSpriteWidth = 16
-    playerSpriteHeight = 18
     spriteAttack1 = peachy.new("assets/sprites/attack1.json",
             love.graphics.newImage("assets/sprites/attack1.png"), 'effect')
     spriteAttack1:stop()

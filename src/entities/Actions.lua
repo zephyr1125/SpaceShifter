@@ -312,8 +312,8 @@ local Actions = class {
             score = 1,
             needChooseSlot = true,
             type = {'move'},
-            move = function(me)
-                me.slot = me.targetSlot
+            move = function(me, onComplete)
+                charMove(me, me.targetSlot, 'fly', onComplete)
             end,
             getExceptSlot = function(me, opponent)
                 -- cant move to enemy slot
