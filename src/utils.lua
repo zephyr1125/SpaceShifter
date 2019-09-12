@@ -163,6 +163,8 @@ end
 
 -- moveMode: 'instant', 'fly', 'hit'
 function charMove(char, newSlot, moveMode, onComplete)
+    char.slot = newSlot
+    
     local newX = map.slots[newSlot].x
             + math.floor(mapSlotWidth/2) - char.spriteWidth/2
     local newY = map.slots[newSlot].y
@@ -176,4 +178,33 @@ function charMove(char, newSlot, moveMode, onComplete)
     elseif moveMode == 'hit' then
         flux.to(char, 0.25, {x=newX, y=newY}):ease('quintout'):oncomplete(onComplete)
     end
+end
+
+function shallowcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in pairs(orig) do
+            copy[orig_key] = orig_value
+        end
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
+end
+
+function deepcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in next, orig, nil do
+            copy[deepcopy(orig_key)] = deepcopy(orig_value)
+        end
+        setmetatable(copy, deepcopy(getmetatable(orig)))
+    else -- number, string, boolean, etc
+        copy = orig
+    end
+    return copy
 end

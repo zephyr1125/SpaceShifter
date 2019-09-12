@@ -22,25 +22,31 @@ function ResolutionState:enter()
 end
 
 function ResolutionState:playFX(playerAction, enemyAction)
-    self.playerFX = playerAction.sprite
-    if self.playerFX ~= nil then
+    if playerAction.sprite ~= nil then
+        self.playerFX = peachy.new(playerAction.sprite[1],
+            love.graphics.newImage(playerAction.sprite[2]), playerAction.sprite[3])
         self.playerFX:play()
         self.playerFX:onLoop(function()
             self.playerFX:stop()
             self.isPlayerFXDone = true
         end)
+    else
+        self.isPlayerFXDone = true
     end
     if playerAction.sound ~= nil then
         playerAction.sound:play()
     end
 
-    self.enemyFX = enemyAction.sprite
-    if self.enemyFX ~= nil then
+    if enemyAction.sprite ~= nil then
+        self.enemyFX = peachy.new(enemyAction.sprite[1],
+            love.graphics.newImage(enemyAction.sprite[2]), enemyAction.sprite[3])
         self.enemyFX:play()
         self.enemyFX:onLoop(function()
             self.enemyFX:stop()
             self.isEnemyFXDone = true
         end)
+    else
+        self.isEnemyFXDone = true
     end
     if enemyAction.sound ~= nil then
         enemyAction.sound:play()
@@ -49,21 +55,31 @@ end
 
 function ResolutionState:draw()
     if self.playerFX ~= nil and not self.isPlayerFXDone then
-        local spriteX, spriteY, drawSlot
-        if player.targetSlot == 0 then
-            drawSlot = player.slot
-        else
-            drawSlot = player.targetSlot
-        end
-        spriteX = mapX + map.slots[drawSlot].x + mapSlotWidth/2 - self.playerFX:getWidth()/2
-        spriteY = mapY + map.slots[drawSlot].y + 4 - self.playerFX:getHeight()/2
-        self.playerFX:draw(spriteX, spriteY)
+        self:drawFX(player, self.playerFX)
     end
+    if self.enemyFX ~= nil and not self.isEnemyFXDone then
+        self:drawFX(currentEnemy, self.enemyFX)
+    end
+end
+
+function ResolutionState:drawFX(char, spriteFX)
+    local spriteX, spriteY, drawSlot
+    if char.targetSlot == 0 then
+        drawSlot = char.slot
+    else
+        drawSlot = char.targetSlot
+    end
+    spriteX = mapX + map.slots[drawSlot].x + mapSlotWidth/2 - spriteFX:getWidth()/2
+    spriteY = mapY + map.slots[drawSlot].y + 4 - spriteFX:getHeight()/2
+    spriteFX:draw(spriteX, spriteY)
 end
 
 function ResolutionState:update(dt)
     if self.playerFX ~= nil then
         self.playerFX:update(dt)
+    end
+    if self.enemyFX ~= nil then
+        self.enemyFX:update(dt)
     end
     self:done()
 end

@@ -41,6 +41,7 @@ local Map = class {
         -- pick space cards to slots
         for i, slot in pairs(self.slots) do
             local card = decks.PublicDeck:pickCards(1)
+            card.isShowAction = false
             self.slots[i].baseCard = card
             self.slots[i].card = card
         end

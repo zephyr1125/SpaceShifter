@@ -18,7 +18,7 @@ local Actions = class {
             score = 1,
             needChooseSlot = true,
             type = {'attack'},
-            sprite = spriteAttack1,
+            sprite = {'assets/sprites/attack1.json','assets/sprites/attack1.png', 'effect'},
             sound = soundHit1,
             effect = function(me, opponent)
                 me.attack = me.attack + 1
@@ -341,19 +341,6 @@ local Actions = class {
             defaultTargetSlot = function(me, opponent)
                 return baseDefaultTargetSlot(me, opponent)
             end
-        },
-        ['universeRecover'] = {
-            name = '宇宙复原',
-            icon = 'universeRecover',
-            info = '全部时空恢复初始',
-            score = 99,
-            needChooseSlot = false,
-            type = {'spaceRecover'},
-            onChangeSpace = function(targetSlot)
-                for i, _ in pairs(map.slots) do
-                    map:changeSpace(i, nil)
-                end
-            end,
         },
         ['universeRecover'] = {
             name = '宇宙复原',

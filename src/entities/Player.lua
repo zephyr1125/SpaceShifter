@@ -10,7 +10,6 @@ local Player = {
     deck = 'PlayerDeck',
     handSize = 3,
     rewardSize = 3,
-    cardAsAction = true,
     spriteWidth = 16,
     spriteHeight = 18,
     init = function(self)
@@ -46,6 +45,7 @@ local Player = {
         end
     end,
     drawSprite = function(self, mapX, mapY)
+        setColor(white)
         spritePlayer:draw(mapX + self.x, mapY + self.y)
     end,
     update = function(self, dt)
@@ -72,7 +72,7 @@ local Player = {
     -- returns if the card need choose slot
     playCard = function(self)
         self.playingCard = self.hand[self.currentCardId]
-        self.playingCardAsAction = self.cardAsAction
+        self.playingCardAsAction = self.playingCard.isShowAction
         if not self.playingCardAsAction then
             -- play space card always need choose slot
             return true
@@ -82,7 +82,10 @@ local Player = {
         return false
     end,
     pickCard = function(self)
-        table.add(self.hand, decks.PlayerDeck:pickCards(1))
+        local card = decks.PlayerDeck:pickCards(1)
+        -- unify card direction
+        if #self.hand > 0 then card.isShowAction = self.hand[1].isShowAction end
+        table.add(self.hand, card)
     end,
     dropCard = function(self)
         dropFirstHandCard(self)

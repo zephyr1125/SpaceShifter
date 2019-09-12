@@ -80,12 +80,9 @@ local baseDrawPlayingCard = function(self, x, y)
 end
 
 local baseDrawSprite = function(self, imageSprite, mapX, mapY)
-    setColor(white)
+    setColor(black)
     love.graphics.draw(imageSprite,
-            mapX + map.slots[self.slot].x
-                    + math.floor(mapSlotWidth/2) - imageSprite:getWidth()/2,
-            mapY + map.slots[self.slot].y
-                    + math.floor(mapSlotHeight/2) - imageSprite:getHeight())
+            mapX + self.x, mapY + self.y)
 end
 
 local baseChooseActionSlot = function(self, action)
