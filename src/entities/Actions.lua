@@ -20,13 +20,14 @@ local Actions = class {
             type = {'attack'},
             sprite = {'assets/sprites/attack1.json','assets/sprites/attack1.png', 'effect'},
             sound = soundHit1,
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me.attack = me.attack + 1
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
                 if space.onCalcAttack ~= nil then
                     space.onCalcAttack(me, opponent)
                 end
+                if onComplete~=nil then onComplete() end
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -43,13 +44,14 @@ local Actions = class {
             score = 2,
             needChooseSlot = true,
             type = {'attack'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me.attack = me.attack + 2
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
                 if space.onCalcAttack ~= nil then
                     space.onCalcAttack(me, opponent)
                 end
+                if onComplete~=nil then onComplete() end
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -66,13 +68,14 @@ local Actions = class {
             score = 3,
             needChooseSlot = true,
             type = {'attack'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me.attack = me.attack + 3
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
                 if space.onCalcAttack ~= nil then
                     space.onCalcAttack(me, opponent)
                 end
+                if onComplete~=nil then onComplete() end
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -89,7 +92,7 @@ local Actions = class {
             score = 1.5,
             needChooseSlot = true,
             type = {'attack','defence'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me.attack = me.attack + 1
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
@@ -97,6 +100,7 @@ local Actions = class {
                     space.onCalcAttack(me, opponent)
                 end
                 me.defence = me.defence + 1
+                if onComplete~=nil then onComplete() end
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -113,7 +117,7 @@ local Actions = class {
             score = 2.5,
             needChooseSlot = true,
             type = {'attack','defence'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me.attack = me.attack + 2
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
@@ -121,6 +125,7 @@ local Actions = class {
                     space.onCalcAttack(me, opponent)
                 end
                 me.defence = me.defence + 1
+                if onComplete~=nil then onComplete() end
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -137,8 +142,9 @@ local Actions = class {
             score = 1,
             needChooseSlot = false,
             type = {'defence'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me.defence = me.defence + 1
+                if onComplete~=nil then onComplete() end
             end,
         },
         ['heal1'] = {
@@ -148,8 +154,9 @@ local Actions = class {
             score = 1,
             needChooseSlot = false,
             type = {'heal'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me:changeLife(1)
+                if onComplete~=nil then onComplete() end
             end,
         },
         ['heal2'] = {
@@ -159,8 +166,9 @@ local Actions = class {
             score = 2.5,
             needChooseSlot = false,
             type = {'heal'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me:changeLife(2)
+                if onComplete~=nil then onComplete() end
             end,
         },
         ['pick2'] = {
@@ -171,9 +179,10 @@ local Actions = class {
             score = 3,
             needChooseSlot = false,
             type = {'pick'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me:pickCard()
                 me:pickCard()
+                if onComplete~=nil then onComplete() end
             end,
         },
         ['a1p1'] = {
@@ -183,7 +192,7 @@ local Actions = class {
             score = 2,
             needChooseSlot = true,
             type = {'attack','pick'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me.attack = me.attack + 1
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
@@ -191,6 +200,7 @@ local Actions = class {
                     space.onCalcAttack(me, opponent)
                 end
                 me:pickCard()
+                if onComplete~=nil then onComplete() end
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -207,7 +217,7 @@ local Actions = class {
             score = 3,
             needChooseSlot = true,
             type = {'attack','pick'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me.attack = me.attack + 2
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
@@ -215,6 +225,7 @@ local Actions = class {
                     space.onCalcAttack(me, opponent)
                 end
                 me:pickCard()
+                if onComplete~=nil then onComplete() end
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -232,10 +243,11 @@ local Actions = class {
             score = 3,
             needChooseSlot = false,
             type = {'heal','pick'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me:changeLife(1)
                 me:pickCard()
                 me:pickCard()
+                if onComplete~=nil then onComplete() end
             end,
         },
         ['drop1'] = {
@@ -245,10 +257,11 @@ local Actions = class {
             score = 1.5,
             needChooseSlot = true,
             type = {'drop'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 if me.targetSlot == opponent.slot then
                     opponent:dropCard()
                 end
+                if onComplete~=nil then onComplete() end
             end,
             getExceptSlot = function(me, opponent)
                 -- can target anywhere
@@ -265,11 +278,12 @@ local Actions = class {
             score = 2.5,
             needChooseSlot = true,
             type = {'drop'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 if me.targetSlot == opponent.slot then
                     opponent:dropCard()
                     opponent:dropCard()
                 end
+                if onComplete~=nil then onComplete() end
             end,
             getExceptSlot = function(me, opponent)
                 -- can target anywhere
@@ -286,7 +300,7 @@ local Actions = class {
             score = 2,
             needChooseSlot = true,
             type = {'attack','drop'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 me.attack = me.attack + 1
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
@@ -296,6 +310,7 @@ local Actions = class {
                 if me.targetSlot == opponent.slot then
                     opponent:dropCard()
                 end
+                if onComplete~=nil then onComplete() end
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -362,13 +377,14 @@ local Actions = class {
             score = 99,
             needChooseSlot = true,
             type = {'special'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 for _, slot in pairs(map:getNoHoleNeighbours(me.slot)) do
                     local resident = map:getSlotOccupied(slot)
                         if resident ~= nil then
                         resident.damagePending = resident.damagePending + 3
                     end
                 end
+                if onComplete~=nil then onComplete() end
             end,
         },
         ['graveWorld'] = {
@@ -378,12 +394,13 @@ local Actions = class {
             score = 99,
             needChooseSlot = false,
             type = {'special'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 for slotId, slot in pairs(map.slots) do
                     if slot.card.space ~= spaces.container.graveyard then
                         map:shiftSpace(slotId, Card(nil, spaces.container.graveyard))
                     end
                 end
+                if onComplete~=nil then onComplete() end
             end,
         },
         ['jump'] = {
@@ -393,15 +410,19 @@ local Actions = class {
             score = 99,
             needChooseSlot = false,
             type = {'special'},
-            effect = function(me, opponent)
+            effect = function(me, opponent, onComplete)
                 -- jump to me.targetSlot
-                charMove(me, me.targetSlot, 'fly')
-                -- if opponent still there, cause damage and bounce away
-                if opponent.slot == me.targetSlot then
-                    opponent.damagePending = opponent.damagePending + 3
-                    charMove(opponent, randomElement(map:getNoHoleNeighbours(opponent.slot)),
-                            'hit')
-                end
+                charMove(me, me.targetSlot, 'jump', function()
+                    soundHit2:play()
+                    -- if opponent still there, cause damage and bounce away
+                    if opponent.slot == me.targetSlot then
+                        opponent.damagePending = opponent.damagePending + 3
+                        charMove(opponent, randomElement(map:getNoHoleNeighbours(opponent.slot)),
+                                'hit', onComplete)
+                    else
+                        if onComplete~=nil then onComplete() end
+                    end
+                end)
             end,
         },
     }

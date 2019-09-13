@@ -186,7 +186,11 @@ local Enemies = class {
                 baseDrawSprite(self, imgGhostSprite, mapX, mapY)
             end,
             drawSelectSlot = function(self)
-                -- hide selection
+                if targetSlot == 0 then return end
+
+                local slot = map.slots[self.targetSlot]
+                setColor(red)
+                love.graphics.draw(imgSlotSelect, mapX + slot.x, mapY + slot.y)
             end,
             playCard = function(me, opponent)
                 me.isPlayingSpecialCard = false
@@ -241,7 +245,11 @@ local Enemies = class {
                 baseDrawSprite(self, imgTrollSprite, mapX, mapY)
             end,
             drawSelectSlot = function(self)
-                -- hide selection
+                if targetSlot == 0 then return end
+
+                local slot = map.slots[self.targetSlot]
+                setColor(red)
+                love.graphics.draw(imgSlotSelect, mapX + slot.x, mapY + slot.y)
             end,
             playCard = function(me, opponent)
                 me.isPlayingSpecialCard = false

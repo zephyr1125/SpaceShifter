@@ -43,7 +43,7 @@ local Player = {
                 drawHandCard(id, card, x, xInterval, y, width)
             end
         end
-        if self.currentCardId ~= 0 then
+        if self.currentCardId ~= 0 and self.currentCardId <= #self.hand then
             drawHandCard(self.currentCardId, self.hand[self.currentCardId],
                     x, xInterval, y-4, width)
         end
@@ -97,6 +97,7 @@ local Player = {
         -- unify card direction
         if #self.hand > 0 then card.isShowAction = self.hand[1].isShowAction end
         table.add(self.hand, card)
+        print('player pick: '..card.action.name..'|'..card.space.name)
     end,
     dropCard = function(self)
         dropFirstHandCard(self)

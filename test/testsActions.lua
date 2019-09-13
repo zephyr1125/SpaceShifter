@@ -56,7 +56,7 @@ function testsActions:testDropCard_NotSecondCardWhenFirstIsPlayingCard()
     
     currentEnemy.hand = {currentEnemy.playingCard, {action=actions.container.attack1}}
 
-    ResolutionState.cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
+    ResolutionState:cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
     luaunit.assertEquals(#currentEnemy.hand, 1)
     luaunit.assertEquals(currentEnemy.hand[1], currentEnemy.playingCard)
 end
@@ -124,6 +124,8 @@ function testsActions:testA1Drop1_DropCard()
     currentEnemy.life = 4
 
     ResolutionState:enter()
+    ResolutionState:update(1)
+    ResolutionState:update(1)
 
     luaunit.assertEquals(player.life, 2)
     luaunit.assertEquals(#player.hand, 0)

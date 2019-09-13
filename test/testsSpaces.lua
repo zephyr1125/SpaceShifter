@@ -89,6 +89,8 @@ function testsSpaces:testDesertDropCardOnAttack()
     currentEnemy.hand = {currentEnemy.playingCard, {action = actions.container.attack1}}
 
     ResolutionState:enter()
+    ResolutionState:update(1)
+    ResolutionState:update(1)
 
     luaunit.assertEquals(#player.hand, 1)
     luaunit.assertEquals(#currentEnemy.hand, 1)
@@ -109,6 +111,8 @@ function testsSpaces:testDesert_NotCorrectSlot_NoDropCard()
     currentEnemy.hand = {currentEnemy.playingCard, {action = actions.container.attack1}}
 
     ResolutionState:enter()
+    ResolutionState:update(1)
+    ResolutionState:update(1)
 
     luaunit.assertEquals(#player.hand, 1)
     luaunit.assertEquals(#currentEnemy.hand, 2)

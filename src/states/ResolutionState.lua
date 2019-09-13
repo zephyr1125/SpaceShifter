@@ -8,19 +8,15 @@ function ResolutionState:enter()
     local enemyAction = currentEnemy.playingCard.action
     local enemySpace = currentEnemy.playingCard.space
     
+    self.step = 'effect'
+    
     self:playFX(playerAction, enemyAction)
 
     -- shift space first
     self.shiftSpace()
     -- then move
     self:move(playerAction, enemyAction)
-    self.cardsEffect(playerAction, enemyAction)
-    self.onAttack()
-    self.extraDefence()
-    local isPlayerAttackSuccess, isEnemyAttackSuccess = self.calcDamage()
-    self:playDefence(isPlayerAttackSuccess, isEnemyAttackSuccess)
-    
-    self.cleanCards()
+    self:cardsEffect(playerAction, enemyAction)
 end
 
 function ResolutionState:playFX(playerAction, enemyAction)
@@ -103,13 +99,26 @@ function ResolutionState:update(dt)
     if self.enemyDefenceFX ~= nil then
         self.enemyDefenceFX:update(dt)
     end
-    self:done()
+
+    if self.step == 'effect' and self.isPlayerEffectDone and self.isEnemyEffectDone then
+        self.step = 'damage'
+    elseif self.step == 'damage' then
+        self.onAttack()
+        self.extraDefence()
+        local isPlayerAttackSuccess, isEnemyAttackSuccess = self.calcDamage()
+        self:playDefence(isPlayerAttackSuccess, isEnemyAttackSuccess)
+        self.cleanCards()
+        self.step = 'done'
+    elseif self.step == 'done' then
+        self:done()
+    end
 end
 
 function ResolutionState:done()
     if self.isPlayerFXDone and self.isEnemyFXDone and
             self.isPlayerMoveDone and self.isEnemyMoveDone and
-            self.isPlayerDefenceFXDone and self.isEnemyDefenceFXDone
+            self.isPlayerDefenceFXDone and self.isEnemyDefenceFXDone and
+            self.isPlayerEffectDone and self.isEnemyEffectDone
     then
         -- next state
         GameState.switch(UpkeepState)
@@ -140,12 +149,20 @@ function ResolutionState:move(playerAction, enemyAction)
     end
 end
 
-function ResolutionState.cardsEffect(playerAction, enemyAction)
+function ResolutionState:cardsEffect(playerAction, enemyAction)
     if player.playingCardAsAction and playerAction.effect ~= nil then
-        playerAction.effect(player, currentEnemy)
+        playerAction.effect(player, currentEnemy, function()
+                self.isPlayerEffectDone = true
+        end)
+    else
+        self.isPlayerEffectDone = true
     end
     if currentEnemy.playingCardAsAction and enemyAction.effect ~= nil then
-        enemyAction.effect(currentEnemy, player)
+        enemyAction.effect(currentEnemy, player, function()
+            self.isEnemyEffectDone = true
+        end)
+    else
+        self.isEnemyEffectDone = true
     end
 end
 
@@ -276,6 +293,9 @@ function ResolutionState:reset()
     player.damagePending = 0
     currentEnemy.damagePending = 0
     
+    self.playerFX = nil
+    self.enemyFX = nil
+    
     self.isPlayerFXDone = false
     self.isEnemyFXDone = false
     
@@ -284,4 +304,7 @@ function ResolutionState:reset()
     
     self.isPlayerDefenceFXDone = false
     self.isEnemyDefenceFXDone = false
+    
+    self.isPlayerEffectDone = false
+    self.isEnemyEffectDone = false
 end

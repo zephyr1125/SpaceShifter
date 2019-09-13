@@ -14,19 +14,19 @@ end
 function testsBanshee:testSpecialAttack()
     currentEnemy:playCard(player)
     ResolutionState:reset()
-    ResolutionState.cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
+    ResolutionState:cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
     luaunit.assertEquals(currentEnemy.specialCounter, 1)
     luaunit.assertNotEquals(player.damagePending, 3)
     
     currentEnemy:playCard(player)
     ResolutionState:reset()
-    ResolutionState.cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
+    ResolutionState:cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
     luaunit.assertEquals(currentEnemy.specialCounter, 2)
     luaunit.assertNotEquals(player.damagePending, 3)
     
     currentEnemy:playCard(player)
     ResolutionState:reset()
-    ResolutionState.cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
+    ResolutionState:cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
     luaunit.assertEquals(currentEnemy.specialCounter, 0)
     luaunit.assertEquals(player.damagePending, 3)
 end

@@ -17,4 +17,5 @@ function InitAssets()
     spriteDefence = {'assets/sprites/shield.json','assets/sprites/shield.png', 'effect'}
     -- sound
     soundHit1 = love.audio.newSource("assets/sounds/hit01.wav", "static")
+    soundHit2 = love.audio.newSource('assets/sounds/hit02.ogg', 'static')
 end

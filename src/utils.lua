@@ -166,7 +166,7 @@ function sortDeck(deck)
     end)
 end
 
--- moveMode: 'instant', 'fly', 'hit'
+-- moveMode: 'instant', 'fly', 'hit', 'jump'
 function charMove(char, newSlot, moveMode, onComplete)
     char.slot = newSlot
     
@@ -182,6 +182,13 @@ function charMove(char, newSlot, moveMode, onComplete)
         timer.tween(0.5, char, {x=newX, y=newY}, 'out-quint', onComplete)
     elseif moveMode == 'hit' then
         timer.tween(0.25, char, {x=newX, y=newY}, 'out-quint', onComplete)
+    elseif moveMode == 'jump' then
+        local time = 0.8
+        timer.tween(time, char, {x=newX}, 'out-in-cubic', onComplete)
+        local yTop = (char.y + newY)/2 - 80
+        timer.tween(time/2, char, {y=yTop}, 'out-cubic', function()
+            timer.tween(time/2, char, {y=newY}, 'in-cubic')
+        end)
     end
 end
 
