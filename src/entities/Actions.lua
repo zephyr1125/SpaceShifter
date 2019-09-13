@@ -395,8 +395,13 @@ local Actions = class {
             type = {'special'},
             effect = function(me, opponent)
                 -- jump to me.targetSlot
-                
-                -- if opponent still there, cause damage
+                charMove(me, me.targetSlot, 'fly')
+                -- if opponent still there, cause damage and bounce away
+                if opponent.slot == me.targetSlot then
+                    opponent.damagePending = opponent.damagePending + 3
+                    charMove(opponent, randomElement(map:getNoHoleNeighbours(opponent.slot)),
+                            'hit')
+                end
             end,
         },
     }

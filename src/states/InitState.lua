@@ -15,7 +15,7 @@ function InitState:enter()
 end
 
 function InitState:initEnemy()
-    currentEnemy = enemies.container.ghost
+    currentEnemy = enemies.container.troll
     currentEnemy:init()
 end
 
