@@ -243,14 +243,14 @@ function ResolutionState:playDefence(isPlayerAttackSuccess, isEnemyAttackSuccess
 end
 
 function ResolutionState.shiftSpace()
-    local enemyChangeSpace = currentEnemy.playingCard.action.onChangeSpace
-    if enemyChangeSpace ~= nil then
-        enemyChangeSpace(currentEnemy.targetSlot)
+    local enemyShiftSpace = currentEnemy.playingCard.action.onShiftSpace
+    if enemyShiftSpace ~= nil then
+        enemyShiftSpace(currentEnemy.targetSlot)
     end
     
     if player.playingCardAsAction then return end
     
-    map:changeSpace(player.targetSlot, player.playingCard)
+    map:shiftSpace(player.targetSlot, player.playingCard)
 end
 
 function ResolutionState.cleanCards()

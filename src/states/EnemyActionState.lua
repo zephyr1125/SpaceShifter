@@ -1,6 +1,6 @@
 EnemyActionState = {}
 
 function EnemyActionState:enter()
-    currentEnemy:playCard()
+    currentEnemy:playCard(player)
     GameState.switch(PlayerPlayCardState)
 end

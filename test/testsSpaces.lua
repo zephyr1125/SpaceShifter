@@ -40,6 +40,10 @@ function testsSpaces:testGraveyardRunOnUpkeep()
     luaunit.assertEquals(player.life, 2)
 end
 
+function testsSpaces:testGraveyard_ImmuneChar_Nothing()
+    currentEnemy = enemies.cona
+end
+
 function testsSpaces:testCovePickCardOnDamaged()
     fillAllDecks()
     

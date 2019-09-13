@@ -113,7 +113,7 @@ local Map = class {
         end
         return mostSlot
     end,
-    changeSpace = function(self, slot, newCard)
+    shiftSpace = function(self, slot, newCard)
         newCard = newCard or self.slots[slot].baseCard
         local oldCard = self.slots[slot].card
         if oldCard ~= self.slots[slot].baseCard then

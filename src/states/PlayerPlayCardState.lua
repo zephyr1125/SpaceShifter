@@ -47,7 +47,7 @@ local function noTipsKeyPressed(self, key)
     end
     
     if key == keys.A then
-        local needChooseSlot = player:playCard()
+        local needChooseSlot = player:playCard(currentEnemy)
         if needChooseSlot then
             GameState.switch(PlayerChooseSlotState)
             return

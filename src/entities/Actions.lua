@@ -331,8 +331,8 @@ local Actions = class {
             score = 99,
             needChooseSlot = true,
             type = {'spaceRecover'},
-            onChangeSpace = function(targetSlot)
-                map:changeSpace(targetSlot, nil)
+            onShiftSpace = function(targetSlot)
+                map:shiftSpace(targetSlot, nil)
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -349,9 +349,9 @@ local Actions = class {
             score = 99,
             needChooseSlot = false,
             type = {'spaceRecover'},
-            onChangeSpace = function(targetSlot)
+            onShiftSpace = function(targetSlot)
                 for i, _ in pairs(map.slots) do
-                    map:changeSpace(i, nil)
+                    map:shiftSpace(i, nil)
                 end
             end,
         },
@@ -360,7 +360,7 @@ local Actions = class {
             icon = 'roundAttack',
             info = '每3回合对邻近所有格造成3伤害',
             score = 99,
-            needChooseSlot = false,
+            needChooseSlot = true,
             type = {'special'},
             effect = function(me, opponent)
                 for _, slot in pairs(map:getNoHoleNeighbours(me.slot)) do
@@ -369,6 +369,34 @@ local Actions = class {
                         resident.damagePending = resident.damagePending + 3
                     end
                 end
+            end,
+        },
+        ['graveWorld'] = {
+            name = '千墓',
+            icon = 'graveWorld',
+            info = '不受墓地影响,每3回合将所有地面变为墓地',
+            score = 99,
+            needChooseSlot = false,
+            type = {'special'},
+            effect = function(me, opponent)
+                for _, slot in pairs(map.slots) do
+                    if slot.card.space ~= spaces.container.graveyard then
+                        map:shiftSpace(slot, Card(nil, spaces.container.graveyard))
+                    end
+                end
+            end,
+        },
+        ['jump'] = {
+            name = '千斤坠',
+            icon = 'roundAttack',
+            info = '每3回合跳跃到玩家位置,造成3点伤害并击退',
+            score = 99,
+            needChooseSlot = false,
+            type = {'special'},
+            effect = function(me, opponent)
+                -- jump to me.targetSlot
+                
+                -- if opponent still there, cause damage
             end,
         },
     }

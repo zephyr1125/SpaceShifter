@@ -40,7 +40,8 @@ function fillAllDecks()
     fillDeck(decks.PublicDeck)
     fillDeck(decks.PlayerDeck)
     fillDeck(decks.BansheeDeck)
-    fillDeck(decks.GreedDeck)
+    fillDeck(decks.GhostDeck)
+    fillDeck(decks.TrollDeck)
 end
 
 function fillDeck(deck)
@@ -68,14 +69,18 @@ function random(n)
 end
 
 -- random element in table, no mater if the table is integer sequence
-function randomElement(myTable)
+function randomElement(myTable, except)
     -- iterate over whole table to get all keys
     local keySet = {}
     for k in pairs(myTable) do
         table.insert(keySet, k)
     end
     -- now you can reliably return a random key
-    return myTable[keySet[random(#keySet)]]
+    local result
+    repeat
+        result = myTable[keySet[random(#keySet)]]
+    until result ~= except
+    return result
 end
 
 function table.contains(tab, val)
@@ -100,7 +105,7 @@ end
 
 function discardCard(card)
     local originDeck = card.deck
-    table.add(originDeck.discardCards, card)
+    if originDeck ~= nil then table.add(originDeck.discardCards, card) end
 end
 
 function getLifePercent(char)

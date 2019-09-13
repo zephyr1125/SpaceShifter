@@ -98,7 +98,7 @@ local Spaces = class {
             score = 2,
             benefit = -1,
             onUpkeep = function(resident)
-                if resident ~= nil then
+                if resident ~= nil and not table.contains(resident, 'isImmuneGrave') then
                     resident:changeLife(-1)
                 end
             end,

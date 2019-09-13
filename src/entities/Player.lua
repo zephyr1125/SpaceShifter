@@ -5,6 +5,7 @@ local function drawHandCard(id, card, handX, xInterval, handY, width)
 end
 
 local Player = {
+    name = '塑地师',
     initLife = 5,
     life = 5,
     deck = 'PlayerDeck',
@@ -80,14 +81,13 @@ local Player = {
         end
         self.currentCardId = id
     end,
-    -- returns if the card need choose slot
-    playCard = function(self)
-        self.playingCard = self.hand[self.currentCardId]
-        self.playingCardAsAction = self.playingCard.isShowAction
-        if not self.playingCardAsAction then
+    playCard = function(me, opponent)
+        me.playingCard = me.hand[me.currentCardId]
+        me.playingCardAsAction = me.playingCard.isShowAction
+        if not me.playingCardAsAction then
             -- play space card always need choose slot
             return true
-        elseif self.playingCardAsAction and self.playingCard.action.needChooseSlot then
+        elseif me.playingCardAsAction and me.playingCard.action.needChooseSlot then
             return true
         end
         return false

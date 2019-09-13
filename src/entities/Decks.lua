@@ -68,7 +68,18 @@ local Decks = class {
             return pickCards(self, amount)
         end
     },
-    GreedDeck = {
+    GhostDeck = {
+        size = 9,
+        scoreRange = {3,4},
+        discardCards = {},
+        draw = function(self, x, y)
+            drawDeck(self.cards, x, y)
+        end,
+        pickCards = function(self, amount)
+            return pickCards(self, amount)
+        end
+    },
+    TrollDeck = {
         size = 9,
         scoreRange = {3,4},
         discardCards = {},

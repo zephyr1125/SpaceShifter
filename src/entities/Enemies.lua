@@ -96,109 +96,179 @@ local baseChooseActionSlot = function(self, action)
     self.targetSlot = action.aiTargetSlot(self, player)
 end
 
-Enemies = class {
-    {
-        name = 'Banshee',
-        initLife = 5,
-        deck = 'BansheeDeck',
-        handSize = 3,
-        spriteWidth = 42,
-        spriteHeight = 44,
-        isShaking = false,
-        specialCard = Card(actions.container.roundAttack),
-        damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
-        healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
-        init = function(self)
-            self.life = self.initLife
-            self.slot = 7
-            charMove(self, self.slot, 'instant')
-            self.hand = decks.BansheeDeck:pickCards(self.handSize)
-            self.specialCounter = 0
-        end,
-        drawInfo = function(self, x, y)
-            baseDrawInfo(self, x, y)
-        end,
-        drawPlayingCard = function(self, x, y)
-            baseDrawPlayingCard(self, x, y)
-        end,
-        drawSprite = function(self, mapX, mapY)
-            baseDrawSprite(self, imgBansheeSprite, mapX, mapY)
-        end,
-        drawSelectSlot = function(self)
-            if targetSlot == 0 then return end
-            
-            local slot = map.slots[self.targetSlot]
-            setColor(red)
-            love.graphics.draw(imgSlotSelect, mapX + slot.x, mapY + slot.y)
-        end,
-        playCard = function(self)
-            self.isPlayingSpecialCard = false
-            self.specialCounter = self.specialCounter+1
-            if self.specialCounter >= 3 then
+local Enemies = class {
+    container = {
+        banshee = {
+            name = '巨蛇',
+            initLife = 0,
+            deck = 'BansheeDeck',
+            handSize = 3,
+            spriteWidth = 42,
+            spriteHeight = 44,
+            isShaking = false,
+            specialCard = Card(actions.container.roundAttack),
+            damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
+            healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
+            init = function(self)
+                self.life = self.initLife
+                self.slot = 7
+                charMove(self, self.slot, 'instant')
+                self.hand = decks.BansheeDeck:pickCards(self.handSize)
                 self.specialCounter = 0
-                self.isPlayingSpecialCard = true
-                self.playingCard = self.specialCard
-                self.playingCardAsAction = true
-            else
-                basePlayCard(self)
+            end,
+            drawInfo = function(self, x, y)
+                baseDrawInfo(self, x, y)
+            end,
+            drawPlayingCard = function(self, x, y)
+                baseDrawPlayingCard(self, x, y)
+            end,
+            drawSprite = function(self, mapX, mapY)
+                baseDrawSprite(self, imgBansheeSprite, mapX, mapY)
+            end,
+            drawSelectSlot = function(self)
+                if targetSlot == 0 then return end
+
+                local slot = map.slots[self.targetSlot]
+                setColor(red)
+                love.graphics.draw(imgSlotSelect, mapX + slot.x, mapY + slot.y)
+            end,
+            playCard = function(me, opponent)
+                me.isPlayingSpecialCard = false
+                me.specialCounter = me.specialCounter+1
+                if me.specialCounter >= 3 then
+                    me.specialCounter = 0
+                    me.isPlayingSpecialCard = true
+                    me.playingCard = me.specialCard
+                    me.playingCardAsAction = true
+                else
+                    basePlayCard(me)
+                end
+            end,
+            chooseActionSlot = function(self)
+                baseChooseActionSlot(self)
+            end,
+            pickCard = function(self)
+                table.add(self.hand, decks.BansheeDeck:pickCards(1))
+            end,
+            dropCard = function(self)
+                dropFirstHandCard(self)
+            end,
+            changeLife = function(self, value)
+                changeLife(self, value)
             end
-        end,
-        chooseActionSlot = function(self)
-            baseChooseActionSlot(self)
-        end,
-        pickCard = function(self)
-            table.add(self.hand, decks.BansheeDeck:pickCards(1))
-        end,
-        dropCard = function(self)
-            dropFirstHandCard(self)
-        end,
-        changeLife = function(self, value)
-            changeLife(self, value)
-        end
-    },
-    {
-        name = 'Greed',
-        initLife = 7,
-        deck = 'GreedDeck',
-        handSize = 3,
-        spriteWidth = 56,
-        spriteHeight = 32,
-        isShaking = false,
-        damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
-        healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
-        init = function(self)
-            self.life = self.initLife
-            self.slot = 7
-            charMove(self, self.slot, 'instant')
-            self.hand = decks.GreedDeck:pickCards(self.handSize)
-        end,
-        drawInfo = function(self, x, y)
-            baseDrawInfo(self, x, y)
-        end,
-        drawPlayingCard = function(self, x, y)
-            baseDrawPlayingCard(self, x, y)
-        end,
-        drawSprite = function(self, mapX, mapY)
-            baseDrawSprite(self, imgGreedSprite, mapX, mapY)
-        end,
-        drawSelectSlot = function(self)
-            -- hide selection
-        end,
-        playCard = function(self)
-            basePlayCard(self)
-        end,
-        chooseActionSlot = function(self)
-            baseChooseActionSlot(self)
-        end,
-        pickCard = function(self)
-            table.add(self.hand, decks.GreedDeck:pickCards(1))
-        end,
-        dropCard = function(self)
-            dropFirstHandCard(self)
-        end,
-        changeLife = function(self, value)
-            changeLife(self, value)
-        end
+        },
+        ghost = {
+            name = '鬼魂',
+            initLife = 7,
+            deck = 'GhostDeck',
+            handSize = 3,
+            spriteWidth = 44,
+            spriteHeight = 44,
+            isShaking = false,
+            isImmuneGrave = true,
+            specialCard = Card(actions.container.graveWorld),
+            damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
+            healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
+            init = function(self)
+                self.life = self.initLife
+                self.slot = 7
+                charMove(self, self.slot, 'instant')
+                self.hand = decks.GhostDeck:pickCards(self.handSize)
+                self.specialCounter = 0
+            end,
+            drawInfo = function(self, x, y)
+                baseDrawInfo(self, x, y)
+            end,
+            drawPlayingCard = function(self, x, y)
+                baseDrawPlayingCard(self, x, y)
+            end,
+            drawSprite = function(self, mapX, mapY)
+                baseDrawSprite(self, imgGhostSprite, mapX, mapY)
+            end,
+            drawSelectSlot = function(self)
+                -- hide selection
+            end,
+            playCard = function(me, opponent)
+                me.isPlayingSpecialCard = false
+                me.specialCounter = me.specialCounter+1
+                if me.specialCounter >= 3 then
+                    me.specialCounter = 0
+                    me.isPlayingSpecialCard = true
+                    me.playingCard = me.specialCard
+                    me.playingCardAsAction = true
+                else
+                    basePlayCard(me)
+                end
+            end,
+            chooseActionSlot = function(self)
+                baseChooseActionSlot(self)
+            end,
+            pickCard = function(self)
+                table.add(self.hand, decks.GhostDeck:pickCards(1))
+            end,
+            dropCard = function(self)
+                dropFirstHandCard(self)
+            end,
+            changeLife = function(self, value)
+                changeLife(self, value)
+            end
+        },
+        troll = {
+            name = '巨魔',
+            initLife = 7,
+            deck = 'TrollDeck',
+            handSize = 3,
+            spriteWidth = 44,
+            spriteHeight = 44,
+            isShaking = false,
+            specialCard = Card(actions.container.jump),
+            damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
+            healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
+            init = function(self)
+                self.life = self.initLife
+                self.slot = 7
+                charMove(self, self.slot, 'instant')
+                self.hand = decks.TrollDeck:pickCards(self.handSize)
+                self.specialCounter = 0
+            end,
+            drawInfo = function(self, x, y)
+                baseDrawInfo(self, x, y)
+            end,
+            drawPlayingCard = function(self, x, y)
+                baseDrawPlayingCard(self, x, y)
+            end,
+            drawSprite = function(self, mapX, mapY)
+                baseDrawSprite(self, imgTrollSprite, mapX, mapY)
+            end,
+            drawSelectSlot = function(self)
+                -- hide selection
+            end,
+            playCard = function(me, opponent)
+                me.isPlayingSpecialCard = false
+                me.specialCounter = me.specialCounter+1
+                if me.specialCounter >= 3 then
+                    me.specialCounter = 0
+                    me.isPlayingSpecialCard = true
+                    me.playingCard = me.specialCard
+                    me.playingCardAsAction = true
+                    me.targetSlot = opponent.slot
+                else
+                    basePlayCard(me)
+                end
+            end,
+            chooseActionSlot = function(self)
+                baseChooseActionSlot(self)
+            end,
+            pickCard = function(self)
+                table.add(self.hand, decks.TrollDeck:pickCards(1))
+            end,
+            dropCard = function(self)
+                dropFirstHandCard(self)
+            end,
+            changeLife = function(self, value)
+                changeLife(self, value)
+            end
+        }
     }
 }
 return Enemies
