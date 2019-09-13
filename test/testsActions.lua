@@ -2,42 +2,36 @@ testsActions = {}
 
 function testsActions:setUp()
     GameState = {switch = function()end}
-    currentEnemy = enemies[1]
+    currentEnemy = enemies.container.banshee
     
     player.slot = 1
-    player.playingCard = {action = actions.container.move}
+    player.playingCard = Card(actions.container.move)
     player.targetSlot = 2
     player.playingCardAsAction = true
     player.currentCardId = 1
-
-    self.enemyPlayingCard = {action = actions.container.move}
-    currentEnemy.playingCard = self.enemyPlayingCard
+    
+    currentEnemy.playingCard = Card(actions.container.move)
     currentEnemy.playingCardAsAction = true
     currentEnemy.currentCardId = 1
     currentEnemy.slot = 7
     currentEnemy.targetSlot = 7
     currentEnemy.hand = {{action=actions.container.attack1}, {action=actions.container.attack1}
-        ,self.enemyPlayingCard}
+        , currentEnemy.playingCard}
 end
 
 function testsActions:testMove()
-    player.playingCard = {action = actions.container.move}
-    player.targetSlot = 2
     currentEnemy.targetSlot = 5
 
-    ResolutionState.move(player.playingCard.action, currentEnemy.playingCard.action)
+    ResolutionState:move(player.playingCard.action, currentEnemy.playingCard.action)
 
     luaunit.assertEquals(player.slot, 2)
     luaunit.assertEquals(currentEnemy.slot, 5)
 end
 
-function testsActions:testIfBothSameTarget_NeitherMove()
-    player.playingCard = {action = actions.container.move}
-    player.targetSlot = 2
-    
+function testsActions:testIfBothSameTarget_NeitherMove()    
     currentEnemy.targetSlot = 2
     
-    ResolutionState.move(player.playingCard.action, currentEnemy.playingCard.action)
+    ResolutionState:move(player.playingCard.action, currentEnemy.playingCard.action)
     
     luaunit.assertEquals(player.slot, 1)
     luaunit.assertEquals(currentEnemy.slot, 7)
@@ -60,11 +54,11 @@ function testsActions:testDropCard_NotSecondCardWhenFirstIsPlayingCard()
     player.targetSlot = 7
     player.hand = {playerPlayingCard, {action=actions.container.attack1}}
     
-    currentEnemy.hand = {self.enemyPlayingCard, {action=actions.container.attack1}}
+    currentEnemy.hand = {currentEnemy.playingCard, {action=actions.container.attack1}}
 
-    ResolutionState:enter()
+    ResolutionState.cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
     luaunit.assertEquals(#currentEnemy.hand, 1)
-    luaunit.assertEquals(currentEnemy.hand[1], self.enemyPlayingCard)
+    luaunit.assertEquals(currentEnemy.hand[1], currentEnemy.playingCard)
 end
 
 function testsActions:testDropCard_NotDropPlayingCardWhenOnly()
@@ -73,7 +67,7 @@ function testsActions:testDropCard_NotDropPlayingCardWhenOnly()
     player.targetSlot = 7
     player.hand = {playerPlayingCard, {action=actions.container.attack1}}
     
-    currentEnemy.hand = {self.enemyPlayingCard}
+    currentEnemy.hand = {currentEnemy.playingCard}
 
     ResolutionState:enter()
     luaunit.assertEquals(#currentEnemy.hand, 1)

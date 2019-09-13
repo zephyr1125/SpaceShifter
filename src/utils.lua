@@ -179,9 +179,9 @@ function charMove(char, newSlot, moveMode, onComplete)
         char.y = newY
         if onComplete ~= nil then onComplete() end
     elseif moveMode == 'fly' then
-        flux.to(char, 0.5, {x=newX, y=newY}):ease('quintout'):oncomplete(onComplete)
+        timer.tween(0.5, char, {x=newX, y=newY}, 'out-quint', onComplete)
     elseif moveMode == 'hit' then
-        flux.to(char, 0.25, {x=newX, y=newY}):ease('quintout'):oncomplete(onComplete)
+        timer.tween(0.25, char, {x=newX, y=newY}, 'out-quint', onComplete)
     end
 end
 

@@ -379,9 +379,9 @@ local Actions = class {
             needChooseSlot = false,
             type = {'special'},
             effect = function(me, opponent)
-                for _, slot in pairs(map.slots) do
+                for slotId, slot in pairs(map.slots) do
                     if slot.card.space ~= spaces.container.graveyard then
-                        map:shiftSpace(slot, Card(nil, spaces.container.graveyard))
+                        map:shiftSpace(slotId, Card(nil, spaces.container.graveyard))
                     end
                 end
             end,

@@ -5,12 +5,15 @@ package.path = package.path .. ";..\\?.lua;"
 
 class = require 'lib.hump.class'
 love = require 'mock.mocklove'
+timer = require('mock.mocktimer')
+peachy = require('mock.mockPeachy')
 
 require('src.utils')
 require('src.states.ResolutionState')
 require('src.states.UpkeepState')
 require('src.ui.SelectionGroup')
 
+require('src.const')
 require('src.entities.Card')
 decks = require('src.entities.Decks')
 actions = require('src.entities.Actions')

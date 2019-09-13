@@ -6,7 +6,7 @@ function testsBanshee:setUp()
     player.playingCard = Card(actions.container.move)
     player.targetSlot = 1
     
-    currentEnemy = enemies[1]
+    currentEnemy = enemies.container.banshee
     currentEnemy:init()
     currentEnemy.slot = 2
 end

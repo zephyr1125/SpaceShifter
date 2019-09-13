@@ -2,6 +2,7 @@ testsSpaces = {}
 
 function testsSpaces:setUp()
     GameState = {switch = function()end}
+    currentEnemy = enemies.container.banshee
     ResolutionState:reset()
     player.slot = 1
     player.playingCardAsAction = true
@@ -41,7 +42,14 @@ function testsSpaces:testGraveyardRunOnUpkeep()
 end
 
 function testsSpaces:testGraveyard_ImmuneChar_Nothing()
-    currentEnemy = enemies.cona
+    currentEnemy = enemies.container.ghost
+    currentEnemy.life = 5
+    currentEnemy.slot = 2
+    map.slots[2].card = {space = spaces.container.graveyard}
+    
+    UpkeepState:enter()
+
+    luaunit.assertEquals(currentEnemy.life, 5)
 end
 
 function testsSpaces:testCovePickCardOnDamaged()
