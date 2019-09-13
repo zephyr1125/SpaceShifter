@@ -180,6 +180,36 @@ function charMove(char, newSlot, moveMode, onComplete)
     end
 end
 
+function drawTip(char, tip)
+    if tip.y ~= tip.baseY then
+        setColor(white)
+        love.graphics.draw(tip.img, mapX + char.x + tip.x,
+                mapY + char.y + tip.y)
+        love.graphics.setFont(fontNum)
+        love.graphics.print((tip.value>0 and '+' or '')..tostring(tip.value),
+                mapX + char.x + tip.x + 6, mapY + char.y + tip.y + 4)
+        love.graphics.setFont(fontCN)
+    end
+end
+
+function changeLife(char, value)
+    char.life = char.life + value
+    if value > 0 then
+        -- show heal tip
+        char.healTip.value = value
+        timer.tween(1.2, char.healTip, {y = char.healTip.baseY - 16}, 'out-cubic',
+                function() char.healTip.y = char.healTip.baseY end)
+    elseif value < 0 then
+        -- shake of damage
+        char.isShaking = true
+        timer.after(0.4, function() char.isShaking = false end)
+        -- show damage tip
+        char.damageTip.value = value
+        timer.tween(1.2, char.damageTip, {y = char.damageTip.baseY - 16}, 'out-cubic',
+                function() char.damageTip.y = char.damageTip.baseY end)
+    end
+end
+
 function shallowcopy(orig)
     local orig_type = type(orig)
     local copy

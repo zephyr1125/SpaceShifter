@@ -149,7 +149,7 @@ local Actions = class {
             needChooseSlot = false,
             type = {'heal'},
             effect = function(me, opponent)
-                me.life = me.life + 1
+                me:changeLife(1)
             end,
         },
         ['heal2'] = {
@@ -160,7 +160,7 @@ local Actions = class {
             needChooseSlot = false,
             type = {'heal'},
             effect = function(me, opponent)
-                me.life = me.life + 2
+                me:changeLife(2)
             end,
         },
         ['pick2'] = {
@@ -233,7 +233,7 @@ local Actions = class {
             needChooseSlot = false,
             type = {'heal','pick'},
             effect = function(me, opponent)
-                me.life = me.life + 1
+                me:changeLife(1)
                 me:pickCard()
                 me:pickCard()
             end,
@@ -358,7 +358,7 @@ local Actions = class {
         ['roundAttack'] = {
             name = '横扫',
             icon = 'roundAttack',
-            info = '每3回合对邻近所有格造成3伤害',
+            info = '每3回合对邻近所有格造成3伤害,无视防御',
             score = 99,
             needChooseSlot = false,
             type = {'special'},

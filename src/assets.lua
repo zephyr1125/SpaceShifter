@@ -8,8 +8,12 @@ function InitAssets()
     imgGreedSprite = love.graphics.newImage('assets/images/greed.png')
     imgTipCursor = love.graphics.newImage('assets/images/tip_cursor.png')
     imgButtonY = love.graphics.newImage('assets/images/button_y.png')
+    imgDamageTip = love.graphics.newImage('assets/images/damage_tip.png')
+    imgHealTip = love.graphics.newImage('assets/images/heal_tip.png')
+    -- sprite
     spritePlayer = peachy.new("assets/sprites/oldHero.json",
             love.graphics.newImage("assets/sprites/oldHero.png"), 'run')
     spriteDefence = {'assets/sprites/shield.json','assets/sprites/shield.png', 'effect'}
+    -- sound
     soundHit1 = love.audio.newSource("assets/sounds/hit01.wav", "static")
 end

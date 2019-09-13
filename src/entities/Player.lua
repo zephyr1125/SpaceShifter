@@ -13,6 +13,8 @@ local Player = {
     spriteWidth = 16,
     spriteHeight = 18,
     isShaking = false,
+    damageTip = {x = -4, baseY = -6, y = -6, img = imgDamageTip, value = 0},
+    healTip = {x = 16, baseY = -6, y = -6, img = imgHealTip, value = 0},
     init = function(self)
         self.life = self.initLife
         self.slot = 1
@@ -52,6 +54,10 @@ local Player = {
         end
         setColor(white)
         spritePlayer:draw(mapX + self.x + shakeX, mapY + self.y)
+        
+        -- draw tips
+        drawTip(self, self.damageTip)
+        drawTip(self, self.healTip)
     end,
     update = function(self, dt)
         spritePlayer:update(dt)
@@ -94,6 +100,9 @@ local Player = {
     end,
     dropCard = function(self)
         dropFirstHandCard(self)
+    end,
+    changeLife = function(self, value)
+        changeLife(self, value)
     end
 }
 return Player

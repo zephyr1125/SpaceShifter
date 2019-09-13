@@ -79,9 +79,11 @@ function love.load()
 	require('src.entities.Card')
 	
 	love.graphics.setDefaultFilter( "nearest", "nearest", 1 )
-	font = love.graphics.newFont("assets/fonts/zpix.ttf", fontSize)
-	font:setFilter( "nearest", "nearest", 0 )
-	love.graphics.setFont(font)
+	fontCN = love.graphics.newFont("assets/fonts/zpix.ttf", fontSize)
+    fontCN:setFilter( "nearest", "nearest", 0 )
+	love.graphics.setFont(fontCN)
+    fontNum = love.graphics.newFont("assets/fonts/zpix.ttf", 10)
+    fontNum:setFilter( "nearest", "nearest", 0 )
 	
 	infoBar = InfoBar(infoBarWidth)
 	

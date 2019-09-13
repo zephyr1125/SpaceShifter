@@ -86,6 +86,10 @@ local baseDrawSprite = function(self, imageSprite, mapX, mapY)
     end
     setColor(black)
     love.graphics.draw(imageSprite, mapX + self.x + shakeX, mapY + self.y)
+
+    -- draw tips
+    drawTip(self, self.damageTip)
+    drawTip(self, self.healTip)
 end
 
 local baseChooseActionSlot = function(self, action)
@@ -102,6 +106,8 @@ Enemies = class {
         spriteHeight = 44,
         isShaking = false,
         specialCard = Card(actions.container.roundAttack),
+        damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
+        healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
         init = function(self)
             self.life = self.initLife
             self.slot = 7
@@ -138,6 +144,9 @@ Enemies = class {
         end,
         dropCard = function(self)
             dropFirstHandCard(self)
+        end,
+        changeLife = function(self, value)
+            changeLife(self, value)
         end
     },
     {
@@ -148,6 +157,8 @@ Enemies = class {
         spriteWidth = 56,
         spriteHeight = 32,
         isShaking = false,
+        damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
+        healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
         init = function(self)
             self.life = self.initLife
             self.slot = 7
@@ -174,6 +185,9 @@ Enemies = class {
         end,
         dropCard = function(self)
             dropFirstHandCard(self)
+        end,
+        changeLife = function(self, value)
+            changeLife(self, value)
         end
     }
 }

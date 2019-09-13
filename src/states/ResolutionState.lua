@@ -17,7 +17,6 @@ function ResolutionState:enter()
     self.extraDefence()
     self.calcDamage()
     self:playDefence()
-    self:playDamage()
     self.changeSpace()
     
     self.cleanCards()
@@ -62,6 +61,7 @@ function ResolutionState:draw()
     if self.enemyFX ~= nil and not self.isEnemyFXDone then
         self:drawFX(currentEnemy, self.enemyFX)
     end
+    
     if self.playerDefenceFX ~= nil and not self.isPlayerDefenceFXDone then
         self:drawDefenceFX(player, self.playerDefenceFX)
     end
@@ -208,19 +208,8 @@ function ResolutionState.calcDamage()
     end
 
     -- resolve damage
-    currentEnemy.life = currentEnemy.life - currentEnemy.damagePending
-    player.life = player.life - player.damagePending
-end
-
-function ResolutionState:playDamage()
-    if player.damagePending > 0 then
-        player.isShaking = true
-        timer.after(0.25, function() player.isShaking = false end)
-    end
-    if currentEnemy.damagePending > 0 then
-        currentEnemy.isShaking = true
-        timer.after(0.25, function() currentEnemy.isShaking = false end)
-    end
+    currentEnemy:changeLife(-currentEnemy.damagePending)
+    player:changeLife(-player.damagePending)
 end
 
 function ResolutionState:playDefence()

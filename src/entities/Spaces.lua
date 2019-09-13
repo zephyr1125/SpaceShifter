@@ -99,7 +99,7 @@ local Spaces = class {
             benefit = -1,
             onUpkeep = function(resident)
                 if resident ~= nil then
-                    resident.life = resident.life - 1
+                    resident:changeLife(-1)
                 end
             end,
             defaultTargetSlot = function(me, opponent)
