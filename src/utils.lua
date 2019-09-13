@@ -197,7 +197,7 @@ function changeLife(char, value)
     if value > 0 then
         -- show heal tip
         char.healTip.value = value
-        timer.tween(1.2, char.healTip, {y = char.healTip.baseY - 16}, 'out-cubic',
+        timer.tween(1, char.healTip, {y = char.healTip.baseY - 16}, 'out-cubic',
                 function() char.healTip.y = char.healTip.baseY end)
     elseif value < 0 then
         -- shake of damage
@@ -205,9 +205,14 @@ function changeLife(char, value)
         timer.after(0.4, function() char.isShaking = false end)
         -- show damage tip
         char.damageTip.value = value
-        timer.tween(1.2, char.damageTip, {y = char.damageTip.baseY - 16}, 'out-cubic',
+        timer.tween(1, char.damageTip, {y = char.damageTip.baseY - 16}, 'out-cubic',
                 function() char.damageTip.y = char.damageTip.baseY end)
     end
+end
+
+function isPlayingDefence(char)
+    return char.playingCardAsAction and
+        table.contains(char.playingCard.action.type, 'defence')
 end
 
 function shallowcopy(orig)

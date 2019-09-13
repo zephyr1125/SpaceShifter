@@ -10,5 +10,5 @@ function UpkeepState:enter()
         end
     end
     
-    GameState.switch(PickCardState)
+    GameState.switch(LifeCheckState)
 end

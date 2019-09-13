@@ -25,6 +25,7 @@ function GameScreen:draw()
     
     self:drawBackground()
     map:draw(imgMapSlot, mapX, mapY)
+    currentEnemy:drawSelectSlot()
     currentEnemy:drawSprite(mapX, mapY)
     player:drawSprite(mapX, mapY)
     self:drawDecks()

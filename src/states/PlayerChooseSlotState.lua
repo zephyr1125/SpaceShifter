@@ -32,7 +32,7 @@ end
 function PlayerChooseSlotState:draw()
     local slot = map.slots[player.targetSlot]
     
-    setColor(white)
+    setColor(green)
     love.graphics.draw(imgSlotSelect, mapX + slot.x, mapY + slot.y)
 end
 

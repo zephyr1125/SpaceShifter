@@ -124,6 +124,13 @@ Enemies = class {
         drawSprite = function(self, mapX, mapY)
             baseDrawSprite(self, imgBansheeSprite, mapX, mapY)
         end,
+        drawSelectSlot = function(self)
+            if targetSlot == 0 then return end
+            
+            local slot = map.slots[self.targetSlot]
+            setColor(red)
+            love.graphics.draw(imgSlotSelect, mapX + slot.x, mapY + slot.y)
+        end,
         playCard = function(self)
             self.isPlayingSpecialCard = false
             self.specialCounter = self.specialCounter+1
@@ -173,6 +180,9 @@ Enemies = class {
         end,
         drawSprite = function(self, mapX, mapY)
             baseDrawSprite(self, imgGreedSprite, mapX, mapY)
+        end,
+        drawSelectSlot = function(self)
+            -- hide selection
         end,
         playCard = function(self)
             basePlayCard(self)

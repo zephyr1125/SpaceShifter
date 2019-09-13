@@ -10,14 +10,15 @@ function ResolutionState:enter()
     
     self:playFX(playerAction, enemyAction)
 
-    -- both move first
+    -- shift space first
+    self.shiftSpace()
+    -- then move
     self:move(playerAction, enemyAction)
     self.cardsEffect(playerAction, enemyAction)
     self.onAttack()
     self.extraDefence()
-    self.calcDamage()
-    self:playDefence()
-    self.changeSpace()
+    local isPlayerAttackSuccess, isEnemyAttackSuccess = self.calcDamage()
+    self:playDefence(isPlayerAttackSuccess, isEnemyAttackSuccess)
     
     self.cleanCards()
 end
@@ -111,7 +112,7 @@ function ResolutionState:done()
             self.isPlayerDefenceFXDone and self.isEnemyDefenceFXDone
     then
         -- next state
-        GameState.switch(LifeCheckState)
+        GameState.switch(UpkeepState)
     end
 end
 
@@ -174,9 +175,6 @@ function ResolutionState.extraDefence()
 end
 
 function ResolutionState.calcDamage()
-    -- no attack no damage
-    if player.attack == 0 and currentEnemy.attack == 0 then return end
-
     -- not correct slot, no damage
     local isPlayerAttackSuccess =
     player.targetSlot ~= nil and player.targetSlot == currentEnemy.slot
@@ -210,10 +208,12 @@ function ResolutionState.calcDamage()
     -- resolve damage
     currentEnemy:changeLife(-currentEnemy.damagePending)
     player:changeLife(-player.damagePending)
+    
+    return isPlayerAttackSuccess, isEnemyAttackSuccess
 end
 
-function ResolutionState:playDefence()
-    if player.defence>0 then
+function ResolutionState:playDefence(isPlayerAttackSuccess, isEnemyAttackSuccess)
+    if isPlayingDefence(player) or (player.defence>0 and isEnemyAttackSuccess) then
         if self.playerDefenceFX == nil then
             self.playerDefenceFX = peachy.new(spriteDefence[1],
                     love.graphics.newImage(spriteDefence[2]), spriteDefence[3])
@@ -227,7 +227,7 @@ function ResolutionState:playDefence()
         self.isPlayerDefenceFXDone = true
     end
 
-    if currentEnemy.defence>0 then
+    if isPlayingDefence(currentEnemy) or (currentEnemy.defence>0 and isPlayerAttackSuccess) then
         if self.enemyDefenceFX == nil then
             self.enemyDefenceFX = peachy.new(spriteDefence[1],
                     love.graphics.newImage(spriteDefence[2]), spriteDefence[3])
@@ -242,7 +242,7 @@ function ResolutionState:playDefence()
     end
 end
 
-function ResolutionState.changeSpace()
+function ResolutionState.shiftSpace()
     local enemyChangeSpace = currentEnemy.playingCard.action.onChangeSpace
     if enemyChangeSpace ~= nil then
         enemyChangeSpace(currentEnemy.targetSlot)

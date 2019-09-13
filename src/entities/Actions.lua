@@ -358,18 +358,17 @@ local Actions = class {
         ['roundAttack'] = {
             name = '横扫',
             icon = 'roundAttack',
-            info = '每3回合对邻近所有格造成3伤害,无视防御',
+            info = '每3回合对邻近所有格造成3伤害',
             score = 99,
             needChooseSlot = false,
             type = {'special'},
             effect = function(me, opponent)
                 for _, slot in pairs(map:getNoHoleNeighbours(me.slot)) do
                     local resident = map:getSlotOccupied(slot)
-                    if resident ~= nil then
+                        if resident ~= nil then
                         resident.damagePending = resident.damagePending + 3
                     end
                 end
-                me.attack = me.attack + 3
             end,
         },
     }

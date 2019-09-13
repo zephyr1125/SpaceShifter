@@ -17,12 +17,12 @@ function testsPlaySpace:tearDown()
 end
 
 function testsPlaySpace:testChangeMapSlotCard()
-    ResolutionState.changeSpace()
+    ResolutionState.shiftSpace()
     luaunit.assertEquals(map.slots[1].card, player.playingCard)
 end
 
 function testsPlaySpace:testOldCardToDiscardPile()
     local oldCard = map.slots[1].card
-    ResolutionState.changeSpace()
+    ResolutionState.shiftSpace()
     luaunit.assertEquals(decks.PlayerDeck.discardCards[1], oldCard)
 end
