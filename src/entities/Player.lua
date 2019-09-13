@@ -4,6 +4,15 @@ local function drawHandCard(id, card, handX, xInterval, handY, width)
     card:draw(cardX, handY)
 end
 
+local function cardFlyToHand(self, id, card, time)
+    time = time or 0.4
+    local xInterval = (playerHandWidth - cardWidth)/(#self.hand <= 1 and 1 or #self.hand-1)
+    local targetX = playerHandX + playerHandWidth - cardWidth -
+            (id-1)*(xInterval > cardWidth+1 and cardWidth+1 or xInterval)
+    local targetY = playerHandY - (self.currentCardId == id and 4 or 0)
+    timer.tween(time, card, {x = targetX, y = targetY})
+end
+
 local Player = {
     name = '塑地师',
     initLife = 5,
@@ -22,6 +31,9 @@ local Player = {
         charMove(self, 1, 'instant')
         self.hand = decks.PlayerDeck:pickCards(self.handSize)
         self.currentCardId = #self.hand
+        for i, card in pairs(self.hand) do
+            cardFlyToHand(self, i, card)
+        end
     end,
     upgrade = function(self)
         self.initLife = self.initLife + 1
@@ -34,18 +46,11 @@ local Player = {
         setColor(white)
         love.graphics.printf(tostring(self.life), x, y+cardHeight-fontSize-4, cardWidth, 'center')
     end,
-    drawHand  = function(self, x, y, width)
+    drawHand  = function(self)
         if self.hand == nil or #self.hand == 0 then return end
-
-        local xInterval = (width - cardWidth)/(#self.hand <= 1 and 1 or #self.hand-1)
-        for id, card in pairs(self.hand) do
-            if id ~= self.currentCardId then
-                drawHandCard(id, card, x, xInterval, y, width)
-            end
-        end
-        if self.currentCardId ~= 0 and self.currentCardId <= #self.hand then
-            drawHandCard(self.currentCardId, self.hand[self.currentCardId],
-                    x, xInterval, y-4, width)
+        
+        for _, card in pairs(self.hand) do
+            card:draw()
         end
     end,
     drawSprite = function(self, mapX, mapY)
@@ -66,20 +71,28 @@ local Player = {
     selectNext = function(self)
         if self.hand == nil or #self.hand == 0 then return end
         
+        local prevId = self.currentCardId
         local id = self.currentCardId + 1
         if id > #self.hand then
             id = 1
         end
         self.currentCardId = id
+        
+        cardFlyToHand(self, prevId, self.hand[prevId],0.1)
+        cardFlyToHand(self, self.currentCardId, self.hand[self.currentCardId],0.1)
     end,
     selectPrev = function(self)
         if self.hand == nil or #self.hand == 0 then return end
-        
+
+        local prevId = self.currentCardId
         local id = self.currentCardId - 1
         if id < 1 then
             id = #self.hand
         end
         self.currentCardId = id
+        
+        cardFlyToHand(self, prevId, self.hand[prevId],0.1)
+        cardFlyToHand(self, self.currentCardId, self.hand[self.currentCardId],0.1)
     end,
     playCard = function(me, opponent)
         me.playingCard = me.hand[me.currentCardId]

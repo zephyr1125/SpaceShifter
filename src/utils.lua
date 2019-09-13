@@ -49,6 +49,8 @@ function fillDeck(deck)
     for i = 1, deck.size do
         deck.cards[i] = createRandomCard(deck.scoreRange)
         deck.cards[i].deck = deck
+        deck.cards[i].x = deck.x
+        deck.cards[i].y = deck.y
     end
 end
 

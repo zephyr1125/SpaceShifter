@@ -39,8 +39,10 @@ local Decks = class {
         size = 40,
         scoreRange = {3,10},
         discardCards = {},
-        draw = function(self, x, y)
-            drawDeck(self.cards, x, y, drawCardAsSpace)
+        x = 4,
+        y = 4,
+        draw = function(self)
+            drawDeck(self.cards, self.x, self.y, drawCardAsSpace)
         end,
         pickCards = function(self, amount)
             return pickCards(self, amount)
@@ -50,8 +52,10 @@ local Decks = class {
         size = 12,
         scoreRange = {2,2},
         discardCards = {},
-        draw = function(self, x, y)
-            drawDeck(self.cards, x, y, drawCardAsAction)
+        x = 276,
+        y = 160,
+        draw = function(self)
+            drawDeck(self.cards, self.x, self.y, drawCardAsAction)
         end,
         pickCards = function(self, amount)
             return pickCards(self, amount)
@@ -61,6 +65,8 @@ local Decks = class {
         size = 9,
         scoreRange = {2,3},
         discardCards = {},
+        x = 120,
+        y = - cardHeight,
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)
         end,
@@ -72,6 +78,8 @@ local Decks = class {
         size = 9,
         scoreRange = {3,4},
         discardCards = {},
+        x = 120,
+        y = - cardHeight,
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)
         end,
@@ -83,6 +91,8 @@ local Decks = class {
         size = 9,
         scoreRange = {3,4},
         discardCards = {},
+        x = 120,
+        y = - cardHeight,
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)
         end,

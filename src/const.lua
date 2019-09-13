@@ -20,6 +20,10 @@ infoBarX = 4
 infoBarY = 216
 infoBarWidth = 312
 
+playerHandX = 72
+playerHandY =  160
+playerHandWidth = 200
+
 white = {255,255,255}
 black = {0,0,0}
 green = {0,255,0}

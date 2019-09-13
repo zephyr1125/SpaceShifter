@@ -8,28 +8,30 @@ function Card:init(action, space)
     self.isShowAction = true
 end
 
-function Card:draw(x, y)
+function Card:draw()
     if self.isShowAction then
-        self:drawCardAsAction(x, y)
+        self:drawCardAsAction()
     else
-        self:drawCardAsSpace(x, y)
+        self:drawCardAsSpace()
     end
 end
 
-function Card:drawCardAsAction(x, y)
+function Card:drawCardAsAction()
     setColor(cardActionColor)
-    love.graphics.rectangle('fill', x+self.tweenWidth/2, y,
+    love.graphics.rectangle('fill', self.x+self.tweenWidth/2, self.y,
             cardWidth-self.tweenWidth, cardHeight)
     setColor(white)
-    love.graphics.printf(self.action.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
+    love.graphics.printf(self.action.name, self.x, self.y+cardHeight/2-fontSize,
+            cardWidth, 'center')
 end
 
-function Card:drawCardAsSpace(x, y)
+function Card:drawCardAsSpace()
     setColor(cardSpaceColor)
-    love.graphics.rectangle('fill', x+self.tweenWidth/2, y,
+    love.graphics.rectangle('fill', self.x+self.tweenWidth/2, self.y,
             cardWidth-self.tweenWidth, cardHeight)
     setColor(white)
-    love.graphics.printf(self.space.name, x, y+cardHeight/2-fontSize, cardWidth, 'center')
+    love.graphics.printf(self.space.name, self.x, self.y+cardHeight/2-fontSize,
+            cardWidth, 'center')
 end
 
 function Card:flip(caller, onFliped)

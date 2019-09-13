@@ -50,8 +50,8 @@ function GameScreen:keypressed(key)
 end
 
 function GameScreen:drawDecks()
-    decks.PublicDeck:draw(4, 4)
-    decks.PlayerDeck:draw(276, 160)
+    decks.PublicDeck:draw()
+    decks.PlayerDeck:draw()
 end
 
 return GameScreen
