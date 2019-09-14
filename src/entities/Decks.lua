@@ -17,6 +17,10 @@ local function refillDeck(self)
     print('refilled deck')
 end
 
+local function discardCard(self, card)
+    table.add(self.discardCards, card)
+end
+
 -- if amount == 1 return 1 card, else return table of cards
 local function pickCards(self, amount)
     if #self.cards == 0 then
@@ -43,9 +47,13 @@ local Decks = class {
         y = 4,
         draw = function(self)
             drawDeck(self.cards, self.x, self.y, drawCardAsSpace)
+            -- drawFirstDiscardCards
         end,
         pickCards = function(self, amount)
             return pickCards(self, amount)
+        end,
+        discardCard = function(self, card)
+            discardCard(self, card)
         end
     },
     PlayerDeck = {
@@ -55,10 +63,21 @@ local Decks = class {
         x = 276,
         y = 160,
         draw = function(self)
+            --draw the latest dicard card
+            local card = self.discardCards[#self.discardCards]
+            if card~=nil and not floatequal(card.x, self.x, 0.1) then
+                card:draw()
+            end
+            
             drawDeck(self.cards, self.x, self.y, drawCardAsAction)
         end,
         pickCards = function(self, amount)
             return pickCards(self, amount)
+        end,
+        discardCard = function(self, card)
+            discardCard(self, card)
+            -- start card tween
+            card:moveTo(self.x, self.y, 0.3)
         end
     },
     BansheeDeck = {
@@ -72,6 +91,9 @@ local Decks = class {
         end,
         pickCards = function(self, amount)
             return pickCards(self, amount)
+        end,
+        discardCard = function(self, card)
+            discardCard(self, card)
         end
     },
     GhostDeck = {
@@ -85,6 +107,9 @@ local Decks = class {
         end,
         pickCards = function(self, amount)
             return pickCards(self, amount)
+        end,
+        discardCard = function(self, card)
+            discardCard(self, card)
         end
     },
     TrollDeck = {
@@ -98,6 +123,9 @@ local Decks = class {
         end,
         pickCards = function(self, amount)
             return pickCards(self, amount)
+        end,
+        discardCard = function(self, card)
+            discardCard(self, card)
         end
     }
 }

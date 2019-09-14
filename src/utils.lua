@@ -105,7 +105,7 @@ end
 
 function discardCard(card)
     local originDeck = card.deck
-    if originDeck ~= nil then table.add(originDeck.discardCards, card) end
+    if originDeck ~= nil then originDeck:discardCard(card) end
 end
 
 function getLifePercent(char)
@@ -254,4 +254,9 @@ function deepcopy(orig)
         copy = orig
     end
     return copy
+end
+
+function floatequal(left,right,precision)
+    local diff = math.abs(left-right)
+    return diff < precision
 end
