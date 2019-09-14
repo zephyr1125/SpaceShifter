@@ -24,10 +24,6 @@ local function enterEnemyTips(self)
 end
 
 local function noTipsKeyPressed(self, key)
-    if key == keys.B then
-        -- todo open system window
-        screenManager:view('/')
-    end
 
     if key == keys.DPad_right then
         player:selectNext()

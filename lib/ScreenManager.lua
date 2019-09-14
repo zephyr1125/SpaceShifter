@@ -61,9 +61,6 @@ function ScreenManager:registerEvents()
 	--function love.filedropped(...) _self:event('filedropped', ...) end
 	function love.focus(...) _self:event('focus', ...) end
 	function love.keypressed(...)
-		if select(1, ...) == 'escape' then
-			love.event.quit()
-		end
 		_self:event('keypressed', ...)
 	end
 	function love.keyreleased(...) _self:event('keyreleased', ...) end

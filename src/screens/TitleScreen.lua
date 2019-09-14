@@ -8,11 +8,11 @@ function TitleScreen:init(ScreenManager)
 	self.screen = ScreenManager
 	
 	self.buttons = SelectionGroup()
-	self.startButton = Button('Start', buttonWidth, buttonHeight,
+	self.startButton = Button('开始', buttonWidth, buttonHeight,
 			buttonIdleColor, buttonSelectColor, function()
 				self.screen:view('game')
 			end)
-	self.exitButton = Button('Exit', buttonWidth, buttonHeight,
+	self.exitButton = Button('退出', buttonWidth, buttonHeight,
 			buttonIdleColor, buttonSelectColor, function ()
 				love.event.quit()
 			end)
@@ -39,6 +39,8 @@ function TitleScreen:keypressed(key)
 		self.buttons:Prev()
 	elseif key == keys.DPad_down then
 		self.buttons:Next()
+	elseif key == keys.Menu then
+			love.event.quit()
 	end
 end
 

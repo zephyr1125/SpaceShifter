@@ -46,7 +46,9 @@ function GameScreen:drawBackground()
 end
 
 function GameScreen:keypressed(key)
-    
+    if key == keys.Menu and GameState.current() ~= SystemMenuState then
+        GameState.push(SystemMenuState)
+    end
 end
 
 function GameScreen:drawDecks()

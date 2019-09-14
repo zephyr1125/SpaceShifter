@@ -67,6 +67,7 @@ require('src.states.LoseState')
 require('src.states.RewardState')
 require('src.states.DiscardCardState')
 require('src.states.NextEnemyState')
+require('src.states.SystemMenuState')
 
 -- Load Game
 function love.load()
