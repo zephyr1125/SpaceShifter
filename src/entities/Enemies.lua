@@ -112,7 +112,7 @@ local Enemies = class {
     container = {
         banshee = {
             name = '巨蛇',
-            initLife = 0,
+            initLife = 5,
             deck = 'BansheeDeck',
             handSize = 3,
             spriteWidth = 42,
@@ -170,7 +170,7 @@ local Enemies = class {
         },
         ghost = {
             name = '鬼魂',
-            initLife = 7,
+            initLife = 6,
             deck = 'GhostDeck',
             handSize = 3,
             spriteWidth = 44,

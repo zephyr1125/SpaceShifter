@@ -53,7 +53,7 @@ function RewardState:draw()
     love.graphics.rectangle('fill', 0, 0, screenWidth, screenHeight)
     
     setColor(white)
-    love.graphics.printf('选择你的奖励', 0, 64, screenWidth, 'center')
+    love.graphics.printf('选择奖励,最多3张', 0, 64, screenWidth, 'center')
     
     setColor(white)
     self:drawRewards(32, 96, screenWidth-64)

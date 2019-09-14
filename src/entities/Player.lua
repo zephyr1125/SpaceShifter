@@ -49,7 +49,7 @@ local Player = {
                 card:draw()
             end
         end
-        if self.currentCardId~=0 then
+        if self.currentCardId~=0 and self.currentCardId<=#self.hand then
             self.hand[self.currentCardId]:draw()
         end
     end,

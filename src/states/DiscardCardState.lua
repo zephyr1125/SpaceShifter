@@ -134,8 +134,8 @@ function DiscardCardState:selectUp()
         local id = self.currentCardId - 5
         if id >= 1 then
             self.currentCardId = id
+            RefreshSelectCard(prevId, id)
         end
-        RefreshSelectCard(prevId, id)
     end
 end
 
