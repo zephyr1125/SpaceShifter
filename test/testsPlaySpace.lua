@@ -1,9 +1,9 @@
 testsPlaySpace = {}
 
 function testsPlaySpace:setUp()
-    map.slots[1].card = {space = spaces.container['plain']}
+    map.slots[1].card = {space = spaces.container.circle}
     map.slots[1].card.deck = decks.PlayerDeck
-    player.playingCard = {space = spaces.container['mountain']}
+    player.playingCard = {space = spaces.container.fence}
     player.playingCardAsAction = false
     player.targetSlot = 1
     

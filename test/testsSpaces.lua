@@ -15,9 +15,9 @@ end
 function testsSpaces:testMountainAffectDefence()
     player.playingCard = {action = actions.container.move}
     player.targetSlot = 1
-    map.slots[1].card = {space = spaces.container.mountain}
+    map.slots[1].card = {space = spaces.container.fence}
     currentEnemy.slot = 2
-    map.slots[2].card = {space = spaces.container.mountain}
+    map.slots[2].card = {space = spaces.container.fence}
     ResolutionState.extraDefence()
 
     luaunit.assertEquals(player.defence, 1)
@@ -26,7 +26,7 @@ end
 
 function testsSpaces:testPlainAffectAttack()
     player.playingCard = {action = actions.container.attack1}
-    map.slots[1].card = {space = spaces.container.plain}
+    map.slots[1].card = {space = spaces.container.circle}
     player.playingCard.action.effect(player, currentEnemy)
 
     luaunit.assertEquals(player.attack, 2)
@@ -55,8 +55,8 @@ end
 function testsSpaces:testCovePickCardOnDamaged()
     fillAllDecks()
     
-    map.slots[1].card = {space = spaces.container.cove}
-    map.slots[1].card = {space = spaces.container.cove}
+    map.slots[1].card = {space = spaces.container.well}
+    map.slots[1].card = {space = spaces.container.well}
     
     player.playingCard = {action = actions.container.move}
     player.life = 3
@@ -76,7 +76,7 @@ end
 
 function testsSpaces:testDesertDropCardOnAttack()
     map.slots[1].card = {space = spaces.container.desert}
-    map.slots[2].card = {space = spaces.container.plain}
+    map.slots[2].card = {space = spaces.container.circle}
 
     player.playingCard = {action = actions.container.attack1}
     player.life = 3
@@ -98,7 +98,7 @@ end
 
 function testsSpaces:testDesert_NotCorrectSlot_NoDropCard()
     map.slots[1].card = {space = spaces.container.desert}
-    map.slots[2].card = {space = spaces.container.plain}
+    map.slots[2].card = {space = spaces.container.circle}
 
     player.playingCard = {action = actions.container.attack1}
     player.life = 3

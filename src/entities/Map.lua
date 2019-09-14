@@ -44,23 +44,31 @@ local Map = class {
             card.isShowAction = false
             self.slots[i].baseCard = card
             self.slots[i].card = card
+            --timer.after(i*0.2, function()
+            --    card:moveTo()
+            --end)
         end
     end,
     draw = function(self, imgMapSlot, x, y)
-        for _, slot in pairs(self.slots) do
+        local sequence = {2,1,3,7,6,4,5}
+        for _, slotId in pairs(sequence) do
+            local slot = map.slots[slotId]
             setColor(white)
-            love.graphics.draw(imgMapSlot, x + slot.x, y + slot.y)
+            --love.graphics.draw(imgMapSlot, x + slot.x, y + slot.y)
+            
+            -- space chess
+            love.graphics.draw(slot.card.space.chess, x + slot.x, y + slot.y-8)
             
             --space name
-            local card
-            if slot.card ~= nil then
-                card = slot.card
-            else
-                card = slot.baseCard
-            end
-            setColor(black)
-            love.graphics.printf(card.space.name,
-                    x + slot.x, y + slot.y + 31-2-fontSize, 96, 'center')
+            --local card
+            --if slot.card ~= nil then
+            --    card = slot.card
+            --else
+            --    card = slot.baseCard
+            --end
+            --setColor(black)
+            --love.graphics.printf(card.space.name,
+            --        x + slot.x, y + slot.y + 31-2-fontSize, 96, 'center')
         end
     end,
     -- returns neighbour id starts with 1 at up, and counter clockwise

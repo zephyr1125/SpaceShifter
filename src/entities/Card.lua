@@ -35,11 +35,14 @@ function Card:drawCardAsSpace()
     -- bg
     love.graphics.draw(imgCardSpaceBg, self.x+self.tweenWidth/2, self.y, 0,
             1-(self.tweenWidth/cardWidth), 1)
-
-    setColor(black)
-    setColor(white)
-    love.graphics.printf(self.space.name, self.x, self.y+cardHeight/2-fontSize,
-            cardWidth, 'center')
+    
+    -- icon
+    love.graphics.draw(self.space.icon, self.x+self.tweenWidth/2+4, self.y+4, 0,
+            1-(self.tweenWidth/cardWidth), 1)
+    
+    -- effect
+    love.graphics.draw(self.space.effectIcon, self.x+self.tweenWidth/2+4, self.y+40, 0,
+            1-(self.tweenWidth/cardWidth), 1)
 end
 
 function Card:flip(caller, onFliped)
@@ -52,6 +55,6 @@ end
 
 function Card:moveTo(targetX, targetY, time, onComplete)
     time = time or 0.4
-    print(self.action.name..'|'..tostring(self.deck)..' move to '..tostring(targetX)..','..tostring(targetY))
+    --print(self.action.name..'|'..tostring(self.deck)..' move to '..tostring(targetX)..','..tostring(targetY))
     timer.tween(time, self, {x = targetX, y = targetY}, 'linear', onComplete)
 end

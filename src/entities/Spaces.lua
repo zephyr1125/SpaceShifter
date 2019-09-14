@@ -5,12 +5,12 @@ end
 
 local Spaces = class {
     container = {
-        ['mountain'] = {
-            name = '山脉',
-            icon = 'mountain',
+        fence = {
+            name = '栅栏',
+            icon = imgFenceIcon,
             info = '提升1点防御',
-            effectIcon = 'defence1',
-            spaceAnim = 'mountain',
+            effectIcon = imgFenceEffect,
+            chess = imgFenceChess,
             score = 1,
             benefit = 1,
             defaultTargetSlot = function(me, opponent)
@@ -21,12 +21,12 @@ local Spaces = class {
                 me.defence = me.defence + 1
             end
         },
-        ['canyon'] = {
-            name = '峡谷',
-            icon = 'canyon',
+        castle = {
+            name = '城堡',
+            icon = imgCastleIcon,
             info = '提升2点防御',
-            effectIcon = 'defence2',
-            spaceAnim = 'canyon',
+            effectIcon = imgCastleEffect,
+            chess = imgCastleChess,
             score = 2,
             benefit = 2,
             defaultTargetSlot = function(me, opponent)
@@ -37,12 +37,12 @@ local Spaces = class {
                 me.defence = me.defence + 2
             end
         },
-        ['plain'] = {
-            name = '平原',
-            icon = 'plain',
+        circle = {
+            name = '法阵',
+            icon = imgCircleIcon,
             info = '提升1点攻击',
-            effectIcon = 'attack1',
-            spaceAnim = 'plain',
+            effectIcon = imgCircleEffect,
+            chess = imgCircleChess,
             score = 1,
             benefit = 1,
             defaultTargetSlot = function(me, opponent)
@@ -53,12 +53,12 @@ local Spaces = class {
                 me.attack = me.attack + 1
             end
         },
-        ['ruin'] = {
-            name = '遗迹',
-            icon = 'ruin',
+        advCircle = {
+            name = '上级法阵',
+            icon = imgAdvCircleIcon,
             info = '提升2点攻击',
-            effectIcon = 'attack2',
-            spaceAnim = 'ruin',
+            effectIcon = imgAdvCircleEffect,
+            chess = imgAdvCircleChess,
             score = 2,
             benefit = 2,
             defaultTargetSlot = function(me, opponent)
@@ -69,12 +69,12 @@ local Spaces = class {
                 me.attack = me.attack + 2
             end
         },
-        ['castle'] = {
-            name = '堡垒',
-            icon = 'castle',
+        circleFence = {
+            name = '防护法阵',
+            icon = imgCircleFenceIcon,
             info = '提升1防御1攻击',
-            effectIcon = 'a1d1',
-            spaceAnim = 'castle',
+            effectIcon = imgCircleFenceEffect,
+            chess = imgCircleFenceChess,
             score = 2,
             benefit = 2,
             defaultTargetSlot = function(me, opponent)
@@ -91,10 +91,10 @@ local Spaces = class {
         },
         ['graveyard'] = {
             name = '墓地',
-            icon = 'graveyard',
+            icon = imgGraveyardIcon,
             info = '每回合受伤1',
-            effectIcon = 'harm1',
-            spaceAnim = 'graveyard',
+            effectIcon = imgGraveyardEffect,
+            chess = imgGraveyardChess,
             score = 2,
             benefit = -1,
             onUpkeep = function(resident)
@@ -111,7 +111,7 @@ local Spaces = class {
         --    icon = 'bog',
         --    info = '无法转移时空',
         --    effectIcon = 'grounded',
-        --    spaceAnim = 'bog',
+        --    chess = 'bog',
         --    score = 2,
         --    benefit = -1,
         --    onActionCheck = function(action)
@@ -122,24 +122,24 @@ local Spaces = class {
         --        end
         --    end,
         --},
-        ['cove'] = {
-            name = '海湾',
-            icon = 'cove',
+        well = {
+            name = '法力井',
+            icon = imgWellIcon,
             info = '受伤时抽牌1',
-            effectIcon = 'pick',
-            spaceAnim = 'cove',
+            effectIcon = imgWellEffect,
+            chess = imgWellChess,
             score = 2,
             benefit = 1,
             onDamaged = function(me)
                 me:pickCard()
             end,
         },
-        ['desert'] = {
+        desert = {
             name = '沙漠',
-            icon = 'desert',
+            icon = imgDesertIcon,
             info = '攻击时附加弃牌1',
-            effectIcon = 'drop',
-            spaceAnim = 'desert',
+            effectIcon = imgDesertEffect,
+            chess = imgDesertChess,
             score = 2,
             benefit = -1,
             onAttack = function(me, opponent)

@@ -33,13 +33,13 @@ end
 
 function testsMap:testGetBestBenefitNeighbour()
     map.slots[1].card = {space = spaces.container.graveyard}
-    map.slots[2].card = {space = spaces.container.mountain}
-    map.slots[6].card = {space = spaces.container.canyon}
+    map.slots[2].card = {space = spaces.container.fence}
+    map.slots[6].card = {space = spaces.container.castle}
     map.slots[7].card = {space = spaces.container.graveyard}
 
     luaunit.assertEquals(map:getBestBenefitNeighbour(1), 6)
 
-    map.slots[1].card = {space = spaces.container.canyon}
+    map.slots[1].card = {space = spaces.container.castle}
 
     luaunit.assertEquals(map:getBestBenefitNeighbour(1), 1)
 end

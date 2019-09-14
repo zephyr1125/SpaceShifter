@@ -12,7 +12,7 @@ function testsAttackAndDefence:testPlainAffectAttack()
     player.playingCard = {action = actions.container['attack1']}
     player.playingCardAsAction = true
     player.slot = 1
-    map.slots[1].card = {space = spaces.container['plain']}
+    map.slots[1].card = {space = spaces.container.circle}
     player.playingCard.action.effect(player, currentEnemy)
     
     luaunit.assertEquals(player.attack, 2)
@@ -23,9 +23,9 @@ function testsAttackAndDefence:testMountainAffectDefence()
     player.playingCardAsAction = true
     player.slot = 1
     player.targetSlot = 1
-    map.slots[1].card = {space = spaces.container['mountain']}
+    map.slots[1].card = {space = spaces.container.fence}
     currentEnemy.slot = 2
-    map.slots[2].card = {space = spaces.container['mountain']}
+    map.slots[2].card = {space = spaces.container.fence}
     ResolutionState.extraDefence()
 
     luaunit.assertEquals(player.defence, 1)
@@ -40,7 +40,7 @@ function testsAttackAndDefence:testCorrectDamageCalc()
     currentEnemy.life = 5
     currentEnemy.defence = 1
     currentEnemy.slot = 2
-    map.slots[1].card = {space = spaces.container['plain']}
+    map.slots[1].card = {space = spaces.container.circle}
 
     player.playingCard.action.effect(player, currentEnemy)
     ResolutionState.calcDamage()
@@ -55,7 +55,7 @@ function testsAttackAndDefence:testNotRightSlot_NoDamage()
     player.targetSlot = 2
     currentEnemy.life = 5
     currentEnemy.slot = 3
-    map.slots[1].card = {space = spaces.container['plain']}
+    map.slots[1].card = {space = spaces.container.circle}
 
     player.playingCard.action.effect(player, currentEnemy)
     ResolutionState.calcDamage()

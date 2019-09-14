@@ -84,7 +84,7 @@ function testsActions:testDropCard_MissSlot_NotDrop()
 end
 
 function testsActions:testSpaceRecover()
-    map.slots[6].card = {space = spaces.container.plain, deck = decks.PlayerDeck}
+    map.slots[6].card = {space = spaces.container.circle, deck = decks.PlayerDeck}
     map.slots[6].baseCard = {space = spaces.container.graveyard, deck = decks.PublicDeck}
     
     currentEnemy.playingCard = {action = actions.container.spaceRecover}
@@ -96,11 +96,11 @@ end
 
 function testsActions:testUniverseRecover()
     for _, slot in pairs(map.slots) do
-        slot.baseCard = {space = spaces.container.plain, deck = decks.PublicDeck}
+        slot.baseCard = {space = spaces.container.circle, deck = decks.PublicDeck}
         slot.card = slot.baseCard
     end
-    map.slots[1].card = {space = spaces.container.plain, deck = decks.PlayerDeck}
-    map.slots[3].card = {space = spaces.container.mountain, deck = decks.PlayerDeck}
+    map.slots[1].card = {space = spaces.container.circle, deck = decks.PlayerDeck}
+    map.slots[3].card = {space = spaces.container.fence, deck = decks.PlayerDeck}
     map.slots[6].card = {space = spaces.container.graveyard, deck = decks.PlayerDeck}
 
     currentEnemy.playingCard = {action = actions.container.universeRecover}
