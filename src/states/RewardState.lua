@@ -1,12 +1,11 @@
 RewardState = {}
 
-local function drawCard(id, card, x, xInterval, y, cardAsAction)
-    local cardX = x + (id-1)*xInterval
-    card:draw(cardX, y)
+local function drawCard(id, card)
+    card:draw()
     -- draw selection
     if card.isRewardSelected then
         setColor(white)
-        love.graphics.draw(imgRewardSelect, cardX + cardWidth - 16, y + 2)
+        love.graphics.draw(imgRewardSelect, card.x + cardWidth - 16, card.y + 2)
     end
 end
 
@@ -68,12 +67,11 @@ function RewardState:drawRewards(x, y, width)
     local xInterval = (width - cardWidth)/6
     for id, slot in pairs(map.slots) do
         if id ~= self.currentCardId then
-            drawCard(id, slot.baseCard, x, xInterval, y)
+            drawCard(id, slot.baseCard)
         end
     end
     if self.currentCardId ~= 0 then
-        drawCard(self.currentCardId, map.slots[self.currentCardId].baseCard,
-                x, xInterval, y+4)
+        drawCard(self.currentCardId, map.slots[self.currentCardId].baseCard)
     end
 end
 
@@ -92,19 +90,29 @@ function RewardState:confirmSelection()
 end
 
 function RewardState:selectRight()
+    local prevId = self.currentCardId
     local id = self.currentCardId + 1
     if id > #map.slots then
         id = 1
     end
     self.currentCardId = id
+    
+    map.slots[prevId].baseCard:moveTo(rewardCardX+(prevId-1)*rewardCardInterval, rewardCardY, 0.1)
+    map.slots[self.currentCardId].baseCard:moveTo(
+            rewardCardX+(id-1)*rewardCardInterval, rewardCardY-4, 0.1)
 end
 
 function RewardState:selectLeft()
+    local prevId = self.currentCardId
     local id = self.currentCardId - 1
     if id <1 then
         id = #map.slots
     end
     self.currentCardId = id
+
+    map.slots[prevId].baseCard:moveTo(rewardCardX+(prevId-1)*rewardCardInterval, rewardCardY, 0.1)
+    map.slots[self.currentCardId].baseCard:moveTo(
+            rewardCardX+(id-1)*rewardCardInterval, rewardCardY-4, 0.1)
 end
 
 function RewardState:keypressed(key)

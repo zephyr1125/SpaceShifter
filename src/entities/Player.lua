@@ -7,8 +7,8 @@ end
 
 local Player = {
     name = '塑地师',
-    initLife = 10,
-    life = 10,
+    initLife = 5,
+    life = 5,
     deck = 'PlayerDeck',
     handSize = 3,
     rewardSize = 3,

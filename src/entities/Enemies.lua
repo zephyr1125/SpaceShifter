@@ -4,6 +4,7 @@ local function baseInit(self, deck, onComplete)
     charMove(self, self.slot, 'arrive', function()
         self.hand = deck:pickCards(self.handSize)
         self.specialCounter = 0
+        self.isInited = true
         onComplete()
     end)
 end
@@ -111,12 +112,15 @@ local Enemies = class {
     container = {
         banshee = {
             name = '巨蛇',
-            initLife = 10,
+            initLife = 0,
             deck = 'BansheeDeck',
             handSize = 3,
             spriteWidth = 42,
             spriteHeight = 44,
             isShaking = false,
+            isInited = false,
+            x = 0,
+            y = -120,
             specialCard = Card(actions.container.roundAttack, nil, specialCardX, specialCardY),
             damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
             healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
@@ -173,6 +177,9 @@ local Enemies = class {
             spriteHeight = 44,
             isShaking = false,
             isImmuneGrave = true,
+            isInited = false,
+            x = 0,
+            y = -120,
             specialCard = Card(actions.container.graveWorld, nil, specialCardX, specialCardY),
             damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
             healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
@@ -228,6 +235,9 @@ local Enemies = class {
             spriteWidth = 44,
             spriteHeight = 44,
             isShaking = false,
+            isInited = false,
+            x = 0,
+            y = -120,
             specialCard = Card(actions.container.jump, nil, specialCardX, specialCardY),
             damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
             healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},

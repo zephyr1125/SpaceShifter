@@ -1,5 +1,4 @@
 function InitAssets()
-    imgMapSlot = love.graphics.newImage("assets/images/map_slot.png")
     imgSlotSelect = love.graphics.newImage('assets/images/slot_select.png')
     imgRewardSelect = love.graphics.newImage('assets/images/reward_select.png')
     imgDiscardSelect = love.graphics.newImage('assets/images/discard_select.png')

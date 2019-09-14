@@ -28,6 +28,11 @@ playerHandY =  160
 playerHandHideY = 208
 playerHandWidth = 200
 
+rewardCardX = 32
+rewardCardY = 96
+rewardCardWidth = screenWidth-64
+rewardCardInterval = (rewardCardWidth - cardWidth)/6
+
 white = {255,255,255}
 black = {0,0,0}
 green = {0,255,0}

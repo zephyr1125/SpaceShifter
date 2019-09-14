@@ -50,18 +50,24 @@ local Map = class {
             end)
         end
     end,
-    draw = function(self, imgMapSlot, x, y)
+    draw = function(self, x, y)
         local sequence = {2,1,3,7,6,4,5}
         for _, slotId in pairs(sequence) do
             local slot = map.slots[slotId]
             setColor(white)
-
+            if floatequal(slot.card.y, mapY+slot.y-12, 0.1) then
+                -- space chess
+                love.graphics.draw(slot.card.space.chess, x + slot.x, y + slot.y-8)
+            end
+        end
+    end,
+    drawCards = function(self, x, y)
+        for id = #map.slots, 1, -1 do
+            local slot = map.slots[id]
+            setColor(white)
             if not floatequal(slot.card.y, mapY+slot.y-12, 0.1) then
                 --space card
                 slot.card:draw()
-            else
-                -- space chess
-                love.graphics.draw(slot.card.space.chess, x + slot.x, y + slot.y-8)
             end
         end
     end,
