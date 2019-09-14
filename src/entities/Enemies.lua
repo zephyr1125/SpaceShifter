@@ -1,3 +1,13 @@
+local function baseInit(self, deck, onComplete)
+    self.life = self.initLife
+    self.slot = 7
+    charMove(self, self.slot, 'arrive', function()
+        self.hand = deck:pickCards(self.handSize)
+        self.specialCounter = 0
+        onComplete()
+    end)
+end
+
 local baseDrawInfo = function(self, x, y)
     setColor(enemyInfoBgColor)
     love.graphics.rectangle('fill', x,y, cardWidth, cardHeight)
@@ -110,12 +120,8 @@ local Enemies = class {
             specialCard = Card(actions.container.roundAttack, nil, specialCardX, specialCardY),
             damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
             healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
-            init = function(self)
-                self.life = self.initLife
-                self.slot = 7
-                charMove(self, self.slot, 'instant')
-                self.hand = decks.BansheeDeck:pickCards(self.handSize)
-                self.specialCounter = 0
+            init = function(self, onComplete)
+                baseInit(self, decks.BansheeDeck, onComplete)
             end,
             drawInfo = function(self, x, y)
                 baseDrawInfo(self, x, y)
@@ -127,7 +133,7 @@ local Enemies = class {
                 baseDrawSprite(self, imgBansheeSprite, mapX, mapY)
             end,
             drawSelectSlot = function(self)
-                if targetSlot == 0 then return end
+                if self.targetSlot == nil or self.targetSlot == 0 then return end
 
                 local slot = map.slots[self.targetSlot]
                 setColor(red)
@@ -170,12 +176,8 @@ local Enemies = class {
             specialCard = Card(actions.container.graveWorld, nil, specialCardX, specialCardY),
             damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
             healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
-            init = function(self)
-                self.life = self.initLife
-                self.slot = 7
-                charMove(self, self.slot, 'instant')
-                self.hand = decks.GhostDeck:pickCards(self.handSize)
-                self.specialCounter = 0
+            init = function(self, onComplete)
+                baseInit(self, decks.GhostDeck, onComplete)
             end,
             drawInfo = function(self, x, y)
                 baseDrawInfo(self, x, y)
@@ -229,12 +231,8 @@ local Enemies = class {
             specialCard = Card(actions.container.jump, nil, specialCardX, specialCardY),
             damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
             healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
-            init = function(self)
-                self.life = self.initLife
-                self.slot = 7
-                charMove(self, self.slot, 'instant')
-                self.hand = decks.TrollDeck:pickCards(self.handSize)
-                self.specialCounter = 0
+            init = function(self, onComplete)
+                baseInit(self, decks.GhostDeck, onComplete)
             end,
             drawInfo = function(self, x, y)
                 baseDrawInfo(self, x, y)

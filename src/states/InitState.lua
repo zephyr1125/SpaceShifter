@@ -7,16 +7,19 @@ function InitState:enter()
     
     fillAllDecks()
     sortDeck(decks.PublicDeck)
-    map:init()
-    player:init()
-    self:initEnemy()
-    
-    GameState.switch(EnemyActionState)
+    map:init(function()
+        player:init(function()
+            self:initEnemy(function()
+                GameState.switch(EnemyActionState)
+            end)
+        end)
+    end)
 end
 
-function InitState:initEnemy()
-    currentEnemy = enemies.container.troll
-    currentEnemy:init()
+function InitState:initEnemy(onComplete)
+    currentEnemyId = 'banshee'
+    currentEnemy = enemies.container[currentEnemyId]
+    currentEnemy:init(onComplete)
 end
 
 function InitState:update(dt)

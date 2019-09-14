@@ -53,8 +53,9 @@ function Card:flip(caller, onFliped)
     end)
 end
 
-function Card:moveTo(targetX, targetY, time, onComplete)
+function Card:moveTo(targetX, targetY, time, onComplete, method)
     time = time or 0.4
+    method = method or 'linear'
     --print(self.action.name..'|'..tostring(self.deck)..' move to '..tostring(targetX)..','..tostring(targetY))
-    timer.tween(time, self, {x = targetX, y = targetY}, 'linear', onComplete)
+    timer.tween(time, self, {x = targetX, y = targetY}, method, onComplete)
 end

@@ -15,14 +15,20 @@ local Player = {
     spriteWidth = 16,
     spriteHeight = 18,
     isShaking = false,
+    isInited = false,
+    x = 0,
+    y = -120,
     damageTip = {x = -4, baseY = -6, y = -6, img = imgDamageTip, value = 0},
     healTip = {x = 16, baseY = -6, y = -6, img = imgHealTip, value = 0},
-    init = function(self)
+    init = function(self, onComplete)
         self.life = self.initLife
         self.slot = 1
-        charMove(self, 1, 'instant')
-        self.hand = decks.PlayerDeck:pickCards(self.handSize)
-        self.currentCardId = 1
+        charMove(self, 1, 'arrive', function()
+            self.isInited = true
+            self.hand = decks.PlayerDeck:pickCards(self.handSize)
+            self.currentCardId = 1
+            onComplete()
+        end)
     end,
     upgrade = function(self)
         self.initLife = self.initLife + 1

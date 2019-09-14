@@ -25,17 +25,19 @@ function GameScreen:draw()
     
     self:drawBackground()
     map:draw(imgMapSlot, mapX, mapY)
-    currentEnemy:drawSelectSlot()
-    currentEnemy:drawSprite(mapX, mapY)
-    player:drawSprite(mapX, mapY)
     self:drawDecks()
-    player:drawHand(72, 160, 200)
-    player:drawInfo(4, 160)
-    if currentEnemy ~= nil then
+    if currentEnemy~=nil then
+        currentEnemy:drawSelectSlot()
+        currentEnemy:drawSprite(mapX, mapY)
         currentEnemy:drawInfo(screenWidth-2-cardWidth, 4)
         currentEnemy:drawPlayingCard(enemyCardX, enemyCardY)
     end
-    infoBar:draw(infoBarX, infoBarY)
+    player:drawSprite(mapX, mapY)
+    if player.isInited then
+        player:drawHand(72, 160, 200)
+        player:drawInfo(4, 160)
+        infoBar:draw(infoBarX, infoBarY)
+    end
     drawFPS()
     drawLogs()
 end

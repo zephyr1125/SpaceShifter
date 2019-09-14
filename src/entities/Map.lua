@@ -37,16 +37,17 @@ local Map = class {
             y = 32
         }
     },
-    init = function(self)
+    init = function(self, onComplete)
         -- pick space cards to slots
         for i, slot in pairs(self.slots) do
             local card = decks.PublicDeck:pickCards(1)
             card.isShowAction = false
             self.slots[i].baseCard = card
             self.slots[i].card = card
-            --timer.after(i*0.2, function()
-            --    card:moveTo()
-            --end)
+            timer.after(i*0.3, function()
+                local callback = (i == #self.slots) and onComplete or nil
+                card:moveTo(mapX+slot.x+28, mapY+slot.y-12, 0.3, callback, 'out-cubic')
+            end)
         end
     end,
     draw = function(self, imgMapSlot, x, y)
@@ -54,21 +55,14 @@ local Map = class {
         for _, slotId in pairs(sequence) do
             local slot = map.slots[slotId]
             setColor(white)
-            --love.graphics.draw(imgMapSlot, x + slot.x, y + slot.y)
-            
-            -- space chess
-            love.graphics.draw(slot.card.space.chess, x + slot.x, y + slot.y-8)
-            
-            --space name
-            --local card
-            --if slot.card ~= nil then
-            --    card = slot.card
-            --else
-            --    card = slot.baseCard
-            --end
-            --setColor(black)
-            --love.graphics.printf(card.space.name,
-            --        x + slot.x, y + slot.y + 31-2-fontSize, 96, 'center')
+
+            if not floatequal(slot.card.y, mapY+slot.y-12, 0.1) then
+                --space card
+                slot.card:draw()
+            else
+                -- space chess
+                love.graphics.draw(slot.card.space.chess, x + slot.x, y + slot.y-8)
+            end
         end
     end,
     -- returns neighbour id starts with 1 at up, and counter clockwise

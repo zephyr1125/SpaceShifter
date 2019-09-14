@@ -1,7 +1,14 @@
 NextEnemyState = {}
 
 function NextEnemyState:enter()
-    currentEnemy = randomElement(enemies.container, currentEnemy)
+    if currentEnemyId == 'banshee' then
+        currentEnemyId = 'ghost'
+    elseif currentEnemyId == 'ghost' then
+        currentEnemyId = 'troll'
+    elseif currentEnemyId == 'troll' then
+        currentEnemyId = 'banshee'    
+    end
+    currentEnemy = enemies.container[currentEnemyId]
     currentEnemy:init()
     map:init()
     player:init()
