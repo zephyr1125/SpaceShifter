@@ -4,6 +4,7 @@ function InitState:enter()
     decks = reload('src.entities.Decks')
     player = reload('src.entities.Player')
     enemies = reload('src.entities.Enemies')
+    currentEnemy = nil
     
     fillAllDecks()
     sortDeck(decks.PublicDeck)
