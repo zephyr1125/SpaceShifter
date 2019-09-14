@@ -25,6 +25,10 @@ function Card:drawCardAsAction()
     love.graphics.draw(imgCardActionBg, self.x+self.tweenWidth/2, self.y, 0,
         1-(self.tweenWidth/cardWidth), 1)
 
+    -- icon
+    love.graphics.draw(self.action.icon, self.x+self.tweenWidth/2+4, self.y+4, 0,
+            1-(self.tweenWidth/cardWidth), 1)
+
     -- effect
     love.graphics.draw(self.action.effectIcon, self.x+self.tweenWidth/2+4, self.y+40, 0,
             1-(self.tweenWidth/cardWidth), 1)

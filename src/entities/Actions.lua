@@ -13,7 +13,6 @@ local Actions = class {
     container = {
         ['attack1'] = {
             name = '戳刺',
-            icon = 'attack1',
             info = '对指定格上的单位攻击1',
             score = 1,
             needChooseSlot = true,
@@ -39,7 +38,6 @@ local Actions = class {
         },
         ['attack2'] = {
             name = '挥击',
-            icon = 'attack2',
             info = '对指定格上的单位攻击2',
             score = 2,
             needChooseSlot = true,
@@ -63,7 +61,6 @@ local Actions = class {
         },
         ['attack3'] = {
             name = '重劈',
-            icon = 'attack3',
             info = '对指定格上的单位攻击3',
             score = 3,
             needChooseSlot = true,
@@ -87,7 +84,6 @@ local Actions = class {
         },
         ['a1d1'] = {
             name = '格挡反击',
-            icon = 'a1d1',
             info = '防御1并攻击1',
             score = 1.5,
             needChooseSlot = true,
@@ -112,7 +108,6 @@ local Actions = class {
         },
         ['a2d1'] = {
             name = '格挡重击',
-            icon = 'a2d1',
             info = '防御1并攻击2',
             score = 2.5,
             needChooseSlot = true,
@@ -137,7 +132,6 @@ local Actions = class {
         },
         ['defence1'] = {
             name = '防御',
-            icon = 'defence1',
             info = '防御1点伤害',
             score = 1,
             needChooseSlot = false,
@@ -149,7 +143,6 @@ local Actions = class {
         },
         ['heal1'] = {
             name = '喘息',
-            icon = 'heal1',
             info = '提升1点血量',
             score = 1,
             needChooseSlot = false,
@@ -161,7 +154,6 @@ local Actions = class {
         },
         ['heal2'] = {
             name = '包扎',
-            icon = 'heal2',
             info = '提升2点血量',
             score = 2.5,
             needChooseSlot = false,
@@ -174,7 +166,6 @@ local Actions = class {
         ['pick2'] = {
             -- pick up 2 cards
             name = '休整',
-            icon = 'pick2',
             info = '抓牌2',
             score = 3,
             needChooseSlot = false,
@@ -187,7 +178,6 @@ local Actions = class {
         },
         ['a1p1'] = {
             name = '戏法',
-            icon = 'a1p1',
             info = '攻击1抓牌1',
             score = 2,
             needChooseSlot = true,
@@ -212,7 +202,6 @@ local Actions = class {
         },
         ['a2p1'] = {
             name = '诈术',
-            icon = 'a2p1',
             info = '攻击2抓牌1',
             score = 3,
             needChooseSlot = true,
@@ -238,7 +227,6 @@ local Actions = class {
         ['h1p2'] = {
             -- heal1 and pick up 2 cards
             name = '整理思绪',
-            icon = 'h1p2',
             info = '加血1抓牌2',
             score = 3,
             needChooseSlot = false,
@@ -252,7 +240,6 @@ local Actions = class {
         },
         ['drop1'] = {
             name = '扰乱',
-            icon = 'drop1',
             info = '使指定格上的单位弃牌1张',
             score = 1.5,
             needChooseSlot = true,
@@ -273,7 +260,6 @@ local Actions = class {
         },
         ['drop2'] = {
             name = '混乱',
-            icon = 'drop2',
             info = '使指定格上的单位弃牌2张',
             score = 2.5,
             needChooseSlot = true,
@@ -295,7 +281,6 @@ local Actions = class {
         },
         ['a1drop1'] = {
             name = '摄魂一击',
-            icon = 'a1drop1',
             info = '对指定格上的单位攻击1弃牌1',
             score = 2,
             needChooseSlot = true,
@@ -322,7 +307,6 @@ local Actions = class {
         },
         ['move'] = {
             name = '时空转移',
-            icon = 'move',
             info = '移动到另一个时空',
             score = 1,
             needChooseSlot = true,
@@ -341,7 +325,6 @@ local Actions = class {
         },
         ['spaceRecover'] = {
             name = '时空复原',
-            icon = 'spaceRecover',
             info = '目标时空恢复初始',
             score = 99,
             needChooseSlot = true,
@@ -359,7 +342,6 @@ local Actions = class {
         },
         ['universeRecover'] = {
             name = '宇宙复原',
-            icon = 'universeRecover',
             info = '全部时空恢复初始',
             score = 99,
             needChooseSlot = false,
@@ -372,7 +354,6 @@ local Actions = class {
         },
         ['roundAttack'] = {
             name = '横扫',
-            icon = 'roundAttack',
             info = '每3回合对邻近所有格造成3伤害',
             score = 99,
             needChooseSlot = true,
@@ -389,7 +370,6 @@ local Actions = class {
         },
         ['graveWorld'] = {
             name = '千墓',
-            icon = 'graveWorld',
             info = '不受墓地影响,每3回合将所有地面变为墓地',
             score = 99,
             needChooseSlot = false,
@@ -405,7 +385,6 @@ local Actions = class {
         },
         ['jump'] = {
             name = '千斤坠',
-            icon = 'roundAttack',
             info = '每3回合跳跃到玩家位置,造成3点伤害并击退',
             score = 99,
             needChooseSlot = false,

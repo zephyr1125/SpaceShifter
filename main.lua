@@ -77,6 +77,7 @@ function love.load()
 	actions = require('src.entities.Actions')
 	for key, action in pairs(actions.container) do
 		action.effectIcon = love.graphics.newImage('assets/images/action_effect/'..key..'.png')
+		action.icon = love.graphics.newImage('assets/images/action_icon/'..key..'.png')
 	end
 	
 	spaces =  require('src.entities.Spaces')
