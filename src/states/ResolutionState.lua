@@ -3,26 +3,15 @@ ResolutionState = {}
 function ResolutionState:enter()
     self:reset()
 
+    self.step = 'cardMove'
+    
     self:cardsMove()
-    
-    local playerAction = player.playingCard.action
-    local playerSpace = player.playingCard.space
-    local enemyAction = currentEnemy.playingCard.action
-    local enemySpace = currentEnemy.playingCard.space
-    
-    self.step = 'effect'
-    
-    self:playFX(playerAction, enemyAction)
-
-    -- shift space first
-    self.shiftSpace()
-    -- then move
-    self:move(playerAction, enemyAction)
-    self:cardsEffect(playerAction, enemyAction)
 end
 
 function ResolutionState:cardsMove()
-    
+    player:hideUnplayedHandCards(function()
+            self.isCardMoveDone = true
+    end)
 end
 
 function ResolutionState:playFX(playerAction, enemyAction)
@@ -105,15 +94,26 @@ function ResolutionState:update(dt)
     if self.enemyDefenceFX ~= nil then
         self.enemyDefenceFX:update(dt)
     end
-
-    if self.step == 'effect' and self.isPlayerEffectDone and self.isEnemyEffectDone then
+    
+    if self.step == 'cardMove' and self.isCardMoveDone then
+        self.step = 'effect'
+        local playerAction = player.playingCard.action
+        local playerSpace = player.playingCard.space
+        local enemyAction = currentEnemy.playingCard.action
+        local enemySpace = currentEnemy.playingCard.space
+        self:playFX(playerAction, enemyAction)
+        -- shift space first
+        self.shiftSpace()
+        -- then move
+        self:move(playerAction, enemyAction)
+        self:cardsEffect(playerAction, enemyAction)
+    elseif self.step == 'effect' and self.isPlayerEffectDone and self.isEnemyEffectDone then
         self.step = 'damage'
     elseif self.step == 'damage' then
         self.onAttack()
         self.extraDefence()
         local isPlayerAttackSuccess, isEnemyAttackSuccess = self.calcDamage()
         self:playDefence(isPlayerAttackSuccess, isEnemyAttackSuccess)
-        self.cleanCards()
         self.step = 'done'
     elseif self.step == 'done' then
         self:done()
@@ -126,6 +126,7 @@ function ResolutionState:done()
             self.isPlayerDefenceFXDone and self.isEnemyDefenceFXDone and
             self.isPlayerEffectDone and self.isEnemyEffectDone
     then
+        self.cleanCards()
         -- next state
         GameState.switch(UpkeepState)
     end
@@ -301,6 +302,8 @@ function ResolutionState:reset()
     
     self.playerFX = nil
     self.enemyFX = nil
+    
+    self.isCardMoveDone = false
     
     self.isPlayerFXDone = false
     self.isEnemyFXDone = false

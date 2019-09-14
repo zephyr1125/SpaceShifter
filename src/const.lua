@@ -25,6 +25,7 @@ infoBarWidth = 312
 
 playerHandX = 72
 playerHandY =  160
+playerHandHideY = 208
 playerHandWidth = 200
 
 white = {255,255,255}

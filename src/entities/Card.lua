@@ -45,7 +45,7 @@ function Card:flip(caller, onFliped)
     end)
 end
 
-function Card:moveTo(targetX, targetY, time)
+function Card:moveTo(targetX, targetY, time, onComplete)
     time = time or 0.4
-    timer.tween(time, self, {x = targetX, y = targetY})
+    timer.tween(time, self, {x = targetX, y = targetY}, 'linear', onComplete)
 end

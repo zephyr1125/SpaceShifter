@@ -111,6 +111,13 @@ local Player = {
         for i, card in pairs(self.hand) do
             cardFlyToHand(self, i, card)
         end
+    end,
+    hideUnplayedHandCards = function(self, onComplete)
+        for i, card in pairs(self.hand) do
+            if card ~= self.playingCard then
+                card:moveTo(card.x, playerHandHideY, 0.1, onComplete)
+            end
+        end
     end
 }
 return Player
