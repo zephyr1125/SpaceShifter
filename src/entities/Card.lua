@@ -20,18 +20,23 @@ function Card:draw()
 end
 
 function Card:drawCardAsAction()
-    setColor(cardActionColor)
-    love.graphics.rectangle('fill', self.x+self.tweenWidth/2, self.y,
-            cardWidth-self.tweenWidth, cardHeight)
     setColor(white)
+    -- bg
+    love.graphics.draw(imgCardActionBg, self.x+self.tweenWidth/2, self.y, 0,
+        1-(self.tweenWidth/cardWidth), 1)
+    
+    setColor(black)
     love.graphics.printf(self.action.name, self.x, self.y+cardHeight/2-fontSize,
             cardWidth, 'center')
 end
 
 function Card:drawCardAsSpace()
-    setColor(cardSpaceColor)
-    love.graphics.rectangle('fill', self.x+self.tweenWidth/2, self.y,
-            cardWidth-self.tweenWidth, cardHeight)
+    setColor(white)
+    -- bg
+    love.graphics.draw(imgCardSpaceBg, self.x+self.tweenWidth/2, self.y, 0,
+            1-(self.tweenWidth/cardWidth), 1)
+
+    setColor(black)
     setColor(white)
     love.graphics.printf(self.space.name, self.x, self.y+cardHeight/2-fontSize,
             cardWidth, 'center')
@@ -47,5 +52,6 @@ end
 
 function Card:moveTo(targetX, targetY, time, onComplete)
     time = time or 0.4
+    print(self.action.name..'|'..tostring(self.deck)..' move to '..tostring(targetX)..','..tostring(targetY))
     timer.tween(time, self, {x = targetX, y = targetY}, 'linear', onComplete)
 end

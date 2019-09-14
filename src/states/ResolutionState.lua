@@ -278,7 +278,8 @@ function ResolutionState.shiftSpace()
 end
 
 function ResolutionState.cleanCards()
-    table.remove(player.hand, player.currentCardId)
+    -- cant use currentCardId, because drop card ability maybe make id wrong
+    table.remove(player.hand, table.find(player.hand, player.playingCard))
     player.currentCardId = 0
     if player.playingCardAsAction then
         decks.PlayerDeck:discardCard(player.playingCard)

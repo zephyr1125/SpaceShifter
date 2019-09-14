@@ -93,6 +93,16 @@ function table.contains(tab, val)
     return false
 end
 
+function table.find(tab, val)
+    for i, value in pairs(tab) do
+        if value == val then
+            return i
+        end
+    end
+
+    return 0
+end
+
 function table.clean(t)
     for k in pairs (t) do
         t [k] = nil
@@ -156,8 +166,9 @@ function dropFirstHandCard(char)
     
     local dropId = 1
     if char.currentCardId == 1 then dropId = 2 end
-    
-    table.remove(char.hand,dropId)
+
+    discardCard(char.hand[dropId])
+    table.remove(char.hand, dropId)
 end
 
 function sortDeck(deck)

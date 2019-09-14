@@ -28,7 +28,6 @@ function TitleScreen:draw()
 	self.startButton:draw((screenWidth-buttonWidth)/2, buttonStartY)
 	self.exitButton:draw((screenWidth-buttonWidth)/2, buttonStartY+buttonHeight)
 	setColor(white)
-	--love.graphics.draw(imgPreview, 0, 0)
 	drawFPS()
 	drawLogs()
 end

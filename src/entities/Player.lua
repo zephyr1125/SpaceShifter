@@ -113,6 +113,11 @@ local Player = {
         end
     end,
     hideUnplayedHandCards = function(self, onComplete)
+        if #self.hand <= 1 then
+            onComplete()
+            return
+        end
+
         for i, card in pairs(self.hand) do
             if card ~= self.playingCard then
                 card:moveTo(card.x, playerHandHideY, 0.1, onComplete)

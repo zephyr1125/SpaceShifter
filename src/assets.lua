@@ -1,5 +1,4 @@
 function InitAssets()
-    imgPreview = love.graphics.newImage('assets/images/preview.png')
     imgMapSlot = love.graphics.newImage("assets/images/map_slot.png")
     imgSlotSelect = love.graphics.newImage('assets/images/slot_select.png')
     imgRewardSelect = love.graphics.newImage('assets/images/reward_select.png')
@@ -11,6 +10,8 @@ function InitAssets()
     imgButtonY = love.graphics.newImage('assets/images/button_y.png')
     imgDamageTip = love.graphics.newImage('assets/images/damage_tip.png')
     imgHealTip = love.graphics.newImage('assets/images/heal_tip.png')
+    imgCardActionBg = love.graphics.newImage('assets/images/card_action.png')
+    imgCardSpaceBg = love.graphics.newImage('assets/images/card_space.png')
     -- sprite
     spritePlayer = peachy.new("assets/sprites/oldHero.json",
             love.graphics.newImage("assets/sprites/oldHero.png"), 'run')
