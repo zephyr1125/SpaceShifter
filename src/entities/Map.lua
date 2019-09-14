@@ -115,13 +115,15 @@ local Map = class {
         end
         return mostSlot
     end,
-    shiftSpace = function(self, slot, newCard)
-        newCard = newCard or self.slots[slot].baseCard
-        local oldCard = self.slots[slot].card
-        if oldCard ~= self.slots[slot].baseCard then
+    shiftSpace = function(self, slotId, newCard)
+        local slot = self.slots[slotId]
+        newCard = newCard or slot.baseCard
+        local oldCard = slot.card
+        if oldCard ~= slot.baseCard then
             discardCard(oldCard)
         end
-        self.slots[slot].card = newCard
+        slot.card = newCard
+        newCard:moveTo(mapX+ slot.x+28, mapY+ slot.y-12, 0.3, nil, 'out-cubic')
     end
 }
 return Map

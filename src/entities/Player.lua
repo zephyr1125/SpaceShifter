@@ -7,8 +7,8 @@ end
 
 local Player = {
     name = '塑地师',
-    initLife = 5,
-    life = 5,
+    initLife = 10,
+    life = 10,
     deck = 'PlayerDeck',
     handSize = 3,
     rewardSize = 3,
@@ -44,8 +44,13 @@ local Player = {
     drawHand  = function(self)
         if self.hand == nil or #self.hand == 0 then return end
         
-        for _, card in pairs(self.hand) do
-            card:draw()
+        for id, card in pairs(self.hand) do
+            if id~=currentCardId then
+                card:draw()
+            end
+        end
+        if self.currentCardId~=0 then
+            self.hand[self.currentCardId]:draw()
         end
     end,
     drawSprite = function(self, mapX, mapY)

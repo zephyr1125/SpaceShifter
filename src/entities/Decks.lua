@@ -11,7 +11,7 @@ end
 local function refillDeck(self)
     for _, card in pairs(self.discardCards) do
         card.isShowAction = true
-        table.add(self.cards, card)
+        table.insert(self.cards, random(2, #self.cards), card)
     end
     table.clean(self.discardCards)
     print('refilled deck')
