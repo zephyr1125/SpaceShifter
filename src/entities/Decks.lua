@@ -65,7 +65,7 @@ local Decks = class {
         size = 9,
         scoreRange = {2,3},
         discardCards = {},
-        x = 120,
+        x = (screenWidth - cardWidth)/2,
         y = - cardHeight,
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)
@@ -78,7 +78,7 @@ local Decks = class {
         size = 9,
         scoreRange = {3,4},
         discardCards = {},
-        x = 120,
+        x = (screenWidth - cardWidth)/2,
         y = - cardHeight,
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)
@@ -91,7 +91,7 @@ local Decks = class {
         size = 9,
         scoreRange = {3,4},
         discardCards = {},
-        x = 120,
+        x = (screenWidth - cardWidth)/2,
         y = - cardHeight,
         draw = function(self, x, y)
             drawDeck(self.cards, x, y)

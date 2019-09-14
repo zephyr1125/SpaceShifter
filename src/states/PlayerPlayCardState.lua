@@ -30,11 +30,11 @@ local function noTipsKeyPressed(self, key)
     end
 
     if key == keys.DPad_right then
-        player:selectPrev()
+        player:selectNext()
     end
 
     if key == keys.DPad_left then
-        player:selectNext()
+        player:selectPrev()
     end
 
     if key == keys.DPad_up then
@@ -122,7 +122,8 @@ end
 PlayerPlayCardState = {}
 function PlayerPlayCardState:enter()
     print("player state")
-    player.currentCardId = #player.hand
+    player.currentCardId = 1
+    player:updateHandCardPositions()
     enterNoTips(self)
 end
 

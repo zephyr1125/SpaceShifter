@@ -1,11 +1,14 @@
 Card = class{}
 
-function Card:init(action, space)
+function Card:init(action, space, x, y)
     self.action = action
     self.space = space
     
     self.tweenWidth = 0
     self.isShowAction = true
+    
+    self.x = x
+    self.y = y
 end
 
 function Card:draw()
@@ -40,4 +43,9 @@ function Card:flip(caller, onFliped)
         flux.to(self, 0.1, {tweenWidth = 0})
         if onFliped~= nil then onFliped(caller) end
     end)
+end
+
+function Card:moveTo(targetX, targetY, time)
+    time = time or 0.4
+    timer.tween(time, self, {x = targetX, y = targetY})
 end

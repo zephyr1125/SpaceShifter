@@ -23,7 +23,7 @@ function drawLogs()
 end
 
 --Create card
-function createRandomCard(scoreRange)
+function createRandomCard(scoreRange, x, y)
     --random action and space
     local action, space, totalScore
     repeat
@@ -32,7 +32,7 @@ function createRandomCard(scoreRange)
         totalScore = action.score + space.score
     until totalScore >= scoreRange[1] and totalScore <= scoreRange[2]
     
-    local card = Card(action, space)
+    local card = Card(action, space, x, y)
     return card
 end
 
@@ -47,10 +47,8 @@ end
 function fillDeck(deck)
     deck.cards = {}
     for i = 1, deck.size do
-        deck.cards[i] = createRandomCard(deck.scoreRange)
+        deck.cards[i] = createRandomCard(deck.scoreRange, deck.x, deck.y)
         deck.cards[i].deck = deck
-        deck.cards[i].x = deck.x
-        deck.cards[i].y = deck.y
     end
 end
 

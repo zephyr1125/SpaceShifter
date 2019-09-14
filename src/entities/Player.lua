@@ -1,16 +1,8 @@
-local function drawHandCard(id, card, handX, xInterval, handY, width)
-    local cardX = handX + width - cardWidth -
-            (id-1)*(xInterval > cardWidth+1 and cardWidth+1 or xInterval)
-    card:draw(cardX, handY)
-end
-
 local function cardFlyToHand(self, id, card, time)
-    time = time or 0.4
     local xInterval = (playerHandWidth - cardWidth)/(#self.hand <= 1 and 1 or #self.hand-1)
-    local targetX = playerHandX + playerHandWidth - cardWidth -
-            (id-1)*(xInterval > cardWidth+1 and cardWidth+1 or xInterval)
+    local targetX = playerHandX + (id-1)*(xInterval > cardWidth+1 and cardWidth+1 or xInterval)
     local targetY = playerHandY - (self.currentCardId == id and 4 or 0)
-    timer.tween(time, card, {x = targetX, y = targetY})
+    card:moveTo(targetX, targetY, time)
 end
 
 local Player = {
@@ -30,10 +22,7 @@ local Player = {
         self.slot = 1
         charMove(self, 1, 'instant')
         self.hand = decks.PlayerDeck:pickCards(self.handSize)
-        self.currentCardId = #self.hand
-        for i, card in pairs(self.hand) do
-            cardFlyToHand(self, i, card)
-        end
+        self.currentCardId = 1
     end,
     upgrade = function(self)
         self.initLife = self.initLife + 1
@@ -117,6 +106,11 @@ local Player = {
     end,
     changeLife = function(self, value)
         changeLife(self, value)
+    end,
+    updateHandCardPositions = function(self)
+        for i, card in pairs(self.hand) do
+            cardFlyToHand(self, i, card)
+        end
     end
 }
 return Player

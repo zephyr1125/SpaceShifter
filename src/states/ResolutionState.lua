@@ -3,6 +3,8 @@ ResolutionState = {}
 function ResolutionState:enter()
     self:reset()
 
+    self:cardsMove()
+    
     local playerAction = player.playingCard.action
     local playerSpace = player.playingCard.space
     local enemyAction = currentEnemy.playingCard.action
@@ -17,6 +19,10 @@ function ResolutionState:enter()
     -- then move
     self:move(playerAction, enemyAction)
     self:cardsEffect(playerAction, enemyAction)
+end
+
+function ResolutionState:cardsMove()
+    
 end
 
 function ResolutionState:playFX(playerAction, enemyAction)

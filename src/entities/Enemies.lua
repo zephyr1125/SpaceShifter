@@ -71,11 +71,12 @@ local basePlayCard = function(self)
     self.playingCard = table.remove(self.hand, cardId)
     self.playingCardAsAction = true
     self.targetSlot = targetSlot
+    self.playingCard:moveTo(enemyCardX, enemyCardY, 0.2)
 end
 
-local baseDrawPlayingCard = function(self, x, y)
+local baseDrawPlayingCard = function(self)
     if(self.playingCard ~= nil) then
-        self.playingCard:draw(x,y)
+        self.playingCard:draw()
     end
 end
 
@@ -106,7 +107,7 @@ local Enemies = class {
             spriteWidth = 42,
             spriteHeight = 44,
             isShaking = false,
-            specialCard = Card(actions.container.roundAttack),
+            specialCard = Card(actions.container.roundAttack, nil, specialCardX, specialCardY),
             damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
             healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
             init = function(self)
@@ -119,8 +120,8 @@ local Enemies = class {
             drawInfo = function(self, x, y)
                 baseDrawInfo(self, x, y)
             end,
-            drawPlayingCard = function(self, x, y)
-                baseDrawPlayingCard(self, x, y)
+            drawPlayingCard = function(self)
+                baseDrawPlayingCard(self)
             end,
             drawSprite = function(self, mapX, mapY)
                 baseDrawSprite(self, imgBansheeSprite, mapX, mapY)
@@ -166,7 +167,7 @@ local Enemies = class {
             spriteHeight = 44,
             isShaking = false,
             isImmuneGrave = true,
-            specialCard = Card(actions.container.graveWorld),
+            specialCard = Card(actions.container.graveWorld, nil, specialCardX, specialCardY),
             damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
             healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
             init = function(self)
@@ -179,8 +180,8 @@ local Enemies = class {
             drawInfo = function(self, x, y)
                 baseDrawInfo(self, x, y)
             end,
-            drawPlayingCard = function(self, x, y)
-                baseDrawPlayingCard(self, x, y)
+            drawPlayingCard = function(self)
+                baseDrawPlayingCard(self)
             end,
             drawSprite = function(self, mapX, mapY)
                 baseDrawSprite(self, imgGhostSprite, mapX, mapY)
@@ -225,7 +226,7 @@ local Enemies = class {
             spriteWidth = 44,
             spriteHeight = 44,
             isShaking = false,
-            specialCard = Card(actions.container.jump),
+            specialCard = Card(actions.container.jump, nil, specialCardX, specialCardY),
             damageTip = {x = -4, baseY = -4, y = -4, img = imgDamageTip, value = 0},
             healTip = {x = 16, baseY = -4, y = -4, img = imgHealTip, value = 0},
             init = function(self)
@@ -238,8 +239,8 @@ local Enemies = class {
             drawInfo = function(self, x, y)
                 baseDrawInfo(self, x, y)
             end,
-            drawPlayingCard = function(self, x, y)
-                baseDrawPlayingCard(self, x, y)
+            drawPlayingCard = function(self)
+                baseDrawPlayingCard(self)
             end,
             drawSprite = function(self, mapX, mapY)
                 baseDrawSprite(self, imgTrollSprite, mapX, mapY)
