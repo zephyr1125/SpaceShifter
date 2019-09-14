@@ -74,7 +74,17 @@ function love.load()
 
 	-- Game Data
 	actions = require('src.entities.Actions')
+	for key, action in pairs(actions.container) do
+		action.effectIcon = love.graphics.newImage('assets/images/action_effect/'..key..'.png')
+	end
+	
 	spaces =  require('src.entities.Spaces')
+	for key, space in pairs(spaces.container) do
+		space.icon = love.graphics.newImage('assets/images/space_icon/'..key..'.png')
+		space.effectIcon = love.graphics.newImage('assets/images/space_effect/'..key..'.png')
+		space.chess = love.graphics.newImage('assets/images/space_chess/'..key..'.png')
+	end
+	
 	map = require('src.entities.Map')
 	require('src.entities.Card')
 	

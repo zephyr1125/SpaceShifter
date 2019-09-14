@@ -24,10 +24,10 @@ function Card:drawCardAsAction()
     -- bg
     love.graphics.draw(imgCardActionBg, self.x+self.tweenWidth/2, self.y, 0,
         1-(self.tweenWidth/cardWidth), 1)
-    
-    setColor(black)
-    love.graphics.printf(self.action.name, self.x, self.y+cardHeight/2-fontSize,
-            cardWidth, 'center')
+
+    -- effect
+    love.graphics.draw(self.action.effectIcon, self.x+self.tweenWidth/2+4, self.y+40, 0,
+            1-(self.tweenWidth/cardWidth), 1)
 end
 
 function Card:drawCardAsSpace()
