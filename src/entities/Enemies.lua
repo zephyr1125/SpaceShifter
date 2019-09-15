@@ -1,5 +1,5 @@
 local function baseInit(self, deck, onComplete)
-    self.life = 0
+    self.life = player.life
     self.slot = 7
     charMove(self, self.slot, 'arrive', function()
         self.hand = deck:pickCards(self.handSize)
