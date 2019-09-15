@@ -31,7 +31,7 @@ local function RefreshSelectCard(prevId, newId)
 end
 
 function DiscardCardState:init()
-    self.confirmButton = Button('确认', buttonWidth, buttonHeight,
+    self.confirmButton = Button(i18n.confirm, buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
                 if not isDiscardFull() then return end
                 self:confirmSelection()
@@ -74,7 +74,7 @@ function DiscardCardState:draw()
     love.graphics.rectangle('fill', 0, 0, screenWidth, screenHeight)
 
     setColor(white)
-    love.graphics.printf('弃牌直至你的牌库为12张', 0, 4, screenWidth, 'center')
+    love.graphics.printf(i18n.dropUntil12, 0, 4, screenWidth, 'center')
 
     setColor(white)
     self:drawPlayerDeck()

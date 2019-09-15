@@ -29,7 +29,8 @@ function Button:draw(x, y)
     end
     
     --text
-    drawText(self.text, x + math.floor((self.width-self.textWidth)/2), y)
+    setColor(white)
+    love.graphics.printf(self.text, x, y+2, self.width, 'center')
 end
 
 function Button:keypressed(key)

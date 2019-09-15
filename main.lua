@@ -72,6 +72,8 @@ require('src.states.NextEnemyState')
 require('src.states.SystemMenuState')
 require('src.states.TutorialState')
 
+i18n = require('assets.i18n.en')
+
 -- Load Game
 function love.load()
 	InitAssets()

@@ -4,19 +4,20 @@ local windowWidth = 144
 local windowHeight = 64+18
 local buttonWidth, buttonHeight = 128, 18
 
-function SystemMenuState:init()
+function SystemMenuState:enter()
+    print('system init')
     self.window = Window()
     self.buttons = SelectionGroup()
-    self.returnButton = Button('返回', buttonWidth, buttonHeight,
+    self.returnButton = Button(i18n.back, buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
                 GameState.pop()
             end)
-    self.restartButton = Button('重来', buttonWidth, buttonHeight,
+    self.restartButton = Button(i18n.retry, buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
                 GameState.pop()
                 GameState.switch(InitState)
             end)
-    self.exitButton = Button('退出', buttonWidth, buttonHeight,
+    self.exitButton = Button(i18n.exit, buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function ()
                 GameState.switch(IdleState)
                 screenManager:view('/')
@@ -37,7 +38,7 @@ function SystemMenuState:draw()
     self.window:draw(windowX, windowY, windowWidth, windowHeight)
 
     setColor(white)
-    love.graphics.printf('系统', windowX, windowY + 4, windowWidth, 'center')
+    love.graphics.printf(i18n.system, windowX, windowY + 4, windowWidth, 'center')
 
     self.returnButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY)
     self.restartButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY+buttonHeight)
