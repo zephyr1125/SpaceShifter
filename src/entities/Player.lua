@@ -8,8 +8,8 @@ end
 local Player = {
     name = '唤地师',
     portrait = imgPlayerPortrait,
-    initLife = 5,
-    life = 5,
+    initLife = 10,
+    life = 10,
     deck = 'PlayerDeck',
     handSize = 3,
     rewardSize = 3,
@@ -47,7 +47,7 @@ local Player = {
         --life--
         love.graphics.draw(imgHealTip, x+41, y)
         love.graphics.setFont(fontNum)
-        love.graphics.printf(tostring(self.life), x+41-6, y, 24, 'center')
+        love.graphics.printf(tostring(self.life), x+41, y+2, 19, 'center')
         love.graphics.setFont(fontCN)
     end,
     drawHand  = function(self)

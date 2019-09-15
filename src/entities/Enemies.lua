@@ -28,7 +28,7 @@ local baseDrawInfo = function(self, x, y)
     --life--
     love.graphics.draw(imgHealTip, x-6, y)
     love.graphics.setFont(fontNum)
-    love.graphics.printf(tostring(self.life), x-12, y, 24, 'center')
+    love.graphics.printf(tostring(self.life), x-6, y+2, 19, 'center')
     love.graphics.setFont(fontCN)
 end
 
