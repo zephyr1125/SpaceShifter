@@ -188,6 +188,7 @@ local Enemies = class {
                     me.isPlayingSpecialCard = true
                     me.playingCard = me.specialCard
                     me.playingCardAsAction = true
+                    me.specialCard:moveTo(enemyCardX, enemyCardY)
                 else
                     basePlayCard(me)
                 end
@@ -248,6 +249,7 @@ local Enemies = class {
                     me.isPlayingSpecialCard = true
                     me.playingCard = me.specialCard
                     me.playingCardAsAction = true
+                    me.specialCard:moveTo(enemyCardX, enemyCardY)
                 else
                     basePlayCard(me)
                 end
@@ -308,6 +310,7 @@ local Enemies = class {
                     me.playingCard = me.specialCard
                     me.playingCardAsAction = true
                     me.targetSlot = opponent.slot
+                    me.specialCard:moveTo(enemyCardX, enemyCardY)
                 else
                     basePlayCard(me)
                 end

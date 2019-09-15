@@ -297,7 +297,9 @@ function ResolutionState.cleanCards()
     end 
     player.playingCard = nil
 
-    if not currentEnemy.isPlayingSpecialCard then
+    if currentEnemy.isPlayingSpecialCard then
+        currentEnemy.specialCard:moveTo(specialCardX, specialCardY)
+    else
         local enemyDeck = decks[currentEnemy.deck]
         enemyDeck:discardCard(currentEnemy.playingCard)
     end
