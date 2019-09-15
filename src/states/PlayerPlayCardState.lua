@@ -130,6 +130,9 @@ function PlayerPlayCardState:enter()
     player.currentCardId = 1
     player:updateHandCardPositions()
     enterNoTips(self)
+    if not isTutorialPlayed then
+        GameState.push(TutorialState)
+    end
 end
 
 function PlayerPlayCardState:draw()

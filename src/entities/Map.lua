@@ -61,13 +61,17 @@ local Map = class {
             end
         end
     end,
-    drawCards = function(self, x, y)
+    drawCards = function(self)
         for id = #map.slots, 1, -1 do
             local slot = map.slots[id]
             setColor(white)
             if not floatequal(slot.card.y, mapY+slot.y-12, 0.1) then
                 --space card
                 slot.card:draw()
+            end
+            if not floatequal(slot.baseCard.y, mapY+slot.y-12, 0.1) then
+                --space base card
+                slot.baseCard:draw()
             end
         end
     end,

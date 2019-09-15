@@ -1,5 +1,5 @@
 local function baseInit(self, deck, onComplete)
-    self.life = self.initLife
+    self.life = player.life
     self.slot = 7
     charMove(self, self.slot, 'arrive', function()
         self.hand = deck:pickCards(self.handSize)
@@ -83,7 +83,7 @@ function baseAIChooseCard(me, opponent)
     -- player space too good, clean space
     if cardId == 0 then
         local opponentSlot = map.slots[opponent.slot]
-        if map:isNeighbour(me.slot, opponent.slot) and
+        if map:isNeighbour(me.slot, opponent.slot)~=0 and
                 opponentSlot.card ~= opponent.baseCard and
                 opponentSlot.card.space.benefit>1 then
             cardId = chooseHandCardSpaceRecover(me)
@@ -235,7 +235,7 @@ local Enemies = class {
                 baseDrawSprite(self, imgGhostSprite, mapX, mapY)
             end,
             drawSelectSlot = function(self)
-                if targetSlot == 0 then return end
+                if self.targetSlot == nil or self.targetSlot == 0 then return end
 
                 local slot = map.slots[self.targetSlot]
                 setColor(red)
@@ -295,7 +295,7 @@ local Enemies = class {
                 baseDrawSprite(self, imgTrollSprite, mapX, mapY)
             end,
             drawSelectSlot = function(self)
-                if targetSlot == 0 then return end
+                if self.targetSlot == nil or self.targetSlot == 0 then return end
 
                 local slot = map.slots[self.targetSlot]
                 setColor(red)

@@ -20,7 +20,7 @@ local function isRewardFull()
 end
 
 local function refreshInfoBar(self)
-    infoBar:setCardInfo(map.slots[self.currentCardId].card)
+    infoBar:setCardInfo(map.slots[self.currentCardId].baseCard)
 end
 
 function RewardState:init()
@@ -119,9 +119,9 @@ function RewardState:keypressed(key)
     if key == keys.Y then
         for id, slot in pairs(map.slots) do
             if id == self.currentCardId then
-                slot.card:flip(self, refreshInfoBar)
+                slot.baseCard:flip(self, refreshInfoBar)
             else
-                slot.card:flip()
+                slot.baseCard:flip()
             end
         end
     end

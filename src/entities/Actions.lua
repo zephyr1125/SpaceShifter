@@ -363,7 +363,7 @@ local Actions = class {
                 for _, slot in pairs(map:getNoHoleNeighbours(me.slot)) do
                     local resident = map:getSlotOccupied(slot)
                         if resident ~= nil then
-                        resident.damagePending = resident.damagePending + 2
+                        resident.damagePending = resident.damagePending + 3
                     end
                 end
                 if onComplete~=nil then onComplete() end

@@ -1,6 +1,7 @@
 InitState = {}
 
 function InitState:enter()
+    isTutorialPlayed = false
     decks = reload('src.entities.Decks')
     player = reload('src.entities.Player')
     enemies = reload('src.entities.Enemies')

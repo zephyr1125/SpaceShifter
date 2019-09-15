@@ -209,12 +209,12 @@ function ResolutionState.calcDamage()
     -- calc damage
     if isPlayerAttackSuccess then
         currentEnemy.damagePending = currentEnemy.damagePending + player.attack
-        currentEnemy.damagePending = currentEnemy.damagePending - currentEnemy.defence
     end
+    currentEnemy.damagePending = currentEnemy.damagePending - currentEnemy.defence
     if isEnemyAttackSuccess then
         player.damagePending = player.damagePending + currentEnemy.attack
-        player.damagePending = player.damagePending - player.defence
     end
+    player.damagePending = player.damagePending - player.defence
 
     -- trim damage
     if currentEnemy.damagePending<0 then currentEnemy.damagePending = 0 end
