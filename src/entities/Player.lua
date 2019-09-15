@@ -76,7 +76,6 @@ local Player = {
         drawTip(self, self.healTip)
     end,
     update = function(self, dt)
-        spritePlayer:update(dt)
     end,
     selectNext = function(self)
         if self.hand == nil or #self.hand == 0 then return end

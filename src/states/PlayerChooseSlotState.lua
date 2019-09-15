@@ -78,6 +78,7 @@ function PlayerChooseSlotState:keypressed(key)
     end
 
     if key == keys.A then
+        soundPlayCard:play()
         GameState.switch(ResolutionState)
         return
     end

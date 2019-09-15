@@ -49,6 +49,7 @@ local function noTipsKeyPressed(self, key)
             GameState.switch(PlayerChooseSlotState)
             return
         else
+            soundPlayCard:play()
             GameState.switch(ResolutionState)
             return
         end

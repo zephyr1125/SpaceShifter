@@ -29,10 +29,12 @@ function InitAssets()
     imgGhostPortrait = love.graphics.newImage('assets/images/portrait/ghost.png')
     imgTrollPortrait = love.graphics.newImage('assets/images/portrait/troll.png')
     -- sprite
-    spritePlayer = peachy.new("assets/sprites/oldHero.json",
-            love.graphics.newImage("assets/sprites/oldHero.png"), 'run')
     spriteDefence = {'assets/sprites/shield.json','assets/sprites/shield.png', 'effect'}
+    --sfx
+    imgSFXFireball = love.graphics.newImage('assets/images/sfx/fireball.png')
     -- sound
     soundHit1 = love.audio.newSource("assets/sounds/hit01.wav", "static")
     soundHit2 = love.audio.newSource('assets/sounds/hit02.ogg', 'static')
+    soundPickCard = love.audio.newSource('assets/sounds/pick_card.wav', 'static')
+    soundPlayCard = love.audio.newSource('assets/sounds/play_card.wav', 'static')
 end

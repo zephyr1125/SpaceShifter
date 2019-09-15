@@ -83,6 +83,7 @@ local Decks = class {
             end
         end,
         pickCards = function(self, amount)
+            soundPickCard:play()
             return pickCards(self, amount)
         end,
         discardCard = function(self, card)

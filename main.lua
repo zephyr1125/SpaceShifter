@@ -28,6 +28,8 @@ timer = require('lib.hump.timer')
 keys = require('lib.keys')
 flux = require('lib.flux')
 peachy = require('lib.peachy')
+require('lib.slam')
+
 require('src.const')
 require('src.utils')
 

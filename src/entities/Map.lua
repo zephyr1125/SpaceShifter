@@ -45,6 +45,7 @@ local Map = class {
             self.slots[i].baseCard = card
             self.slots[i].card = card
             timer.after(i*0.3, function()
+                soundPlayCard:play()
                 local callback = (i == #self.slots) and onComplete or nil
                 card:moveTo(mapX+slot.x+28, mapY+slot.y-12, 0.3, callback, 'out-cubic')
             end)
