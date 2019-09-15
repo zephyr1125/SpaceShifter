@@ -55,6 +55,28 @@ function baseAIChooseCard(me, opponent)
             end
         end
     end
+
+    -- space too bad, clean space
+    if cardId == 0 then
+        local meSlot = map.slots[me.slot]
+        if meSlot.card~=meSlot.baseCard and meSlot.card.space.benefit<0 then
+            cardId = chooseHandCardSpaceRecover(me)
+            if cardId > 0 then print('ai choose space recover self') end
+            targetSlot = me.slot
+        end
+    end
+
+    -- player space too good, clean space
+    if cardId == 0 then
+        local opponentSlot = map.slots[opponent.slot]
+        if map:isNeighbour(me.slot, opponent.slot) and
+                opponentSlot.card ~= opponent.baseCard and
+                opponentSlot.card.space.benefit>1 then
+            cardId = chooseHandCardSpaceRecover(me)
+            if cardId > 0 then print('ai choose space recover player') end
+            targetSlot = opponent.slot
+        end
+    end
     
     -- space too bad, move to best neighbour
     if cardId == 0 then
@@ -112,7 +134,7 @@ local Enemies = class {
     container = {
         banshee = {
             name = '巨蛇',
-            initLife = 0,
+            initLife = 5,
             deck = 'BansheeDeck',
             handSize = 3,
             spriteWidth = 42,
@@ -169,7 +191,7 @@ local Enemies = class {
             end
         },
         ghost = {
-            name = '鬼魂',
+            name = '怨煞灵',
             initLife = 6,
             deck = 'GhostDeck',
             handSize = 3,

@@ -7,6 +7,8 @@ function Card:init(action, space, x, y)
     self.tweenWidth = 0
     self.isShowAction = true
     
+    x = x or screenWidth/2-cardWidth/2
+    y = y or -cardHeight
     self.x = x
     self.y = y
 end

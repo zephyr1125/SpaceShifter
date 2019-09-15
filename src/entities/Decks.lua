@@ -9,6 +9,7 @@ local function drawDeck(cards, x, y, drawTopDeck)
 end
 
 local function refillDeck(self)
+    shuffle(self.discardCards)
     for _, card in pairs(self.discardCards) do
         card.isShowAction = true
         table.insert(self.cards, random(2, #self.cards), card)
@@ -54,11 +55,12 @@ local Decks = class {
         end,
         discardCard = function(self, card)
             discardCard(self, card)
-        end
+        end,
+        cards={}
     },
     PlayerDeck = {
         size = 12,
-        scoreRange = {2,2},
+        scoreRange = {2,3},
         discardCards = {},
         x = 276,
         y = 160,
@@ -78,10 +80,11 @@ local Decks = class {
             discardCard(self, card)
             -- start card tween
             card:moveTo(self.x, self.y, 0.3)
-        end
+        end,
+        cards={}
     },
     BansheeDeck = {
-        size = 9,
+        size = 18,
         scoreRange = {2,3},
         discardCards = {},
         x = (screenWidth - cardWidth)/2,
@@ -94,10 +97,14 @@ local Decks = class {
         end,
         discardCard = function(self, card)
             discardCard(self, card)
-        end
+        end,
+        cards = {
+            Card(actions.container.spaceRecover),Card(actions.container.spaceRecover),
+            Card(actions.container.spaceRecover),Card(actions.container.spaceRecover)
+        }
     },
     GhostDeck = {
-        size = 9,
+        size = 20,
         scoreRange = {3,4},
         discardCards = {},
         x = (screenWidth - cardWidth)/2,
@@ -110,11 +117,12 @@ local Decks = class {
         end,
         discardCard = function(self, card)
             discardCard(self, card)
-        end
+        end,
+        cards = {}
     },
     TrollDeck = {
-        size = 9,
-        scoreRange = {3,4},
+        size = 22,
+        scoreRange = {3,5},
         discardCards = {},
         x = (screenWidth - cardWidth)/2,
         y = - cardHeight,
@@ -126,7 +134,11 @@ local Decks = class {
         end,
         discardCard = function(self, card)
             discardCard(self, card)
-        end
+        end,
+        cards = {
+            Card(actions.container.spaceRecover),Card(actions.container.spaceRecover),
+            Card(actions.container.spaceRecover),Card(actions.container.universeRecover)
+        }
     }
 }
 

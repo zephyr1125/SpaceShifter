@@ -45,11 +45,14 @@ function fillAllDecks()
 end
 
 function fillDeck(deck)
-    deck.cards = {}
     for i = 1, deck.size do
-        deck.cards[i] = createRandomCard(deck.scoreRange, deck.x, deck.y)
+        if i>#deck.cards then
+            deck.cards[i] = createRandomCard(deck.scoreRange, deck.x, deck.y)
+        end
         deck.cards[i].deck = deck
     end
+    -- shuffle the deck
+    shuffle(deck.cards)
 end
 
 
@@ -153,6 +156,15 @@ end
 function chooseHandCardDrop(char)
     for id, card in pairs(char.hand) do
         if table.contains(card.action.type, 'drop') then
+            return id
+        end
+    end
+    return 0
+end
+
+function chooseHandCardSpaceRecover(char)
+    for id, card in pairs(char.hand) do
+        if table.contains(card.action.type, 'spaceRecover') then
             return id
         end
     end
@@ -274,4 +286,11 @@ end
 function floatequal(left,right,precision)
     local diff = math.abs(left-right)
     return diff < precision
+end
+
+function shuffle(list)
+    for i = #list, 2, -1 do
+        local j = random(i)
+        list[i], list[j] = list[j], list[i]
+    end
 end

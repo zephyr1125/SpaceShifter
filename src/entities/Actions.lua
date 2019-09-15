@@ -329,8 +329,8 @@ local Actions = class {
             score = 99,
             needChooseSlot = true,
             type = {'spaceRecover'},
-            onShiftSpace = function(targetSlot)
-                map:shiftSpace(targetSlot, nil)
+            onShiftSpace = function(targetSlot, onComplete)
+                map:shiftSpace(targetSlot, nil, onComplete)
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -346,9 +346,10 @@ local Actions = class {
             score = 99,
             needChooseSlot = false,
             type = {'spaceRecover'},
-            onShiftSpace = function(targetSlot)
+            onShiftSpace = function(targetSlot, onComplete)
                 for i, _ in pairs(map.slots) do
-                    map:shiftSpace(i, nil)
+                    local callback = (i == #map.slots) and onComplete or nil
+                    map:shiftSpace(i, nil, callback)
                 end
             end,
         },
@@ -374,13 +375,20 @@ local Actions = class {
             score = 99,
             needChooseSlot = false,
             type = {'special'},
-            effect = function(me, opponent, onComplete)
+            onShiftSpace = function(targetSlot, onComplete)
+                local needShift = {}
                 for slotId, slot in pairs(map.slots) do
                     if slot.card.space ~= spaces.container.graveyard then
-                        map:shiftSpace(slotId, Card(nil, spaces.container.graveyard))
+                        table.add(needShift, slotId)
                     end
                 end
-                if onComplete~=nil then onComplete() end
+                for id, slotId in pairs(needShift) do
+                    local slot = map.slots[slotsId]
+                    local card = Card(nil, spaces.container.graveyard)
+                    card.isShowAction = false
+                    local callback = (id == #needShift) and onComplete or nil
+                    map:shiftSpace(slotId, card, callback)
+                end
             end,
         },
         ['jump'] = {

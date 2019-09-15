@@ -121,7 +121,7 @@ local Map = class {
         end
         return mostSlot
     end,
-    shiftSpace = function(self, slotId, newCard)
+    shiftSpace = function(self, slotId, newCard, onComplete)
         local slot = self.slots[slotId]
         newCard = newCard or slot.baseCard
         local oldCard = slot.card
@@ -129,7 +129,7 @@ local Map = class {
             discardCard(oldCard)
         end
         slot.card = newCard
-        newCard:moveTo(mapX+ slot.x+28, mapY+ slot.y-12, 0.3, nil, 'out-cubic')
+        newCard:moveTo(mapX+ slot.x+28, mapY+ slot.y-12, 0.3, onComplete, 'out-cubic')
     end
 }
 return Map

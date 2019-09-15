@@ -103,11 +103,12 @@ function ResolutionState:update(dt)
         local enemySpace = currentEnemy.playingCard.space
         self:playFX(playerAction, enemyAction)
         -- shift space first
-        self.shiftSpace()
+        self:shiftSpace()
         -- then move
         self:move(playerAction, enemyAction)
         self:cardsEffect(playerAction, enemyAction)
-    elseif self.step == 'effect' and self.isPlayerEffectDone and self.isEnemyEffectDone then
+    elseif self.step == 'effect' and self.isPlayerShiftSpaceDone 
+            and self.isPlayerEffectDone and self.isEnemyEffectDone then
         self.step = 'damage'
     elseif self.step == 'damage' then
         self.onAttack()
@@ -266,15 +267,25 @@ function ResolutionState:playDefence(isPlayerAttackSuccess, isEnemyAttackSuccess
     end
 end
 
-function ResolutionState.shiftSpace()
+function ResolutionState:playerShiftSpace()
+    if player.playingCardAsAction then
+        self.isPlayerShiftSpaceDone = true
+        return 
+    end
+    map:shiftSpace(player.targetSlot, player.playingCard, function()
+        self.isPlayerShiftSpaceDone = true
+    end)
+end
+
+function ResolutionState:shiftSpace()
     local enemyShiftSpace = currentEnemy.playingCard.action.onShiftSpace
     if enemyShiftSpace ~= nil then
-        enemyShiftSpace(currentEnemy.targetSlot)
+        enemyShiftSpace(currentEnemy.targetSlot, function()
+            self:playerShiftSpace()
+        end)
+    else
+        self:playerShiftSpace()
     end
-    
-    if player.playingCardAsAction then return end
-    
-    map:shiftSpace(player.targetSlot, player.playingCard)
 end
 
 function ResolutionState.cleanCards()
@@ -308,6 +319,8 @@ function ResolutionState:reset()
     
     self.isPlayerFXDone = false
     self.isEnemyFXDone = false
+
+    self.isPlayerShiftSpaceDone = false
     
     self.isPlayerMoveDone = false
     self.isEnemyMoveDone = false

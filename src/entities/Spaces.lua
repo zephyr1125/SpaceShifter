@@ -100,6 +100,9 @@ local Spaces = class {
         --            return true
         --        end
         --    end,
+        --    defaultTargetSlot = function(me, opponent)
+        --        return defaultTargetSlot(me, opponent)
+        --    end,
         --},
         well = {
             name = '法力井',
@@ -109,6 +112,9 @@ local Spaces = class {
             onDamaged = function(me)
                 me:pickCard()
             end,
+            defaultTargetSlot = function(me, opponent)
+                return defaultTargetSlot(me, opponent)
+            end,
         },
         desert = {
             name = '沙漠',
@@ -117,6 +123,9 @@ local Spaces = class {
             benefit = -1,
             onAttack = function(me, opponent)
                 opponent:dropCard()
+            end,
+            defaultTargetSlot = function(me, opponent)
+                return defaultTargetSlot(me, opponent)
             end,
         },
     }
