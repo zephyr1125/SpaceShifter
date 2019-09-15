@@ -53,6 +53,14 @@ function ResolutionState:draw()
     if self.enemyFX ~= nil and not self.isEnemyFXDone then
         self:drawFX(currentEnemy, self.enemyFX)
     end
+
+    if self.playerSFX ~= nil and not self.isPlayerEffectDone then
+        self:drawEffect(self.playerSFX)
+    end
+
+    if self.enemySFX ~= nil and not self.isEnemyEffectDone then
+        self:drawEffect(self.enemySFX)
+    end
     
     if self.playerDefenceFX ~= nil and not self.isPlayerDefenceFXDone then
         self:drawDefenceFX(player, self.playerDefenceFX)
@@ -72,6 +80,13 @@ function ResolutionState:drawFX(char, spriteFX)
     spriteX = mapX + map.slots[drawSlot].x + mapSlotWidth/2 - spriteFX:getWidth()/2
     spriteY = mapY + map.slots[drawSlot].y + 4 - spriteFX:getHeight()/2
     spriteFX:draw(spriteX, spriteY)
+end
+
+function ResolutionState:drawEffect(sfx)
+    if sfx == nil then return end
+    
+    setColor(white)
+    love.graphics.draw(sfx.img, mapX + sfx.x, mapY + sfx.y)
 end
 
 function ResolutionState:drawDefenceFX(char, spriteDefenceFX)
@@ -159,14 +174,20 @@ end
 
 function ResolutionState:cardsEffect(playerAction, enemyAction)
     if player.playingCardAsAction and playerAction.effect ~= nil then
-        playerAction.effect(player, currentEnemy, function()
+        if playerAction.sfxImg ~= nil then
+            self.playerSFX = {x=0, y=0, img = playerAction.sfxImg}
+        end
+        playerAction:effect(player, currentEnemy, self.playerSFX, function()
                 self.isPlayerEffectDone = true
         end)
     else
         self.isPlayerEffectDone = true
     end
     if currentEnemy.playingCardAsAction and enemyAction.effect ~= nil then
-        enemyAction.effect(currentEnemy, player, function()
+        if enemyAction.sfxImg ~= nil then
+            self.enemySFX = {x=0, y=0, img = enemyAction.sfxImg}
+        end
+        enemyAction:effect(currentEnemy, player, self.enemySFX, function()
             self.isEnemyEffectDone = true
         end)
     else
@@ -316,6 +337,9 @@ function ResolutionState:reset()
     
     self.playerFX = nil
     self.enemyFX = nil
+    
+    self.playerSFX = nil
+    self.enemySFX = nil
     
     self.isCardMoveDone = false
     

@@ -33,7 +33,8 @@ function InitAssets()
     --sfx
     imgSFXFireball = love.graphics.newImage('assets/images/sfx/fireball.png')
     -- sound
-    soundHit1 = love.audio.newSource("assets/sounds/hit01.wav", "static")
+    soundFireballStart = love.audio.newSource('assets/sounds/fireball_start.wav', 'static')
+    soundFireballHit = love.audio.newSource('assets/sounds/fireball_hit.wav', 'static')
     soundHit2 = love.audio.newSource('assets/sounds/hit02.ogg', 'static')
     soundPickCard = love.audio.newSource('assets/sounds/pick_card.wav', 'static')
     soundPlayCard = love.audio.newSource('assets/sounds/play_card.wav', 'static')

@@ -9,6 +9,22 @@ local function baseDefaultTargetSlot(me, opponent)
     end
 end
 
+local function playFireballSFX(me, opponent, sfx, onComplete)
+    if sfx == nil then
+        if onComplete~=nil then onComplete() end
+        return
+    else
+        sfx.x = me.x
+        sfx.y = me.y
+        soundFireballStart:play()
+        timer.tween(0.6, sfx, {x = opponent.x, y = opponent.y},
+                'in-quart', function()
+                    soundFireballHit:play()
+                    if onComplete~=nil then onComplete() end
+                end)
+    end
+end
+
 local Actions = class {
     container = {
         ['attack1'] = {
@@ -17,16 +33,15 @@ local Actions = class {
             score = 1,
             needChooseSlot = true,
             type = {'attack'},
-            sprite = {'assets/sprites/attack1.json','assets/sprites/attack1.png', 'effect'},
-            sound = soundHit1,
-            effect = function(me, opponent, onComplete)
+            sfxImg = imgSFXFireball,
+            effect = function(self, me, opponent, sfx, onComplete)
                 me.attack = me.attack + 1
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
                 if space.onCalcAttack ~= nil then
                     space.onCalcAttack(me, opponent)
                 end
-                if onComplete~=nil then onComplete() end
+                playFireballSFX(me, opponent, sfx, onComplete)
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -42,14 +57,15 @@ local Actions = class {
             score = 2,
             needChooseSlot = true,
             type = {'attack'},
-            effect = function(me, opponent, onComplete)
+            sfxImg = imgSFXFireball,
+            effect = function(self, me, opponent, sfx, onComplete)
                 me.attack = me.attack + 2
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
                 if space.onCalcAttack ~= nil then
                     space.onCalcAttack(me, opponent)
                 end
-                if onComplete~=nil then onComplete() end
+                playFireballSFX(me, opponent, sfx, onComplete)
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -65,14 +81,15 @@ local Actions = class {
             score = 3,
             needChooseSlot = true,
             type = {'attack'},
-            effect = function(me, opponent, onComplete)
+            sfxImg = imgSFXFireball,
+            effect = function(self, me, opponent, sfx, onComplete)
                 me.attack = me.attack + 3
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
                 if space.onCalcAttack ~= nil then
                     space.onCalcAttack(me, opponent)
                 end
-                if onComplete~=nil then onComplete() end
+                playFireballSFX(me, opponent, sfx, onComplete)
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -88,7 +105,8 @@ local Actions = class {
             score = 1.5,
             needChooseSlot = true,
             type = {'attack','defence'},
-            effect = function(me, opponent, onComplete)
+            sfxImg = imgSFXFireball,
+            effect = function(self, me, opponent, sfx, onComplete)
                 me.attack = me.attack + 1
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
@@ -96,7 +114,7 @@ local Actions = class {
                     space.onCalcAttack(me, opponent)
                 end
                 me.defence = me.defence + 1
-                if onComplete~=nil then onComplete() end
+                playFireballSFX(me, opponent, sfx, onComplete)
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -112,7 +130,8 @@ local Actions = class {
             score = 2.5,
             needChooseSlot = true,
             type = {'attack','defence'},
-            effect = function(me, opponent, onComplete)
+            sfxImg = imgSFXFireball,
+            effect = function(self, me, opponent, sfx, onComplete)
                 me.attack = me.attack + 2
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
@@ -120,7 +139,7 @@ local Actions = class {
                     space.onCalcAttack(me, opponent)
                 end
                 me.defence = me.defence + 1
-                if onComplete~=nil then onComplete() end
+                playFireballSFX(me, opponent, sfx, onComplete)
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -136,7 +155,7 @@ local Actions = class {
             score = 1,
             needChooseSlot = false,
             type = {'defence'},
-            effect = function(me, opponent, onComplete)
+            effect = function(self, me, opponent, sfx, onComplete)
                 me.defence = me.defence + 1
                 if onComplete~=nil then onComplete() end
             end,
@@ -147,7 +166,7 @@ local Actions = class {
             score = 1,
             needChooseSlot = false,
             type = {'heal'},
-            effect = function(me, opponent, onComplete)
+            effect = function(self, me, opponent, sfx, onComplete)
                 me:changeLife(1)
                 if onComplete~=nil then onComplete() end
             end,
@@ -158,7 +177,7 @@ local Actions = class {
             score = 2.5,
             needChooseSlot = false,
             type = {'heal'},
-            effect = function(me, opponent, onComplete)
+            effect = function(self, me, opponent, sfx, onComplete)
                 me:changeLife(2)
                 if onComplete~=nil then onComplete() end
             end,
@@ -170,7 +189,7 @@ local Actions = class {
             score = 3,
             needChooseSlot = false,
             type = {'pick'},
-            effect = function(me, opponent, onComplete)
+            effect = function(self, me, opponent, sfx, onComplete)
                 me:pickCard()
                 me:pickCard()
                 if onComplete~=nil then onComplete() end
@@ -182,7 +201,8 @@ local Actions = class {
             score = 2,
             needChooseSlot = true,
             type = {'attack','pick'},
-            effect = function(me, opponent, onComplete)
+            sfxImg = imgSFXFireball,
+            effect = function(self, me, opponent, sfx, onComplete)
                 me.attack = me.attack + 1
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
@@ -190,7 +210,7 @@ local Actions = class {
                     space.onCalcAttack(me, opponent)
                 end
                 me:pickCard()
-                if onComplete~=nil then onComplete() end
+                playFireballSFX(me, opponent, sfx, onComplete)
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -206,7 +226,8 @@ local Actions = class {
             score = 3,
             needChooseSlot = true,
             type = {'attack','pick'},
-            effect = function(me, opponent, onComplete)
+            sfxImg = imgSFXFireball,
+            effect = function(self, me, opponent, sfx, onComplete)
                 me.attack = me.attack + 2
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
@@ -214,7 +235,7 @@ local Actions = class {
                     space.onCalcAttack(me, opponent)
                 end
                 me:pickCard()
-                if onComplete~=nil then onComplete() end
+                playFireballSFX(me, opponent, sfx, onComplete)
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -231,7 +252,7 @@ local Actions = class {
             score = 3,
             needChooseSlot = false,
             type = {'heal','pick'},
-            effect = function(me, opponent, onComplete)
+            effect = function(self, me, opponent, sfx, onComplete)
                 me:changeLife(1)
                 me:pickCard()
                 me:pickCard()
@@ -244,7 +265,7 @@ local Actions = class {
             score = 1.5,
             needChooseSlot = true,
             type = {'drop'},
-            effect = function(me, opponent, onComplete)
+            effect = function(self, me, opponent, sfx, onComplete)
                 if me.targetSlot == opponent.slot then
                     opponent:dropCard()
                 end
@@ -264,7 +285,7 @@ local Actions = class {
             score = 2.5,
             needChooseSlot = true,
             type = {'drop'},
-            effect = function(me, opponent, onComplete)
+            effect = function(self, me, opponent, sfx, onComplete)
                 if me.targetSlot == opponent.slot then
                     opponent:dropCard()
                     opponent:dropCard()
@@ -285,7 +306,8 @@ local Actions = class {
             score = 2,
             needChooseSlot = true,
             type = {'attack','drop'},
-            effect = function(me, opponent, onComplete)
+            sfxImg = imgSFXFireball,
+            effect = function(self, me, opponent, sfx, onComplete)
                 me.attack = me.attack + 1
                 -- space affect attack
                 local space = map.slots[me.slot].card.space
@@ -295,7 +317,7 @@ local Actions = class {
                 if me.targetSlot == opponent.slot then
                     opponent:dropCard()
                 end
-                if onComplete~=nil then onComplete() end
+                playFireballSFX(me, opponent, sfx, onComplete)
             end,
             getExceptSlot = function(me, opponent)
                 -- can attack anywhere
@@ -359,7 +381,7 @@ local Actions = class {
             score = 99,
             needChooseSlot = true,
             type = {'special'},
-            effect = function(me, opponent, onComplete)
+            effect = function(self, me, opponent, sfx, onComplete)
                 for _, slot in pairs(map:getNoHoleNeighbours(me.slot)) do
                     local resident = map:getSlotOccupied(slot)
                         if resident ~= nil then
@@ -397,7 +419,7 @@ local Actions = class {
             score = 99,
             needChooseSlot = false,
             type = {'special'},
-            effect = function(me, opponent, onComplete)
+            effect = function(self, me, opponent, sfx, onComplete)
                 -- jump to me.targetSlot
                 charMove(me, me.targetSlot, 'jump', function()
                     soundHit2:play()
