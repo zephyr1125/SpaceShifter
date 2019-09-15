@@ -77,29 +77,15 @@ i18n = require('assets.i18n.en')
 -- Load Game
 function love.load()
 	InitAssets()
-
-	-- Game Data
-	actions = require('src.entities.Actions')
-	for key, action in pairs(actions.container) do
-		action.effectIcon = love.graphics.newImage('assets/images/action_effect/'..key..'.png')
-		action.icon = love.graphics.newImage('assets/images/action_icon/'..key..'.png')
-	end
-	
-	spaces =  require('src.entities.Spaces')
-	for key, space in pairs(spaces.container) do
-		space.icon = love.graphics.newImage('assets/images/space_icon/'..key..'.png')
-		space.effectIcon = love.graphics.newImage('assets/images/space_effect/'..key..'.png')
-		space.chess = love.graphics.newImage('assets/images/space_chess/'..key..'.png')
-	end
 	
 	map = require('src.entities.Map')
 	require('src.entities.Card')
 	
 	love.graphics.setDefaultFilter( "nearest", "nearest", 1 )
-	fontCN = love.graphics.newFont("assets/fonts/zpix.ttf", fontSize)
+	fontCN = love.graphics.newFont("assets/fonts/en.ttf", fontSize)
     fontCN:setFilter( "nearest", "nearest", 0 )
 	love.graphics.setFont(fontCN)
-    fontNum = love.graphics.newFont("assets/fonts/zpix.ttf", 10)
+    fontNum = love.graphics.newFont("assets/fonts/cn.ttf", 10)
     fontNum:setFilter( "nearest", "nearest", 0 )
 	
 	infoBar = InfoBar(infoBarWidth)

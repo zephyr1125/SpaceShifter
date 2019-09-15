@@ -16,7 +16,7 @@ end
 function WinState:init()
     self.window = Window()
     self.buttons = SelectionGroup()
-    self.nextButton = Button('Next', buttonWidth, buttonHeight,
+    self.nextButton = Button(i18n.next, buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
                 self.isDrawWindow = false
                 for id, slot in pairs(map.slots) do
@@ -42,8 +42,8 @@ function WinState:draw()
     if self.isDrawWindow then
         self.window:draw( self.windowX, self.windowY, windowWidth, windowHeight)
         setColor(white)
-        love.graphics.printf('胜利!', self.windowX, self.windowY + 4, windowWidth, 'center')
-        love.graphics.printf('血量+1', self.windowX, self.windowY + 4+14, windowWidth, 'center')
+        love.graphics.printf(i18n.win, self.windowX, self.windowY + 4, windowWidth, 'center')
+        love.graphics.printf(i18n.update, self.windowX, self.windowY + 4+14, windowWidth, 'center')
         self.nextButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY)
     end
 end

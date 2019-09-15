@@ -31,7 +31,7 @@ local Actions = class {
     container = {
         ['attack1'] = {
             name = '戳刺',
-            info = '对指定格上的单位攻击1',
+            info = i18n.infoAttack1,
             score = 1,
             needChooseSlot = true,
             type = {'attack'},
@@ -55,7 +55,7 @@ local Actions = class {
         },
         ['attack2'] = {
             name = '挥击',
-            info = '对指定格上的单位攻击2',
+            info = i18n.infoAttack2,
             score = 2,
             needChooseSlot = true,
             type = {'attack'},
@@ -79,7 +79,7 @@ local Actions = class {
         },
         ['attack3'] = {
             name = '重劈',
-            info = '对指定格上的单位攻击3',
+            info = i18n.infoAttack3,
             score = 3,
             needChooseSlot = true,
             type = {'attack'},
@@ -103,7 +103,7 @@ local Actions = class {
         },
         ['a1d1'] = {
             name = '格挡反击',
-            info = '防御1并攻击1',
+            info = i18n.infoA1D1,
             score = 1.5,
             needChooseSlot = true,
             type = {'attack','defence'},
@@ -128,7 +128,7 @@ local Actions = class {
         },
         ['a2d1'] = {
             name = '格挡重击',
-            info = '防御1并攻击2',
+            info = i18n.infoA2D1,
             score = 2.5,
             needChooseSlot = true,
             type = {'attack','defence'},
@@ -153,7 +153,7 @@ local Actions = class {
         },
         ['defence1'] = {
             name = '防御',
-            info = '防御1点伤害',
+            info = i18n.infoDefence1,
             score = 1,
             needChooseSlot = false,
             type = {'defence'},
@@ -164,7 +164,7 @@ local Actions = class {
         },
         ['heal1'] = {
             name = '喘息',
-            info = '提升1点血量',
+            info = i18n.infoHeal1,
             score = 1,
             needChooseSlot = false,
             type = {'heal'},
@@ -175,7 +175,7 @@ local Actions = class {
         },
         ['heal2'] = {
             name = '包扎',
-            info = '提升2点血量',
+            info = i18n.infoHeal2,
             score = 2.5,
             needChooseSlot = false,
             type = {'heal'},
@@ -187,7 +187,7 @@ local Actions = class {
         ['pick2'] = {
             -- pick up 2 cards
             name = '休整',
-            info = '抓牌2',
+            info = i18n.infoPick2,
             score = 3,
             needChooseSlot = false,
             type = {'pick'},
@@ -199,7 +199,7 @@ local Actions = class {
         },
         ['a1p1'] = {
             name = '戏法',
-            info = '攻击1抓牌1',
+            info = i18n.infoA1P1,
             score = 2,
             needChooseSlot = true,
             type = {'attack','pick'},
@@ -224,7 +224,7 @@ local Actions = class {
         },
         ['a2p1'] = {
             name = '诈术',
-            info = '攻击2抓牌1',
+            info = infoA2P1,
             score = 3,
             needChooseSlot = true,
             type = {'attack','pick'},
@@ -250,7 +250,7 @@ local Actions = class {
         ['h1p2'] = {
             -- heal1 and pick up 2 cards
             name = '整理思绪',
-            info = '加血1抓牌2',
+            info = i18n.infoH1P2,
             score = 3,
             needChooseSlot = false,
             type = {'heal','pick'},
@@ -263,7 +263,7 @@ local Actions = class {
         },
         ['drop1'] = {
             name = '扰乱',
-            info = '使指定格上的单位弃牌1张',
+            info = i18n.infoDrop1,
             score = 1.5,
             needChooseSlot = true,
             type = {'drop'},
@@ -283,7 +283,7 @@ local Actions = class {
         },
         ['drop2'] = {
             name = '混乱',
-            info = '使指定格上的单位弃牌2张',
+            info = i18n.infoDrop2,
             score = 2.5,
             needChooseSlot = true,
             type = {'drop'},
@@ -304,7 +304,7 @@ local Actions = class {
         },
         ['a1drop1'] = {
             name = '摄魂一击',
-            info = '对指定格上的单位攻击1弃牌1',
+            info = i18n.infoA1Drop1,
             score = 2,
             needChooseSlot = true,
             type = {'attack','drop'},
@@ -331,7 +331,7 @@ local Actions = class {
         },
         ['move'] = {
             name = '时空转移',
-            info = '移动到另一个时空',
+            info = i18n.infoMove,
             score = 1,
             needChooseSlot = true,
             type = {'move'},
@@ -349,7 +349,7 @@ local Actions = class {
         },
         ['spaceRecover'] = {
             name = '时空复原',
-            info = '目标时空恢复初始',
+            info = i18n.infoSpaceRecover,
             score = 99,
             needChooseSlot = true,
             type = {'spaceRecover'},
@@ -366,7 +366,7 @@ local Actions = class {
         },
         ['universeRecover'] = {
             name = '宇宙复原',
-            info = '全部时空恢复初始',
+            info = i18n.infoUniverseRecover,
             score = 99,
             needChooseSlot = false,
             type = {'spaceRecover'},
@@ -379,7 +379,7 @@ local Actions = class {
         },
         ['roundAttack'] = {
             name = '横扫',
-            info = '每3回合对邻近所有格造成2伤害',
+            info = i18n.infoRoundAttack,
             score = 99,
             needChooseSlot = true,
             type = {'special'},
@@ -412,7 +412,7 @@ local Actions = class {
         },
         ['graveWorld'] = {
             name = '千墓',
-            info = '不受墓地影响,每3回合将所有地面变为墓地',
+            info = i18n.infoGraveWorld,
             score = 99,
             needChooseSlot = false,
             type = {'special'},
@@ -434,7 +434,7 @@ local Actions = class {
         },
         ['jump'] = {
             name = '千斤坠',
-            info = '每3回合跳跃到玩家位置,造成3点伤害并击退',
+            info = i18n.infoJump,
             score = 99,
             needChooseSlot = false,
             type = {'special'},

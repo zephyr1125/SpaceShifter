@@ -7,11 +7,11 @@ local buttonWidth, buttonHeight = 128, 18
 function LoseState:init()
     self.window = Window()
     self.buttons = SelectionGroup()
-    self.restartButton = Button('重来', buttonWidth, buttonHeight,
+    self.restartButton = Button(i18n.retry, buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
                 GameState.switch(InitState)
             end)
-    self.exitButton = Button('退出', buttonWidth, buttonHeight,
+    self.exitButton = Button(i18n.exit, buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function ()
                 GameState.switch(IdleState)
                 screenManager:view('/')
@@ -27,7 +27,7 @@ function LoseState:draw()
     self.window:draw(windowX, windowY, windowWidth, windowHeight)
     
     setColor(white)
-    love.graphics.printf('失败!', windowX, windowY + 2, windowWidth, 'center')
+    love.graphics.printf(i18n.fail, windowX, windowY + 2, windowWidth, 'center')
     
     self.restartButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY)
     self.exitButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY+buttonHeight)

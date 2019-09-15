@@ -24,7 +24,7 @@ local function refreshInfoBar(self)
 end
 
 function RewardState:init()
-    self.confirmButton = Button('确定', buttonWidth, buttonHeight,
+    self.confirmButton = Button(i18n.confirm, buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
                 self:confirmSelection()
                 if #decks.PlayerDeck.cards > decks.PlayerDeck.size then
@@ -53,7 +53,7 @@ function RewardState:draw()
     love.graphics.rectangle('fill', 0, 0, screenWidth, screenHeight)
     
     setColor(white)
-    love.graphics.printf('选择奖励,最多3张', 0, 64, screenWidth, 'center')
+    love.graphics.printf(i18n.chooseReward, 0, 64, screenWidth, 'center')
     
     setColor(white)
     self:drawRewards(32, 96, screenWidth-64)

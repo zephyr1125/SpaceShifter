@@ -37,6 +37,10 @@ function TitleScreen:init(ScreenManager)
 end
 
 function TitleScreen:refreshLanguage()
+	imgTutorial1 = love.graphics.newImage('assets/images/tutorial_1_'..language..'.png')
+	imgTutorial2 = love.graphics.newImage('assets/images/tutorial_2_'..language..'.png')
+	fontSize = (language == 'cn') and 12 or 8
+	fontCN = love.graphics.newFont('assets/fonts/'..language..'.ttf', fontSize)
 	self.startButton.text = i18n.start
 	self.i18nButton.text = i18n.language
 	self.exitButton.text = i18n.exit
@@ -54,6 +58,7 @@ function TitleScreen:draw()
 	love.graphics.draw(imgBackground, 0, 0)
 	love.graphics.draw(imgName, (screenWidth - 198)/2, (screenHeight-88)/2 - buttonHeight)
 	--love.graphics.print('Space Shifter', 10, 10)
+	love.graphics.setFont(fontCN)
 	self.startButton:draw((screenWidth-buttonWidth)/2, buttonStartY)
 	self.i18nButton:draw((screenWidth-buttonWidth)/2, buttonStartY+buttonHeight)
 	self.exitButton:draw((screenWidth-buttonWidth)/2, buttonStartY+buttonHeight*2)

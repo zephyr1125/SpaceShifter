@@ -49,4 +49,4 @@ infoBarBgColor = {240,234,216}
 infoBarTextColor = {119,119,119}
 infoBarFlipInfoColor = {87,152,250}
 
-fontSize = 12
+fontSize = 8

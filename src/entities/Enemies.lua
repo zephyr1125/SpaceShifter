@@ -1,5 +1,5 @@
 local function baseInit(self, deck, onComplete)
-    self.life = player.life
+    self.life = 0
     self.slot = 7
     charMove(self, self.slot, 'arrive', function()
         self.hand = deck:pickCards(self.handSize)
@@ -147,7 +147,7 @@ end
 local Enemies = class {
     container = {
         banshee = {
-            name = '巨蛇',
+            name = i18n.nameBanshee,
             portrait = imgBansheePortrait,
             initLife = 5,
             deck = 'BansheeDeck',
@@ -207,7 +207,7 @@ local Enemies = class {
             end
         },
         ghost = {
-            name = '怨煞灵',
+            name = i18n.nameGhost,
             portrait = imgGhostPortrait,
             initLife = 6,
             deck = 'GhostDeck',
@@ -268,7 +268,7 @@ local Enemies = class {
             end
         },
         troll = {
-            name = '巨魔',
+            name = i18n.nameTroll,
             portrait = imgTrollPortrait,
             initLife = 7,
             deck = 'TrollDeck',

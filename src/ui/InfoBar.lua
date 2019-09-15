@@ -30,7 +30,7 @@ function InfoBar:draw(x, y)
         setColor(white)
         love.graphics.draw(imgButtonY, x+246, y+4)
         setColor(infoBarFlipInfoColor)
-        love.graphics.print('卡牌翻面', x+258, y+4)
+        love.graphics.print(i18n.flipCard, x+258, y+4)
     end
     
     

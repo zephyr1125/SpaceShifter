@@ -7,7 +7,7 @@ local Spaces = class {
     container = {
         fence = {
             name = '栅栏',
-            info = '提升1点防御',
+            info = i18n.infoFence,
             score = 1,
             benefit = 1,
             defaultTargetSlot = function(me, opponent)
@@ -20,7 +20,7 @@ local Spaces = class {
         },
         castle = {
             name = '城堡',
-            info = '提升2点防御',
+            info = i18n.infoCastle,
             score = 2,
             benefit = 2,
             defaultTargetSlot = function(me, opponent)
@@ -33,7 +33,7 @@ local Spaces = class {
         },
         circle = {
             name = '法阵',
-            info = '提升1点攻击',
+            info = i18n.infoCircle,
             score = 1,
             benefit = 1,
             defaultTargetSlot = function(me, opponent)
@@ -46,7 +46,7 @@ local Spaces = class {
         },
         advCircle = {
             name = '上级法阵',
-            info = '提升2点攻击',
+            info = i18n.infoAdvCircle,
             score = 2,
             benefit = 2,
             defaultTargetSlot = function(me, opponent)
@@ -59,7 +59,7 @@ local Spaces = class {
         },
         circleFence = {
             name = '防护法阵',
-            info = '提升1防御1攻击',
+            info = i18n.infoCircleFence,
             score = 2,
             benefit = 2,
             defaultTargetSlot = function(me, opponent)
@@ -76,7 +76,7 @@ local Spaces = class {
         },
         ['graveyard'] = {
             name = '墓地',
-            info = '每回合受伤1',
+            info = i18n.infoGraveyard,
             score = 2,
             benefit = -1,
             onUpkeep = function(resident)
@@ -106,7 +106,7 @@ local Spaces = class {
         --},
         well = {
             name = '法力井',
-            info = '受伤时抽牌1',
+            info = i18n.infoWell,
             score = 2,
             benefit = 1,
             onDamaged = function(me)
@@ -118,7 +118,7 @@ local Spaces = class {
         },
         desert = {
             name = '沙漠',
-            info = '攻击时附加弃牌1',
+            info = infoDesert,
             score = 2,
             benefit = -1,
             onAttack = function(me, opponent)

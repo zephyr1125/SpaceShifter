@@ -6,7 +6,7 @@ local function cardFlyToHand(self, id, card, time)
 end
 
 local Player = {
-    name = '唤地师',
+    name = i18n.namePlayer,
     portrait = imgPlayerPortrait,
     initLife = 8,
     life = 8,
