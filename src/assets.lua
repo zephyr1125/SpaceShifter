@@ -16,6 +16,8 @@ function InitAssets()
     imgEnemyFrame = love.graphics.newImage('assets/images/enemy_frame.png')
     imgConnectionEnemyFrame = love.graphics.newImage('assets/images/connection_enemy_frame.png')
     imgSpecialCard = love.graphics.newImage('assets/images/special_card.png')
+    imgDeckBg = love.graphics.newImage('assets/images/deck_bg.png')
+    imgDeckCountBg = love.graphics.newImage('assets/images/deck_count_bg.png')
     -- characters
     imgPlayerSprite = love.graphics.newImage('assets/images/sprite/player.png')
     imgBansheeSprite = love.graphics.newImage('assets/images/sprite/banshee.png')

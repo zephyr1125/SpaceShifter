@@ -1,11 +1,16 @@
 local function drawDeck(cards, x, y, drawTopDeck)
     if #cards > 0 and drawTopDeck ~= nil then
+        setColor(white)
+        love.graphics.draw(imgDeckBg, x, y+cardHeight-3)
         drawTopDeck(cards[#cards])
     end
 
     --card count
     setColor(white)
-    love.graphics.printf(tostring(#cards), x, y+48, cardWidth, 'center')
+    love.graphics.draw(imgDeckCountBg, x+cardWidth-12, y)
+    love.graphics.setFont(fontNum)
+    love.graphics.printf(tostring(#cards), x+cardWidth-12, y+4, 17, 'center')
+    love.graphics.setFont(fontCN)
 end
 
 local function refillDeck(self)
@@ -65,7 +70,7 @@ local Decks = class {
         scoreRange = {2,3},
         discardCards = {},
         x = 276,
-        y = 160,
+        y = 154,
         draw = function(self)
             --draw the latest dicard card
             local card = self.discardCards[#self.discardCards]
