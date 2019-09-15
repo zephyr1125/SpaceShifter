@@ -25,41 +25,37 @@ function GameScreen:draw()
     
     self:drawBackground()
     map:draw(mapX, mapY)
-    self:drawDecks()
+    decks.PublicDeck:draw()
     if currentEnemy~=nil then
         currentEnemy:drawSprite(mapX, mapY)
         if currentEnemy.isInited then
             currentEnemy:drawSelectSlot()
-            currentEnemy:drawInfo(screenWidth-2-cardWidth, 4)
+            currentEnemy:drawInfo(screenWidth-54, 4)
             currentEnemy:drawPlayingCard(enemyCardX, enemyCardY)
         end
     end
     player:drawSprite(mapX, mapY)
     if player.isInited then
+        decks.PlayerDeck:draw()
         player:drawHand(72, 160, 200)
         player:drawInfo(4, 160)
         infoBar:draw(infoBarX, infoBarY)
     end
     map:drawCards(mapX, mapY)
     
-    drawFPS()
-    drawLogs()
+    --drawFPS()
+    --drawLogs()
 end
 
 function GameScreen:drawBackground()
-    setColor({53,53,53})
-    love.graphics.rectangle('fill', 0, 0, screenWidth, screenHeight)
+    setColor(white)
+    love.graphics.draw(imgBackground, 0, 0)
 end
 
 function GameScreen:keypressed(key)
     if key == keys.Menu and GameState.current() ~= SystemMenuState then
         GameState.push(SystemMenuState)
     end
-end
-
-function GameScreen:drawDecks()
-    decks.PublicDeck:draw()
-    decks.PlayerDeck:draw()
 end
 
 return GameScreen

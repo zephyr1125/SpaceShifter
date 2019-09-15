@@ -24,7 +24,13 @@ end
 function Card:drawCardAsAction()
     setColor(white)
     -- bg
-    love.graphics.draw(imgCardActionBg, self.x+self.tweenWidth/2, self.y, 0,
+    local imgBg
+    if table.contains(self.action.type, 'special') then
+        imgBg = imgSpecialCard
+    else
+        imgBg = imgCardActionBg
+    end
+    love.graphics.draw(imgBg, self.x+self.tweenWidth/2, self.y, 0,
         1-(self.tweenWidth/cardWidth), 1)
 
     -- icon

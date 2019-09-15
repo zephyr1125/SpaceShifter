@@ -18,7 +18,7 @@ function InitState:enter()
 end
 
 function InitState:initEnemy(onComplete)
-    currentEnemyId = 'ghost'
+    currentEnemyId = 'troll'
     currentEnemy = enemies.container[currentEnemyId]
     currentEnemy:init(onComplete)
 end

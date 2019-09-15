@@ -6,13 +6,14 @@ local function cardFlyToHand(self, id, card, time)
 end
 
 local Player = {
-    name = '塑地师',
+    name = '唤地师',
+    portrait = imgPlayerPortrait,
     initLife = 5,
     life = 5,
     deck = 'PlayerDeck',
     handSize = 3,
     rewardSize = 3,
-    spriteWidth = 16,
+    spriteWidth = 8,
     spriteHeight = 18,
     isShaking = false,
     isInited = false,
@@ -34,12 +35,20 @@ local Player = {
         self.initLife = self.initLife + 1
     end,
     drawInfo = function(self, x, y)
-        setColor(playerInfoBgColor)
-        love.graphics.rectangle('fill', x,y, cardWidth, cardHeight)
+        setColor(white)
+        love.graphics.draw(imgPlayerFrame, x, y)
+        
+        --portrait
+        love.graphics.draw(self.portrait, x+6, y+4)
+        
+        --name
+        love.graphics.printf(self.name, x, y+32, 50, 'center')
         
         --life--
-        setColor(white)
-        love.graphics.printf(tostring(self.life), x, y+cardHeight-fontSize-4, cardWidth, 'center')
+        love.graphics.draw(imgHealTip, x+41, y)
+        love.graphics.setFont(fontNum)
+        love.graphics.printf(tostring(self.life), x+41-6, y, 24, 'center')
+        love.graphics.setFont(fontCN)
     end,
     drawHand  = function(self)
         if self.hand == nil or #self.hand == 0 then return end
@@ -59,7 +68,8 @@ local Player = {
             shakeX = love.math.random(-2, 2)
         end
         setColor(white)
-        spritePlayer:draw(mapX + self.x + shakeX, mapY + self.y)
+        love.graphics.draw(imgPlayerSprite, mapX + self.x + shakeX, mapY + self.y)
+        --spritePlayer:draw(mapX + self.x + shakeX, mapY + self.y)
         
         -- draw tips
         drawTip(self, self.damageTip)

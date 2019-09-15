@@ -1,6 +1,6 @@
 local function drawDeck(cards, x, y, drawTopDeck)
     if #cards > 0 and drawTopDeck ~= nil then
-        drawTopDeck(cards[#cards], x, y)
+        drawTopDeck(cards[#cards])
     end
 
     --card count
@@ -47,7 +47,7 @@ local Decks = class {
         x = 4,
         y = 4,
         draw = function(self)
-            drawDeck(self.cards, self.x, self.y, drawCardAsSpace)
+            drawDeck(self.cards, self.x, self.y, self.cards[#self.cards].drawCardAsSpace)
             -- drawFirstDiscardCards
         end,
         pickCards = function(self, amount)
@@ -70,8 +70,7 @@ local Decks = class {
             if card~=nil and not floatequal(card.x, self.x, 0.1) then
                 card:draw()
             end
-            
-            drawDeck(self.cards, self.x, self.y, drawCardAsAction)
+            drawDeck(self.cards, self.x, self.y, self.cards[#self.cards].drawCardAsAction)
         end,
         pickCards = function(self, amount)
             return pickCards(self, amount)

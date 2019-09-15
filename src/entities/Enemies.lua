@@ -10,12 +10,26 @@ local function baseInit(self, deck, onComplete)
 end
 
 local baseDrawInfo = function(self, x, y)
-    setColor(enemyInfoBgColor)
-    love.graphics.rectangle('fill', x,y, cardWidth, cardHeight)
+    -- specialCard
+    self.specialCard:draw()
+    
+    setColor(white)
+    love.graphics.draw(imgEnemyFrame, x, y)
+    
+    -- connector
+    love.graphics.draw(imgConnectionEnemyFrame, x-3, y+18)
+
+    --portrait
+    love.graphics.draw(self.portrait, x+6, y+4)
+
+    --name
+    love.graphics.printf(self.name, x, y+32, 50, 'center')
 
     --life--
-    setColor(white)
-    love.graphics.printf(tostring(self.life), x, y+cardHeight-fontSize-4, cardWidth, 'center')
+    love.graphics.draw(imgHealTip, x-6, y)
+    love.graphics.setFont(fontNum)
+    love.graphics.printf(tostring(self.life), x-12, y, 24, 'center')
+    love.graphics.setFont(fontCN)
 end
 
 function baseAIChooseCard(me, opponent)
@@ -118,7 +132,7 @@ local baseDrawSprite = function(self, imageSprite, mapX, mapY)
     if self.isShaking then
         shakeX = love.math.random(-2, 2)
     end
-    setColor(black)
+    setColor(white)
     love.graphics.draw(imageSprite, mapX + self.x + shakeX, mapY + self.y)
 
     -- draw tips
@@ -134,11 +148,12 @@ local Enemies = class {
     container = {
         banshee = {
             name = '巨蛇',
+            portrait = imgBansheePortrait,
             initLife = 5,
             deck = 'BansheeDeck',
             handSize = 3,
             spriteWidth = 42,
-            spriteHeight = 44,
+            spriteHeight = 41,
             isShaking = false,
             isInited = false,
             x = 0,
@@ -192,11 +207,12 @@ local Enemies = class {
         },
         ghost = {
             name = '怨煞灵',
+            portrait = imgGhostPortrait,
             initLife = 6,
             deck = 'GhostDeck',
             handSize = 3,
-            spriteWidth = 44,
-            spriteHeight = 44,
+            spriteWidth = 40,
+            spriteHeight = 48,
             isShaking = false,
             isImmuneGrave = true,
             isInited = false,
@@ -251,11 +267,12 @@ local Enemies = class {
         },
         troll = {
             name = '巨魔',
+            portrait = imgTrollPortrait,
             initLife = 7,
             deck = 'TrollDeck',
             handSize = 3,
-            spriteWidth = 44,
-            spriteHeight = 44,
+            spriteWidth = 36,
+            spriteHeight = 37,
             isShaking = false,
             isInited = false,
             x = 0,

@@ -24,12 +24,14 @@ function TitleScreen:activate()
 end
 
 function TitleScreen:draw()
+	setColor(white)
+	love.graphics.draw(imgBackground, 0, 0)
 	--love.graphics.print('Space Shifter', 10, 10)
 	self.startButton:draw((screenWidth-buttonWidth)/2, buttonStartY)
 	self.exitButton:draw((screenWidth-buttonWidth)/2, buttonStartY+buttonHeight)
 	setColor(white)
-	drawFPS()
-	drawLogs()
+	--drawFPS()
+	--drawLogs()
 end
 
 function TitleScreen:keypressed(key)
