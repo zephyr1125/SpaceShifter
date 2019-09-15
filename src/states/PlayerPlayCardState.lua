@@ -19,6 +19,7 @@ end
 
 local function enterEnemyTips(self)
     self.tipsStatus = enemyTips
+    self.enemyTipPos = enemyCardX
     infoBar:setShowFlipInfo(false)
     infoBar:setCardInfo(currentEnemy.playingCard)
 end
@@ -107,12 +108,20 @@ local function enemyTipsKeyPressed(self, key)
         return
     end
 
+    if key == keys.DPad_left then
+        self.enemyTipPos = enemyCardX
+        infoBar:setCardInfo(currentEnemy.playingCard)
+    elseif key == keys.DPad_right then
+        self.enemyTipPos = specialCardX
+        infoBar:setCardInfo(currentEnemy.specialCard)
+    end
+
     if key == keys.DPad_down then
         enterMapTips(self, false)
         return
     end
 
-    infoBar:setCardInfo(currentEnemy.playingCard)
+    
 end
 
 PlayerPlayCardState = {}
@@ -130,7 +139,7 @@ function PlayerPlayCardState:draw()
         love.graphics.draw(imgTipCursor, mapX + slot.x + 48,
                 mapY + slot.y + 26)
     elseif self.tipsStatus == enemyTips then
-        love.graphics.draw(imgTipCursor, enemyCardX + cardWidth/2,
+        love.graphics.draw(imgTipCursor, self.enemyTipPos + cardWidth/2,
                 enemyCardY + cardHeight - 8)
     end
 end
