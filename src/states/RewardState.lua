@@ -24,7 +24,7 @@ local function refreshInfoBar(self)
 end
 
 function RewardState:init()
-    self.confirmButton = Button('Confirm', buttonWidth, buttonHeight,
+    self.confirmButton = Button('确定', buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
                 self:confirmSelection()
                 if #decks.PlayerDeck.cards > decks.PlayerDeck.size then

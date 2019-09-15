@@ -31,7 +31,7 @@ local function RefreshSelectCard(prevId, newId)
 end
 
 function DiscardCardState:init()
-    self.confirmButton = Button('Confirm', buttonWidth, buttonHeight,
+    self.confirmButton = Button('确认', buttonWidth, buttonHeight,
             buttonIdleColor, buttonSelectColor, function()
                 if not isDiscardFull() then return end
                 self:confirmSelection()
