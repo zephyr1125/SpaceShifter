@@ -13,7 +13,7 @@ mapY = 60
 mapSlotWidth = 97
 mapSlotHeight = 31
 
-enemyCardX = (screenWidth - cardWidth)/2
+enemyCardX = 222 - cardWidth
 enemyCardY = 4
 
 specialCardX = 226

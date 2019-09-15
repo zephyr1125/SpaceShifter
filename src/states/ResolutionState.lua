@@ -85,8 +85,10 @@ end
 function ResolutionState:drawEffect(sfx)
     if sfx == nil then return end
     
-    setColor(white)
-    love.graphics.draw(sfx.img, mapX + sfx.x, mapY + sfx.y)
+    local alpha = sfx.alpha or 1
+    setColor({255, 255, 255, alpha})
+    local scale = sfx.scale or 1
+    love.graphics.draw(sfx.img, mapX + sfx.x, mapY + sfx.y, 0, scale)
 end
 
 function ResolutionState:drawDefenceFX(char, spriteDefenceFX)

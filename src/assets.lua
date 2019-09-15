@@ -32,9 +32,11 @@ function InitAssets()
     spriteDefence = {'assets/sprites/shield.json','assets/sprites/shield.png', 'effect'}
     --sfx
     imgSFXFireball = love.graphics.newImage('assets/images/sfx/fireball.png')
+    imgSFXRoundAttack = love.graphics.newImage('assets/images/sfx/round_attack.png')
     -- sound
     soundFireballStart = love.audio.newSource('assets/sounds/fireball_start.wav', 'static')
     soundFireballHit = love.audio.newSource('assets/sounds/fireball_hit.wav', 'static')
+    soundRoundAttack = love.audio.newSource('assets/sounds/round_attack.ogg', 'static')
     soundHit2 = love.audio.newSource('assets/sounds/hit02.ogg', 'static')
     soundPickCard = love.audio.newSource('assets/sounds/pick_card.wav', 'static')
     soundPlayCard = love.audio.newSource('assets/sounds/play_card.wav', 'static')

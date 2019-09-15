@@ -8,8 +8,8 @@ end
 local Player = {
     name = '唤地师',
     portrait = imgPlayerPortrait,
-    initLife = 10,
-    life = 10,
+    initLife = 8,
+    life = 8,
     deck = 'PlayerDeck',
     handSize = 3,
     rewardSize = 3,

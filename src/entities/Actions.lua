@@ -14,6 +14,7 @@ local function playFireballSFX(me, opponent, sfx, onComplete)
         if onComplete~=nil then onComplete() end
         return
     else
+        sfx.scale = 1
         sfx.x = me.x + me.spriteWidth/3
         sfx.y = me.y + me.spriteHeight/3
         soundFireballStart:play()
@@ -382,6 +383,7 @@ local Actions = class {
             score = 99,
             needChooseSlot = true,
             type = {'special'},
+            sfxImg = imgSFXRoundAttack,
             effect = function(self, me, opponent, sfx, onComplete)
                 for _, slot in pairs(map:getNoHoleNeighbours(me.slot)) do
                     local resident = map:getSlotOccupied(slot)
@@ -389,7 +391,23 @@ local Actions = class {
                         resident.damagePending = resident.damagePending + 3
                     end
                 end
-                if onComplete~=nil then onComplete() end
+                if sfx == nil then
+                    if onComplete~=nil then onComplete() end
+                    return
+                else
+                    sfx.scale = 0.5
+                    sfx.alpha = 1
+                    sfx.x = me.x + me.spriteWidth/2 - 88 + sfx.scale * 88
+                    sfx.y = me.y + me.spriteHeight - 24 + sfx.scale * 24
+                    timer.tween(0.6, sfx,
+                            {scale = 1.5, alpha = 0,
+                             x = me.x + me.spriteWidth/2 - 88*1.5,
+                             y = me.y + me.spriteHeight - 24*1.25},
+                            'in-quart', function()
+                                soundRoundAttack:play()
+                                if onComplete~=nil then onComplete() end
+                            end)
+                end
             end,
         },
         ['graveWorld'] = {

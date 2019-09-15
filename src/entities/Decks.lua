@@ -46,7 +46,7 @@ end
 
 local Decks = class {
     PublicDeck = {
-        size = 40,
+        size = 70,
         scoreRange = {3,10},
         discardCards = {},
         x = 4,
