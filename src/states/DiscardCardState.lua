@@ -58,8 +58,10 @@ function DiscardCardState:enter()
     for id, card in pairs(decks.PlayerDeck.cards) do
         card.isDiscardSelected = false
         card.isShowAction = true
+        local selectionOffsetY
+        if id == 1 then selectionOffsetY = -3 else selectionOffsetY = 0 end
         local x = startX + math.fmod(id-1, 5) * (cardWidth + xInterval)
-        local y = startY + math.floor((id-1)/5) * (cardHeight + yInterval)
+        local y = startY + math.floor((id-1)/5) * (cardHeight + yInterval) + selectionOffsetY
         card:moveTo(x, y)
     end
     

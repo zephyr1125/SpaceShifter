@@ -28,6 +28,10 @@ function SystemMenuState:init()
 end
 
 function SystemMenuState:draw()
+    setColor(coverColor)
+    love.graphics.rectangle('fill', 0, 0, screenWidth, screenHeight)
+
+
     local windowX = (screenWidth - windowWidth )/2
     local windowY = (screenHeight - windowHeight)/2
     self.window:draw(windowX, windowY, windowWidth, windowHeight)

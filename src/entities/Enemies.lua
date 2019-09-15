@@ -59,7 +59,7 @@ function baseAIChooseCard(me, opponent)
     -- space too bad, move to best neighbour
     if cardId == 0 then
         local bestBenefitSlot = map:getBestBenefitNeighbour(me.slot)
-        if bestBenefitSlot ~= me.slot then
+        if bestBenefitSlot ~= me.slot and map:isNeighbour(bestBenefitSlot, opponent.slot) == 0 then
             print('ai choose move to better slot')
             cardId = chooseHandCardMove(me)
             targetSlot = bestBenefitSlot
@@ -112,7 +112,7 @@ local Enemies = class {
     container = {
         banshee = {
             name = '巨蛇',
-            initLife = 5,
+            initLife = 0,
             deck = 'BansheeDeck',
             handSize = 3,
             spriteWidth = 42,

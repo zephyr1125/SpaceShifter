@@ -41,6 +41,7 @@ function GameScreen:draw()
         infoBar:draw(infoBarX, infoBarY)
     end
     map:drawCards(mapX, mapY)
+    
     drawFPS()
     drawLogs()
 end

@@ -354,7 +354,7 @@ local Actions = class {
         },
         ['roundAttack'] = {
             name = '横扫',
-            info = '每3回合对邻近所有格造成3伤害',
+            info = '每3回合对邻近所有格造成2伤害',
             score = 99,
             needChooseSlot = true,
             type = {'special'},
@@ -362,7 +362,7 @@ local Actions = class {
                 for _, slot in pairs(map:getNoHoleNeighbours(me.slot)) do
                     local resident = map:getSlotOccupied(slot)
                         if resident ~= nil then
-                        resident.damagePending = resident.damagePending + 3
+                        resident.damagePending = resident.damagePending + 2
                     end
                 end
                 if onComplete~=nil then onComplete() end
