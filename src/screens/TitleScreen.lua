@@ -1,7 +1,7 @@
 local TitleScreen = class {}
 
 local buttonWidth, buttonHeight = 128, 18
-local buttonStartY = 180
+local buttonStartY = 194
 
 
 function TitleScreen:init(ScreenManager)
@@ -26,6 +26,7 @@ end
 function TitleScreen:draw()
 	setColor(white)
 	love.graphics.draw(imgBackground, 0, 0)
+	love.graphics.draw(imgName, (screenWidth - 198)/2, (screenHeight-88)/2)
 	--love.graphics.print('Space Shifter', 10, 10)
 	self.startButton:draw((screenWidth-buttonWidth)/2, buttonStartY)
 	self.exitButton:draw((screenWidth-buttonWidth)/2, buttonStartY+buttonHeight)

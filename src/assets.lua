@@ -1,5 +1,6 @@
 function InitAssets()
     -- UI
+    imgName = love.graphics.newImage('assets/images/name.png')
     imgBackground = love.graphics.newImage('assets/images/background.png')
     imgTutorial1 = love.graphics.newImage('assets/images/tutorial_1.png')
     imgTutorial2 = love.graphics.newImage('assets/images/tutorial_2.png')
