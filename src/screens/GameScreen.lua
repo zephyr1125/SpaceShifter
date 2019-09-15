@@ -8,6 +8,7 @@ function GameScreen:init(ScreenManager)
 end
 
 function GameScreen:activate()
+    bgmInstance:setVolume(0.4)
     GameState.switch(InitState)
 end
 

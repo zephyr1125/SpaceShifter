@@ -14,10 +14,11 @@ local function playFireballSFX(me, opponent, sfx, onComplete)
         if onComplete~=nil then onComplete() end
         return
     else
-        sfx.x = me.x
-        sfx.y = me.y
+        sfx.x = me.x + me.spriteWidth/3
+        sfx.y = me.y + me.spriteHeight/3
         soundFireballStart:play()
-        timer.tween(0.6, sfx, {x = opponent.x, y = opponent.y},
+        timer.tween(0.6, sfx,
+                {x = opponent.x+ opponent.spriteWidth/3, y = opponent.y + opponent.spriteHeight/3},
                 'in-quart', function()
                     soundFireballHit:play()
                     if onComplete~=nil then onComplete() end

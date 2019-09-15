@@ -5,6 +5,10 @@ local buttonStartY = 194
 
 
 function TitleScreen:init(ScreenManager)
+	musicBGM:setLooping(true)
+	musicBGM:setVolume(1)
+	bgmInstance = musicBGM:play()
+
 	self.screen = ScreenManager
 	
 	self.buttons = SelectionGroup()
@@ -18,6 +22,10 @@ function TitleScreen:init(ScreenManager)
 			end)
 	self.buttons:add(self.startButton)
 	self.buttons:add(self.exitButton)
+end
+
+function TitleScreen:activate()
+	bgmInstance:setVolume(1)
 end
 
 function TitleScreen:activate()

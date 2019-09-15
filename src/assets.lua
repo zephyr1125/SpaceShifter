@@ -38,4 +38,5 @@ function InitAssets()
     soundHit2 = love.audio.newSource('assets/sounds/hit02.ogg', 'static')
     soundPickCard = love.audio.newSource('assets/sounds/pick_card.wav', 'static')
     soundPlayCard = love.audio.newSource('assets/sounds/play_card.wav', 'static')
+    musicBGM =  love.audio.newSource('assets/sounds/bgm.mp3', 'stream')
 end
