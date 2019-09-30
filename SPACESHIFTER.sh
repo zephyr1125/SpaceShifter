@@ -1,3 +1,3 @@
 #!/bin/bash
 
-love ProjectDeot.love gameshell
+love SpaceShifter.love gameshell
