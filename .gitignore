@@ -18,5 +18,6 @@ ExportedObj/
 *.pdb
 
 /release/
+*.h
 *.log
 *.love
