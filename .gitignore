@@ -17,6 +17,6 @@ ExportedObj/
 *.svd
 *.pdb
 
-Publish/
+release/
 *.log
 *.love
