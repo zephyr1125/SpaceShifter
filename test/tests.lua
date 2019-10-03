@@ -38,6 +38,7 @@ require('testsDiscardCardState')
 require('testsAIChooseCards')
 require('testsUpkeepState')
 require('testsBanshee')
+require('testsGhost')
 
 
 os.exit( luaunit.LuaUnit.run() )

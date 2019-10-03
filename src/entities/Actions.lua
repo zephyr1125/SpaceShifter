@@ -423,6 +423,10 @@ local Actions = class {
                         table.add(needShift, slotId)
                     end
                 end
+                
+                -- if no space need to shift, directly callback
+                if #needShift == 0 then onComplete() end
+                
                 for id, slotId in pairs(needShift) do
                     local slot = map.slots[slotsId]
                     local card = Card(nil, spaces.container.graveyard)

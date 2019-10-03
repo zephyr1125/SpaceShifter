@@ -1,7 +1,9 @@
 local M = {}
 
-function M.tween(...)
-    
+function M.tween(time, self, subject, method, after, ...)
+    if after ~= nil then
+        after()
+    end
 end
 
 function M.after(...)

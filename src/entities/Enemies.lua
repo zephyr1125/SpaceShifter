@@ -5,7 +5,7 @@ local function baseInit(self, deck, onComplete)
     charMove(self, self.slot, 'arrive', function()
         self.hand = deck:pickCards(self.handSize)
         self.isInited = true
-        onComplete()
+        if onComplete ~= nil then onComplete() end
     end)
 end
 

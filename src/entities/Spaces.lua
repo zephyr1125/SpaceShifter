@@ -74,7 +74,7 @@ local Spaces = class {
                 me.defence = me.defence + 1
             end
         },
-        ['graveyard'] = {
+        graveyard = {
             name = '墓地',
             info = i18n.infoGraveyard,
             score = 2,
