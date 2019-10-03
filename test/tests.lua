@@ -13,10 +13,12 @@ require('src.states.ResolutionState')
 require('src.states.UpkeepState')
 require('src.ui.SelectionGroup')
 
+i18n = require('assets.i18n.en')
+
 require('src.const')
 require('src.entities.Card')
-decks = require('src.entities.Decks')
 actions = require('src.entities.Actions')
+decks = require('src.entities.Decks')
 spaces =  require('src.entities.Spaces')
 map = require('src.entities.Map')
 player = require('src.entities.Player')

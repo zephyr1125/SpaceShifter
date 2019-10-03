@@ -1,11 +1,13 @@
 Card = class{}
 
-function Card:init(action, space, x, y)
+function Card:init(action, space, x, y, deck)
     self.action = action
     self.space = space
     
     self.tweenWidth = 0
     self.isShowAction = true
+    
+    self.deck = deck
     
     x = x or screenWidth/2-cardWidth/2
     y = y or -cardHeight

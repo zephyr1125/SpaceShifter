@@ -43,7 +43,7 @@ function testsActions:testDropCard()
     player.targetSlot = 7
     player.hand = {playerPlayingCard, {action=actions.container.attack1}}
 
-    ResolutionState:enter()
+    ResolutionState:cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
 
     luaunit.assertEquals(#currentEnemy.hand, 2)
 end
@@ -69,7 +69,8 @@ function testsActions:testDropCard_NotDropPlayingCardWhenOnly()
     
     currentEnemy.hand = {currentEnemy.playingCard}
 
-    ResolutionState:enter()
+    ResolutionState:cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
+    
     luaunit.assertEquals(#currentEnemy.hand, 1)
 end
 
@@ -78,34 +79,36 @@ function testsActions:testDropCard_MissSlot_NotDrop()
     player.playingCard = playerPlayingCard
     player.targetSlot = 2
     player.hand = {playerPlayingCard, {action=actions.container.attack1}}
+
+    ResolutionState:cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
     
-    ResolutionState:enter()
     luaunit.assertEquals(#currentEnemy.hand, 3)
 end
 
 function testsActions:testSpaceRecover()
-    map.slots[6].card = {space = spaces.container.circle, deck = decks.PlayerDeck}
-    map.slots[6].baseCard = {space = spaces.container.graveyard, deck = decks.PublicDeck}
+    map.slots[6].card = Card(nil, spaces.container.circle, 0, 0, decks.PlayerDeck)
+    map.slots[6].baseCard = Card(nil, spaces.container.graveyard, 0, 0, decks.PublicDeck)
     
-    currentEnemy.playingCard = {action = actions.container.spaceRecover}
+    currentEnemy.playingCard = Card(actions.container.spaceRecover)
     currentEnemy.targetSlot = 6
 
-    ResolutionState:enter()
+    ResolutionState:shiftSpace()
+    
     luaunit.assertEquals(map.slots[6].card, map.slots[6].baseCard)
 end
 
 function testsActions:testUniverseRecover()
     for _, slot in pairs(map.slots) do
-        slot.baseCard = {space = spaces.container.circle, deck = decks.PublicDeck}
+        slot.baseCard = Card(nil, spaces.container.circle, 0, 0, decks.PublicDeck)
         slot.card = slot.baseCard
     end
-    map.slots[1].card = {space = spaces.container.circle, deck = decks.PlayerDeck}
-    map.slots[3].card = {space = spaces.container.fence, deck = decks.PlayerDeck}
-    map.slots[6].card = {space = spaces.container.graveyard, deck = decks.PlayerDeck}
+    map.slots[1].card = Card(nil, spaces.container.circle, 0, 0, decks.PlayerDeck)
+    map.slots[3].card = Card(nil, spaces.container.fence, 0, 0, decks.PlayerDeck)
+    map.slots[6].card = Card(nil, spaces.container.graveyard, 0, 0, decks.PlayerDeck)
 
-    currentEnemy.playingCard = {action = actions.container.universeRecover}
+    currentEnemy.playingCard = Card(actions.container.universeRecover)
 
-    ResolutionState:enter()
+    ResolutionState:shiftSpace()
     
     for _, slot in pairs(map.slots) do
         luaunit.assertEquals(slot.card, slot.baseCard)
@@ -116,17 +119,15 @@ function testsActions:testA1Drop1_DropCard()
     local playerPlayingCard = {action = actions.container.drop1}
     player.playingCard = playerPlayingCard
     player.targetSlot = 1
-    player.life = 3
     player.hand = {playerPlayingCard, {action=actions.container.attack1}}
 
     currentEnemy.playingCard = {action = actions.container.a1drop1}
+    currentEnemy.attack = 0
     currentEnemy.targetSlot = 1
     currentEnemy.life = 4
 
-    ResolutionState:enter()
-    ResolutionState:update(1)
-    ResolutionState:update(1)
+    ResolutionState:cardsEffect(player.playingCard.action, currentEnemy.playingCard.action)
 
-    luaunit.assertEquals(player.life, 2)
-    luaunit.assertEquals(#player.hand, 0)
+    luaunit.assertEquals(currentEnemy.attack, 1)
+    luaunit.assertEquals(#player.hand, 1)
 end
