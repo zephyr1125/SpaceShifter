@@ -5,7 +5,7 @@ function testsFillAllDecks:setUp()
 end
 
 function testsFillAllDecks:tearDown()
-    decks.PublicDeck.cards = nil
+    table.clean(decks.PublicDeck.cards)
 end
 
 function testsFillAllDecks:testAllDecksExecuted()

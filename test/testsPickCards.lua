@@ -5,7 +5,7 @@ function testsPickCards:setUp()
 end
 
 function testsPickCards:tearDown()
-    decks.PublicDeck.cards = nil
+    table.clean(decks.PublicDeck.cards)
 end
 
 function testsPickCards:testPickPublicDeckCards()

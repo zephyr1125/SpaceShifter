@@ -1,9 +1,9 @@
 local function baseInit(self, deck, onComplete)
     self.life = player.life
     self.slot = 7
+    self.specialCounter = 0
     charMove(self, self.slot, 'arrive', function()
         self.hand = deck:pickCards(self.handSize)
-        self.specialCounter = 0
         self.isInited = true
         onComplete()
     end)

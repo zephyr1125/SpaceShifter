@@ -9,6 +9,8 @@ function testsBanshee:setUp()
     currentEnemy = enemies.container.banshee
     currentEnemy:init()
     currentEnemy.slot = 2
+    currentEnemy.hand = {Card(actions.container.move)}
+    currentEnemy.targetSlot = 2
 end
 
 function testsBanshee:testSpecialAttack()

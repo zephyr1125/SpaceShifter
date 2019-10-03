@@ -12,7 +12,7 @@ function testsSpaces:tearDown()
     ResolutionState:reset()
 end
 
-function testsSpaces:testMountainAffectDefence()
+function testsSpaces:testFenceAffectDefence()
     player.playingCard = {action = actions.container.move}
     player.targetSlot = 1
     map.slots[1].card = {space = spaces.container.fence}
@@ -24,10 +24,10 @@ function testsSpaces:testMountainAffectDefence()
     luaunit.assertEquals(currentEnemy.defence, 1)
 end
 
-function testsSpaces:testPlainAffectAttack()
-    player.playingCard = {action = actions.container.attack1}
-    map.slots[1].card = {space = spaces.container.circle}
-    player.playingCard.action.effect(player, currentEnemy)
+function testsSpaces:testCircleAffectAttack()
+    player.playingCard = Card(actions.container.attack1)
+    map.slots[1].card = Card(nil, spaces.container.circle)
+    player.playingCard.action:effect(player, currentEnemy)
 
     luaunit.assertEquals(player.attack, 2)
 end
@@ -88,11 +88,9 @@ function testsSpaces:testDesertDropCardOnAttack()
     currentEnemy.targetSlot = 1
     currentEnemy.hand = {currentEnemy.playingCard, {action = actions.container.attack1}}
 
-    ResolutionState:enter()
-    ResolutionState:update(1)
-    ResolutionState:update(1)
+    ResolutionState.onAttack()
 
-    luaunit.assertEquals(#player.hand, 1)
+    luaunit.assertEquals(#player.hand, 2)
     luaunit.assertEquals(#currentEnemy.hand, 1)
 end
 
@@ -110,10 +108,8 @@ function testsSpaces:testDesert_NotCorrectSlot_NoDropCard()
     currentEnemy.targetSlot = 1
     currentEnemy.hand = {currentEnemy.playingCard, {action = actions.container.attack1}}
 
-    ResolutionState:enter()
-    ResolutionState:update(1)
-    ResolutionState:update(1)
+    ResolutionState.onAttack()
 
-    luaunit.assertEquals(#player.hand, 1)
+    luaunit.assertEquals(#player.hand, 2)
     luaunit.assertEquals(#currentEnemy.hand, 2)
 end
