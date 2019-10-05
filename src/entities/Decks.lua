@@ -49,7 +49,7 @@ local Decks = class {
         size = 70,
         scoreRange = {3,10},
         discardCards = {},
-        x = 4,
+        x = -8-cardWidth,
         y = 4,
         draw = function(self)
             local topCard = self.cards[#self.cards]
@@ -91,7 +91,13 @@ local Decks = class {
             -- start card tween
             card:moveTo(self.x, self.y, 0.3)
         end,
-        cards={}
+        cards={
+            Card(actions.container.attack1, spaces.container.fence),
+            Card(actions.container.attack1, spaces.container.fence),
+            Card(actions.container.attack1, spaces.container.circle),
+            Card(actions.container.attack2, spaces.container.fence),
+            Card(actions.container.attack2, spaces.container.circle),
+        }
     },
     BansheeDeck = {
         size = 18,
