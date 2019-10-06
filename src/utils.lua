@@ -48,6 +48,9 @@ function fillDeck(deck)
     for i = 1, deck.size do
         if i>#deck.cards then
             deck.cards[i] = createRandomCard(deck.scoreRange, deck.x, deck.y)
+        else
+            deck.cards[i].x = deck.x
+            deck.cards[i].y = deck.y
         end
         deck.cards[i].deck = deck
     end
