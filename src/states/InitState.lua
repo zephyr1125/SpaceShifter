@@ -2,6 +2,7 @@ InitState = {}
 
 function InitState:enter()
     isTutorialPlayed = false
+    cursor:setVisible(false)
     -- Game Data
     actions = reload('src.entities.Actions')
     for key, action in pairs(actions.container) do

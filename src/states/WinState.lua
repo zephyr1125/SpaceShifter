@@ -34,6 +34,7 @@ function WinState:init()
 end
 
 function WinState:enter()
+    cursor:setVisible(true)
     player:upgrade()
     self.isDrawWindow = true
 end
@@ -45,6 +46,7 @@ function WinState:draw()
         love.graphics.printf(i18n.win, self.windowX, self.windowY + 4, windowWidth, 'center')
         love.graphics.printf(i18n.update, self.windowX, self.windowY + 4+14, windowWidth, 'center')
         self.nextButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY)
+        cursor:draw()
     end
 end
 

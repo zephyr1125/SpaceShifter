@@ -36,6 +36,7 @@ function RewardState:init()
 end
 
 function RewardState:enter()
+    cursor:setVisible(true)
     self.currentCardId = 1
     self.isSelectingCard = true
     self.confirmButton:setSelect(false)
@@ -61,6 +62,8 @@ function RewardState:draw()
     self.confirmButton:draw((screenWidth-buttonWidth)/2, 96 + 64 + 16)
     
     infoBar:draw(infoBarX, infoBarY)
+    
+    cursor:draw()
 end
 
 function RewardState:drawRewards(x, y, width)
@@ -72,6 +75,12 @@ function RewardState:drawRewards(x, y, width)
     end
     if self.currentCardId ~= 0 then
         drawCard(self.currentCardId, map.slots[self.currentCardId].baseCard)
+    end
+end
+
+function RewardState:update(dt)
+    if self.isSelectingCard and self.currentCardId ~= 0 then
+        cursor:moveToCard(map.slots[self.currentCardId].baseCard)
     end
 end
 

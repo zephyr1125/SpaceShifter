@@ -4,7 +4,7 @@ local windowWidth = 144
 local windowHeight = 64+18
 local buttonWidth, buttonHeight = 128, 18
 
-function SystemMenuState:enter()
+function SystemMenuState:init()
     print('system init')
     self.window = Window()
     self.buttons = SelectionGroup()
@@ -28,6 +28,10 @@ function SystemMenuState:enter()
     self.buttonStartY = (screenHeight-windowHeight)/2 + 22
 end
 
+function SystemMenuState:enter()
+    cursor:setVisible(true)
+end
+
 function SystemMenuState:draw()
     setColor(coverColor)
     love.graphics.rectangle('fill', 0, 0, screenWidth, screenHeight)
@@ -43,6 +47,8 @@ function SystemMenuState:draw()
     self.returnButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY)
     self.restartButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY+buttonHeight)
     self.exitButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY+buttonHeight*2)
+    
+    cursor:draw()
 end
 
 

@@ -20,6 +20,7 @@ function PlayerChooseSlotState:init()
 end
 
 function PlayerChooseSlotState:enter()
+    cursor:setVisible(true)
     -- to defaultSlot
     if player.playingCardAsAction then
         player.targetSlot = player.playingCard.action.defaultTargetSlot(player, currentEnemy)
@@ -34,6 +35,10 @@ function PlayerChooseSlotState:draw()
     
     setColor(green)
     love.graphics.draw(imgSlotSelect, mapX + slot.x, mapY + slot.y)
+end
+
+function PlayerChooseSlotState:update(dt)
+    cursor:moveToMapSlot(player.targetSlot)
 end
 
 function PlayerChooseSlotState:keypressed(key)

@@ -16,6 +16,11 @@ function Button:setSelect(isSelect)
 end
 
 function Button:draw(x, y)
+    -- move cursor
+    if self.isSelect then
+        cursor:moveTo(x+self.width/2, y+self.height-4)
+    end
+    
     -- idle background
     if self.idleBGColor and not self.isSelect then
         setColor(self.idleBGColor)

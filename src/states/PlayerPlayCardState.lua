@@ -6,12 +6,14 @@ end
 
 local function enterNoTips(self)
     self.tipsStatus = noTips
+    cursor:setTip(false)
     infoBar:setShowFlipInfo(true)
     refreshInfoBarAtNoTips(self)
 end
 
 local function enterMapTips(self, isFromBottom)
     self.tipsStatus = mapTips
+    cursor:setTip(true)
     self.mapTipSlot = isFromBottom and 5 or 2
     infoBar:setShowFlipInfo(false)
     infoBar:setCardInfo(map.slots[self.mapTipSlot].card)
@@ -19,6 +21,7 @@ end
 
 local function enterEnemyTips(self)
     self.tipsStatus = enemyTips
+    cursor:setTip(true)
     self.enemyTipPos = enemyCardX
     infoBar:setShowFlipInfo(false)
     infoBar:setCardInfo(currentEnemy.playingCard)
@@ -128,6 +131,7 @@ end
 PlayerPlayCardState = {}
 function PlayerPlayCardState:enter()
     print("player state")
+    cursor:setVisible(true)
     player.currentCardId = 1
     player:updateHandCardPositions()
     enterNoTips(self)
@@ -136,15 +140,18 @@ function PlayerPlayCardState:enter()
     end
 end
 
-function PlayerPlayCardState:draw()
-    setColor(white)
-    if self.tipsStatus == mapTips then
-        local slot = map.slots[self.mapTipSlot]
-        love.graphics.draw(imgTipCursor, mapX + slot.x + 48,
-                mapY + slot.y + 26)
-    elseif self.tipsStatus == enemyTips then
-        love.graphics.draw(imgTipCursor, self.enemyTipPos + cardWidth/2,
-                enemyCardY + cardHeight - 8)
+function PlayerPlayCardState:resume()
+    cursor:setVisible(true)
+end
+
+function PlayerPlayCardState:update(dt)
+    if self.tipsStatus == noTips then
+        cursor:moveToCard(player.hand[player.currentCardId])
+    elseif self.tipsStatus == mapTips then
+        cursor:moveToMapSlot(self.mapTipSlot)
+    else
+        cursor:moveTo(self.enemyTipPos + cardWidth/2,
+                        enemyCardY + cardHeight - 8)
     end
 end
 

@@ -20,6 +20,7 @@ local function returnAllPlayerCards()
 end
 
 function LifeCheckState:enter()
+    cursor:setVisible(false)
     if player.life <= 0 then
         returnAllPlayerCards()
         GameState.switch(LoseState)

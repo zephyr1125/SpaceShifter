@@ -65,6 +65,8 @@ function DiscardCardState:enter()
         card:moveTo(x, y)
     end
     
+    cursor:setVisible(true)
+    
     infoBar:setShowFlipInfo(true)
     refreshInfoBar(self)
 end
@@ -82,6 +84,8 @@ function DiscardCardState:draw()
     self.confirmButton:draw((screenWidth-buttonWidth)/2, screenHeight - 28 - buttonHeight)
 
     infoBar:draw(infoBarX, infoBarY)
+    
+    cursor:draw()
 end
 
 function DiscardCardState:drawPlayerDeck()
@@ -150,6 +154,12 @@ function DiscardCardState:selectDown()
         RefreshSelectCard(prevId, id)
     else
         self:setSelectingCard(false)
+    end
+end
+
+function DiscardCardState:update(dt)
+    if self.isSelectingCard then
+        cursor:moveToCard(decks.PlayerDeck.cards[self.currentCardId])
     end
 end
 

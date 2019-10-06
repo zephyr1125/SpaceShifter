@@ -1,10 +1,9 @@
 ResolutionState = {}
 
 function ResolutionState:enter()
+    cursor:setVisible(false)
     self:reset()
-
     self.step = 'cardMove'
-    
     self:cardsMove()
 end
 

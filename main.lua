@@ -38,7 +38,8 @@ Button = require('src.ui.Button')
 require('src.ui.SelectionGroup')
 Window = require('src.ui.Window')
 InfoBar = require('src.ui.InfoBar')
-
+Cursor = require('src.ui.Cursor')
+cursor = Cursor()
 -- assets
 require('src.assets')
 

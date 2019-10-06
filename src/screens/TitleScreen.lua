@@ -63,8 +63,13 @@ function TitleScreen:draw()
 	self.i18nButton:draw((screenWidth-buttonWidth)/2, buttonStartY+buttonHeight)
 	self.exitButton:draw((screenWidth-buttonWidth)/2, buttonStartY+buttonHeight*2)
 	setColor(white)
+	cursor:draw()
 	--drawFPS()
 	--drawLogs()
+end
+
+function TitleScreen:update(dt)
+	timer.update(dt)
 end
 
 function TitleScreen:keypressed(key)

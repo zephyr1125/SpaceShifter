@@ -1,6 +1,7 @@
 TutorialState = {}
 
 function TutorialState:enter()
+    cursor:setVisible(false)
     isTutorialPlayed = true
     self.step = 1
 end

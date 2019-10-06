@@ -1,6 +1,7 @@
 UpkeepState = {}
 
 function UpkeepState:enter()
+    cursor:setVisible(false)
     -- all spaces runs onUpkeep
     for slotId, slot in pairs(map.slots) do
         local resident = map:getSlotOccupied(slotId)

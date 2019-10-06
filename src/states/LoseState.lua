@@ -21,6 +21,10 @@ function LoseState:init()
     self.buttonStartY = (screenHeight-windowHeight)/2 + 24
 end
 
+function LoseState:enter()
+    cursor:setVisible(true)
+end
+
 function LoseState:draw()
     local windowX = (screenWidth - windowWidth )/2
     local windowY = (screenHeight - windowHeight)/2
@@ -31,6 +35,8 @@ function LoseState:draw()
     
     self.restartButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY)
     self.exitButton:draw((screenWidth-buttonWidth)/2, self.buttonStartY+buttonHeight)
+    
+    cursor:draw()
 end
 
 function LoseState:keypressed(key)

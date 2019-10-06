@@ -9,6 +9,7 @@ end
 
 function GameScreen:activate()
     bgmInstance:setVolume(0.4)
+    cursor:setVisible(false)
     GameState.switch(InitState)
 end
 
@@ -44,6 +45,7 @@ function GameScreen:draw()
     end
     map:drawCards(mapX, mapY)
     
+    cursor:draw()
     --drawFPS()
     --drawLogs()
 end
