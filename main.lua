@@ -72,8 +72,9 @@ require('src.states.DiscardCardState')
 require('src.states.NextEnemyState')
 require('src.states.SystemMenuState')
 require('src.states.TutorialState')
+require('src.states.EnemyShowState')
 
-i18n = require('assets.i18n.en')
+i18n = require('assets.i18n.cn')
 
 -- Load Game
 function love.load()
@@ -83,7 +84,7 @@ function love.load()
 	require('src.entities.Card')
 	
 	love.graphics.setDefaultFilter( "nearest", "nearest", 1 )
-	fontCN = love.graphics.newFont("assets/fonts/en.ttf", fontSize)
+	fontCN = love.graphics.newFont("assets/fonts/cn.ttf", fontSize)
     fontCN:setFilter( "nearest", "nearest", 0 )
 	love.graphics.setFont(fontCN)
     fontNum = love.graphics.newFont("assets/fonts/cn.ttf", 10)

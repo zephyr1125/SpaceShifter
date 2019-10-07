@@ -2,6 +2,7 @@ InitState = {}
 
 function InitState:enter()
     isTutorialPlayed = false
+    isEnemyShowed = false
     cursor:setVisible(false)
     -- Game Data
     actions = reload('src.entities.Actions')

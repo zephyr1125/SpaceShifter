@@ -1,3 +1,14 @@
+function enemySpecialCardMoveIn(self, onComplete)
+    timer.tween(0.5, self.specialCard,
+            {x = screenWidth/2-cardWidth/2, y = screenHeight/2-cardHeight},
+            'linear', onComplete)
+end
+
+function enemySpecialCardMoveOut(self, onComplete)
+    timer.tween(0.5, self.specialCard, {x = specialCardX, y = specialCardY},
+            'linear', onComplete)
+end
+
 local function baseInit(self, deck, onComplete)
     self.life = player.life
     self.slot = 7

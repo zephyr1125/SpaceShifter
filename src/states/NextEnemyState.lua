@@ -1,6 +1,7 @@
 NextEnemyState = {}
 
 function NextEnemyState:enter()
+    isEnemyShowed = false
     cursor:setVisible(false)
     if currentEnemyId == 'banshee' then
         currentEnemyId = 'ghost'

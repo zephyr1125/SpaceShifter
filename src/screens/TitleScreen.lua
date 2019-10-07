@@ -3,7 +3,7 @@ local TitleScreen = class {}
 local buttonWidth, buttonHeight = 128, 18
 local buttonStartY = 194-18
 
-local language = 'en'
+local language = 'cn'
 
 function TitleScreen:init(ScreenManager)
 	musicBGM:setLooping(true)

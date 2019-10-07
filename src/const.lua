@@ -13,6 +13,8 @@ mapY = 60
 mapSlotWidth = 97
 mapSlotHeight = 31
 
+enemyInfoPos = {x = screenWidth-54, y = 4}
+
 enemyCardX = 222 - cardWidth
 enemyCardY = 4
 
@@ -37,6 +39,7 @@ white = {255,255,255}
 black = {0,0,0}
 green = {0,255,0}
 red = {255,0,0}
+halfCoverColor = {0,0,0,0.7}
 coverColor = {0,0,0,1}
 buttonIdleColor = {32, 32, 32}
 buttonSelectColor = {59, 133, 10}
@@ -49,4 +52,4 @@ infoBarBgColor = {240,234,216}
 infoBarTextColor = {119,119,119}
 infoBarFlipInfoColor = {87,152,250}
 
-fontSize = 8
+fontSize = 12

@@ -130,18 +130,22 @@ end
 
 PlayerPlayCardState = {}
 function PlayerPlayCardState:enter()
-    print("player state")
     cursor:setVisible(true)
     player.currentCardId = 1
     player:updateHandCardPositions()
     enterNoTips(self)
     if not isTutorialPlayed then
         GameState.push(TutorialState)
+    elseif not isEnemyShowed then
+        GameState.push(EnemyShowState)
     end
 end
 
 function PlayerPlayCardState:resume()
     cursor:setVisible(true)
+    if not isEnemyShowed then
+        GameState.push(EnemyShowState)
+    end
 end
 
 function PlayerPlayCardState:update(dt)

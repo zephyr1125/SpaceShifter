@@ -32,7 +32,7 @@ function GameScreen:draw()
         currentEnemy:drawSprite(mapX, mapY)
         if currentEnemy.isInited then
             currentEnemy:drawSelectSlot()
-            currentEnemy:drawInfo(screenWidth-54, 4)
+            currentEnemy:drawInfo(enemyInfoPos.x, enemyInfoPos.y)
             currentEnemy:drawPlayingCard(enemyCardX, enemyCardY)
         end
     end
