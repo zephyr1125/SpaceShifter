@@ -118,7 +118,7 @@ local Spaces = class {
         },
         desert = {
             name = '沙漠',
-            info = infoDesert,
+            info = i18n.infoDesert,
             score = 2,
             benefit = -1,
             onAttack = function(me, opponent)

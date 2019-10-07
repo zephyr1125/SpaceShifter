@@ -5,7 +5,7 @@ local function drawCard(id, card)
     -- draw selection
     if card.isRewardSelected then
         setColor(white)
-        love.graphics.draw(imgRewardSelect, card.x + cardWidth - 16, card.y + 2)
+        love.graphics.draw(imgRewardSelect, card.x + cardWidth - 19, card.y + 2)
     end
 end
 

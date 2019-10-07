@@ -18,7 +18,7 @@ end
 function Button:draw(x, y)
     -- move cursor
     if self.isSelect then
-        cursor:moveTo(x+self.width/2, y+self.height-4)
+        cursor:moveTo(x+self.width/2+12, y+self.height-4)
     end
     
     -- idle background

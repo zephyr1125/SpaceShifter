@@ -45,9 +45,9 @@ local Player = {
         love.graphics.printf(self.name, x, y+32, 50, 'center')
         
         --life--
-        love.graphics.draw(imgHealTip, x+41, y)
+        love.graphics.draw(imgHPBg, x+41, y)
         love.graphics.setFont(fontNum)
-        love.graphics.printf(tostring(self.life), x+41, y+2, 19, 'center')
+        love.graphics.printf(tostring(self.life), x+41, y+1, 18, 'center')
         love.graphics.setFont(fontCN)
     end,
     drawHand  = function(self)

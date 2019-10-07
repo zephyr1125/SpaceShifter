@@ -5,7 +5,7 @@ local function drawCard(id, card)
     -- draw selection
     if card.isDiscardSelected then
         setColor(white)
-        love.graphics.draw(imgDiscardSelect, card.x + cardWidth - 16, card.y + 2)
+        love.graphics.draw(imgDiscardSelect, card.x + cardWidth - 19, card.y + 2)
     end
 end
 

@@ -7,9 +7,9 @@ local function drawDeck(cards, x, y, drawTopDeck)
 
     --card count
     setColor(white)
-    love.graphics.draw(imgDeckCountBg, x+cardWidth-12, y)
+    love.graphics.draw(imgDeckCountBg, x+cardWidth-16, y-2)
     love.graphics.setFont(fontNum)
-    love.graphics.printf(tostring(#cards), x+cardWidth-12, y+4, 17, 'center')
+    love.graphics.printf(tostring(#cards), x+cardWidth-16, y+1, 19, 'center')
     love.graphics.setFont(fontCN)
 end
 

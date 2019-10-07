@@ -87,7 +87,7 @@ function love.load()
 	fontCN = love.graphics.newFont("assets/fonts/cn.ttf", fontSize)
     fontCN:setFilter( "nearest", "nearest", 0 )
 	love.graphics.setFont(fontCN)
-    fontNum = love.graphics.newFont("assets/fonts/cn.ttf", 10)
+    fontNum = love.graphics.newFont("assets/fonts/num.ttf", 11)
     fontNum:setFilter( "nearest", "nearest", 0 )
 	
 	infoBar = InfoBar(infoBarWidth)

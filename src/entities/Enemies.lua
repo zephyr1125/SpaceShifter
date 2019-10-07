@@ -28,7 +28,7 @@ local baseDrawInfo = function(self, x, y)
     love.graphics.draw(imgEnemyFrame, x, y)
     
     -- connector
-    love.graphics.draw(imgConnectionEnemyFrame, x-3, y+18)
+    --love.graphics.draw(imgConnectionEnemyFrame, x-3, y+18)
 
     --portrait
     love.graphics.draw(self.portrait, x+6, y+4)
@@ -37,10 +37,14 @@ local baseDrawInfo = function(self, x, y)
     love.graphics.printf(self.name, x, y+32, 50, 'center')
 
     --life--
-    love.graphics.draw(imgHealTip, x-6, y)
+    love.graphics.draw(imgHPBg, x-6, y)
     love.graphics.setFont(fontNum)
-    love.graphics.printf(tostring(self.life), x-6, y+2, 19, 'center')
-    love.graphics.setFont(fontCN)
+    love.graphics.printf(tostring(self.life), x-6, y+1, 18, 'center')
+    
+    --hand count--
+    love.graphics.draw(imgHandCountBg, x-4, y+19)
+    love.graphics.printf(tostring(#self.hand), x-4, y+21, 14, 'center')
+    --love.graphics.setFont(fontCN)
 end
 
 function baseAIChooseCard(me, opponent)

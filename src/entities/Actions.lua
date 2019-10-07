@@ -224,7 +224,7 @@ local Actions = class {
         },
         ['a2p1'] = {
             name = '诈术',
-            info = infoA2P1,
+            info = i18n.infoA2P1,
             score = 3,
             needChooseSlot = true,
             type = {'attack','pick'},
